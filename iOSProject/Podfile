@@ -1,0 +1,9 @@
+#Kiwi -> docs
+
+target 'iOSProject' do
+
+end
+
+target 'iOSProjectTests' do
+	pod 'Kiwi', '~> 2.3'
+end
