@@ -8,36 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^AKICompletionHandler)(void);
-
-typedef enum {
-    AKIPositionFirst,
-    AKIPositionSecond,
-    AKIPositionThird,
-    AKIPositionFourth
-} AKIPosition;
+@class AKIUserCell;
 
 @interface AKIUserView : UIView
-@property (nonatomic, strong)   IBOutlet UILabel             *label;
-@property (nonatomic, strong)   IBOutlet UIButton            *button;
-@property (nonatomic, strong)   IBOutlet UIButton            *start;
-@property (nonatomic, strong)   IBOutlet UIButton            *stop;
+@property (nonatomic, strong) IBOutlet UITableView     *tableView;
 
-@property (nonatomic, assign)   AKIPosition                  squarePosition;
+@property (nonatomic, strong) IBOutlet UIButton     *addField;
+@property (nonatomic, strong) IBOutlet UIButton     *removeField;
+@property (nonatomic, strong) IBOutlet UIButton     *sort;
 
-- (void)moveRouteLabel;
-- (SEL)nextPosition;
+@property (nonatomic, retain) AKIUserCell *cell;
 
-- (void)setSquarePosition;
-- (void)setSquarePosition:(AKIPosition)squarePosition withAnimated:(BOOL)animated;
-- (void)setSquarePosition:(AKIPosition)squarePosition withAnimated:(BOOL)animated withCompletionHandler:(AKICompletionHandler)completionHandler;
-
--(void)AKIPositionFirst;
--(void)AKIPositionSecond;
--(void)AKIPositionThird;
--(void)AKIPositionFourth;
-
-- (void)startAnimation;
-- (void)stopAnimation;
+- (void)addFieldWithRandomText;
+- (void)removeLastField;
+- (void)sortTable;
 
 @end

@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AKIUserView.h"
+@class AKIUser;
 
-@interface AKIUserViewController : UIViewController
+@interface AKIUserViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, retain)   AKIUser *user;
 
-- (IBAction)onRandomRouteButton:(id)sender;
-- (IBAction)onAutoRouteButton:(id)sender;
-
-- (IBAction)onStartProcessingButton:(id)sender;
-- (IBAction)onStopProcessingButton:(id)sender;
+- (IBAction)onAddField:(id)sender;
+- (IBAction)onRemoveField:(id)sender;
+- (IBAction)onSortTable:(id)sender;
 
 @end

@@ -15,75 +15,73 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sxy-Mc-HTh">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8b4-da-Ayj">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Stop"/>
+                    <state key="normal" title="Add"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="270" y="471" width="68" height="48"/>
+                        <rect key="frame" x="25" y="545" width="100" height="30"/>
                     </variation>
                     <connections>
-                        <action selector="onStopProcessingButton:" destination="-1" eventType="touchUpInside" id="rXf-bg-Uo1"/>
+                        <action selector="onAddField:" destination="-1" eventType="touchUpInside" id="fJl-Y4-Dov"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FPS-Kp-XNh">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SD4-If-gpn" userLabel="Remove Field">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Start"/>
+                    <state key="normal" title="Remove"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="166" y="471" width="68" height="48"/>
+                        <rect key="frame" x="276" y="546" width="100" height="29"/>
                     </variation>
                     <connections>
-                        <action selector="onStartProcessingButton:" destination="-1" eventType="touchUpInside" id="Aqs-lN-mUx"/>
+                        <action selector="onRemoveField:" destination="-1" eventType="touchUpInside" id="HKh-Di-qCq"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Jq-7z-mfV">
-                    <rect key="frame" x="68" y="52" width="304" height="157"/>
-                    <color key="backgroundColor" red="0.0" green="0.90787433080000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="0.0" y="0.0" width="150" height="86"/>
-                    </variation>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAH-Qc-Z0B">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHf-xv-rwe">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Move">
-                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
+                    <state key="normal" title="Sort"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="60" y="471" width="68" height="48"/>
+                        <rect key="frame" x="150" y="545" width="99" height="29"/>
                     </variation>
                     <connections>
-                        <action selector="onAutoRouteButton:" destination="-1" eventType="touchUpInside" id="UJl-ed-xVa"/>
+                        <action selector="onSortTable:" destination="-1" eventType="touchUpInside" id="qNZ-2U-dWK"/>
                     </connections>
                 </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OPu-bI-i6B">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="522"/>
+                    </variation>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="fhA-72-TyA"/>
+                        <outlet property="delegate" destination="-1" id="hPa-Qi-6zH"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <variation key="default">
                 <mask key="subviews">
-                    <exclude reference="Sxy-Mc-HTh"/>
-                    <exclude reference="FPS-Kp-XNh"/>
-                    <exclude reference="4Jq-7z-mfV"/>
-                    <exclude reference="vAH-Qc-Z0B"/>
+                    <exclude reference="8b4-da-Ayj"/>
+                    <exclude reference="SD4-If-gpn"/>
+                    <exclude reference="DHf-xv-rwe"/>
+                    <exclude reference="OPu-bI-i6B"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
                 <mask key="subviews">
-                    <include reference="Sxy-Mc-HTh"/>
-                    <include reference="FPS-Kp-XNh"/>
-                    <include reference="4Jq-7z-mfV"/>
-                    <include reference="vAH-Qc-Z0B"/>
+                    <include reference="8b4-da-Ayj"/>
+                    <include reference="SD4-If-gpn"/>
+                    <include reference="DHf-xv-rwe"/>
+                    <include reference="OPu-bI-i6B"/>
                 </mask>
             </variation>
             <connections>
-                <outlet property="button" destination="vAH-Qc-Z0B" id="K8x-qX-uRk"/>
-                <outlet property="label" destination="4Jq-7z-mfV" id="r6D-9Z-Gw1"/>
+                <outlet property="addField" destination="8b4-da-Ayj" id="7d0-Ya-jfY"/>
+                <outlet property="removeField" destination="SD4-If-gpn" id="6GH-aI-bjY"/>
+                <outlet property="sort" destination="DHf-xv-rwe" id="QVQ-yd-fyH"/>
+                <outlet property="tableView" destination="OPu-bI-i6B" id="ccB-OK-BA9"/>
             </connections>
         </view>
         <panGestureRecognizer minimumNumberOfTouches="1" id="h5Q-OA-EIt"/>
