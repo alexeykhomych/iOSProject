@@ -56,12 +56,13 @@ AKIViewControllerBaseViewProperty(AKIUserViewController, userView, AKIUserView)
         cell = [cells firstObject];
     }
     
-    NSArray *data = cell.data;
-    for (id object in data) {
-        cell.user = object;
-        
-        break;
-    }
+    cell.user = self.user;
+//    NSArray *data = cell.data;
+//    for (id object in data) {
+//        cell.user = object;
+//        
+//        break;
+//    }
     
     return cell;
 }

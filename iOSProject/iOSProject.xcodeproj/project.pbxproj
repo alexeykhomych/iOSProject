@@ -21,6 +21,8 @@
 		843038EA1D5C98E800083ADE /* AKIUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843038E81D5C98E800083ADE /* AKIUserCell.xib */; };
 		843038EB1D5CC65800083ADE /* AKIUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843038E81D5C98E800083ADE /* AKIUserCell.xib */; };
 		843038EC1D5CC65C00083ADE /* AKIUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843038DA1D5C98A500083ADE /* AKIUserViewController.xib */; };
+		843038F01D5E2AB900083ADE /* AKIRandomData.m in Sources */ = {isa = PBXBuildFile; fileRef = 843038EF1D5E2AB900083ADE /* AKIRandomData.m */; };
+		843038F41D5E2D6800083ADE /* AKIKvo.m in Sources */ = {isa = PBXBuildFile; fileRef = 843038F31D5E2D6800083ADE /* AKIKvo.m */; };
 		848EE67E1D48CFE700B7F780 /* iOSProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */; };
 		848EE69A1D48D3EA00B7F780 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6901D48D3EA00B7F780 /* Assets.xcassets */; };
 		848EE69B1D48D3EA00B7F780 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6911D48D3EA00B7F780 /* LaunchScreen.storyboard */; };
@@ -59,6 +61,10 @@
 		843038E61D5C98E800083ADE /* AKIUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIUserCell.h; sourceTree = "<group>"; };
 		843038E71D5C98E800083ADE /* AKIUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIUserCell.m; sourceTree = "<group>"; };
 		843038E81D5C98E800083ADE /* AKIUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKIUserCell.xib; sourceTree = "<group>"; };
+		843038EE1D5E2AB900083ADE /* AKIRandomData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIRandomData.h; sourceTree = "<group>"; };
+		843038EF1D5E2AB900083ADE /* AKIRandomData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIRandomData.m; sourceTree = "<group>"; };
+		843038F21D5E2D6800083ADE /* AKIKvo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIKvo.h; sourceTree = "<group>"; };
+		843038F31D5E2D6800083ADE /* AKIKvo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIKvo.m; sourceTree = "<group>"; };
 		848EE65D1D48CEEE00B7F780 /* iOSProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67B1D48CFE700B7F780 /* iOSProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSProjectTests.m; sourceTree = "<group>"; };
@@ -119,6 +125,7 @@
 		8430387D1D50EE2100083ADE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				843038ED1D5E2A8800083ADE /* AKIRandomData */,
 				843038C01D5C8D4100083ADE /* AKIUser */,
 			);
 			path = Models;
@@ -135,6 +142,7 @@
 		843038941D50EE3200083ADE /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				843038F11D5E2D4200083ADE /* KVO */,
 				843038CC1D5C97B400083ADE /* Classes */,
 				843038C41D5C970100083ADE /* AKIMacro */,
 			);
@@ -215,6 +223,24 @@
 				843038E81D5C98E800083ADE /* AKIUserCell.xib */,
 			);
 			path = AKIUserCell;
+			sourceTree = "<group>";
+		};
+		843038ED1D5E2A8800083ADE /* AKIRandomData */ = {
+			isa = PBXGroup;
+			children = (
+				843038EE1D5E2AB900083ADE /* AKIRandomData.h */,
+				843038EF1D5E2AB900083ADE /* AKIRandomData.m */,
+			);
+			path = AKIRandomData;
+			sourceTree = "<group>";
+		};
+		843038F11D5E2D4200083ADE /* KVO */ = {
+			isa = PBXGroup;
+			children = (
+				843038F21D5E2D6800083ADE /* AKIKvo.h */,
+				843038F31D5E2D6800083ADE /* AKIKvo.m */,
+			);
+			path = KVO;
 			sourceTree = "<group>";
 		};
 		848EE6541D48CEEE00B7F780 = {
@@ -498,7 +524,9 @@
 				843038C31D5C8D4100083ADE /* AKIUser.m in Sources */,
 				843038E11D5C98A500083ADE /* AKIUserViewController.m in Sources */,
 				848EE6D01D48DD5300B7F780 /* main.m in Sources */,
+				843038F01D5E2AB900083ADE /* AKIRandomData.m in Sources */,
 				843038E01D5C98A500083ADE /* AKIUserView.m in Sources */,
+				843038F41D5E2D6800083ADE /* AKIKvo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

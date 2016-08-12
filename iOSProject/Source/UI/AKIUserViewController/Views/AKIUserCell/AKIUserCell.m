@@ -9,13 +9,10 @@
 #import "AKIUserCell.h"
 
 #import "AKIUser.h"
-
-static NSUInteger const kAKIUserCount = 100;
+#import "AKIRandomData.h"
 
 @interface AKIUserCell()
-@property (nonatomic, readonly) NSMutableArray *mutableData;
-
-- (NSArray *)fillArrayWithRandomValues;
+@property (nonatomic, retain) AKIRandomData *data;
 
 @end
 
@@ -25,7 +22,10 @@ static NSUInteger const kAKIUserCount = 100;
 #pragma mark Initializations and Deallocations
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    return [super initWithCoder:aDecoder];
+    self = [super initWithCoder:aDecoder];
+    self.data = [AKIRandomData init];
+    
+    return self;
 }
 
 - (void)awakeFromNib {
@@ -40,12 +40,7 @@ static NSUInteger const kAKIUserCount = 100;
         _user = user;
         
         [self fillWithModel:user];
-        [self fillArrayWithRandomValues];
     }
-}
-
-- (NSArray *)data {
-    return [self.mutableData copy];
 }
 
 #pragma mark -
@@ -64,40 +59,19 @@ static NSUInteger const kAKIUserCount = 100;
 }
 
 - (void)addField {
-    NSMutableArray *data = self.mutableData;
-    
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            [data addObject:[AKIUser new]];
+            [self setUser:[AKIUser new]];
         });
     });
 }
 
 - (void)removeField {
-    NSMutableArray *data = self.mutableData;
-    
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            [data removeLastObject];
+//            [self.data removeLastObject];
         });
     });
-}
-
-#pragma mark -
-#pragma mark Private
-
-- (NSArray *)fillArrayWithRandomValues {
-    NSMutableArray *data = self.mutableData;
-    
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            for (NSUInteger i = 0; i < kAKIUserCount; i++) {
-                [data addObject:[AKIUser new]];
-            }
-        });
-    });
-    
-    return data;
 }
 
 @end

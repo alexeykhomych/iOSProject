@@ -15,8 +15,6 @@
 @property (nonatomic, strong)   IBOutlet    UIImageView *userImageView;
 @property (nonatomic, strong)   AKIUser                 *user;
 
-@property (nonatomic, readonly) NSArray *data;
-
 - (void)fillWithModel:(AKIUser *)user;
 - (void)addField;
 - (void)removeField;
