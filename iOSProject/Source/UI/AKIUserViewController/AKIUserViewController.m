@@ -25,26 +25,27 @@ AKIViewControllerBaseViewProperty(AKIUserViewController, userView, AKIUserView)
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
 }
 
 #pragma mark -
 #pragma mark View Lifecycle
 
-- (IBAction)onRandomRouteButton:(id)sender {
-    
-}
-
 - (IBAction)onAutoRouteButton:(id)sender {
-    [self.userView moveRouteLabel];
+    if (![self.userView isRunning]) {
+        [self.userView moveRouteLabel];
+    }
 }
 
 - (IBAction)onStartProcessingButton:(id)sender {
-    [self.userView startAnimation];
+    if (![self.userView isRunning]) {
+        [self.userView startAnimation];
+    }
 }
 
 - (IBAction)onStopProcessingButton:(id)sender {
-    [self.userView stopAnimation];
+    if ([self.userView isRunning]) {
+        [self.userView stopAnimation];
+    }
 }
 
 @end

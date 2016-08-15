@@ -23,19 +23,19 @@ typedef enum {
 @property (nonatomic, strong)   IBOutlet UIButton            *start;
 @property (nonatomic, strong)   IBOutlet UIButton            *stop;
 
+@property (nonatomic, readonly, getter=isRunning) BOOL    run;
+
 @property (nonatomic, assign)   AKIPosition                  squarePosition;
 
 - (void)moveRouteLabel;
-- (SEL)nextPosition;
 
 - (void)setSquarePosition;
-- (void)setSquarePosition:(AKIPosition)squarePosition withAnimated:(BOOL)animated;
-- (void)setSquarePosition:(AKIPosition)squarePosition withAnimated:(BOOL)animated withCompletionHandler:(AKICompletionHandler)completionHandler;
+- (void)setSquarePosition:(AKIPosition)squarePosition
+                 animated:(BOOL)animated;
 
--(void)AKIPositionFirst;
--(void)AKIPositionSecond;
--(void)AKIPositionThird;
--(void)AKIPositionFourth;
+- (void)setSquarePosition:(AKIPosition)squarePosition
+                 animated:(BOOL)animated
+    withCompletionHandler:(AKICompletionHandler)completionHandler;
 
 - (void)startAnimation;
 - (void)stopAnimation;

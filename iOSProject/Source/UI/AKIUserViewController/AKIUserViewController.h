@@ -10,7 +10,6 @@
 
 @interface AKIUserViewController : UIViewController
 
-- (IBAction)onRandomRouteButton:(id)sender;
 - (IBAction)onAutoRouteButton:(id)sender;
 
 - (IBAction)onStartProcessingButton:(id)sender;

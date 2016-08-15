@@ -10,11 +10,14 @@
 
 #import <math.h>
 
-@interface AKIUserView()
-@property (nonatomic, assign)   CGFloat x;
-@property (nonatomic, assign)   CGFloat y;
+static float const kAKIDuration = 3.0;
+static float const kAKIDelay = 1.0;
 
-@property (nonatomic, retain)   NSTimer *timer;
+@interface AKIUserView()
+@property (nonatomic, readwrite) BOOL    run;
+
+- (CGRect)coordinates;
+- (CGPoint)nextPosition;
 
 @end
 
@@ -23,92 +26,92 @@
 #pragma mark -
 #pragma mark Public
 
-- (void)moveRouteLabel {
+- (void)startAnimation {
     [self setSquarePosition];
 }
 
-- (SEL)nextPosition {
-    switch (self.squarePosition) {
-        case AKIPositionFirst:
-            return @selector(AKIPositionSecond); break;
-        case AKIPositionSecond:
-            return @selector(AKIPositionThird); break;
-        case AKIPositionThird:
-            return @selector(AKIPositionFourth); break;
-        case AKIPositionFourth:
-            return @selector(AKIPositionFirst); break;
-            
-        default: return 0;
-    }
-}
-
-- (void)startAnimation {
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0
-                                     target:self
-                                   selector:@selector(setSquarePosition)
-                                   userInfo:nil
-                                    repeats:YES];
-}
-
 - (void)stopAnimation {
-    [self.timer invalidate];
+    self.run = NO;
+}
+
+- (void)moveRouteLabel {
+    [self setSquarePosition];
+    [self stopAnimation];
+}
+
+- (BOOL)isRunning {
+    return _run;
 }
 
 #pragma mark -
 #pragma mark Change square position
 
 - (void)setSquarePosition {
-    [self setSquarePosition:self.squarePosition withAnimated:YES];
-}
-- (void)setSquarePosition:(AKIPosition)squarePosition withAnimated:(BOOL)animated {
-    if (animated) {
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:5.0];
-        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-    }
-    
-    [self performSelector:[self nextPosition]];
-    
-    NSUInteger width = self.label.frame.size.width;
-    NSUInteger height = self.label.frame.size.height;
-    
-    self.label.transform = CGAffineTransformMakeTranslation(self.x - width, self.y - height);
-    
-    if (animated) {
-        [UIView commitAnimations];
-    }
-}
-- (void)setSquarePosition:(AKIPosition)squarePosition withAnimated:(BOOL)animated withCompletionHandler:(AKICompletionHandler)completionHandler {
-    [self setSquarePosition:squarePosition withAnimated:animated];
-    
-    completionHandler();
+    self.run = YES;
+    [self setSquarePosition:self.squarePosition animated:YES];
 }
 
 #pragma mark -
-#pragma mark Selector
+#pragma mark Private
 
--(void)AKIPositionFirst {
-    self.x = self.label.frame.size.width;
-    self.y = self.label.frame.size.height;
-    self.squarePosition = AKIPositionFirst;
+- (CGRect)coordinates {
+    return CGRectMake(self.bounds.origin.x, self.bounds.origin.y, [[UIScreen mainScreen] bounds].size.width - self.label.bounds.size.width, [[UIScreen mainScreen] bounds].size.height - self.label.bounds.size.height);
 }
 
--(void)AKIPositionSecond {
-    self.x = [[UIScreen mainScreen] bounds].size.width;
-    self.y = self.label.frame.size.height;
-    self.squarePosition = AKIPositionSecond;
+- (CGPoint)nextPosition:(AKIPosition)position {
+    CGRect rect = [self coordinates];
+    CGPoint point = CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect));
+    CGPoint maxPoint = CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
+    
+    switch (position) {
+        case AKIPositionFirst:
+            point.x = maxPoint.x;
+            break;
+            
+        case AKIPositionSecond:
+            point = maxPoint;
+            break;
+            
+        case AKIPositionThird:
+            point.y = maxPoint.y;
+            break;
+            
+        default:
+            point = CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect));
+            break;
+    }
+    
+    return point;
 }
 
--(void)AKIPositionThird {
-    self.x = [[UIScreen mainScreen] bounds].size.width;;
-    self.y = [[UIScreen mainScreen] bounds].size.height;;
-    self.squarePosition = AKIPositionThird;
+- (void)setSquarePosition:(AKIPosition)squarePosition
+                 animated:(BOOL)animated
+{
+    if (self.run) {
+        [self setSquarePosition:squarePosition animated:animated withCompletionHandler:^{
+            self.squarePosition == AKIPositionFourth ? self.squarePosition = AKIPositionFirst : self.squarePosition++;
+            [self setSquarePosition:self.squarePosition animated:YES];
+        }];
+    }
 }
 
--(void)AKIPositionFourth {
-    self.x = self.label.frame.size.width;
-    self.y = [[UIScreen mainScreen] bounds].size.height;
-    self.squarePosition = AKIPositionFourth;
+- (void)setSquarePosition:(AKIPosition)squarePosition
+                 animated:(BOOL)animated
+    withCompletionHandler:(AKICompletionHandler)completionHandler
+{
+    [UIView animateWithDuration:kAKIDuration
+                          delay:kAKIDelay
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         CGPoint point = [self nextPosition:squarePosition];
+                         self.label.transform = CGAffineTransformMakeTranslation(point.x, point.y);
+                     }
+                     completion:^(BOOL finished) {
+                         self.squarePosition = squarePosition;
+                         if (completionHandler) {
+                             completionHandler();
+                         }
+                     }];
 }
 
 @end
