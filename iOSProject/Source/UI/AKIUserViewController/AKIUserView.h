@@ -23,4 +23,7 @@
 - (void)removeLastField;
 - (void)sortTable;
 
+- (void)removeObjectAtIndex:(NSUInteger)index;
+- (void)removeObjectAtIndexSubscript:(NSUInteger)index;
+
 @end

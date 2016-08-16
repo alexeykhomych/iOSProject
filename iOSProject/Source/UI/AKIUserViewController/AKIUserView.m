@@ -26,4 +26,12 @@
     
 }
 
+- (void)removeObjectAtIndex:(NSUInteger)index {
+    
+}
+
+- (void)removeObjectAtIndexSubscript:(NSUInteger)index {
+    
+}
+
 @end

@@ -31,3 +31,24 @@
     AKIBaseViewGetterSynthesize(propertyName, baseViewClass) \
     \
     @end
+
+#define AKIWeakify(variable) \
+    __weak __typeof(variable) __AKIWeakified_##variable = variable;
+
+// you should only call this method after you called weakify for that same variable
+#define AKIStrongify(variable) \
+    __strong __typeof(variable) variable = __AKIWeakified_##variable;
+
+#define AKIEmptyResult
+
+#define AKIStrongifyIfNilReturn(variable) \
+    AKIStrongifyIfNilReturnResult(variable, AKIEmptyResult)
+
+#define AKIStrongifyIfNilReturnNil(variable) \
+    AKIStrongifyIfNilReturnResult(variable, nil)
+
+#define AKIStrongifyIfNilReturnResult(variable, result) \
+    AKIStrongify(variable); \
+    if (!variable) { \
+        return result; \
+    }

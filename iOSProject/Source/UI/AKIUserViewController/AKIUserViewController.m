@@ -14,6 +14,8 @@
 
 #import "AKIMacro.h"
 
+static NSUInteger const kAKINumberOfRows = 5;
+
 AKIViewControllerBaseViewProperty(AKIUserViewController, userView, AKIUserView)
 
 @implementation AKIUserViewController
@@ -43,7 +45,7 @@ AKIViewControllerBaseViewProperty(AKIUserViewController, userView, AKIUserView)
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return kAKINumberOfRows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

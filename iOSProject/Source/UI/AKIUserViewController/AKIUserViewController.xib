@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
@@ -26,17 +25,6 @@
                         <action selector="onAddField:" destination="-1" eventType="touchUpInside" id="fJl-Y4-Dov"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SD4-If-gpn" userLabel="Remove Field">
-                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <state key="normal" title="Remove"/>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="276" y="546" width="100" height="29"/>
-                    </variation>
-                    <connections>
-                        <action selector="onRemoveField:" destination="-1" eventType="touchUpInside" id="HKh-Di-qCq"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHf-xv-rwe">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -59,22 +47,33 @@
                         <outlet property="delegate" destination="-1" id="hPa-Qi-6zH"/>
                     </connections>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SD4-If-gpn" userLabel="Remove Field">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <state key="normal" title="Remove"/>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="276" y="546" width="100" height="29"/>
+                    </variation>
+                    <connections>
+                        <action selector="onRemoveField:" destination="-1" eventType="touchUpInside" id="HKh-Di-qCq"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <variation key="default">
                 <mask key="subviews">
                     <exclude reference="8b4-da-Ayj"/>
-                    <exclude reference="SD4-If-gpn"/>
                     <exclude reference="DHf-xv-rwe"/>
                     <exclude reference="OPu-bI-i6B"/>
+                    <exclude reference="SD4-If-gpn"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
                 <mask key="subviews">
                     <include reference="8b4-da-Ayj"/>
-                    <include reference="SD4-If-gpn"/>
                     <include reference="DHf-xv-rwe"/>
                     <include reference="OPu-bI-i6B"/>
+                    <include reference="SD4-If-gpn"/>
                 </mask>
             </variation>
             <connections>
