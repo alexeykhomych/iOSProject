@@ -16,7 +16,5 @@
 @property (nonatomic, strong)   AKIUser                 *user;
 
 - (void)fillWithModel:(AKIUser *)user;
-- (void)addField;
-- (void)removeField;
 
 @end

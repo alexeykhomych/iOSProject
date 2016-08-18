@@ -10,7 +10,6 @@
 
 @interface AKIRandomName : NSString
 
-+ (NSString *)randomName;
-+ (NSString *)randomSurname;
+- (instancetype)nameWithSurname;
 
 @end

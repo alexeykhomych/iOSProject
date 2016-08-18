@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "AKIUserView.h"
+
 @class AKIUser;
 
 @interface AKIUserViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-@property (nonatomic, retain)   AKIUser *user;
+@property (nonatomic, retain)   AKIUser             *user;
+@property (nonatomic, retain)   NSMutableArray      *users;
 
 - (IBAction)onAddField:(id)sender;
 - (IBAction)onRemoveField:(id)sender;

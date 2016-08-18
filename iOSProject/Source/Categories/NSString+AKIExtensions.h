@@ -1,5 +1,5 @@
 //
-//  NSString+AKIRandomName.h
+//  NSString+AKIExtensions.h
 //  iOSProject
 //
 //  Created by Alexey Khomych on 28.07.16.
@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (AKIRandomName)
+@interface NSString (AKIExtensions)
 
-+ (instancetype)randomName;
-+ (instancetype)randomSurname;
++ (NSString *)fullName;
 
 @end

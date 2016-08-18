@@ -8,11 +8,15 @@
 
 #import "AKIUser.h"
 
-#import "NSString+AKIRandomName.h"
+#import "NSString+AKIExtensions.h"
+
+@interface AKIUser()
+@property (nonatomic, copy)     NSString    *fullName;
+
+@end
 
 @implementation AKIUser
 
-@dynamic fullName;
 @dynamic image;
 
 #pragma mark -
@@ -22,8 +26,7 @@
     self = [super init];
     
     if (self) {
-        self.name = [NSString randomName];
-        self.surname = [NSString randomSurname];
+        self.fullName = [NSString fullName];
     }
     
     return self;
@@ -31,10 +34,6 @@
 
 #pragma mark -
 #pragma mark Accessors
-
-- (NSString *)fullName {
-    return [NSString stringWithFormat:@"%@ %@", self.name, self.surname];
-}
 
 - (UIImage *)image {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"image" ofType:@"jpg"];

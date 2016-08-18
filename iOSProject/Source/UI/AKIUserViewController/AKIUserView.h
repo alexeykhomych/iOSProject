@@ -26,4 +26,6 @@
 - (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)removeObjectAtIndexSubscript:(NSUInteger)index;
 
+- (void)editing;
+
 @end

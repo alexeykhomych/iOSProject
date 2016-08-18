@@ -11,6 +11,7 @@
 
 #import "AKIUser.h"
 #import "AKIUserCell.h"
+#import "AKIUserView.h"
 
 #import "AKIMacro.h"
 
@@ -25,17 +26,9 @@ AKIViewControllerBaseViewProperty(AKIUserViewController, userView, AKIUserView)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self.userView.tableView reloadData];
     
-//    [tableView addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew context:NULL];
+    self.users = [NSMutableArray arrayWithObjects:@"Tom", @"Bill", @"Tom", @"Joe", @"Tom", nil];
 }
-
-//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-//    CGRect bounds = self.userView.tableView.bounds;
-//    
-//    NSLog(@"%@", [NSValue valueWithCGRect:bounds]);
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -59,15 +52,37 @@ AKIViewControllerBaseViewProperty(AKIUserViewController, userView, AKIUserView)
     }
     
     cell.user = self.user;
-//    NSArray *data = cell.data;
-//    for (id object in data) {
-//        cell.user = object;
-//        
-//        break;
-//    }
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.users removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                         withRowAnimation:UITableViewRowAnimationFade];
+        
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        [self.users insertObject:@"New field" atIndex:0];
+        [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                         withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView
+moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+      toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    [self.users exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+}
+
 
 #pragma mark -
 #pragma mark UIButton

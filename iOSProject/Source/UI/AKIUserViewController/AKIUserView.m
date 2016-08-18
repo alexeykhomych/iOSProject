@@ -15,11 +15,11 @@
 #pragma mark Public
 
 - (void)addFieldWithRandomText {
-    [self.cell addField];
+
 }
 
 - (void)removeLastField {
-    [self.cell removeField];
+
 }
 
 - (void)sortTable {
@@ -32,6 +32,10 @@
 
 - (void)removeObjectAtIndexSubscript:(NSUInteger)index {
     
+}
+
+- (void)editing {
+    [self.tableView setEditing:!self.tableView.editing animated:YES];
 }
 
 @end

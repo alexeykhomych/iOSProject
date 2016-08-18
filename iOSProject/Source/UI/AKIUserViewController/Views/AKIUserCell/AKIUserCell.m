@@ -9,12 +9,6 @@
 #import "AKIUserCell.h"
 
 #import "AKIUser.h"
-#import "AKIRandomData.h"
-
-@interface AKIUserCell()
-@property (nonatomic, retain) AKIRandomData *data;
-
-@end
 
 @implementation AKIUserCell
 
@@ -22,10 +16,7 @@
 #pragma mark Initializations and Deallocations
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    self.data = [AKIRandomData init];
-    
-    return self;
+    return [super initWithCoder:aDecoder];
 }
 
 - (void)awakeFromNib {
@@ -54,22 +45,6 @@
         UIImage *image = user.image;
         dispatch_async(dispatch_get_main_queue(), ^{
             self.userImageView.image = image;
-        });
-    });
-}
-
-- (void)addField {
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self setUser:[AKIUser new]];
-        });
-    });
-}
-
-- (void)removeField {
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.data removeLastObject];
         });
     });
 }
