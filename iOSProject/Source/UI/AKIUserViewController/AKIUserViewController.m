@@ -30,22 +30,12 @@ AKIViewControllerBaseViewProperty(AKIUserViewController, userView, AKIUserView)
 #pragma mark -
 #pragma mark View Lifecycle
 
-- (IBAction)onAutoRouteButton:(id)sender {
-    if (![self.userView isRunning]) {
-        [self.userView moveRouteLabel];
-    }
-}
-
 - (IBAction)onStartProcessingButton:(id)sender {
-    if (![self.userView isRunning]) {
-        [self.userView startAnimation];
-    }
+    [self.userView startAnimation];
 }
 
 - (IBAction)onStopProcessingButton:(id)sender {
-    if ([self.userView isRunning]) {
-        [self.userView stopAnimation];
-    }
+    [self.userView stopAnimation];
 }
 
 @end

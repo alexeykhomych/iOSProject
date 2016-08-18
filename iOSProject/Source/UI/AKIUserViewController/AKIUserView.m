@@ -14,10 +14,10 @@ static float const kAKIDuration = 3.0;
 static float const kAKIDelay = 1.0;
 
 @interface AKIUserView()
-@property (nonatomic, readwrite) BOOL    run;
+@property (nonatomic, readwrite) BOOL    running;
 
-- (CGRect)coordinates;
-- (CGPoint)nextPosition;
+- (CGPoint)newPoint;
+- (CGPoint)nextPosition:(AKIPosition)position;
 
 @end
 
@@ -27,57 +27,47 @@ static float const kAKIDelay = 1.0;
 #pragma mark Public
 
 - (void)startAnimation {
-    [self setSquarePosition];
+    if (!self.running) {
+        self.running = YES;
+        [self setSquarePosition:self.squarePosition animated:YES];
+    }
 }
 
 - (void)stopAnimation {
-    self.run = NO;
-}
-
-- (void)moveRouteLabel {
-    [self setSquarePosition];
-    [self stopAnimation];
-}
-
-- (BOOL)isRunning {
-    return _run;
+    self.running = NO;
 }
 
 #pragma mark -
-#pragma mark Change square position
+#pragma mark Public
 
-- (void)setSquarePosition {
-    self.run = YES;
-    [self setSquarePosition:self.squarePosition animated:YES];
-}
-
-#pragma mark -
-#pragma mark Private
-
-- (CGRect)coordinates {
-    return CGRectMake(self.bounds.origin.x, self.bounds.origin.y, [[UIScreen mainScreen] bounds].size.width - self.label.bounds.size.width, [[UIScreen mainScreen] bounds].size.height - self.label.bounds.size.height);
+- (CGPoint)newPoint {
+    CGRect viewBounds = [self bounds];
+    CGRect labelBounds = [self.label bounds];
+    
+    float averageHeight = CGRectGetHeight(viewBounds) - CGRectGetHeight(labelBounds);
+    float averageWidth = CGRectGetWidth(viewBounds) - CGRectGetWidth(labelBounds);
+    
+    return CGPointMake(averageWidth, averageHeight);
 }
 
 - (CGPoint)nextPosition:(AKIPosition)position {
-    CGRect rect = [self coordinates];
-    CGPoint point = CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect));
-    CGPoint maxPoint = CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
+    CGPoint point = CGPointMake(0, 0);
+    CGPoint maxPoint = [self newPoint];
     
     switch (position) {
-        case AKIPositionFirst:
+        case AKIPositionTopLeft:
             point.x = maxPoint.x;
             break;
             
-        case AKIPositionSecond:
+        case AKIPositionTopRight:
             point = maxPoint;
             break;
             
-        case AKIPositionThird:
+        case AKIPositionDownRight:
             point.y = maxPoint.y;
             break;
             
         default:
-            point = CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect));
             break;
     }
     
@@ -87,9 +77,9 @@ static float const kAKIDelay = 1.0;
 - (void)setSquarePosition:(AKIPosition)squarePosition
                  animated:(BOOL)animated
 {
-    if (self.run) {
+    if (self.running) {
         [self setSquarePosition:squarePosition animated:animated withCompletionHandler:^{
-            self.squarePosition == AKIPositionFourth ? self.squarePosition = AKIPositionFirst : self.squarePosition++;
+            self.squarePosition = (self.squarePosition + 1) % AKIPositionCount;
             [self setSquarePosition:self.squarePosition animated:YES];
         }];
     }
