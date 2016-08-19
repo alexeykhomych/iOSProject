@@ -10,14 +10,29 @@
 
 #import <math.h>
 
+#import "AKIMacro.h"
+
 static float const kAKIDuration = 3.0;
 static float const kAKIDelay = 1.0;
 
-@interface AKIUserView()
-@property (nonatomic, readwrite) BOOL    running;
+@interface AKIUserView ()
+@property (nonatomic, assign) BOOL    running;
+@property (nonatomic, assign) BOOL    finished;
 
-- (CGPoint)newPoint;
+@property (nonatomic, assign) AKIPosition squarePosition;
+
+- (CGPoint)viewSize;
 - (CGPoint)nextPosition:(AKIPosition)position;
+- (AKIPosition)nextPosition;
+
+- (void)setSquarePosition:(AKIPosition)squarePosition;
+
+- (void)setSquarePosition:(AKIPosition)squarePosition
+                 animated:(BOOL)animated;
+
+- (void)setSquarePosition:(AKIPosition)squarePosition
+                 animated:(BOOL)animated
+        completionHandler:(AKICompletionHandler)completionHandler;
 
 @end
 
@@ -27,32 +42,44 @@ static float const kAKIDelay = 1.0;
 #pragma mark Public
 
 - (void)startAnimation {
-    if (!self.running) {
+    if (!self.running && !self.finished) {
         self.running = YES;
-        [self setSquarePosition:self.squarePosition animated:YES];
+        
+        AKIWeakify(self);
+        [self setSquarePosition:[self nextPosition] animated:YES completionHandler:^{
+            AKIStrongify(self);
+            self.running = NO;
+//            self.squarePosition = (self.squarePosition + 1) % AKIPositionCount;
+            [self startAnimation];
+        }];
     }
+}
+
+- (AKIPosition)nextPosition {
+    return (self.squarePosition + 1) % AKIPositionCount;
 }
 
 - (void)stopAnimation {
     self.running = NO;
+    self.finished = YES;
 }
 
 #pragma mark -
-#pragma mark Public
+#pragma mark Private
 
-- (CGPoint)newPoint {
+- (CGPoint)viewSize {
     CGRect viewBounds = [self bounds];
     CGRect labelBounds = [self.label bounds];
     
-    float averageHeight = CGRectGetHeight(viewBounds) - CGRectGetHeight(labelBounds);
-    float averageWidth = CGRectGetWidth(viewBounds) - CGRectGetWidth(labelBounds);
+    CGFloat averageHeight = CGRectGetHeight(viewBounds) - CGRectGetHeight(labelBounds);
+    CGFloat averageWidth = CGRectGetWidth(viewBounds) - CGRectGetWidth(labelBounds);
     
     return CGPointMake(averageWidth, averageHeight);
 }
 
 - (CGPoint)nextPosition:(AKIPosition)position {
     CGPoint point = CGPointMake(0, 0);
-    CGPoint maxPoint = [self newPoint];
+    CGPoint maxPoint = [self viewSize];
     
     switch (position) {
         case AKIPositionTopLeft:
@@ -63,7 +90,7 @@ static float const kAKIDelay = 1.0;
             point = maxPoint;
             break;
             
-        case AKIPositionDownRight:
+        case AKIPositionButtomRight:
             point.y = maxPoint.y;
             break;
             
@@ -74,30 +101,30 @@ static float const kAKIDelay = 1.0;
     return point;
 }
 
-- (void)setSquarePosition:(AKIPosition)squarePosition
-                 animated:(BOOL)animated
-{
-    if (self.running) {
-        [self setSquarePosition:squarePosition animated:animated withCompletionHandler:^{
-            self.squarePosition = (self.squarePosition + 1) % AKIPositionCount;
-            [self setSquarePosition:self.squarePosition animated:YES];
-        }];
-    }
+- (void)setSquarePosition:(AKIPosition)squarePosition {
+    [self setSquarePosition:squarePosition animated:YES];
 }
 
 - (void)setSquarePosition:(AKIPosition)squarePosition
                  animated:(BOOL)animated
-    withCompletionHandler:(AKICompletionHandler)completionHandler
 {
-    [UIView animateWithDuration:kAKIDuration
+    [self setSquarePosition:squarePosition animated:animated completionHandler:nil];
+}
+
+- (void)setSquarePosition:(AKIPosition)squarePosition
+                 animated:(BOOL)animated
+    completionHandler:(AKICompletionHandler)completionHandler
+{
+    [UIView animateWithDuration:animated ? kAKIDuration : 0
                           delay:kAKIDelay
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
-                         CGPoint point = [self nextPosition:squarePosition];
-                         self.label.transform = CGAffineTransformMakeTranslation(point.x, point.y);
+                         CGRect frame = self.label.frame;
+                         frame.origin = [self nextPosition:squarePosition];
+                         self.label.frame = frame;
                      }
                      completion:^(BOOL finished) {
-                         self.squarePosition = squarePosition;
+                         _squarePosition = squarePosition;
                          if (completionHandler) {
                              completionHandler();
                          }
