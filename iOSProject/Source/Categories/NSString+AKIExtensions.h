@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^dispatch_block_t)(void);
+
 @interface NSString (AKIExtensions)
 
 + (NSString *)fullName;

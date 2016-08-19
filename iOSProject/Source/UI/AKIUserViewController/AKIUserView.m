@@ -9,30 +9,16 @@
 #import "AKIUserView.h"
 #import "AKIUserCell.h"
 
+@interface AKIUserView ()
+//@property (nonatomic, strong) UITableView *editing;
+//@property (nonatomic, assign) BOOL editing;
+
+@end
+
 @implementation AKIUserView
 
 #pragma mark -
 #pragma mark Public
-
-- (void)addFieldWithRandomText {
-
-}
-
-- (void)removeLastField {
-
-}
-
-- (void)sortTable {
-    
-}
-
-- (void)removeObjectAtIndex:(NSUInteger)index {
-    
-}
-
-- (void)removeObjectAtIndexSubscript:(NSUInteger)index {
-    
-}
 
 - (void)editing {
     [self.tableView setEditing:!self.tableView.editing animated:YES];
