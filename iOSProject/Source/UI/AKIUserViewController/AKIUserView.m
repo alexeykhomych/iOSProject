@@ -16,23 +16,14 @@ static float const kAKIDuration = 3.0;
 static float const kAKIDelay = 1.0;
 
 @interface AKIUserView ()
-@property (nonatomic, assign) BOOL    running;
-@property (nonatomic, assign) BOOL    finished;
+@property (nonatomic, assign, getter=isRunnning) BOOL    running;
+@property (nonatomic, assign) BOOL    shouldFinish;
 
 @property (nonatomic, assign) AKIPosition squarePosition;
 
 - (CGPoint)viewSize;
 - (CGPoint)nextPosition:(AKIPosition)position;
 - (AKIPosition)nextPosition;
-
-- (void)setSquarePosition:(AKIPosition)squarePosition;
-
-- (void)setSquarePosition:(AKIPosition)squarePosition
-                 animated:(BOOL)animated;
-
-- (void)setSquarePosition:(AKIPosition)squarePosition
-                 animated:(BOOL)animated
-        completionHandler:(AKICompletionHandler)completionHandler;
 
 @end
 
@@ -42,7 +33,7 @@ static float const kAKIDelay = 1.0;
 #pragma mark Public
 
 - (void)startAnimation {
-    if (!self.running && !self.finished) {
+    if (!self.running && !self.shouldFinish) {
         self.running = YES;
         
         AKIWeakify(self);
@@ -55,24 +46,57 @@ static float const kAKIDelay = 1.0;
     }
 }
 
-- (AKIPosition)nextPosition {
-    return (self.squarePosition + 1) % AKIPositionCount;
-}
-
 - (void)stopAnimation {
     self.running = NO;
-    self.finished = YES;
+    self.shouldFinish = YES;
+}
+
+- (void)setSquarePosition:(AKIPosition)squarePosition {
+    [self setSquarePosition:squarePosition animated:YES];
+}
+
+- (void)setSquarePosition:(AKIPosition)squarePosition
+                 animated:(BOOL)animated
+{
+    [self setSquarePosition:squarePosition animated:animated completionHandler:nil];
+}
+
+- (void)setSquarePosition:(AKIPosition)squarePosition
+                 animated:(BOOL)animated
+        completionHandler:(AKICompletionHandler)completionHandler
+{
+    [UIView animateWithDuration:animated ? kAKIDuration : 0
+                          delay:kAKIDelay
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         CGRect frame = self.label.frame;
+                         frame.origin = [self nextPosition:squarePosition];
+                         self.label.frame = frame;
+                     }
+                     completion:^(BOOL shouldFinish) {
+                         _squarePosition = squarePosition;
+                         if (completionHandler) {
+                             completionHandler();
+                         }
+                     }];
 }
 
 #pragma mark -
 #pragma mark Private
 
+- (AKIPosition)nextPosition {
+    return (self.squarePosition + 1) % AKIPositionCount;
+}
+
+#define CGHeight CGRectGetHeight
+#define CGWidth CGRectGetWidth
+
 - (CGPoint)viewSize {
     CGRect viewBounds = [self bounds];
     CGRect labelBounds = [self.label bounds];
     
-    CGFloat averageHeight = CGRectGetHeight(viewBounds) - CGRectGetHeight(labelBounds);
-    CGFloat averageWidth = CGRectGetWidth(viewBounds) - CGRectGetWidth(labelBounds);
+    CGFloat averageHeight = CGHeight(viewBounds) - CGHeight(labelBounds);
+    CGFloat averageWidth = CGWidth(viewBounds) - CGWidth(labelBounds);
     
     return CGPointMake(averageWidth, averageHeight);
 }
@@ -90,7 +114,7 @@ static float const kAKIDelay = 1.0;
             point = maxPoint;
             break;
             
-        case AKIPositionButtomRight:
+        case AKIPositionBottomRight:
             point.y = maxPoint.y;
             break;
             
@@ -99,36 +123,6 @@ static float const kAKIDelay = 1.0;
     }
     
     return point;
-}
-
-- (void)setSquarePosition:(AKIPosition)squarePosition {
-    [self setSquarePosition:squarePosition animated:YES];
-}
-
-- (void)setSquarePosition:(AKIPosition)squarePosition
-                 animated:(BOOL)animated
-{
-    [self setSquarePosition:squarePosition animated:animated completionHandler:nil];
-}
-
-- (void)setSquarePosition:(AKIPosition)squarePosition
-                 animated:(BOOL)animated
-    completionHandler:(AKICompletionHandler)completionHandler
-{
-    [UIView animateWithDuration:animated ? kAKIDuration : 0
-                          delay:kAKIDelay
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         CGRect frame = self.label.frame;
-                         frame.origin = [self nextPosition:squarePosition];
-                         self.label.frame = frame;
-                     }
-                     completion:^(BOOL finished) {
-                         _squarePosition = squarePosition;
-                         if (completionHandler) {
-                             completionHandler();
-                         }
-                     }];
 }
 
 @end

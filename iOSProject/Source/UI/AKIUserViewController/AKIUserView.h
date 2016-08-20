@@ -11,10 +11,11 @@
 typedef void (^AKICompletionHandler)(void);
 
 typedef enum {
+    AKIPositionDefault,
     AKIPositionTopLeft,
     AKIPositionTopRight,
-    AKIPositionButtomRight,
-    AKIPositionButtomLeft,
+    AKIPositionBottomRight,
+    AKIPositionBottomLeft,
     AKIPositionCount
 } AKIPosition;
 
@@ -23,11 +24,18 @@ typedef enum {
 @property (nonatomic, strong)   IBOutlet UIButton            *start;
 @property (nonatomic, strong)   IBOutlet UIButton            *stop;
 
-@property (nonatomic, readonly) BOOL running;
+@property (nonatomic, readonly, getter=isRunnning) BOOL running;
 
 @property (nonatomic, readonly)   AKIPosition squarePosition;
 
 - (void)startAnimation;
 - (void)stopAnimation;
+
+- (void)setSquarePosition:(AKIPosition)squarePosition
+                 animated:(BOOL)animated;
+
+- (void)setSquarePosition:(AKIPosition)squarePosition
+                 animated:(BOOL)animated
+        completionHandler:(AKICompletionHandler)completionHandler;
 
 @end

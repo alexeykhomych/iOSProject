@@ -35,7 +35,7 @@
 		8430387B1D50EE2100083ADE /* NSString+AKIRandomName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+AKIRandomName.h"; sourceTree = "<group>"; };
 		8430387C1D50EE2100083ADE /* NSString+AKIRandomName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+AKIRandomName.m"; sourceTree = "<group>"; };
 		843038851D50EE2100083ADE /* AKIUserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIUserView.h; sourceTree = "<group>"; };
-		843038861D50EE2100083ADE /* AKIUserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIUserView.m; sourceTree = "<group>"; };
+		843038861D50EE2100083ADE /* AKIUserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AKIUserView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		843038871D50EE2100083ADE /* AKIUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIUserViewController.h; sourceTree = "<group>"; };
 		843038881D50EE2100083ADE /* AKIUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIUserViewController.m; sourceTree = "<group>"; };
 		843038891D50EE2100083ADE /* AKIUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKIUserViewController.xib; sourceTree = "<group>"; };
