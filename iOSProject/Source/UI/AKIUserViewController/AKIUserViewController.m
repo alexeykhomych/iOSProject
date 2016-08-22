@@ -8,6 +8,7 @@
 
 #import "AKIUserViewController.h"
 
+#import "UINib+AKIExtensions.h"
 
 #import "AKIUser.h"
 #import "AKIUserCell.h"
@@ -15,7 +16,7 @@
 
 #import "AKIMacro.h"
 
-static NSUInteger const kAKINumberOfRows = 5;
+#import "AKIArrayModel.h"
 
 AKIViewControllerBaseViewProperty(AKIUserViewController, userView, AKIUserView)
 
@@ -28,6 +29,9 @@ AKIViewControllerBaseViewProperty(AKIUserViewController, userView, AKIUserView)
     [super viewDidLoad];
     
     self.users = [NSMutableArray arrayWithObjects:@"Tom", @"Bill", @"Tom", @"Joe", @"Tom", nil];
+//    self.users = [AKIArrayModel randomDataArray:3];
+    [self.userView.tableView reloadData];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,7 +42,7 @@ AKIViewControllerBaseViewProperty(AKIUserViewController, userView, AKIUserView)
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return kAKINumberOfRows;
+    return self.users.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -51,7 +55,7 @@ AKIViewControllerBaseViewProperty(AKIUserViewController, userView, AKIUserView)
         cell = [cells firstObject];
     }
     
-    cell.user = self.user;
+    cell.textLabel.text = [self.users objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -62,13 +66,12 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.users removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+        [self.userView.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                          withRowAnimation:UITableViewRowAnimationFade];
         
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        [self.users insertObject:@"New field" atIndex:0];
-        [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                         withRowAnimation:UITableViewRowAnimationFade];
+        [self.users addObject:@"New field"];
+        [self.userView.tableView reloadData];
     }
 }
 
@@ -83,23 +86,26 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     [self.users exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
 }
 
-
 #pragma mark -
 #pragma mark UIButton
 
 - (IBAction)onAddField:(id)sender {
-    [self.userView addFieldWithRandomText];
-    [self.userView.tableView reloadData];
+    [self tableView:self.userView.tableView commitEditingStyle:UITableViewCellEditingStyleInsert
+  forRowAtIndexPath:[self.userView.tableView indexPathForSelectedRow]];
 }
 
 - (IBAction)onRemoveField:(id)sender {
-    [self.userView removeLastField];
-    [self.userView.tableView reloadData];
+    NSIndexPath *indexPath = [self.userView.tableView indexPathForSelectedRow];
+    
+    if (!indexPath) {
+        return;
+    }
+    
+    [self tableView:self.userView.tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
 }
 
 - (IBAction)onSortTable:(id)sender {
-    [self.userView sortTable];
-    [self.userView.tableView reloadData];
+    [self.userView setEditing:self.userView.editing animated:YES];
 }
 
 @end

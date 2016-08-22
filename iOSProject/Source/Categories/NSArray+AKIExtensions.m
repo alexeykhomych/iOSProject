@@ -10,4 +10,11 @@
 
 @implementation NSArray (AKIExtensions)
 
+#pragma mark -
+#pragma mark Class methods
+
+- (id)randomObject {
+    return [self objectAtIndex:arc4random_uniform((u_int32_t)self.count)];
+}
+
 @end

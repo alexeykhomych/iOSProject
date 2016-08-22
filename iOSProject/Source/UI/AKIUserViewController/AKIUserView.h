@@ -17,15 +17,10 @@
 @property (nonatomic, strong) IBOutlet UIButton     *removeField;
 @property (nonatomic, strong) IBOutlet UIButton     *sort;
 
+@property(nonatomic, getter=isEditing) BOOL editing;
+
 @property (nonatomic, retain) AKIUserCell *cell;
 
-- (void)addFieldWithRandomText;
-- (void)removeLastField;
-- (void)sortTable;
-
-- (void)removeObjectAtIndex:(NSUInteger)index;
-- (void)removeObjectAtIndexSubscript:(NSUInteger)index;
-
-- (void)editing;
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated;
 
 @end

@@ -8,45 +8,72 @@
 
 #import "NSString+AKIExtensions.h"
 
+#import "NSArray+AKIExtensions.h"
+
 @implementation NSString (AKIExtensions)
 
 #pragma mark -
 #pragma mark Class methods
 
 + (NSString *)fullName {
-    return [[self alloc]  nameWithSurname];
-}
-
-#pragma mark -
-#pragma mark Initializations and Deallocations
-
-- (instancetype)nameWithSurname {
     return [NSString stringWithFormat:@"%@ %@", [self randomName], [self randomSurname]];
 }
 
 #pragma mark -
 #pragma mark Private methods
 
-- (NSString *)randomName {
-    static  NSArray *names;
++ (NSString *)randomName {
+    static  NSArray *names = nil;
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-        names = @[@"Ackerley", @"Acton", @"Adamaris", @"Addison", @"Adney", @"Adolf", @"Aethelder", @"Africa", @"Aiken", @"Ainsley", @"Aaron", @"Alan", @"Connor", @"Conway", @"Cyril", @"Curtis", @"Crosby"];
+        names = @[@"Ackerley",
+                  @"Acton",
+                  @"Adamaris",
+                  @"Addison",
+                  @"Adney",
+                  @"Adolf",
+                  @"Aethelder",
+                  @"Africa",
+                  @"Aiken",
+                  @"Ainsley",
+                  @"Aaron",
+                  @"Alan",
+                  @"Connor",
+                  @"Conway",
+                  @"Cyril",
+                  @"Curtis",
+                  @"Crosby"];
     });
     
-    return [names objectAtIndex:arc4random_uniform((u_int32_t)names.count)];
+    return [names randomObject];
 }
 
-- (NSString *)randomSurname {
-    static NSArray *surnames;
++ (NSString *)randomSurname {
+    static NSArray *surnames = nil;
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-         surnames = @[@"Abbey", @"Abbott", @"Abel", @"Abney", @"Abharams", @"Abrams", @"AChilles", @"Albertson", @"Albinson", @"Bailey", @"Baldwin", @"Bancroft", @"Banister", @"Banks", @"Badcock", @"Blake", @"Bloodworth"];
+         surnames = @[@"Abbey",
+                      @"Abbott",
+                      @"Abel",
+                      @"Abney",
+                      @"Abharams",
+                      @"Abrams",
+                      @"AChilles",
+                      @"Albertson",
+                      @"Albinson",
+                      @"Bailey",
+                      @"Baldwin",
+                      @"Bancroft",
+                      @"Banister",
+                      @"Banks",
+                      @"Badcock",
+                      @"Blake",
+                      @"Bloodworth"];
     });
     
-    return [surnames objectAtIndex:arc4random_uniform((u_int32_t)surnames.count)];
+    return [surnames randomObject];
 }
 
 @end

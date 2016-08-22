@@ -8,6 +8,17 @@
 
 #import "UITableView+AKIExtensions.h"
 
+#import "UINib+AKIExtensions.h"
+
 @implementation UITableView (AKIExtensions)
+
+- (id)cellWithClass:(Class)class {
+    id cell = [self dequeueReusableCellWithIdentifier:NSStringFromClass(class)];
+    if (!cell) {
+        cell = [UINib objectWithClass:class];
+    }
+    
+    return cell;
+}
 
 @end

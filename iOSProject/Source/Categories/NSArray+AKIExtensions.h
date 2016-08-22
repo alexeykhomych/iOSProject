@@ -10,4 +10,6 @@
 
 @interface NSArray (AKIExtensions)
 
+- (id)randomObject;
+
 @end

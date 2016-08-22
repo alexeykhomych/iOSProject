@@ -10,8 +10,6 @@
 #import "AKIUserCell.h"
 
 @interface AKIUserView ()
-//@property (nonatomic, strong) UITableView *editing;
-//@property (nonatomic, assign) BOOL editing;
 
 @end
 
@@ -20,8 +18,9 @@
 #pragma mark -
 #pragma mark Public
 
-- (void)editing {
-    [self.tableView setEditing:!self.tableView.editing animated:YES];
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [self.tableView setEditing:self.editing animated:animated];
+    self.editing = !self.editing;
 }
 
 @end

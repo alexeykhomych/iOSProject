@@ -10,4 +10,6 @@
 
 @interface UITableView (AKIExtensions)
 
+- (id)cellWithClass:(Class)class;
+
 @end
