@@ -9,14 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "AKIUserView.h"
 
-@class AKIUser;
+@class AKIArrayModel;
 
 @interface AKIUserViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-@property (nonatomic, retain)   AKIUser             *user;
+@property (nonatomic, retain)   AKIArrayModel       *model;
 @property (nonatomic, retain)   NSMutableArray      *users;
 
-- (IBAction)onAddField:(id)sender;
-- (IBAction)onRemoveField:(id)sender;
-- (IBAction)onSortTable:(id)sender;
+- (IBAction)onAddButton:(id)sender;
+- (IBAction)onEditButton:(id)sender;
+
+- (void)addModel:(id)model;
 
 @end

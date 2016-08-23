@@ -14,13 +14,17 @@
 @end
 
 @implementation AKIUserView
+@dynamic editing;
 
 #pragma mark -
 #pragma mark Public
 
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-    [self.tableView setEditing:self.editing animated:animated];
-    self.editing = !self.editing;
+- (void)setEditing:(BOOL)editing {
+    self.tableView.editing = editing;
+}
+
+- (BOOL)isEditing {
+    return self.tableView.editing;
 }
 
 @end

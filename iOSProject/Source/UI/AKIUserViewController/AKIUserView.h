@@ -13,14 +13,13 @@
 @interface AKIUserView : UIView
 @property (nonatomic, strong) IBOutlet UITableView     *tableView;
 
-@property (nonatomic, strong) IBOutlet UIButton     *addField;
-@property (nonatomic, strong) IBOutlet UIButton     *removeField;
-@property (nonatomic, strong) IBOutlet UIButton     *sort;
+@property (nonatomic, strong) IBOutlet UIButton     *addButton;
+@property (nonatomic, strong) IBOutlet UIButton     *editButton;
 
 @property(nonatomic, getter=isEditing) BOOL editing;
 
 @property (nonatomic, retain) AKIUserCell *cell;
 
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated;
+- (void)setEditing:(BOOL)editing;
 
 @end

@@ -10,27 +10,51 @@
 
 #import "NSString+AKIExtensions.h"
 
-static NSUInteger const kAKIUserCount = 10;
-
 @implementation AKIArrayModel
 
 #pragma mark -
 #pragma mark Class methods
 
-+ (id)randomDataArray:(NSUInteger)count {
++ (instancetype)initWithCount:(NSUInteger)count {
+    return [[self alloc] initWithCount:count];
+}
+
+#pragma mark -
+#pragma mark Init and Dealloc
+
+- (instancetype)initWithCount:(NSUInteger)count {
+    self = [super init];
+    if (self) {
+        [self randomDataArray:count];
+    }
+    
+    return self;
+}
+
+#pragma mark -
+#pragma mark Public
+
+- (void)addObject {
+    [self.data addObject:[NSString fullName]];
+}
+
+- (void)randomDataArray:(NSUInteger)count {
     NSMutableArray *data = [NSMutableArray new];
     
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            for (NSUInteger i = 0; i < kAKIUserCount; i++) {
-                [data addObject:[NSString fullName]];
-            }
-        });
-    });
+    for (NSUInteger i = 0; i < count; i++) {
+        [data addObject:[NSString fullName]];
+    }
     
+    self.data = data;
     NSLog(@"Done");
-    
-    return data;
+}
+
+- (id)objectInDataAtIndex:(NSUInteger)index {
+    return [self.data objectAtIndex:index];
+}
+
+- (NSUInteger)count {
+    return self.data.count;
 }
 
 
