@@ -26,16 +26,15 @@ typedef enum {
 
 @property (nonatomic, readonly, getter=isRunnning) BOOL running;
 
-@property (nonatomic, readonly)   AKIPosition squarePosition;
-
-- (void)startAnimation;
-- (void)stopAnimation;
-
+@property (nonatomic, assign)   AKIPosition squarePosition;
 - (void)setSquarePosition:(AKIPosition)squarePosition
                  animated:(BOOL)animated;
 
 - (void)setSquarePosition:(AKIPosition)squarePosition
                  animated:(BOOL)animated
         completionHandler:(AKICompletionHandler)completionHandler;
+
+- (void)startAnimation;
+- (void)stopAnimation;
 
 @end

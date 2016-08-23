@@ -19,8 +19,6 @@ static float const kAKIDelay = 1.0;
 @property (nonatomic, assign, getter=isRunnning) BOOL    running;
 @property (nonatomic, assign) BOOL    shouldFinish;
 
-@property (nonatomic, assign) AKIPosition squarePosition;
-
 - (CGPoint)viewSize;
 - (CGPoint)nextPosition:(AKIPosition)position;
 - (AKIPosition)nextPosition;
@@ -38,9 +36,8 @@ static float const kAKIDelay = 1.0;
         
         AKIWeakify(self);
         [self setSquarePosition:[self nextPosition] animated:YES completionHandler:^{
-            AKIStrongify(self);
+            AKIStrongifyIfNilReturn(self);
             self.running = NO;
-//            self.squarePosition = (self.squarePosition + 1) % AKIPositionCount;
             [self startAnimation];
         }];
     }
