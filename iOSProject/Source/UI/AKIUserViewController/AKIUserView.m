@@ -16,8 +16,8 @@ static float const kAKIDuration = 3.0;
 static float const kAKIDelay = 1.0;
 
 @interface AKIUserView ()
-@property (nonatomic, assign, getter=isRunnning) BOOL    running;
-@property (nonatomic, assign) BOOL    shouldFinish;
+@property (nonatomic, assign, getter=isAnimating)   BOOL    animating;
+@property (nonatomic, assign)                       BOOL    shouldFinish;
 
 - (CGPoint)viewSize;
 - (CGPoint)nextPosition:(AKIPosition)position;
@@ -31,20 +31,20 @@ static float const kAKIDelay = 1.0;
 #pragma mark Public
 
 - (void)startAnimation {
-    if (!self.running && !self.shouldFinish) {
-        self.running = YES;
+    if (!self.animating && !self.shouldFinish) {
+        self.animating = YES;
         
         AKIWeakify(self);
         [self setSquarePosition:[self nextPosition] animated:YES completionHandler:^{
-            AKIStrongifyIfNilReturn(self);
-            self.running = NO;
+            AKIStrongifyAndReturn(self);
+            self.animating = NO;
             [self startAnimation];
         }];
     }
 }
 
 - (void)stopAnimation {
-    self.running = NO;
+    self.animating = NO;
     self.shouldFinish = YES;
 }
 

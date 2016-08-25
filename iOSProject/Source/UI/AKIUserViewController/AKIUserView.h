@@ -24,7 +24,7 @@ typedef enum {
 @property (nonatomic, strong)   IBOutlet UIButton            *start;
 @property (nonatomic, strong)   IBOutlet UIButton            *stop;
 
-@property (nonatomic, readonly, getter=isRunnning) BOOL running;
+@property (nonatomic, readonly, getter=isAnimating) BOOL animating;
 
 @property (nonatomic, assign)   AKIPosition squarePosition;
 - (void)setSquarePosition:(AKIPosition)squarePosition

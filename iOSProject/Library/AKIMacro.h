@@ -41,10 +41,10 @@
 
 #define AKIEmptyResult
 
-#define AKIStrongifyIfNilReturn(variable) \
+#define AKIStrongifyAndReturn(variable) \
     AKIStrongifyIfNilReturnResult(variable, AKIEmptyResult)
 
-#define AKIStrongifyIfNilReturnNil(variable) \
+#define AKIStrongifyAndReturnNil(variable) \
     AKIStrongifyIfNilReturnResult(variable, nil)
 
 #define AKIStrongifyIfNilReturnResult(variable, result) \
