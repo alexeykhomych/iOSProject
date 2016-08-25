@@ -9,11 +9,8 @@
 #import "AKIUserView.h"
 #import "AKIUserCell.h"
 
-@interface AKIUserView ()
-
-@end
-
 @implementation AKIUserView
+
 @dynamic editing;
 
 #pragma mark -

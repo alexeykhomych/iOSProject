@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "AKIObservableObject.h"
+
 /*
     - доступ по индексам;
 	- доступ по литералу индекса;
@@ -15,15 +17,25 @@
 	- возможность получить количество;
  */
 
-@interface AKIArrayModel : NSObject
-@property (nonatomic, retain) NSMutableArray *data;
+@protocol AKIArrayModel <NSObject>
 
-+ (instancetype)initWithCount:(NSUInteger)count;
+@optional
+- (void)array:(NSArray *)array didUpdate:(id)data;
 
-- (void)randomDataArray:(NSUInteger)count;
+@end
 
-- (void)addObject;
-- (id)objectInDataAtIndex:(NSUInteger)index;
+@interface AKIArrayModel : AKIObservableObject
+@property (nonatomic, readonly) NSArray *data;
+
++ (instancetype)allocWithCount:(NSUInteger)count;
+
+- (void)addObject:(id)object;
+- (void)removeObject:(id)object;
+- (void)removeObjectAtIndex:(NSUInteger)index;
+
+- (void)exchangeObjectAtIndex:(NSUInteger)firstIndex withObjectAtIndex:(NSUInteger)secondIndex;
+
+- (id)objectAtIndexSubscript:(NSUInteger)index;
 - (NSUInteger)count;
 
 @end

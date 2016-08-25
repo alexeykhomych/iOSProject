@@ -8,7 +8,7 @@
 
 #import "AKIAppDelegate.h"
 
-#import "AKIUserViewController.h"
+#import "AKIUsersViewController.h"
 
 @interface AKIAppDelegate ()
 
@@ -21,7 +21,7 @@
     UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     self.window = window;
-    AKIUserViewController *controller = [AKIUserViewController new];
+    AKIUsersViewController *controller = [AKIUsersViewController new];
     window.rootViewController = controller;
     
     [window makeKeyAndVisible];

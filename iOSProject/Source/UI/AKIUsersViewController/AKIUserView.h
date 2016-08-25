@@ -16,10 +16,8 @@
 @property (nonatomic, strong) IBOutlet UIButton     *addButton;
 @property (nonatomic, strong) IBOutlet UIButton     *editButton;
 
-@property(nonatomic, getter=isEditing) BOOL editing;
+@property(nonatomic, assign, getter=isEditing) BOOL editing;
 
 @property (nonatomic, retain) AKIUserCell *cell;
-
-- (void)setEditing:(BOOL)editing;
 
 @end

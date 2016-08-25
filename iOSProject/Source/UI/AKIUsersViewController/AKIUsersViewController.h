@@ -1,5 +1,5 @@
 //
-//  AKIUserViewController.h
+//  AKIUsersViewController.h
 //  iOSProject
 //
 //  Created by Alexey Khomych on 27.07.16.
@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AKIUserView.h"
 
-@class AKIArrayModel;
+#import "AKIArrayModel.h"
 
-@interface AKIUserViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface AKIUsersViewController : UIViewController <
+UITableViewDelegate,
+UITableViewDataSource,
+AKIArrayModel
+>
+
 @property (nonatomic, retain)   AKIArrayModel       *model;
 @property (nonatomic, retain)   NSMutableArray      *users;
 

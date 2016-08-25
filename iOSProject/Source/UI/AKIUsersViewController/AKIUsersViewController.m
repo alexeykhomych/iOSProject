@@ -1,12 +1,12 @@
 //
-//  AKIUserViewController.m
+//  AKIUsersViewController.m
 //  iOSProject
 //
 //  Created by Alexey Khomych on 27.07.16.
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIUserViewController.h"
+#import "AKIUsersViewController.h"
 
 #import "UINib+AKIExtensions.h"
 
@@ -20,15 +20,15 @@
 
 static NSInteger const kAKIModelsCount = 3;
 
-AKIViewControllerBaseViewProperty(AKIUserViewController, userView, AKIUserView)
+AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 
-@implementation AKIUserViewController
+@implementation AKIUsersViewController
 
 #pragma mark -
 #pragma mark Init and Dealloc
 
 - (void)dealloc {
-    self.model = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark -
@@ -36,13 +36,36 @@ AKIViewControllerBaseViewProperty(AKIUserViewController, userView, AKIUserView)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.model = [AKIArrayModel initWithCount:kAKIModelsCount];
-    [self.userView.tableView reloadData];
+    
+    self.title = @"Users";
+    [self initLeftBarButtonItem];
+    [self initRightBarButtonItem];
+ 
+    self.model = [AKIArrayModel allocWithCount:kAKIModelsCount];
+    [self.model addObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark -
+#pragma mark UIBarButtonItems
+
+- (void)initLeftBarButtonItem {
+    UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                            target:self
+                                                                            action:@selector(addModel:)];
+    [self.navigationItem setLeftBarButtonItem:buttom animated:YES];
+}
+
+- (void)initRightBarButtonItem {
+    UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithTitle:@"Edit"
+                                                               style:UIBarButtonItemStyleDone
+                                                              target:self
+                                                              action:@selector(onEditButton:)];
+    
+    [self.navigationItem setRightBarButtonItem:buttom animated:YES];
 }
 
 #pragma mark -
@@ -62,7 +85,8 @@ AKIViewControllerBaseViewProperty(AKIUserViewController, userView, AKIUserView)
         cell = [cells firstObject];
     }
     
-    cell.textLabel.text = [self.model.data objectAtIndex:indexPath.row];
+    AKIUser *user = [self.model.data objectAtIndex:indexPath.row];
+    cell.textLabel.text = user.fullName;
 
     return cell;
 }
@@ -72,13 +96,10 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.model.data removeObjectAtIndex:indexPath.row];
+        [self.model removeObjectAtIndex:indexPath.row];
         [self.userView.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                          withRowAnimation:UITableViewRowAnimationFade];
         
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        [self addModel:@"new model"];
-        [self.userView.tableView reloadData];
     }
 }
 
@@ -90,7 +111,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
       toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    [self.model.data exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+    [self.model exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
 }
 
 #pragma mark -
@@ -108,11 +129,14 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 #pragma mark Public
 
 - (void)addModel:(id)model {
-    [self.model addObject];
-    [self.userView.tableView reloadData];
+    [self.model addObject:model];
 }
 
-- (void)updateTable {
+#pragma mark -
+#pragma mark Notifications
+
+- (void)array:(NSArray *)array didUpdate:(id)data {
+    NSLog(@"Notification: didUpdate");
     [self.userView.tableView reloadData];
 }
 
