@@ -10,6 +10,10 @@
 
 #import "AKIUsersViewController.h"
 
+#import "AKIArrayModel.h"
+
+static NSInteger const kAKIModelsCount = 3;
+
 @interface AKIAppDelegate ()
 
 @end
@@ -22,6 +26,7 @@
     
     self.window = window;
     AKIUsersViewController *controller = [AKIUsersViewController new];
+    controller.model = [AKIArrayModel arrayWithCount:kAKIModelsCount];
     window.rootViewController = controller;
     
     [window makeKeyAndVisible];

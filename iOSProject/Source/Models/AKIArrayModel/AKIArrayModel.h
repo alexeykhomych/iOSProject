@@ -10,30 +10,37 @@
 
 #import "AKIObservableObject.h"
 
-/*
-    - доступ по индексам;
-	- доступ по литералу индекса;
-	- работа как с моделями, так и с индексами моделей;
-	- возможность получить количество;
- */
+@class AKIArrayModel;
+
+typedef NS_ENUM(NSUInteger, AKIArrayModelState) {
+    AKIArrayModelLoaded,
+    AKIArrayModelUpdated,
+    AKIArrayModelLoading,
+    AKIArrayModelFailed
+};
 
 @protocol AKIArrayModel <NSObject>
 
 @optional
-- (void)array:(NSArray *)array didUpdate:(id)data;
+- (void)arrayModel:(AKIArrayModel *)arrayModel didUpdate:(id)data;
+
+- (void)modelLoaded;
+- (void)modelUpdated;
+- (void)modelFailed;
+- (void)modelLoading;
 
 @end
 
 @interface AKIArrayModel : AKIObservableObject
 @property (nonatomic, readonly) NSArray *data;
 
-+ (instancetype)allocWithCount:(NSUInteger)count;
++ (instancetype)arrayWithCount:(NSUInteger)count;
 
 - (void)addObject:(id)object;
 - (void)removeObject:(id)object;
 - (void)removeObjectAtIndex:(NSUInteger)index;
 
-- (void)exchangeObjectAtIndex:(NSUInteger)firstIndex withObjectAtIndex:(NSUInteger)secondIndex;
+- (void)moveObjectAtIndex:(NSUInteger)firstIndex toIndex:(NSUInteger)secondIndex;
 
 - (id)objectAtIndexSubscript:(NSUInteger)index;
 - (NSUInteger)count;

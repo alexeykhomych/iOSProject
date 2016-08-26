@@ -26,7 +26,7 @@
 #pragma mark -
 #pragma mark Class methods
 
-+ (instancetype)allocWithCount:(NSUInteger)count {
++ (instancetype)arrayWithCount:(NSUInteger)count {
     return [[self alloc] initWithCount:count];
 }
 
@@ -46,7 +46,9 @@
 #pragma mark Accessors
 
 - (NSArray *)data {
-    return [self.mutableData copy];
+    @synchronized (self) {
+        return [self.mutableData copy];
+    }
 }
 
 #pragma mark -
@@ -55,44 +57,80 @@
 - (void)addObject:(id)object {
     @synchronized (self) {
         [self.mutableData addObject:object];
-        [self notifyObserverWithSelector:@selector(array:didUpdate:) object:nil];
+        [self notifyObserverWithSelector:@selector(arrayModel:didUpdate:) object:nil];
     }
 }
 
 - (void)removeObject:(id)object {
     @synchronized (self) {
         [self.mutableData removeObject:object];
-        [self notifyObserverWithSelector:@selector(array:didUpdate:) object:nil];
+        [self notifyObserverWithSelector:@selector(arrayModel:didUpdate:) object:nil];
     }
 }
 
 - (id)objectAtIndexSubscript:(NSUInteger)index {
-    return [self.data objectAtIndex:index];
+    @synchronized (self) {
+        return [self.data objectAtIndex:index];
+    }
 }
 
 - (void)removeObjectAtIndex:(NSUInteger)index {
-    [self.mutableData removeObjectAtIndex:index];
+    @synchronized (self) {
+        [self.mutableData removeObjectAtIndex:index];
+    }
 }
 
-- (void)exchangeObjectAtIndex:(NSUInteger)firstIndex withObjectAtIndex:(NSUInteger)secondIndex {
-    [self.mutableData exchangeObjectAtIndex:firstIndex withObjectAtIndex:secondIndex];
+- (void)moveObjectAtIndex:(NSUInteger)firstIndex toIndex:(NSUInteger)secondIndex {
+    @synchronized (self) {
+        id object = [self.mutableData objectAtIndex:firstIndex];
+        [self.mutableData removeObjectAtIndex:firstIndex];
+        [self.mutableData insertObject:object
+                               atIndex:secondIndex];
+    }
 }
 
 - (NSUInteger)count {
-    return self.data.count;
+    @synchronized (self) {
+        return self.data.count;
+    }
 }
 
 #pragma mark -
 #pragma mark Private
 
 - (void)randomDataArray:(NSUInteger)count {
-    NSMutableArray *data = [NSMutableArray new];
-    
-    for (NSUInteger i = 0; i < count; i++) {
-        [data addObject:[AKIUser new]];
+    @synchronized (self) {
+        NSMutableArray *data = [NSMutableArray new];
+        
+        for (NSUInteger i = 0; i < count; i++) {
+            [data addObject:[AKIUser new]];
+        }
+        
+        self.mutableData = data;
     }
-    
-    self.mutableData = data;
+}
+
+#pragma mark -
+#pragma mark AKIObservableObject
+
+- (SEL)selectorForState:(NSUInteger)state {
+    switch (state) {
+        case AKIArrayModelLoaded:
+            return @selector(modelLoaded);
+            break;
+        case AKIArrayModelUpdated:
+            return @selector(modelUpdated);
+            break;
+        case AKIArrayModelLoading:
+            return @selector(modelLoading);
+            break;
+        case AKIArrayModelFailed:
+            return @selector(modelFailed);
+            break;
+        default:
+            return nil;
+            break;
+    }
 }
 
 @end

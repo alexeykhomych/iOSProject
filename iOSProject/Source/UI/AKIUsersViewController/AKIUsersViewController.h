@@ -11,9 +11,9 @@
 #import "AKIArrayModel.h"
 
 @interface AKIUsersViewController : UIViewController <
-UITableViewDelegate,
-UITableViewDataSource,
-AKIArrayModel
+    UITableViewDelegate,
+    UITableViewDataSource,
+    AKIArrayModel
 >
 
 @property (nonatomic, retain)   AKIArrayModel       *model;

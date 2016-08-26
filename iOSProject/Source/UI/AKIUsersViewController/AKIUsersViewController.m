@@ -18,8 +18,6 @@
 
 #import "AKIArrayModel.h"
 
-static NSInteger const kAKIModelsCount = 3;
-
 AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 
 @implementation AKIUsersViewController
@@ -28,7 +26,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 #pragma mark Init and Dealloc
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.model removeObserver:self];
 }
 
 #pragma mark -
@@ -40,9 +38,16 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
     self.title = @"Users";
     [self initLeftBarButtonItem];
     [self initRightBarButtonItem];
- 
-    self.model = [AKIArrayModel allocWithCount:kAKIModelsCount];
-    [self.model addObserver:self];
+}
+
+- (void)setModel:(AKIArrayModel *)model {
+    if (_model != model) {
+        [_model removeObserver:self];
+        
+        _model = model;
+        
+        [_model addObserver:self];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,20 +90,20 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
         cell = [cells firstObject];
     }
     
-    AKIUser *user = [self.model.data objectAtIndex:indexPath.row];
+    AKIUser *user = [self.model objectAtIndexSubscript:indexPath.row];
     cell.textLabel.text = user.fullName;
 
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView
-commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)    tableView:(UITableView *)tableView
+   commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+    forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.model removeObjectAtIndex:indexPath.row];
         [self.userView.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                         withRowAnimation:UITableViewRowAnimationFade];
+                                       withRowAnimation:UITableViewRowAnimationFade];
         
     }
 }
@@ -107,11 +112,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView
-moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
-      toIndexPath:(NSIndexPath *)destinationIndexPath
+- (void)    tableView:(UITableView *)tableView
+   moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+          toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    [self.model exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+    [self.model moveObjectAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
 }
 
 #pragma mark -
@@ -135,8 +140,7 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 #pragma mark -
 #pragma mark Notifications
 
-- (void)array:(NSArray *)array didUpdate:(id)data {
-    NSLog(@"Notification: didUpdate");
+- (void)arrayModel:(AKIArrayModel *)arrayModel didUpdate:(id)data {
     [self.userView.tableView reloadData];
 }
 

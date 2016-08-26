@@ -21,7 +21,7 @@
 }
 
 + (instancetype)nibWithClass:(Class)class bundle:(NSBundle *)bundle {
-    return [UINib nibWithNibName:NSStringFromClass(class) bundle:bundle];
+    return [self nibWithNibName:NSStringFromClass(class) bundle:bundle];
 }
 
 - (id)objectWithClass:(Class)class {
