@@ -1,0 +1,126 @@
+//
+//  AKIObservableObject.m
+//  ObjectiveC
+//
+//  Created by Alexey Khomych on 01.07.16.
+//  Copyright © 2016 Alexey Khomych. All rights reserved.
+//
+
+#import "AKIObservableObject.h"
+
+//typedef void(^AKIControllerNotificationBlock)(AKIObservationController *controller);
+
+@interface AKIObservableObject()
+@property (nonatomic, retain) NSHashTable *observersTable;
+
+@end
+
+@implementation AKIObservableObject
+
+@synthesize state = _state;
+
+@dynamic observers;
+
+#pragma mark -
+#pragma mark Initializations and Dealocations
+
+- (void)dealloc {
+    self.observersTable = nil;
+}
+
+- (instancetype)init {
+    self = [super init];
+    self.observersTable = [NSHashTable weakObjectsHashTable];
+    
+    return self;
+}
+
+#pragma mark -
+#pragma mark Accessors Methods
+
+- (NSSet *)observers {
+    @synchronized (self) {
+        return self.observersTable.setRepresentation;
+    }
+}
+
+- (void)setState:(NSUInteger)state {
+    [self setState:state withObject:self];
+}
+
+- (void)setState:(NSUInteger)state withObject:(id)object {
+    @synchronized (self) {
+        if (_state != state) {
+            _state = state;
+            
+            [self notifyOfState:state withObject:object];
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark Public Methods
+
+- (void)addObserver:(id)object {
+    @synchronized (self) {
+        if (object) {
+            [self.observersTable addObject:object];
+        }
+    }
+}
+
+- (void)addObservers:(NSArray *)observers {
+    @synchronized (self) {
+        for (id observer in observers) {
+            [self addObserver:observer];
+        }
+    }
+}
+
+- (void)removeObserver:(id)object {
+    @synchronized (self) {
+        [self.observersTable removeObject:object];
+    }
+}
+
+- (void)removeObservers:(NSArray *)observers {
+    @synchronized (self) {
+        for (id object in observers) {
+            [self removeObserver:object];
+        }
+    }
+}
+
+- (BOOL)containsObserver:(id)object {
+    @synchronized (self) {
+        return [self.observersTable containsObject:object];
+    }
+}
+
+- (void)notifyOfState:(NSUInteger)state {
+    [self notifyOfState:state withObject:nil];
+}
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (void)notifyObserverWithSelector:(SEL)selector {
+    [self notifyObserverWithSelector:selector object:nil];
+}
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+
+- (void)notifyObserverWithSelector:(SEL)selector object:(id)object {
+    @synchronized (self) {
+        NSHashTable *observers = self.observersTable;
+    
+        for (id observer in observers) {
+            if ([observer respondsToSelector:selector]) {
+                [observer performSelector:selector withObject:self withObject:object];
+            }
+        }
+    }
+}
+
+@end

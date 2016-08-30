@@ -11,23 +11,23 @@
 #import "AKIObservableObject.h"
 
 @class AKIArrayModel;
+@class AKIArrayModelChange;
 
 typedef NS_ENUM(NSUInteger, AKIArrayModelState) {
     AKIArrayModelLoaded,
     AKIArrayModelUpdated,
     AKIArrayModelLoading,
-    AKIArrayModelFailed
+    AKIArrayModelFailedLoading
 };
 
 @protocol AKIArrayModel <NSObject>
 
 @optional
-- (void)arrayModel:(AKIArrayModel *)arrayModel didUpdate:(id)data;
+- (void)arrayModel:(AKIArrayModel *)arrayModel didUpdateWithChangeModel:(AKIArrayModelChange *)arrayModelChange;
 
-- (void)modelLoaded;
-- (void)modelUpdated;
-- (void)modelFailed;
-- (void)modelLoading;
+- (void)arrayModelDidLoad:(AKIArrayModel *)arrayModel;
+- (void)arrayModelDidFailLoading:(AKIArrayModel *)arrayModel;
+- (void)arrayModelWillLoad:(AKIArrayModel *)arrayModel;
 
 @end
 

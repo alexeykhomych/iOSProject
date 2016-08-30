@@ -13,7 +13,6 @@
 		843038FB1D63457300083ADE /* AKIImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843038FA1D63457300083ADE /* AKIImageModel.m */; };
 		843039041D6359BC00083ADE /* AKIImageModelDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039031D6359BC00083ADE /* AKIImageModelDispatcher.m */; };
 		843039081D65CC6800083ADE /* AKITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039071D65CC6800083ADE /* AKITableViewCell.m */; };
-		843039181D69F64600083ADE /* AKIObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039171D69F64600083ADE /* AKIObservableObject.m */; };
 		8430391F1D6A2EFD00083ADE /* AKIArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430391E1D6A2EFD00083ADE /* AKIArrayModel.m */; };
 		843039301D6C7DD500083ADE /* NSArray+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039261D6C7DD500083ADE /* NSArray+AKIExtensions.m */; };
 		843039311D6C7DD500083ADE /* NSString+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039291D6C7DD500083ADE /* NSString+AKIExtensions.m */; };
@@ -25,6 +24,9 @@
 		8430394A1D6F0DDC00083ADE /* AKIUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039451D6F0DDC00083ADE /* AKIUserCell.m */; };
 		8430394B1D6F0DDC00083ADE /* AKIUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843039461D6F0DDC00083ADE /* AKIUserCell.xib */; };
 		8430394D1D6F1D6C00083ADE /* AKIUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430394C1D6F1D6C00083ADE /* AKIUsersViewController.m */; };
+		843039511D719F6700083ADE /* AKIObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039501D719F6700083ADE /* AKIObservableObject.m */; };
+		843039591D75C0B000083ADE /* AKIArrayChangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039581D75C0B000083ADE /* AKIArrayChangeModel.m */; };
+		8430395D1D75E44F00083ADE /* NSMutableArray+AKIExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430395C1D75E44F00083ADE /* NSMutableArray+AKIExtension.m */; };
 		848EE67E1D48CFE700B7F780 /* iOSProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */; };
 		848EE69A1D48D3EA00B7F780 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6901D48D3EA00B7F780 /* Assets.xcassets */; };
 		848EE69B1D48D3EA00B7F780 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6911D48D3EA00B7F780 /* LaunchScreen.storyboard */; };
@@ -53,8 +55,6 @@
 		843039031D6359BC00083ADE /* AKIImageModelDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIImageModelDispatcher.m; sourceTree = "<group>"; };
 		843039061D65CC6800083ADE /* AKITableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKITableViewCell.h; sourceTree = "<group>"; };
 		843039071D65CC6800083ADE /* AKITableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKITableViewCell.m; sourceTree = "<group>"; };
-		843039161D69F64600083ADE /* AKIObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIObservableObject.h; sourceTree = "<group>"; };
-		843039171D69F64600083ADE /* AKIObservableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIObservableObject.m; sourceTree = "<group>"; };
 		8430391D1D6A2EFD00083ADE /* AKIArrayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIArrayModel.h; sourceTree = "<group>"; };
 		8430391E1D6A2EFD00083ADE /* AKIArrayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayModel.m; sourceTree = "<group>"; };
 		843039251D6C7DD500083ADE /* NSArray+AKIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+AKIExtensions.h"; sourceTree = "<group>"; };
@@ -75,6 +75,12 @@
 		843039451D6F0DDC00083ADE /* AKIUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIUserCell.m; sourceTree = "<group>"; };
 		843039461D6F0DDC00083ADE /* AKIUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKIUserCell.xib; sourceTree = "<group>"; };
 		8430394C1D6F1D6C00083ADE /* AKIUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIUsersViewController.m; sourceTree = "<group>"; };
+		8430394F1D719F6700083ADE /* AKIObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIObservableObject.h; sourceTree = "<group>"; };
+		843039501D719F6700083ADE /* AKIObservableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIObservableObject.m; sourceTree = "<group>"; };
+		843039571D75C0B000083ADE /* AKIArrayChangeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIArrayChangeModel.h; sourceTree = "<group>"; };
+		843039581D75C0B000083ADE /* AKIArrayChangeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModel.m; sourceTree = "<group>"; };
+		8430395B1D75E44F00083ADE /* NSMutableArray+AKIExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+AKIExtension.h"; sourceTree = "<group>"; };
+		8430395C1D75E44F00083ADE /* NSMutableArray+AKIExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+AKIExtension.m"; sourceTree = "<group>"; };
 		848EE65D1D48CEEE00B7F780 /* iOSProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67B1D48CFE700B7F780 /* iOSProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSProjectTests.m; sourceTree = "<group>"; };
@@ -124,6 +130,7 @@
 		8430387D1D50EE2100083ADE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				843039561D75C08000083ADE /* AKIArrayChangeModel */,
 				8430391C1D6A2EE400083ADE /* AKIArrayModel */,
 				843038F81D63457300083ADE /* AKIImageModel */,
 				843038C01D5C8D4100083ADE /* AKIUser */,
@@ -177,8 +184,8 @@
 		843038CC1D5C97B400083ADE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8430394E1D719F6700083ADE /* AKIObservableObject */,
 				843039381D6CB16400083ADE /* GCD */,
-				843039151D69F64600083ADE /* AKIObservableObject */,
 				843039051D65CC2700083ADE /* AKITableViewCell */,
 			);
 			path = Classes;
@@ -212,16 +219,6 @@
 			path = AKITableViewCell;
 			sourceTree = "<group>";
 		};
-		843039151D69F64600083ADE /* AKIObservableObject */ = {
-			isa = PBXGroup;
-			children = (
-				843039161D69F64600083ADE /* AKIObservableObject.h */,
-				843039171D69F64600083ADE /* AKIObservableObject.m */,
-			);
-			name = AKIObservableObject;
-			path = ../../../../Documents/Lectures/iOSProject/Library/Classes/AKIObservableObject;
-			sourceTree = "<group>";
-		};
 		8430391C1D6A2EE400083ADE /* AKIArrayModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +231,7 @@
 		843039231D6C7DD500083ADE /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				8430395A1D75E42100083ADE /* NSMutableArray */,
 				843039241D6C7DD500083ADE /* NSArray */,
 				843039271D6C7DD500083ADE /* NSString */,
 				8430392A1D6C7DD500083ADE /* UINib */,
@@ -316,6 +314,33 @@
 				843039461D6F0DDC00083ADE /* AKIUserCell.xib */,
 			);
 			path = AKIUserCell;
+			sourceTree = "<group>";
+		};
+		8430394E1D719F6700083ADE /* AKIObservableObject */ = {
+			isa = PBXGroup;
+			children = (
+				8430394F1D719F6700083ADE /* AKIObservableObject.h */,
+				843039501D719F6700083ADE /* AKIObservableObject.m */,
+			);
+			path = AKIObservableObject;
+			sourceTree = "<group>";
+		};
+		843039561D75C08000083ADE /* AKIArrayChangeModel */ = {
+			isa = PBXGroup;
+			children = (
+				843039571D75C0B000083ADE /* AKIArrayChangeModel.h */,
+				843039581D75C0B000083ADE /* AKIArrayChangeModel.m */,
+			);
+			path = AKIArrayChangeModel;
+			sourceTree = "<group>";
+		};
+		8430395A1D75E42100083ADE /* NSMutableArray */ = {
+			isa = PBXGroup;
+			children = (
+				8430395B1D75E44F00083ADE /* NSMutableArray+AKIExtension.h */,
+				8430395C1D75E44F00083ADE /* NSMutableArray+AKIExtension.m */,
+			);
+			path = NSMutableArray;
 			sourceTree = "<group>";
 		};
 		848EE6541D48CEEE00B7F780 = {
@@ -587,14 +612,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8430395D1D75E44F00083ADE /* NSMutableArray+AKIExtension.m in Sources */,
 				843039041D6359BC00083ADE /* AKIImageModelDispatcher.m in Sources */,
 				8430394D1D6F1D6C00083ADE /* AKIUsersViewController.m in Sources */,
 				843039081D65CC6800083ADE /* AKITableViewCell.m in Sources */,
 				843038C81D5C970100083ADE /* AKIMacro.m in Sources */,
 				843039331D6C7DD500083ADE /* UITableView+AKIExtensions.m in Sources */,
 				843039311D6C7DD500083ADE /* NSString+AKIExtensions.m in Sources */,
+				843039511D719F6700083ADE /* AKIObservableObject.m in Sources */,
 				848EE6FD1D48F7FB00B7F780 /* AKIAppDelegate.m in Sources */,
-				843039181D69F64600083ADE /* AKIObservableObject.m in Sources */,
 				843039491D6F0DDC00083ADE /* AKIUserView.m in Sources */,
 				843039321D6C7DD500083ADE /* UINib+AKIExtensions.m in Sources */,
 				843039301D6C7DD500083ADE /* NSArray+AKIExtensions.m in Sources */,
@@ -602,6 +628,7 @@
 				8430394A1D6F0DDC00083ADE /* AKIUserCell.m in Sources */,
 				843038FB1D63457300083ADE /* AKIImageModel.m in Sources */,
 				848EE6D01D48DD5300B7F780 /* main.m in Sources */,
+				843039591D75C0B000083ADE /* AKIArrayChangeModel.m in Sources */,
 				8430393B1D6CB16400083ADE /* AKIGCD.m in Sources */,
 				8430391F1D6A2EFD00083ADE /* AKIArrayModel.m in Sources */,
 			);

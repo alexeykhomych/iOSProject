@@ -14,6 +14,8 @@
 
 #import "AKIGCD.h"
 
+#import "AKIArrayChangeModel.h"
+
 @interface AKIArrayModel()
 @property (nonatomic, retain) NSMutableArray *mutableData;
 
@@ -56,15 +58,16 @@
 
 - (void)addObject:(id)object {
     @synchronized (self) {
-        [self.mutableData addObject:object];
-        [self notifyObserverWithSelector:@selector(arrayModel:didUpdate:) object:nil];
+        [AKIArrayChangeModel insertObject:object atIndex:self.count];
+//        [self notifyObserverWithSelector:@selector(arrayModel:didUpdate:) object:nil];
     }
 }
 
 - (void)removeObject:(id)object {
     @synchronized (self) {
-        [self.mutableData removeObject:object];
-        [self notifyObserverWithSelector:@selector(arrayModel:didUpdate:) object:nil];
+//        [self.mutableData removeObject:object];
+        [self removeObjectAtIndex:[self.mutableData indexOfObject:object]];
+//        [self notifyObserverWithSelector:@selector(arrayModel:didUpdate:) object:nil];
     }
 }
 
@@ -76,16 +79,14 @@
 
 - (void)removeObjectAtIndex:(NSUInteger)index {
     @synchronized (self) {
-        [self.mutableData removeObjectAtIndex:index];
+//        [self.mutableData removeObjectAtIndex:index];
+        [AKIArrayChangeModel removeObjectAtIndex:self.count];
     }
 }
 
 - (void)moveObjectAtIndex:(NSUInteger)firstIndex toIndex:(NSUInteger)secondIndex {
     @synchronized (self) {
-        id object = [self.mutableData objectAtIndex:firstIndex];
-        [self.mutableData removeObjectAtIndex:firstIndex];
-        [self.mutableData insertObject:object
-                               atIndex:secondIndex];
+        [AKIArrayChangeModel moveObjectAtIndex:firstIndex toIndex:secondIndex];
     }
 }
 
@@ -113,24 +114,24 @@
 #pragma mark -
 #pragma mark AKIObservableObject
 
-- (SEL)selectorForState:(NSUInteger)state {
-    switch (state) {
-        case AKIArrayModelLoaded:
-            return @selector(modelLoaded);
-            break;
-        case AKIArrayModelUpdated:
-            return @selector(modelUpdated);
-            break;
-        case AKIArrayModelLoading:
-            return @selector(modelLoading);
-            break;
-        case AKIArrayModelFailed:
-            return @selector(modelFailed);
-            break;
-        default:
-            return nil;
-            break;
-    }
-}
+//- (SEL)selectorForState:(NSUInteger)state {
+//    switch (state) {
+//        case AKIArrayModelLoaded:
+//            return @selector(modelLoaded);
+//            break;
+//        case AKIArrayModelUpdated:
+//            return @selector(modelUpdated);
+//            break;
+//        case AKIArrayModelLoading:
+//            return @selector(modelLoading);
+//            break;
+//        case AKIArrayModelLoaded:
+//            return @selector(modelFailed);
+//            break;
+//        default:
+//            return nil;
+//            break;
+//    }
+//}
 
 @end
