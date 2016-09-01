@@ -17,4 +17,14 @@
     return [self objectAtIndex:arc4random_uniform((u_int32_t)self.count)];
 }
 
+- (id)objectWithClass:(Class)class {
+    for (id object in self) {
+        if ([object isMemberOfClass:class]) {
+            return object;
+        }
+    }
+    
+    return nil;
+}
+
 @end

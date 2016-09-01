@@ -15,6 +15,7 @@
 @property (nonatomic, assign)   NSUInteger  state;
 
 - (void)setState:(NSUInteger)state withObject:(id)object;
+- (SEL)selectorForState:(NSUInteger)state;
 
 - (void)addObserver:(id)object;
 - (void)addObservers:(NSArray *)observers;

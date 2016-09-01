@@ -8,6 +8,8 @@
 
 #import "UINib+AKIExtensions.h"
 
+#import "NSArray+AKIExtensions.h"
+
 @implementation UINib (AKIExtensions)
 
 + (id)objectWithClass:(Class)class {
@@ -29,14 +31,7 @@
 }
 
 - (id)objectWithClass:(Class)class owner:(id)owner options:(NSDictionary *)options {
-    NSArray *objects = [self instantiateWithOwner:owner options:options];
-    for (id object in objects) {
-        if ([object isMemberOfClass:class]) {
-            return object;
-        }
-    }
-    
-    return nil;
+    return [[self instantiateWithOwner:owner options:options] objectWithClass:class];
 }
 
 @end

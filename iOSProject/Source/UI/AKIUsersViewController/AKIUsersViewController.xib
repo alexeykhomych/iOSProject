@@ -14,60 +14,55 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8b4-da-Ayj" userLabel="AddButton">
-                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <state key="normal" title="Add"/>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="87" y="545" width="100" height="30"/>
-                    </variation>
-                    <connections>
-                        <action selector="onAddButton:" destination="-1" eventType="touchUpInside" id="RNe-6I-GLE"/>
-                    </connections>
-                </button>
-                <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHf-xv-rwe" userLabel="EditButton">
-                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <state key="normal" title="Edit"/>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="213" y="545" width="99" height="29"/>
-                    </variation>
-                    <connections>
-                        <action selector="onEditButton:" destination="-1" eventType="touchUpInside" id="0Xt-oD-8wq"/>
-                    </connections>
-                </button>
                 <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OPu-bI-i6B">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="8" y="88" width="381" height="405"/>
+                        <rect key="frame" x="8" y="88" width="381" height="488"/>
                     </variation>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="fhA-72-TyA"/>
                         <outlet property="delegate" destination="-1" id="hPa-Qi-6zH"/>
                     </connections>
                 </tableView>
+                <navigationBar contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eew-Zf-W4T">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <items>
+                        <navigationItem title="Users" id="c73-XV-Rn9">
+                            <barButtonItem key="leftBarButtonItem" title="+" id="spV-VE-N56">
+                                <connections>
+                                    <action selector="onAddButton:" destination="-1" id="HCA-gj-UTT"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" title="Edit" id="1YV-dx-CeD">
+                                <connections>
+                                    <action selector="onEditButton:" destination="-1" id="2L3-GQ-cea"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="0.0" y="24" width="400" height="44"/>
+                    </variation>
+                </navigationBar>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <variation key="default">
                 <mask key="subviews">
-                    <exclude reference="8b4-da-Ayj"/>
-                    <exclude reference="DHf-xv-rwe"/>
                     <exclude reference="OPu-bI-i6B"/>
+                    <exclude reference="eew-Zf-W4T"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
                 <mask key="subviews">
-                    <include reference="8b4-da-Ayj"/>
-                    <include reference="DHf-xv-rwe"/>
                     <include reference="OPu-bI-i6B"/>
+                    <include reference="eew-Zf-W4T"/>
                 </mask>
             </variation>
             <connections>
-                <outlet property="addButton" destination="8b4-da-Ayj" id="f2X-Zu-VL6"/>
-                <outlet property="editButton" destination="DHf-xv-rwe" id="pfk-wq-lMu"/>
                 <outlet property="tableView" destination="OPu-bI-i6B" id="ccB-OK-BA9"/>
             </connections>
+            <point key="canvasLocation" x="400" y="385"/>
         </view>
         <panGestureRecognizer minimumNumberOfTouches="1" id="h5Q-OA-EIt"/>
     </objects>

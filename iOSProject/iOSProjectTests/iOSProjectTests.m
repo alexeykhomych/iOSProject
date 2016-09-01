@@ -6,34 +6,32 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+#import "Kiwi.h"
 
-@interface iOSProjectTests : XCTestCase
+#import "NSMutableArray+AKIExtension.h"
 
-@end
+SPEC_BEGIN(AKIDelegatingObjectSpec)
 
-@implementation iOSProjectTests
+describe(@"AKIMutableArray", ^{
+    __block AKIMutableArray *array = nil;
+    
+    beforeAll(^{
+        array = [NSMutableArray new];
+    });
+    
+    context(@"", ^{
+        it(@"", ^{
+            //                [[delegate shouldNot] receive:@selector(delegatingObject:didChangeState:)];
+            //
+            //                delegatingObject.state = 1;
+        });
+    });
+    
+    context(@"", ^{
+        it(@"", ^{
+            
+        });
+    });
+});
 
-- (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-}
-
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
-}
-
-@end
+SPEC_END

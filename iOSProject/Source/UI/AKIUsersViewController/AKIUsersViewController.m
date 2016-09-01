@@ -23,21 +23,10 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 @implementation AKIUsersViewController
 
 #pragma mark -
-#pragma mark Init and Dealloc
-
-- (void)dealloc {
-    [self.model removeObserver:self];
-}
-
-#pragma mark -
 #pragma mark Accessors
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.title = @"Users";
-    [self initLeftBarButtonItem];
-    [self initRightBarButtonItem];
 }
 
 - (void)setModel:(AKIArrayModel *)model {
@@ -52,25 +41,6 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-
-#pragma mark -
-#pragma mark UIBarButtonItems
-
-- (void)initLeftBarButtonItem {
-    UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                            target:self
-                                                                            action:@selector(addModel:)];
-    [self.navigationItem setLeftBarButtonItem:buttom animated:YES];
-}
-
-- (void)initRightBarButtonItem {
-    UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithTitle:@"Edit"
-                                                               style:UIBarButtonItemStyleDone
-                                                              target:self
-                                                              action:@selector(onEditButton:)];
-    
-    [self.navigationItem setRightBarButtonItem:buttom animated:YES];
 }
 
 #pragma mark -
@@ -90,7 +60,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
         cell = [cells firstObject];
     }
     
-    AKIUser *user = [self.model objectAtIndexSubscript:indexPath.row];
+    AKIUser *user = [self.model objectAtIndexedSubscript:indexPath.row];
     cell.textLabel.text = user.fullName;
 
     return cell;
@@ -137,11 +107,28 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
     [self.model addObject:model];
 }
 
+- (void)updateTableWithChangeModel:(AKIArrayModelChange *)model {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
 #pragma mark -
 #pragma mark Notifications
 
-- (void)arrayModel:(AKIArrayModel *)arrayModel didUpdate:(id)data {
-    [self.userView.tableView reloadData];
+- (void)arrayModel:(AKIArrayModel *)arrayModel didUpdateWithChangeModel:(AKIArrayModelChange *)arrayModelChange {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+    [self updateTableWithChangeModel:arrayModelChange];
+}
+
+- (void)arrayModelDidLoad:(AKIArrayModel *)arrayModel {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)arrayModelDidFailLoading:(AKIArrayModel *)arrayModel {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)arrayModelWillLoad:(AKIArrayModel *)arrayModel {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
 }
 
 @end

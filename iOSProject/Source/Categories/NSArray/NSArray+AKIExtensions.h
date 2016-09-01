@@ -11,5 +11,6 @@
 @interface NSArray (AKIExtensions)
 
 - (id)randomObject;
+- (id)objectWithClass:(Class)class;
 
 @end

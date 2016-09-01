@@ -8,7 +8,7 @@
 
 #import "AKIArrayModel.h"
 
-#import "NSString+AKIExtensions.h"
+#import "NSMutableArray+AKIExtension.h"
 
 #import "AKIUser.h"
 
@@ -16,10 +16,11 @@
 
 #import "AKIArrayChangeModel.h"
 
-@interface AKIArrayModel()
-@property (nonatomic, retain) NSMutableArray *mutableData;
+@interface AKIArrayModel ()
+@property (nonatomic, retain) NSMutableArray *mutableObjects;
 
 - (void)randomDataArray:(NSUInteger)count;
+- (void)notifyOfModelUpdateWithChange:(AKIArrayChangeModel *)changeModel;
 
 @end
 
@@ -47,9 +48,9 @@
 #pragma mark -
 #pragma mark Accessors
 
-- (NSArray *)data {
+- (NSArray *)objects {
     @synchronized (self) {
-        return [self.mutableData copy];
+        return [self.mutableObjects copy];
     }
 }
 
@@ -58,41 +59,41 @@
 
 - (void)addObject:(id)object {
     @synchronized (self) {
-        [AKIArrayChangeModel insertObject:object atIndex:self.count];
-//        [self notifyObserverWithSelector:@selector(arrayModel:didUpdate:) object:nil];
+        [self.mutableObjects addObject:object];
+        [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel insertObject:object atIndex:self.count]];
     }
 }
 
 - (void)removeObject:(id)object {
     @synchronized (self) {
-//        [self.mutableData removeObject:object];
-        [self removeObjectAtIndex:[self.mutableData indexOfObject:object]];
-//        [self notifyObserverWithSelector:@selector(arrayModel:didUpdate:) object:nil];
+        [self.mutableObjects removeObject:object];
+        [self removeObjectAtIndex:[self.mutableObjects indexOfObject:object]];
     }
 }
 
-- (id)objectAtIndexSubscript:(NSUInteger)index {
+- (id)objectAtIndexedSubscript:(NSUInteger)index {
     @synchronized (self) {
-        return [self.data objectAtIndex:index];
+        return [self.objects objectAtIndex:index];
     }
 }
 
 - (void)removeObjectAtIndex:(NSUInteger)index {
     @synchronized (self) {
-//        [self.mutableData removeObjectAtIndex:index];
-        [AKIArrayChangeModel removeObjectAtIndex:self.count];
+        [self.mutableObjects removeObjectAtIndex:index];
+        [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel removeObjectAtIndex:index]];
     }
 }
 
 - (void)moveObjectAtIndex:(NSUInteger)firstIndex toIndex:(NSUInteger)secondIndex {
     @synchronized (self) {
-        [AKIArrayChangeModel moveObjectAtIndex:firstIndex toIndex:secondIndex];
+        [self.mutableObjects moveObjectFromIndex:firstIndex toIndex:secondIndex];
+        [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel moveObjectFromIndex:firstIndex toIndex:secondIndex]];
     }
 }
 
 - (NSUInteger)count {
     @synchronized (self) {
-        return self.data.count;
+        return self.objects.count;
     }
 }
 
@@ -101,37 +102,41 @@
 
 - (void)randomDataArray:(NSUInteger)count {
     @synchronized (self) {
-        NSMutableArray *data = [NSMutableArray new];
+        NSMutableArray *objects = [NSMutableArray new];
         
         for (NSUInteger i = 0; i < count; i++) {
-            [data addObject:[AKIUser new]];
+            [objects addObject:[AKIUser new]];
         }
         
-        self.mutableData = data;
+        self.mutableObjects = objects;
     }
+}
+
+- (void)notifyOfModelUpdateWithChange:(AKIArrayChangeModel *)changeModel {
+//    [self notifyOfState:changeModel.state withObject:changeModel];
+    [self notifyOfState:AKIArrayModelUpdated withObject:changeModel];
 }
 
 #pragma mark -
 #pragma mark AKIObservableObject
 
-//- (SEL)selectorForState:(NSUInteger)state {
-//    switch (state) {
-//        case AKIArrayModelLoaded:
-//            return @selector(modelLoaded);
-//            break;
-//        case AKIArrayModelUpdated:
-//            return @selector(modelUpdated);
-//            break;
-//        case AKIArrayModelLoading:
-//            return @selector(modelLoading);
-//            break;
-//        case AKIArrayModelLoaded:
-//            return @selector(modelFailed);
-//            break;
-//        default:
-//            return nil;
-//            break;
-//    }
-//}
+- (SEL)selectorForState:(NSUInteger)state {
+    switch (state) {
+        case AKIArrayModelLoaded:
+            return @selector(arrayModelDidLoad:);
+            
+        case AKIArrayModelUpdated:
+            return @selector(arrayModel: didUpdateWithChangeModel:);
+            
+        case AKIArrayModelLoading:
+            return @selector(arrayModelWillLoad:);
+            
+        case AKIArrayModelFailedLoading:
+            return @selector(arrayModelDidFailLoading:);
+
+        default:
+            return nil;
+    }
+}
 
 @end

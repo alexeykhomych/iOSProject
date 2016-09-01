@@ -8,17 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum {
+typedef NS_ENUM (NSUInteger, AKIArrayChangeModelState) {
     AKIArrayChangeModelInsert,
     AKIArrayChangeModelDelete,
     AKIArrayChangeModelMove
-}AKIArrayChangeModelState;
+};
 
 @interface AKIArrayChangeModel : NSObject
-@property (nonatomic, assign) AKIArrayChangeModelState modelState;
+@property (nonatomic, assign) AKIArrayChangeModelState  state;
 
-//+ (id)insertObject:(id)object atIndex:(NSUInteger)index;
-//+ (id)removeObjectAtIndex:(NSUInteger)index;
-//+ (id)moveObjectFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
+@property (nonatomic, assign) NSUInteger    fromIndex;
+@property (nonatomic, assign) NSUInteger    toIndex;
+
++ (id)insertObject:(id)object atIndex:(NSUInteger)index;
++ (id)removeObjectAtIndex:(NSUInteger)index;
++ (id)moveObjectFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
 @end

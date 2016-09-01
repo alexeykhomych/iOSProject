@@ -8,16 +8,11 @@
 
 #import "AKIArrayChangeModel.h"
 
-#import "AKIArrayModel.h"
-
-#import "NSMutableArray+AKIExtension.h"
-
 @interface AKIArrayChangeModel ()
-@property (nonatomic, retain) NSMutableArray *mutableObjectsModel;
 
-- (void)addObject:(id)object atIndex:(NSUInteger)index;
-- (void)deleteObjectAtIndex:(NSUInteger)index;
-- (void)moveObjectFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
+- (void)addObject;
+- (void)removeObject;
+- (void)moveObject;
 
 @end
 
@@ -27,24 +22,45 @@
 #pragma mark Class methods
 
 + (id)insertObject:(id)object atIndex:(NSUInteger)index {
-    return nil;
+    id class = [[self alloc] initWithIndex:index];
+    [class addObject];
+    
+    return class;
 }
 
 + (id)removeObjectAtIndex:(NSUInteger)index {
-    return nil;
+    id class = [[self alloc] initWithIndex:index];
+    [class removeObject];
+    
+    return class;
 }
 
-//+ (id)moveObjectFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-//    return nil;
-//}
++ (id)moveObjectFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+    id class = [[self alloc] initWithIndexes:fromIndex toIndex:toIndex];
+    [class moveObject];
+    
+    return class;
+}
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
-- (instancetype)init {
+- (instancetype)initWithIndex:(NSUInteger)index {
     self = [super init];
+    
     if (self) {
-        self.mutableObjectsModel = [[AKIArrayModel new].data copy];
+        self.fromIndex = index;
+    }
+    
+    return self;
+}
+
+- (instancetype)initWithIndexes:(NSUInteger)first toIndex:(NSUInteger)second {
+    self = [super init];
+    
+    if (self) {
+        self.fromIndex = first;
+        self.toIndex = second;
     }
     
     return self;
@@ -53,21 +69,16 @@
 #pragma mark -
 #pragma mark Private
 
-- (void)addObject:(id)object atIndex:(NSUInteger)index {
-    [self.mutableObjectsModel insertObject:object atIndex:index];
-    
-    self.modelState = AKIArrayChangeModelInsert;
+- (void)addObject {
+    self.state = AKIArrayChangeModelInsert;
 }
 
-- (void)removeObjectAtIndex:(NSUInteger)index {
-    [self.mutableObjectsModel removeObjectAtIndex:index];
-    
-    self.modelState = AKIArrayChangeModelDelete;
+- (void)removeObject {
+    self.state = AKIArrayChangeModelDelete;
 }
 
-- (void)moveObjectFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-    [self.mutableObjectsModel moveObjectFromIndex:fromIndex toIndex:toIndex];
-    self.modelState = AKIArrayChangeModelMove;
+- (void)moveObject {
+    self.state = AKIArrayChangeModelMove;
 }
 
 @end
