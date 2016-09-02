@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AKIArrayModel.h"
+#import "AKIUsersArrayModel.h"
 
 @interface AKIUsersViewController : UIViewController <
     UITableViewDelegate,
@@ -16,7 +16,7 @@
     AKIArrayModel
 >
 
-@property (nonatomic, retain)   AKIArrayModel       *model;
+@property (nonatomic, retain)   AKIUsersArrayModel  *model;
 @property (nonatomic, retain)   NSMutableArray      *users;
 
 - (IBAction)onAddButton:(id)sender;

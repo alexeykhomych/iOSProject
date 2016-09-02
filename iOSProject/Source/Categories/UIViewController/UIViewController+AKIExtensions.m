@@ -10,7 +10,7 @@
 
 @implementation UIViewController (AKIExtensions)
 
-+ (id)viewController {
++ (instancetype)viewController {
     return [[self alloc] initWithNibName:[self nibName] bundle:nil];
 }
 

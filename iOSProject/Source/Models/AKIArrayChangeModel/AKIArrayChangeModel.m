@@ -9,10 +9,7 @@
 #import "AKIArrayChangeModel.h"
 
 @interface AKIArrayChangeModel ()
-
-- (void)addObject;
-- (void)removeObject;
-- (void)moveObject;
+@property (nonatomic, assign) AKIArrayChangeModelState  state;
 
 @end
 
@@ -21,41 +18,26 @@
 #pragma mark -
 #pragma mark Class methods
 
-+ (id)insertObject:(id)object atIndex:(NSUInteger)index {
-    id class = [[self alloc] initWithIndex:index];
-    [class addObject];
-    
-    return class;
++ (id)insertModelAtIndex:(NSUInteger)index {
+    return [[self alloc] initWithIndex:index];
 }
 
-+ (id)removeObjectAtIndex:(NSUInteger)index {
-    id class = [[self alloc] initWithIndex:index];
-    [class removeObject];
-    
-    return class;
++ (id)removeModelAtIndex:(NSUInteger)index {
+    return [[self alloc] initWithIndex:index];
 }
 
-+ (id)moveObjectFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-    id class = [[self alloc] initWithIndexes:fromIndex toIndex:toIndex];
-    [class moveObject];
-    
-    return class;
++ (id)moveModelFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+    return [[self alloc] initWithFromIndex:fromIndex toIndex:toIndex];
 }
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
 - (instancetype)initWithIndex:(NSUInteger)index {
-    self = [super init];
-    
-    if (self) {
-        self.fromIndex = index;
-    }
-    
-    return self;
+    return [self initWithFromIndex:0 toIndex:index];
 }
 
-- (instancetype)initWithIndexes:(NSUInteger)first toIndex:(NSUInteger)second {
+- (instancetype)initWithFromIndex:(NSUInteger)first toIndex:(NSUInteger)second {
     self = [super init];
     
     if (self) {
@@ -64,21 +46,6 @@
     }
     
     return self;
-}
-
-#pragma mark -
-#pragma mark Private
-
-- (void)addObject {
-    self.state = AKIArrayChangeModelInsert;
-}
-
-- (void)removeObject {
-    self.state = AKIArrayChangeModelDelete;
-}
-
-- (void)moveObject {
-    self.state = AKIArrayChangeModelMove;
 }
 
 @end

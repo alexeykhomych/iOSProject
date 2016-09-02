@@ -11,6 +11,6 @@
 @interface UIViewController (AKIExtensions)
 
 + (NSString *)nibName;
-+ (id)viewController;
++ (instancetype)viewController;
 
 @end

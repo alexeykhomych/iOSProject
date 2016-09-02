@@ -17,6 +17,7 @@
 #import "AKIMacro.h"
 
 #import "AKIArrayModel.h"
+#import "AKIArrayChangeModel.h"
 
 AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 
@@ -29,7 +30,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
     [super viewDidLoad];
 }
 
-- (void)setModel:(AKIArrayModel *)model {
+- (void)setModel:(AKIUsersArrayModel *)model {
     if (_model != model) {
         [_model removeObserver:self];
         
@@ -75,6 +76,9 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
         [self.userView.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                                        withRowAnimation:UITableViewRowAnimationFade];
         
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        [self.model addObject:[AKIUser new]];
+        [self.userView.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 
@@ -97,7 +101,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 }
 
 - (IBAction)onEditButton:(id)sender {
-    self.userView.editing = !self.userView.editing;
+    [self.userView setEditing:!self.userView.editing];
 }
 
 #pragma mark -
@@ -107,28 +111,60 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
     [self.model addObject:model];
 }
 
-- (void)updateTableWithChangeModel:(AKIArrayModelChange *)model {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
+- (void)updateTableWithChangeModel:(AKIArrayChangeModel *)model {
+    AKIPrintMethod
+    [self actionForTableView:model];
 }
 
 #pragma mark -
 #pragma mark Notifications
 
-- (void)arrayModel:(AKIArrayModel *)arrayModel didUpdateWithChangeModel:(AKIArrayModelChange *)arrayModelChange {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-    [self updateTableWithChangeModel:arrayModelChange];
+- (void)arrayModel:(AKIArrayModel *)arrayModel didUpdateWithChangeModel:(AKIArrayChangeModel *)arrayChangeModel {
+    AKIPrintMethod
+    
+    [self updateTableWithChangeModel:arrayChangeModel];
 }
 
 - (void)arrayModelDidLoad:(AKIArrayModel *)arrayModel {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
+    AKIPrintMethod
 }
 
 - (void)arrayModelDidFailLoading:(AKIArrayModel *)arrayModel {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
+    AKIPrintMethod
 }
 
 - (void)arrayModelWillLoad:(AKIArrayModel *)arrayModel {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
+    AKIPrintMethod
+}
+
+#pragma mark -
+#pragma mark Switch state
+
+- (void)actionForTableView:(AKIArrayChangeModel *)changeModel {
+    AKIArrayChangeModel *model = [changeModel copy];
+    
+    NSIndexPath *fromIndex = [NSIndexPath indexPathWithIndex:model.fromIndex];
+    NSIndexPath *toIndex = [NSIndexPath indexPathWithIndex:model.toIndex];
+    
+    UITableView *tableView = [self.userView.tableView copy];
+    
+    switch (model.state) {
+        case AKIArrayChangeModelMove:
+            [self tableView:tableView moveRowAtIndexPath:fromIndex toIndexPath:toIndex];
+            
+            break;
+        case AKIArrayChangeModelDelete:
+            [self tableView:tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:toIndex];
+            
+            break;
+        case AKIArrayChangeModelInsert:
+            [self tableView:tableView commitEditingStyle:UITableViewCellEditingStyleInsert forRowAtIndexPath:toIndex];
+            
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end

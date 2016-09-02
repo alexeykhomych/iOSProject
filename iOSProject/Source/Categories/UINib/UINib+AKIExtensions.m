@@ -12,26 +12,29 @@
 
 @implementation UINib (AKIExtensions)
 
-+ (id)objectWithClass:(Class)class {
-    UINib *nib = [UINib nibWithClass:class];
++ (id)objectWithClass:(Class)cls {
+    UINib *nib = [UINib nibWithClass:cls];
     
-    return [nib objectWithClass:class];
+    return [nib objectWithClass:cls];
 }
 
-+ (instancetype)nibWithClass:(Class)class {
-    return [self nibWithClass:class bundle:nil];
++ (instancetype)nibWithClass:(Class)cls {
+    return [self nibWithClass:cls bundle:nil];
 }
 
-+ (instancetype)nibWithClass:(Class)class bundle:(NSBundle *)bundle {
-    return [self nibWithNibName:NSStringFromClass(class) bundle:bundle];
++ (instancetype)nibWithClass:(Class)cls bundle:(NSBundle *)bundle {
+    return [self nibWithNibName:NSStringFromClass(cls) bundle:bundle];
 }
 
-- (id)objectWithClass:(Class)class {
-    return [self objectWithClass:(Class)class owner:nil options:nil];
+- (id)objectWithClass:(Class)cls {
+    return [self objectWithClass:(Class)cls owner:nil options:nil];
+}
+- (id)objectWithClass:(Class)cls owner:(id)owner {
+    return [self objectWithClass:cls owner:owner options:nil];
 }
 
-- (id)objectWithClass:(Class)class owner:(id)owner options:(NSDictionary *)options {
-    return [[self instantiateWithOwner:owner options:options] objectWithClass:class];
+- (id)objectWithClass:(Class)cls owner:(id)owner options:(NSDictionary *)options {
+    return [[self instantiateWithOwner:owner options:options] objectWithClass:cls];
 }
 
 @end

@@ -15,13 +15,13 @@ typedef NS_ENUM (NSUInteger, AKIArrayChangeModelState) {
 };
 
 @interface AKIArrayChangeModel : NSObject
-@property (nonatomic, assign) AKIArrayChangeModelState  state;
+@property (nonatomic, readonly) AKIArrayChangeModelState  state;
 
 @property (nonatomic, assign) NSUInteger    fromIndex;
 @property (nonatomic, assign) NSUInteger    toIndex;
 
-+ (id)insertObject:(id)object atIndex:(NSUInteger)index;
-+ (id)removeObjectAtIndex:(NSUInteger)index;
-+ (id)moveObjectFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
++ (id)insertModelAtIndex:(NSUInteger)index;
++ (id)removeModelAtIndex:(NSUInteger)index;
++ (id)moveModelFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
 @end

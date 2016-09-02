@@ -52,3 +52,5 @@
     if (!variable) { \
         return result; \
     }
+
+#define AKIPrintMethod NSLog(@"%@", NSStringFromSelector(_cmd));

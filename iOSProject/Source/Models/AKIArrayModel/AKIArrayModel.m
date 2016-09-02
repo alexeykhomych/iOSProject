@@ -19,7 +19,6 @@
 @interface AKIArrayModel ()
 @property (nonatomic, retain) NSMutableArray *mutableObjects;
 
-- (void)randomDataArray:(NSUInteger)count;
 - (void)notifyOfModelUpdateWithChange:(AKIArrayChangeModel *)changeModel;
 
 @end
@@ -38,9 +37,9 @@
 
 - (instancetype)initWithCount:(NSUInteger)count {
     self = [super init];
-    if (self) {
-        [self randomDataArray:count];
-    }
+//    if (self) {
+//        [self randomDataArray:count];
+//    }
     
     return self;
 }
@@ -60,7 +59,7 @@
 - (void)addObject:(id)object {
     @synchronized (self) {
         [self.mutableObjects addObject:object];
-        [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel insertObject:object atIndex:self.count]];
+        [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel insertModelAtIndex:self.count]];
     }
 }
 
@@ -80,14 +79,14 @@
 - (void)removeObjectAtIndex:(NSUInteger)index {
     @synchronized (self) {
         [self.mutableObjects removeObjectAtIndex:index];
-        [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel removeObjectAtIndex:index]];
+        [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel removeModelAtIndex:index]];
     }
 }
 
 - (void)moveObjectAtIndex:(NSUInteger)firstIndex toIndex:(NSUInteger)secondIndex {
     @synchronized (self) {
         [self.mutableObjects moveObjectFromIndex:firstIndex toIndex:secondIndex];
-        [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel moveObjectFromIndex:firstIndex toIndex:secondIndex]];
+        [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel moveModelFromIndex:firstIndex toIndex:secondIndex]];
     }
 }
 
@@ -100,20 +99,7 @@
 #pragma mark -
 #pragma mark Private
 
-- (void)randomDataArray:(NSUInteger)count {
-    @synchronized (self) {
-        NSMutableArray *objects = [NSMutableArray new];
-        
-        for (NSUInteger i = 0; i < count; i++) {
-            [objects addObject:[AKIUser new]];
-        }
-        
-        self.mutableObjects = objects;
-    }
-}
-
 - (void)notifyOfModelUpdateWithChange:(AKIArrayChangeModel *)changeModel {
-//    [self notifyOfState:changeModel.state withObject:changeModel];
     [self notifyOfState:AKIArrayModelUpdated withObject:changeModel];
 }
 
@@ -126,7 +112,7 @@
             return @selector(arrayModelDidLoad:);
             
         case AKIArrayModelUpdated:
-            return @selector(arrayModel: didUpdateWithChangeModel:);
+            return @selector(arrayModel:didUpdateWithChangeModel:);
             
         case AKIArrayModelLoading:
             return @selector(arrayModelWillLoad:);

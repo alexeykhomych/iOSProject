@@ -26,7 +26,7 @@ static NSInteger const kAKIModelsCount = 3;
     
     self.window = window;
     AKIUsersViewController *controller = [AKIUsersViewController new];
-    controller.model = [AKIArrayModel arrayWithCount:kAKIModelsCount];
+    controller.model = [AKIUsersArrayModel arrayWithCount:kAKIModelsCount];
     window.rootViewController = controller;
     
     [window makeKeyAndVisible];
