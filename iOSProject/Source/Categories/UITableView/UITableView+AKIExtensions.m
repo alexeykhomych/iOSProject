@@ -21,4 +21,8 @@
     return cell;
 }
 
+- (void)applyToTableView:(AKIArrayChangeModel *)model {
+    
+}
+
 @end

@@ -18,8 +18,4 @@
     return NSStringFromClass([self class]);
 }
 
-- (void)applyToTableView:(UITableView *)tableView {
-    
-}
-
 @end

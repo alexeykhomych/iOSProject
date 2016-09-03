@@ -8,6 +8,8 @@
 
 #import "AKIArrayChangeModelDelete.h"
 
+#import "UITableView+AKIExtensions.h"
+
 @implementation AKIArrayChangeModelDelete
 
 - (instancetype)initWithIndex:(NSUInteger)index {

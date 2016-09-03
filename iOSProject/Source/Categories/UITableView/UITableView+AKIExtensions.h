@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class AKIArrayChangeModel;
+
 @interface UITableView (AKIExtensions)
 
 - (id)cellWithClass:(Class)class;
+
+- (void)applyToTableView:(AKIArrayChangeModel *)model;
 
 @end

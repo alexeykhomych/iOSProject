@@ -77,7 +77,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
                                        withRowAnimation:UITableViewRowAnimationFade];
         
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        [self.model addObject:[AKIUser new]];
+//        [self.model addObject:[AKIUser new]];
         [self.userView.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
@@ -141,13 +141,13 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 #pragma mark Switch state
 
 - (void)actionForTableView:(AKIArrayChangeModel *)changeModel {
-//    AKIArrayChangeModel *model = [changeModel copy];
-//    
-//    NSIndexPath *fromIndex = [NSIndexPath indexPathWithIndex:model.fromIndex];
-//    NSIndexPath *toIndex = [NSIndexPath indexPathWithIndex:model.toIndex];
-//    
-//    UITableView *tableView = [self.userView.tableView copy];
-//    
+    AKIArrayChangeModel *model = changeModel;
+    
+    NSIndexPath *fromIndex = [NSIndexPath indexPathWithIndex:model.fromIndex];
+    NSIndexPath *toIndex = [NSIndexPath indexPathWithIndex:model.toIndex];
+    
+    UITableView *tableView = self.userView.tableView;
+//
 //    switch (model.state) {
 //        case AKIArrayChangeModelMove:
 //            [self tableView:tableView moveRowAtIndexPath:fromIndex toIndexPath:toIndex];
@@ -158,8 +158,8 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 //            
 //            break;
 //        case AKIArrayChangeModelInsert:
-//            [self tableView:tableView commitEditingStyle:UITableViewCellEditingStyleInsert forRowAtIndexPath:toIndex];
-//            
+            [self tableView:tableView commitEditingStyle:UITableViewCellEditingStyleInsert forRowAtIndexPath:toIndex];
+//
 //            break;
 //            
 //        default:
