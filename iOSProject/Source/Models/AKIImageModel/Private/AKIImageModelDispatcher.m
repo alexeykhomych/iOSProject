@@ -11,7 +11,7 @@
 
 #import "AKIMacro.h"
 
-AKIConstant(NSUInteger, kAKIMaxOperationCount, 2);
+AKIConstant(NSUInteger, MaxOperationCount, 2);
 
 @interface AKIImageModelDispatcher()
 @property (nonatomic, strong) NSOperationQueue    *queue;

@@ -10,11 +10,11 @@
 
 #import "AKIUsersViewController.h"
 
-#import "AKIArrayModel.h"
+#import "AKIUsersArrayModel.h"
 
 #import "AKIMacro.h"
 
-AKIConstant(NSUInteger, kAKIModelsCount, 3);
+AKIConstant(NSUInteger, ModelsCount, 3);
 
 @interface AKIAppDelegate ()
 
@@ -28,7 +28,9 @@ AKIConstant(NSUInteger, kAKIModelsCount, 3);
     
     self.window = window;
     AKIUsersViewController *controller = [AKIUsersViewController new];
-    controller.model = [AKIUsersArrayModel arrayWithCount:kAKIModelsCount];
+    controller.model = [AKIUsersArrayModel new];
+    [controller.model fillModelWithCount:kAKIModelsCount];
+    
     window.rootViewController = controller;
     
     [window makeKeyAndVisible];

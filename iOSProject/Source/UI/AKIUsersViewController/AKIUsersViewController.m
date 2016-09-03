@@ -141,30 +141,30 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 #pragma mark Switch state
 
 - (void)actionForTableView:(AKIArrayChangeModel *)changeModel {
-    AKIArrayChangeModel *model = [changeModel copy];
-    
-    NSIndexPath *fromIndex = [NSIndexPath indexPathWithIndex:model.fromIndex];
-    NSIndexPath *toIndex = [NSIndexPath indexPathWithIndex:model.toIndex];
-    
-    UITableView *tableView = [self.userView.tableView copy];
-    
-    switch (model.state) {
-        case AKIArrayChangeModelMove:
-            [self tableView:tableView moveRowAtIndexPath:fromIndex toIndexPath:toIndex];
-            
-            break;
-        case AKIArrayChangeModelDelete:
-            [self tableView:tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:toIndex];
-            
-            break;
-        case AKIArrayChangeModelInsert:
-            [self tableView:tableView commitEditingStyle:UITableViewCellEditingStyleInsert forRowAtIndexPath:toIndex];
-            
-            break;
-            
-        default:
-            break;
-    }
+//    AKIArrayChangeModel *model = [changeModel copy];
+//    
+//    NSIndexPath *fromIndex = [NSIndexPath indexPathWithIndex:model.fromIndex];
+//    NSIndexPath *toIndex = [NSIndexPath indexPathWithIndex:model.toIndex];
+//    
+//    UITableView *tableView = [self.userView.tableView copy];
+//    
+//    switch (model.state) {
+//        case AKIArrayChangeModelMove:
+//            [self tableView:tableView moveRowAtIndexPath:fromIndex toIndexPath:toIndex];
+//            
+//            break;
+//        case AKIArrayChangeModelDelete:
+//            [self tableView:tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:toIndex];
+//            
+//            break;
+//        case AKIArrayChangeModelInsert:
+//            [self tableView:tableView commitEditingStyle:UITableViewCellEditingStyleInsert forRowAtIndexPath:toIndex];
+//            
+//            break;
+//            
+//        default:
+//            break;
+//    }
 }
 
 @end

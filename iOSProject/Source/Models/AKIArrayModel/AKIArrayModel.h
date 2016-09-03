@@ -32,9 +32,8 @@ typedef NS_ENUM(NSUInteger, AKIArrayModelState) {
 @end
 
 @interface AKIArrayModel : AKIObservableObject
-@property (nonatomic, readonly) NSArray *objects;
-
-+ (instancetype)arrayWithCount:(NSUInteger)count;
+@property (nonatomic, readonly) NSArray     *objects;
+@property (nonatomic, assign)   NSUInteger  count;
 
 - (void)addObject:(id)object;
 - (void)removeObject:(id)object;
@@ -43,6 +42,5 @@ typedef NS_ENUM(NSUInteger, AKIArrayModelState) {
 - (void)moveObjectAtIndex:(NSUInteger)firstIndex toIndex:(NSUInteger)secondIndex;
 
 - (id)objectAtIndexedSubscript:(NSUInteger)index;
-- (NSUInteger)count;
 
 @end

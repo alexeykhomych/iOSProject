@@ -17,7 +17,7 @@
 #import "AKIArrayChangeModel.h"
 
 @interface AKIArrayModel ()
-@property (nonatomic, retain) NSMutableArray *mutableObjects;
+@property (nonatomic, retain) NSMutableArray    *mutableObjects;
 
 - (void)notifyOfModelUpdateWithChange:(AKIArrayChangeModel *)changeModel;
 
@@ -26,20 +26,13 @@
 @implementation AKIArrayModel
 
 #pragma mark -
-#pragma mark Class methods
-
-+ (instancetype)arrayWithCount:(NSUInteger)count {
-    return [[self alloc] initWithCount:count];
-}
-
-#pragma mark -
 #pragma mark Init and Dealloc
 
-- (instancetype)initWithCount:(NSUInteger)count {
+- (instancetype)init {
     self = [super init];
-//    if (self) {
-//        [self randomDataArray:count];
-//    }
+    if (self) {
+        self.mutableObjects = [NSMutableArray new];
+    }
     
     return self;
 }
@@ -50,6 +43,12 @@
 - (NSArray *)objects {
     @synchronized (self) {
         return [self.mutableObjects copy];
+    }
+}
+
+- (NSUInteger)count {
+    @synchronized (self) {
+        return self.mutableObjects.count;   
     }
 }
 
@@ -87,12 +86,6 @@
     @synchronized (self) {
         [self.mutableObjects moveObjectFromIndex:firstIndex toIndex:secondIndex];
         [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel moveModelFromIndex:firstIndex toIndex:secondIndex]];
-    }
-}
-
-- (NSUInteger)count {
-    @synchronized (self) {
-        return self.objects.count;
     }
 }
 
