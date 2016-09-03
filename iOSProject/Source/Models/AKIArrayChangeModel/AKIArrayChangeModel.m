@@ -8,10 +8,9 @@
 
 #import "AKIArrayChangeModel.h"
 
-@interface AKIArrayChangeModel ()
-@property (nonatomic, assign) AKIArrayChangeModelState  state;
-
-@end
+#import "AKIArrayChangeModelInsert.h"
+#import "AKIArrayChangeModelDelete.h"
+#import "AKIArrayChangeModelMove.h"
 
 @implementation AKIArrayChangeModel
 
@@ -19,33 +18,15 @@
 #pragma mark Class methods
 
 + (id)insertModelAtIndex:(NSUInteger)index {
-    return [[self alloc] initWithIndex:index];
+    return [AKIArrayChangeModelInsert new];
 }
 
 + (id)removeModelAtIndex:(NSUInteger)index {
-    return [[self alloc] initWithIndex:index];
+    return [AKIArrayChangeModelDelete new];
 }
 
 + (id)moveModelFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-    return [[self alloc] initWithFromIndex:fromIndex toIndex:toIndex];
-}
-
-#pragma mark -
-#pragma mark Initializations and Deallocations
-
-- (instancetype)initWithIndex:(NSUInteger)index {
-    return [self initWithFromIndex:0 toIndex:index];
-}
-
-- (instancetype)initWithFromIndex:(NSUInteger)first toIndex:(NSUInteger)second {
-    self = [super init];
-    
-    if (self) {
-        self.fromIndex = first;
-        self.toIndex = second;
-    }
-    
-    return self;
+    return [AKIArrayChangeModelMove new];
 }
 
 @end

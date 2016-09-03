@@ -54,3 +54,5 @@
     }
 
 #define AKIPrintMethod NSLog(@"%@", NSStringFromSelector(_cmd));
+
+#define AKIConstant(type, name, value) static type const name = value

@@ -9,7 +9,9 @@
 
 #import "AKIImageModelDispatcher.h"
 
-static NSUInteger const kAKIMaxOperationCount = 2;
+#import "AKIMacro.h"
+
+AKIConstant(NSUInteger, kAKIMaxOperationCount, 2);
 
 @interface AKIImageModelDispatcher()
 @property (nonatomic, strong) NSOperationQueue    *queue;

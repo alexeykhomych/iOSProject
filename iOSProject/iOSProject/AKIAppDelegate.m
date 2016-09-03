@@ -12,7 +12,9 @@
 
 #import "AKIArrayModel.h"
 
-static NSInteger const kAKIModelsCount = 3;
+#import "AKIMacro.h"
+
+AKIConstant(NSUInteger, kAKIModelsCount, 3);
 
 @interface AKIAppDelegate ()
 
