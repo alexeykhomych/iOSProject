@@ -48,7 +48,8 @@
 
 - (NSUInteger)count {
     @synchronized (self) {
-        return self.mutableObjects.count;   
+//        NSLog(@"count = %lu", self.mutableObjects.count);
+        return self.mutableObjects.count;
     }
 }
 
@@ -58,7 +59,7 @@
 - (void)addObject:(id)object {
     @synchronized (self) {
         [self.mutableObjects addObject:object];
-        [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel insertModelAtIndex:self.count]];
+        [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel insertModelAtIndex:self.count - 1]]; //added to const if it will work
     }
 }
 

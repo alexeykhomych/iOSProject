@@ -10,6 +10,6 @@
 
 @interface AKIArrayChangeModelInsert : AKIArrayChangeModel
 
-- (instancetype)initWithIndex:(NSUInteger)index;
+- (instancetype)initModelWithIndex:(NSUInteger)index;
 
 @end

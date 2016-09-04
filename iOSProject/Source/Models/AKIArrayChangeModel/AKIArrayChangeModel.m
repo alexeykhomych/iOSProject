@@ -18,15 +18,15 @@
 #pragma mark Class methods
 
 + (id)insertModelAtIndex:(NSUInteger)index {
-    return [AKIArrayChangeModelInsert new];
+    return [[AKIArrayChangeModelInsert alloc] initModelWithIndex:index];
 }
 
 + (id)removeModelAtIndex:(NSUInteger)index {
-    return [AKIArrayChangeModelDelete new];
+    return [[AKIArrayChangeModelDelete alloc] initModelWithIndex:index];
 }
 
 + (id)moveModelFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-    return [AKIArrayChangeModelMove new];
+    return [[AKIArrayChangeModelMove alloc] initModelFromIndex:fromIndex toIndex:toIndex];
 }
 
 @end

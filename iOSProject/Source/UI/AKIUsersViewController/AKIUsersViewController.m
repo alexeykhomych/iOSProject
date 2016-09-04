@@ -10,6 +10,8 @@
 
 #import "UINib+AKIExtensions.h"
 
+#import "UITableView+AKIExtensions.h"
+
 #import "AKIUser.h"
 #import "AKIUserCell.h"
 #import "AKIUserView.h"
@@ -111,18 +113,13 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
     [self.model addObject:model];
 }
 
-- (void)updateTableWithChangeModel:(AKIArrayChangeModel *)model {
-    AKIPrintMethod
-    [self actionForTableView:model];
-}
-
 #pragma mark -
 #pragma mark Notifications
 
 - (void)arrayModel:(AKIArrayModel *)arrayModel didUpdateWithChangeModel:(AKIArrayChangeModel *)arrayChangeModel {
     AKIPrintMethod
     
-    [self updateTableWithChangeModel:arrayChangeModel];
+    [self.userView.tableView applyToTableView:arrayChangeModel];
 }
 
 - (void)arrayModelDidLoad:(AKIArrayModel *)arrayModel {
@@ -135,36 +132,6 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 
 - (void)arrayModelWillLoad:(AKIArrayModel *)arrayModel {
     AKIPrintMethod
-}
-
-#pragma mark -
-#pragma mark Switch state
-
-- (void)actionForTableView:(AKIArrayChangeModel *)changeModel {
-    AKIArrayChangeModel *model = changeModel;
-    
-    NSIndexPath *fromIndex = [NSIndexPath indexPathWithIndex:model.fromIndex];
-    NSIndexPath *toIndex = [NSIndexPath indexPathWithIndex:model.toIndex];
-    
-    UITableView *tableView = self.userView.tableView;
-//
-//    switch (model.state) {
-//        case AKIArrayChangeModelMove:
-//            [self tableView:tableView moveRowAtIndexPath:fromIndex toIndexPath:toIndex];
-//            
-//            break;
-//        case AKIArrayChangeModelDelete:
-//            [self tableView:tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:toIndex];
-//            
-//            break;
-//        case AKIArrayChangeModelInsert:
-            [self tableView:tableView commitEditingStyle:UITableViewCellEditingStyleInsert forRowAtIndexPath:toIndex];
-//
-//            break;
-//            
-//        default:
-//            break;
-//    }
 }
 
 @end

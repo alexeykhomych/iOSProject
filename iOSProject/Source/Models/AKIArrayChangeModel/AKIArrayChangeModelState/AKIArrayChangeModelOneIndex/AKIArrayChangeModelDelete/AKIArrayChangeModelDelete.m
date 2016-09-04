@@ -12,7 +12,7 @@
 
 @implementation AKIArrayChangeModelDelete
 
-- (instancetype)initWithIndex:(NSUInteger)index {
+- (instancetype)initModelWithIndex:(NSUInteger)index {
     self = [super init];
     if (self) {
         self.toIndex = index;
