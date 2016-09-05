@@ -6,9 +6,9 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIArrayChangeModel.h"
+#import "AKIArrayChangeModelTwoIndexes.h"
 
-@interface AKIArrayChangeModelMove : AKIArrayChangeModel
+@interface AKIArrayChangeModelMove : AKIArrayChangeModelTwoIndexes
 
 - (instancetype)initModelFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 

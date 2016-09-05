@@ -12,6 +12,9 @@
 
 #import "AKIArrayChangeModel.h"
 
+#import "AKIArrayChangeModelOneIndex.h"
+#import "AKIArrayChangeModelTwoIndexes.h"
+
 @implementation UITableView (AKIExtensions)
 
 - (id)cellWithClass:(Class)class {
@@ -23,34 +26,14 @@
     return cell;
 }
 
-- (void)applyToTableView:(AKIArrayChangeModel *)changeModel {
-    [self beginUpdates];
-    
-//    AKIArrayChangeModel *model = changeModel;
-//    
+- (void)applyToTableView:(AKIArrayChangeModelOneIndex *)changeModel {
+    AKIArrayChangeModelOneIndex *model = changeModel;
+
 //    NSIndexPath *fromIndex = [NSIndexPath indexPathForRow:model.fromIndex inSection:0];
-//    NSIndexPath *toIndex = [NSIndexPath indexPathForRow:model.toIndex inSection:0];
-//
-//    UITableView *tableView = self.userView.tableView;
-    //
-    //    switch (model.state) {
-    //        case AKIArrayChangeModelMove:
-    //            [self tableView:tableView moveRowAtIndexPath:fromIndex toIndexPath:toIndex];
-    //
-    //            break;
-    //        case AKIArrayChangeModelDelete:
-                [self tableView:tableView commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:toIndex];
-    //
-    //            break;
-    //        case AKIArrayChangeModelInsert:
-    //            [self tableView:tableView commitEditingStyle:UITableViewCellEditingStyleInsert forRowAtIndexPath:toIndex];
-    //
-    //            break;
-    //
-    //        default:
-    //            break;
-    //    }
+    NSIndexPath *toIndex = [NSIndexPath indexPathForRow:model.toIndex inSection:0];
     
+    [self beginUpdates];
+    [self insertRowsAtIndexPaths:toIndex withRowAnimation:UITableViewRowAnimationAutomatic];
     [self endUpdates];
 }
 

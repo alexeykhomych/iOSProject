@@ -21,4 +21,15 @@
     return self;
 }
 
+- (void)applyToTableView:(AKIArrayChangeModelOneIndex *)changeModel {
+    AKIArrayChangeModelOneIndex *model = changeModel;
+    
+    //    NSIndexPath *fromIndex = [NSIndexPath indexPathForRow:model.fromIndex inSection:0];
+    NSIndexPath *toIndex = [NSIndexPath indexPathForRow:model.toIndex inSection:0];
+    
+//    [UITableView beginUpdates];
+//    [self insertRowsAtIndexPaths:toIndex withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+}
+
 @end

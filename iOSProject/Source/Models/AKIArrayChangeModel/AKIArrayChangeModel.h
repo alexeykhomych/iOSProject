@@ -8,15 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-//typedef NS_ENUM (NSUInteger, AKIArrayChangeModelState) {
-//    AKIArrayChangeModelInsert,
-//    AKIArrayChangeModelDelete,
-//    AKIArrayChangeModelMove
-//};
+@class AKIArrayModel;
+
+@protocol AKIArrayChangeModel <NSObject>
+
+- (void)applyToTableView;
+
+@end
 
 @interface AKIArrayChangeModel : NSObject
-@property (nonatomic, assign) NSUInteger    fromIndex;
-@property (nonatomic, assign) NSUInteger    toIndex;
 
 + (id)insertModelAtIndex:(NSUInteger)index;
 + (id)removeModelAtIndex:(NSUInteger)index;

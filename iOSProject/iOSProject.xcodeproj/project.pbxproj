@@ -32,6 +32,8 @@
 		843039951D7AF9D800083ADE /* AKIArrayChangeModelDelete.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430398D1D7AF9D800083ADE /* AKIArrayChangeModelDelete.m */; };
 		843039961D7AF9D800083ADE /* AKIArrayChangeModelInsert.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039901D7AF9D800083ADE /* AKIArrayChangeModelInsert.m */; };
 		843039971D7AF9D800083ADE /* AKIArrayChangeModelMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039941D7AF9D800083ADE /* AKIArrayChangeModelMove.m */; };
+		8430399C1D7D9F8900083ADE /* AKIArrayChangeModelOneIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430399B1D7D9F8900083ADE /* AKIArrayChangeModelOneIndex.m */; };
+		843039A11D7D9FB800083ADE /* AKIArrayChangeModelTwoIndexes.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039A01D7D9FB800083ADE /* AKIArrayChangeModelTwoIndexes.m */; };
 		848EE67E1D48CFE700B7F780 /* iOSProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */; };
 		848EE69A1D48D3EA00B7F780 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6901D48D3EA00B7F780 /* Assets.xcassets */; };
 		848EE69B1D48D3EA00B7F780 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6911D48D3EA00B7F780 /* LaunchScreen.storyboard */; };
@@ -96,6 +98,10 @@
 		843039901D7AF9D800083ADE /* AKIArrayChangeModelInsert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelInsert.m; sourceTree = "<group>"; };
 		843039931D7AF9D800083ADE /* AKIArrayChangeModelMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIArrayChangeModelMove.h; sourceTree = "<group>"; };
 		843039941D7AF9D800083ADE /* AKIArrayChangeModelMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelMove.m; sourceTree = "<group>"; };
+		843039991D7D967900083ADE /* AKIArrayChangeModelOneIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKIArrayChangeModelOneIndex.h; sourceTree = "<group>"; };
+		8430399A1D7D96CA00083ADE /* AKIArrayChangeModelTwoIndexes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKIArrayChangeModelTwoIndexes.h; sourceTree = "<group>"; };
+		8430399B1D7D9F8900083ADE /* AKIArrayChangeModelOneIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelOneIndex.m; sourceTree = "<group>"; };
+		843039A01D7D9FB800083ADE /* AKIArrayChangeModelTwoIndexes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelTwoIndexes.m; sourceTree = "<group>"; };
 		848EE65D1D48CEEE00B7F780 /* iOSProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67B1D48CFE700B7F780 /* iOSProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSProjectTests.m; sourceTree = "<group>"; };
@@ -345,9 +351,9 @@
 		843039561D75C08000083ADE /* AKIArrayChangeModel */ = {
 			isa = PBXGroup;
 			children = (
-				843039891D7AF9D800083ADE /* AKIArrayChangeModelState */,
 				843039571D75C0B000083ADE /* AKIArrayChangeModel.h */,
 				843039581D75C0B000083ADE /* AKIArrayChangeModel.m */,
+				843039891D7AF9D800083ADE /* AKIArrayChangeModelState */,
 			);
 			path = AKIArrayChangeModel;
 			sourceTree = "<group>";
@@ -382,6 +388,10 @@
 		843039891D7AF9D800083ADE /* AKIArrayChangeModelState */ = {
 			isa = PBXGroup;
 			children = (
+				843039991D7D967900083ADE /* AKIArrayChangeModelOneIndex.h */,
+				8430399A1D7D96CA00083ADE /* AKIArrayChangeModelTwoIndexes.h */,
+				8430399B1D7D9F8900083ADE /* AKIArrayChangeModelOneIndex.m */,
+				843039A01D7D9FB800083ADE /* AKIArrayChangeModelTwoIndexes.m */,
 				8430398A1D7AF9D800083ADE /* AKIArrayChangeModelOneIndex */,
 				843039911D7AF9D800083ADE /* AKIArrayChangeModelTwoIndexes */,
 			);
@@ -714,6 +724,7 @@
 				848EE6FD1D48F7FB00B7F780 /* AKIAppDelegate.m in Sources */,
 				843039491D6F0DDC00083ADE /* AKIUserView.m in Sources */,
 				843039321D6C7DD500083ADE /* UINib+AKIExtensions.m in Sources */,
+				8430399C1D7D9F8900083ADE /* AKIArrayChangeModelOneIndex.m in Sources */,
 				843039301D6C7DD500083ADE /* NSArray+AKIExtensions.m in Sources */,
 				843038C31D5C8D4100083ADE /* AKIUser.m in Sources */,
 				843039651D79B13200083ADE /* AKIUsersArrayModel.m in Sources */,
@@ -721,6 +732,7 @@
 				843038FB1D63457300083ADE /* AKIImageModel.m in Sources */,
 				848EE6D01D48DD5300B7F780 /* main.m in Sources */,
 				843039961D7AF9D800083ADE /* AKIArrayChangeModelInsert.m in Sources */,
+				843039A11D7D9FB800083ADE /* AKIArrayChangeModelTwoIndexes.m in Sources */,
 				843039591D75C0B000083ADE /* AKIArrayChangeModel.m in Sources */,
 				8430393B1D6CB16400083ADE /* AKIGCD.m in Sources */,
 				843039971D7AF9D800083ADE /* AKIArrayChangeModelMove.m in Sources */,

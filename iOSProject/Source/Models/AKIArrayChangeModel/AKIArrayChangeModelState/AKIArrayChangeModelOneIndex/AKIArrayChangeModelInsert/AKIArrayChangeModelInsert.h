@@ -6,9 +6,9 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIArrayChangeModel.h"
+#import "AKIArrayChangeModelOneIndex.h"
 
-@interface AKIArrayChangeModelInsert : AKIArrayChangeModel
+@interface AKIArrayChangeModelInsert : AKIArrayChangeModelOneIndex
 
 - (instancetype)initModelWithIndex:(NSUInteger)index;
 

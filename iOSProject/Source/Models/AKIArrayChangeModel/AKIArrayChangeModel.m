@@ -8,6 +8,8 @@
 
 #import "AKIArrayChangeModel.h"
 
+#import "AKIArrayModel.h"
+
 #import "AKIArrayChangeModelInsert.h"
 #import "AKIArrayChangeModelDelete.h"
 #import "AKIArrayChangeModelMove.h"
