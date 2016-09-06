@@ -28,11 +28,4 @@
     return self;
 }
 
-- (void)applyToTableView:(UITableView *)tableView {
-    [tableView applyChangeBlock:^{
-        [tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.toIndex inSection:0]]
-                         withRowAnimation:UITableViewRowAnimationAutomatic];
-    }];
-}
-
 @end

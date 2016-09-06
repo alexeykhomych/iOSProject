@@ -10,10 +10,9 @@
 
 #import "UINib+AKIExtensions.h"
 
-#import "AKIArrayChangeModel.h"
+#import "AKIArrayChangeModel+AKIExtensions.h"	
 
-#import "AKIArrayChangeModelOneIndex.h"
-#import "AKIArrayChangeModelTwoIndexes.h"
+#import "AKIArrayChangeModel.h"
 
 #import "AKIMacro.h"
 

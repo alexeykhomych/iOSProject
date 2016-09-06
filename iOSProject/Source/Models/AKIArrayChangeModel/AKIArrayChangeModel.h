@@ -18,6 +18,4 @@
 + (id)removeModelAtIndex:(NSUInteger)index;
 + (id)moveModelFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
-- (void)applyToTableView:(UITableView *)tableView;
-
 @end

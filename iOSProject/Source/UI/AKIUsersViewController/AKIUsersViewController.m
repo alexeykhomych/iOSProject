@@ -75,12 +75,8 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.model removeObjectAtIndex:indexPath.row];
-        [self.userView.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                                       withRowAnimation:UITableViewRowAnimationFade];
-        
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-//        [self.model addObject:[AKIUser new]];
-        [self.userView.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.model addObject:[AKIUser new]];
     }
 }
 
@@ -119,7 +115,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 - (void)arrayModel:(AKIArrayModel *)arrayModel didUpdateWithChangeModel:(AKIArrayChangeModel *)arrayChangeModel {
     AKIPrintMethod
     
-    [self.userView.tableView applyToTableView:arrayChangeModel];
+    [self.userView.tableView applyChangeModel:arrayChangeModel];
 }
 
 - (void)arrayModelDidLoad:(AKIArrayModel *)arrayModel {

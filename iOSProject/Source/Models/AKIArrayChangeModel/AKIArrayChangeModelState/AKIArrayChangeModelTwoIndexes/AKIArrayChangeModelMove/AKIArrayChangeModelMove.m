@@ -31,11 +31,4 @@
     return self;
 }
 
-- (void)applyToTableView:(UITableView *)tableView {
-    [tableView applyChangeBlock:^{
-        [tableView moveRowAtIndexPath:[NSIndexPath indexPathForItem:self.fromIndex inSection:0]
-                          toIndexPath:[NSIndexPath indexPathForItem:self.toIndex inSection:0]];
-    }];
-}
-
 @end
