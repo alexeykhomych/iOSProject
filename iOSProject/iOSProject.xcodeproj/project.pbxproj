@@ -253,6 +253,7 @@
 		843039231D6C7DD500083ADE /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				843039A41D7EEEE800083ADE /* ArrayChangeModel */,
 				8430395E1D78882400083ADE /* UIViewController */,
 				8430395A1D75E42100083ADE /* NSMutableArray */,
 				843039241D6C7DD500083ADE /* NSArray */,
@@ -389,8 +390,8 @@
 			isa = PBXGroup;
 			children = (
 				843039991D7D967900083ADE /* AKIArrayChangeModelOneIndex.h */,
-				8430399A1D7D96CA00083ADE /* AKIArrayChangeModelTwoIndexes.h */,
 				8430399B1D7D9F8900083ADE /* AKIArrayChangeModelOneIndex.m */,
+				8430399A1D7D96CA00083ADE /* AKIArrayChangeModelTwoIndexes.h */,
 				843039A01D7D9FB800083ADE /* AKIArrayChangeModelTwoIndexes.m */,
 				8430398A1D7AF9D800083ADE /* AKIArrayChangeModelOneIndex */,
 				843039911D7AF9D800083ADE /* AKIArrayChangeModelTwoIndexes */,
@@ -440,6 +441,13 @@
 				843039941D7AF9D800083ADE /* AKIArrayChangeModelMove.m */,
 			);
 			path = AKIArrayChangeModelMove;
+			sourceTree = "<group>";
+		};
+		843039A41D7EEEE800083ADE /* ArrayChangeModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ArrayChangeModel;
 			sourceTree = "<group>";
 		};
 		848EE6541D48CEEE00B7F780 = {

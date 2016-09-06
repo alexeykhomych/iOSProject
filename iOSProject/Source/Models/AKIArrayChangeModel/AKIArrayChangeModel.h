@@ -8,18 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+#import "UITableView+AKIExtensions.h"
+
 @class AKIArrayModel;
-
-@protocol AKIArrayChangeModel <NSObject>
-
-- (void)applyToTableView;
-
-@end
 
 @interface AKIArrayChangeModel : NSObject
 
 + (id)insertModelAtIndex:(NSUInteger)index;
 + (id)removeModelAtIndex:(NSUInteger)index;
 + (id)moveModelFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
+
+- (void)applyToTableView:(UITableView *)tableView;
 
 @end

@@ -15,6 +15,8 @@
 #import "AKIArrayChangeModelOneIndex.h"
 #import "AKIArrayChangeModelTwoIndexes.h"
 
+#import "AKIMacro.h"
+
 @implementation UITableView (AKIExtensions)
 
 - (id)cellWithClass:(Class)class {
@@ -26,14 +28,15 @@
     return cell;
 }
 
-- (void)applyToTableView:(AKIArrayChangeModelOneIndex *)changeModel {
-    AKIArrayChangeModelOneIndex *model = changeModel;
+- (void)applyChangeModel:(AKIArrayChangeModel *)changeModel {
+    [self applyChangeBlock:^{
+        [changeModel applyToTableView:self];
+    }];
+}
 
-//    NSIndexPath *fromIndex = [NSIndexPath indexPathForRow:model.fromIndex inSection:0];
-    NSIndexPath *toIndex = [NSIndexPath indexPathForRow:model.toIndex inSection:0];
-    
+- (void)applyChangeBlock:(AKIApplyChangeBlock)block {
     [self beginUpdates];
-    [self insertRowsAtIndexPaths:toIndex withRowAnimation:UITableViewRowAnimationAutomatic];
+    AKIPerformBlock(block);
     [self endUpdates];
 }
 

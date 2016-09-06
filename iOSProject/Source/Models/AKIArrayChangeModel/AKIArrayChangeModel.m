@@ -31,4 +31,11 @@
     return [[AKIArrayChangeModelMove alloc] initModelFromIndex:fromIndex toIndex:toIndex];
 }
 
+#pragma mark -
+#pragma mark Public
+
+- (void)applyToTableView:(UITableView *)tableView {
+    
+}
+
 @end

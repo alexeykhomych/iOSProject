@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^AKIApplyChangeBlock) (void);
+
 @class AKIArrayChangeModel;
 
 @interface UITableView (AKIExtensions)
 
 - (id)cellWithClass:(Class)class;
 
-- (void)applyToTableView:(AKIArrayChangeModel *)model;
+- (void)applyChangeModel:(AKIArrayChangeModel *)changeModel;
+- (void)applyChangeBlock:(AKIApplyChangeBlock)block;
 
 @end

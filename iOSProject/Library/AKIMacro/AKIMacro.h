@@ -56,3 +56,8 @@
 #define AKIPrintMethod NSLog(@"%@", NSStringFromSelector(_cmd));
 
 #define AKIConstant(type, name, value) static type const kAKI##name = value
+
+#define AKIPerformBlock(block, ...) \
+    if (block) { \
+        block(__VA_ARGS__); \
+    }

@@ -6,11 +6,9 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIArrayChangeModel.h"
+#import "AKIArrayChangeModelOneIndex.h"
 
-@interface AKIArrayChangeModelTwoIndexes : AKIArrayChangeModel
-
-@property (nonatomic, assign) NSUInteger    fromIndex;
-@property (nonatomic, assign) NSUInteger    toIndex;
+@interface AKIArrayChangeModelTwoIndexes : AKIArrayChangeModelOneIndex
+@property (nonatomic, readonly) NSUInteger    fromIndex;
 
 @end

@@ -8,7 +8,16 @@
 
 #import "AKIArrayChangeModelInsert.h"
 
+#import "UITableView+AKIExtensions.h"
+
+@interface AKIArrayChangeModelInsert ()
+@property (nonatomic, assign) NSUInteger toIndex;
+
+@end
+
 @implementation AKIArrayChangeModelInsert
+
+@synthesize toIndex = _toIndex;
 
 - (instancetype)initModelWithIndex:(NSUInteger)index {
     self = [super init];
@@ -17,6 +26,13 @@
     }
     
     return self;
+}
+
+- (void)applyToTableView:(UITableView *)tableView {
+    [tableView applyChangeBlock:^{
+        [tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.toIndex inSection:0]]
+                         withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
 }
 
 @end

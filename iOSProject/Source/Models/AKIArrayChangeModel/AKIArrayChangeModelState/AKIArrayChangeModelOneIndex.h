@@ -9,7 +9,6 @@
 #import "AKIArrayChangeModel.h"
 
 @interface AKIArrayChangeModelOneIndex : AKIArrayChangeModel
-
-@property (nonatomic, assign) NSUInteger toIndex;
+@property (nonatomic, readonly) NSUInteger toIndex;
 
 @end

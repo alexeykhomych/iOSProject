@@ -10,7 +10,14 @@
 
 #import "UITableView+AKIExtensions.h"
 
+@interface AKIArrayChangeModelDelete ()
+@property (nonatomic, assign) NSUInteger toIndex;
+
+@end
+
 @implementation AKIArrayChangeModelDelete
+
+@synthesize toIndex = _toIndex;
 
 - (instancetype)initModelWithIndex:(NSUInteger)index {
     self = [super init];
@@ -21,15 +28,11 @@
     return self;
 }
 
-- (void)applyToTableView:(AKIArrayChangeModelOneIndex *)changeModel {
-    AKIArrayChangeModelOneIndex *model = changeModel;
-    
-    //    NSIndexPath *fromIndex = [NSIndexPath indexPathForRow:model.fromIndex inSection:0];
-    NSIndexPath *toIndex = [NSIndexPath indexPathForRow:model.toIndex inSection:0];
-    
-//    [UITableView beginUpdates];
-//    [self insertRowsAtIndexPaths:toIndex withRowAnimation:UITableViewRowAnimationAutomatic];
-    
+- (void)applyToTableView:(UITableView *)tableView {
+    [tableView applyChangeBlock:^{
+        [tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.toIndex inSection:0]]
+                         withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
 }
 
 @end

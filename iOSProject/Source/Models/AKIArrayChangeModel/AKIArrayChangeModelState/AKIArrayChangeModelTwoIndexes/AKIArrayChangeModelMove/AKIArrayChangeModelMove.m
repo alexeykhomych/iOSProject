@@ -8,7 +8,18 @@
 
 #import "AKIArrayChangeModelMove.h"
 
+#import "UITableView+AKIExtensions.h"
+
+@interface AKIArrayChangeModelMove ()
+@property (nonatomic, assign) NSUInteger toIndex;
+@property (nonatomic, assign) NSUInteger fromIndex;
+
+@end
+
 @implementation AKIArrayChangeModelMove
+
+@synthesize toIndex = _toIndex;
+@synthesize fromIndex = _fromIndex;
 
 - (instancetype)initModelFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
     self = [super init];
@@ -18,6 +29,13 @@
     }
     
     return self;
+}
+
+- (void)applyToTableView:(UITableView *)tableView {
+    [tableView applyChangeBlock:^{
+        [tableView moveRowAtIndexPath:[NSIndexPath indexPathForItem:self.fromIndex inSection:0]
+                          toIndexPath:[NSIndexPath indexPathForItem:self.toIndex inSection:0]];
+    }];
 }
 
 @end
