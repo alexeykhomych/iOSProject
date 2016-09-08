@@ -13,6 +13,6 @@
 - (void)save;
 - (void)load;
 
-- (void)fillModelWithCount:(NSUInteger)count;
+- (void)fillModel;
 
 @end

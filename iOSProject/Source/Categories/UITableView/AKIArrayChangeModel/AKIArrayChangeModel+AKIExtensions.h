@@ -8,8 +8,26 @@
 
 #import "AKIArrayChangeModel.h"
 
+#import "AKIArrayChangeModelInsert.h"
+#import "AKIArrayChangeModelDelete.h"
+
+#import "AKIArrayChangeModelMove.h"
+
 @interface AKIArrayChangeModel (AKIExtensions)
 
 - (void)applyToTableView:(UITableView *)tableView;
 
 @end
+
+@interface AKIArrayChangeModelInsert (AKIExtensions)
+
+@end
+
+@interface AKIArrayChangeModelDelete (AKIExtensions)
+
+@end
+
+@interface AKIArrayChangeModelMove (AKIExtensions)
+
+@end
+

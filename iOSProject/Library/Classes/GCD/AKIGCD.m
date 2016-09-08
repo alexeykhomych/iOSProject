@@ -8,22 +8,22 @@
 
 #import "AKIGCD.h"
 
-void AKIAsyncPefrormInBackground(AKIGCDBlock block) {
-    AKIAsyncPefrormInQueue(AKIQueueTypeBackground, block);
+void AKIAsyncPerformInBackground(AKIGCDBlock block) {
+    AKIAsyncPerformInQueue(AKIQueueTypeBackground, block);
 }
 
 void AKISyncPerformInBackground(AKIGCDBlock block) {
-    AKISyncPefrormInQueue(AKIQueueTypeBackground, block);
+    AKISyncPerformInQueue(AKIQueueTypeBackground, block);
 }
 
-void AKIAsyncPefrormInQueue(AKIQueueType type, AKIGCDBlock block) {
+void AKIAsyncPerformInQueue(AKIQueueType type, AKIGCDBlock block) {
     if (!block) {
         return;
     }
     
     dispatch_async(AKIGetGlobalQueueWithType(type), block);
 }
-void AKISyncPefrormInQueue(AKIQueueType type, AKIGCDBlock block) {
+void AKISyncPerformInQueue(AKIQueueType type, AKIGCDBlock block) {
     if (!block) {
         return;
     }
@@ -31,7 +31,7 @@ void AKISyncPefrormInQueue(AKIQueueType type, AKIGCDBlock block) {
     dispatch_sync(AKIGetGlobalQueueWithType(type), block);
 }
 
-void AKIAsyncPeformInMainQueue(AKIGCDBlock block) {
+void AKIAsyncPerformInMainQueue(AKIGCDBlock block) {
     if (!block) {
         return;
     }

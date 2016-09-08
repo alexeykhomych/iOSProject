@@ -41,17 +41,17 @@
 
 #define AKIEmptyResult
 
-#define AKIStrongifyIfNilReturn(variable) \
-    AKIStrongifyIfNilReturnResult(variable, AKIEmptyResult)
+#define AKIStrongifyAndReturnIfNil(variable) \
+    AKIStrongifyAndReturnResultIfNil(variable, AKIEmptyResult) \
 
-#define AKIStrongifyIfNilReturnNil(variable) \
-    AKIStrongifyIfNilReturnResult(variable, nil)
+#define AKIStrongifyAndReturnNilIfNil(variable) \
+    AKIStrongifyAndReturnResultIfNil(variable, nil)
 
-#define AKIStrongifyIfNilReturnResult(variable, result) \
+#define AKIStrongifyAndReturnResultIfNil(variable, result) \
     AKIStrongify(variable); \
-    if (!variable) { \
-        return result; \
-    }
+        if (!variable) { \
+            return result; \
+        } \
 
 #define AKIPrintMethod NSLog(@"%@", NSStringFromSelector(_cmd));
 
@@ -61,3 +61,4 @@
     if (block) { \
         block(__VA_ARGS__); \
     }
+

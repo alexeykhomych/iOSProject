@@ -8,8 +8,6 @@
 
 #import "AKIImageModel.h"
 
-#import "AKIImageModelDispatcher.h"
-
 #import "AKIMacro.h"
 
 @interface AKIImageModel()
@@ -54,11 +52,6 @@
     if (_operation != operation) {
         [_operation cancel];
         _operation = operation;
-        
-        if (operation) {
-            AKIImageModelDispatcher *dispatcher = [AKIImageModelDispatcher sharedDispatcher];
-            [dispatcher.queue addOperation:operation];
-        }
     }
 }
 
@@ -95,7 +88,7 @@
     AKIWeakify(self);
     
     NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
-        AKIStrongifyIfNilReturn(self);
+        AKIStrongifyAndReturnIfNil(self);
         self.image = [UIImage imageWithContentsOfFile:[self.url absoluteString]];
     }];
     

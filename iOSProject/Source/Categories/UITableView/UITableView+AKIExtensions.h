@@ -16,7 +16,7 @@ typedef void (^AKIApplyChangeBlock) (void);
 
 - (id)cellWithClass:(Class)class;
 
-- (void)applyChangeModel:(AKIArrayChangeModel *)changeModel;
+- (void)updateWithBlock:(AKIArrayChangeModel *)changeModel;
 - (void)applyChangeBlock:(AKIApplyChangeBlock)block;
 
 @end

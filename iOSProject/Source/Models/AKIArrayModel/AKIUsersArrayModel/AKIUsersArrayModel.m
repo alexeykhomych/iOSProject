@@ -12,6 +12,10 @@
 
 #import "AKIMacro.h"
 
+#import "AKIGCD.h"
+
+AKIConstant(NSUInteger, UsersCount, 10);
+
 @implementation AKIUsersArrayModel
 
 #pragma mark -
@@ -29,12 +33,12 @@
     }
 }
 
-- (void)fillModelWithCount:(NSUInteger)count {
-    @synchronized (self) {
-        for (NSUInteger i = 0; i < count; i++) {
+- (void)fillModel {
+    AKIAsyncPerformInBackground(^{
+        for (NSUInteger i = 0; i < kAKIUsersCount; i++) {
             [self addObject:[AKIUser new]];
         }
-    }
+    });
 }
 
 @end

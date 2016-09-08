@@ -12,14 +12,6 @@
 
 #import "AKIUsersArrayModel.h"
 
-#import "AKIMacro.h"
-
-AKIConstant(NSUInteger, ModelsCount, 3);
-
-@interface AKIAppDelegate ()
-
-@end
-
 @implementation AKIAppDelegate
 
 
@@ -28,8 +20,8 @@ AKIConstant(NSUInteger, ModelsCount, 3);
     
     self.window = window;
     AKIUsersViewController *controller = [AKIUsersViewController new];
-    controller.model = [AKIUsersArrayModel new];
-    [controller.model fillModelWithCount:kAKIModelsCount];
+    controller.model = [[AKIUsersArrayModel alloc] init];
+    [controller.model fillModel];
     
     window.rootViewController = controller;
     

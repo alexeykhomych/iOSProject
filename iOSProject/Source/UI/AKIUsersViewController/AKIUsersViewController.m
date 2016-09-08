@@ -21,6 +21,8 @@
 #import "AKIArrayModel.h"
 #import "AKIArrayChangeModel.h"
 
+#import "AKIGCD.h"
+
 AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 
 @implementation AKIUsersViewController
@@ -37,10 +39,15 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
         [_model removeObserver:self];
         
         _model = model;
+//        _filteredModel = model;
         
         [_model addObserver:self];
     }
 }
+
+//- (AKIUsersArrayModel *)model {
+//    return self.userView.editingSearchBar && self.filteredModel ? self.filteredModel : self.model;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -73,11 +80,13 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.model removeObjectAtIndex:indexPath.row];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        [self.model addObject:[AKIUser new]];
-    }
+    AKIAsyncPerformInBackground(^{
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
+            [self.model removeObjectAtIndex:indexPath.row];
+        } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+            [self.model addObject:[AKIUser new]];
+        }
+    });
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -115,11 +124,22 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 - (void)arrayModel:(AKIArrayModel *)arrayModel didUpdateWithChangeModel:(AKIArrayChangeModel *)arrayChangeModel {
     AKIPrintMethod
     
-    [self.userView.tableView applyChangeModel:arrayChangeModel];
+//    AKIWeakify(self);
+//    
+//    AKIAsyncPerformInMainQueue(^{
+//        AKIStrongifyAndReturnIfNil(self);
+        [self.userView.tableView updateWithBlock:arrayChangeModel];
+//    });
 }
 
 - (void)arrayModelDidLoad:(AKIArrayModel *)arrayModel {
     AKIPrintMethod
+    
+    AKIWeakify(self);
+    AKIAsyncPerformInMainQueue(^{
+        AKIStrongifyAndReturnIfNil(self);
+        
+    });
 }
 
 - (void)arrayModelDidFailLoading:(AKIArrayModel *)arrayModel {
@@ -129,5 +149,39 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 - (void)arrayModelWillLoad:(AKIArrayModel *)arrayModel {
     AKIPrintMethod
 }
+
+#pragma mark -
+#pragma mark UISearchBar
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    AKIPrintMethod
+    self.userView.editingSearchBar = YES;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    AKIPrintMethod
+    self.userView.editingSearchBar = NO;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    AKIPrintMethod
+    [self filterContentForSearchText:searchText];
+}
+
+//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar;                     // called when keyboard search button pressed
+//- (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar __TVOS_PROHIBITED; // called when bookmark button pressed
+//- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar __TVOS_PROHIBITED;   // called when cancel button pressed
+//- (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar NS_AVAILABLE_IOS(3_2) __TVOS_PROHIBITED; // called when search results button pressed
+//
+//- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope NS_AVAILABLE_IOS(3_0);
+
+- (void)filterContentForSearchText:(NSString*)searchText {
+//    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", searchText];
+//    NSArray *result = [self.model.objects filteredArrayUsingPredicate:resultPredicate];
+//    
+//    [self.userView.tableView reloadData];
+    AKIPrintMethod
+}
+
 
 @end

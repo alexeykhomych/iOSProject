@@ -32,8 +32,16 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
+                <searchBar contentMode="redraw" id="co3-0i-sQr">
+                    <rect key="frame" x="0.0" y="68" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="f7U-PT-Owg"/>
+                    </connections>
+                </searchBar>
                 <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="OPu-bI-i6B">
-                    <rect key="frame" x="8" y="88" width="312" height="480"/>
+                    <rect key="frame" x="0.0" y="112" width="320" height="456"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>

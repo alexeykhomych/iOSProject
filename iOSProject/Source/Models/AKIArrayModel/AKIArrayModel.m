@@ -16,6 +16,10 @@
 
 #import "AKIArrayChangeModel.h"
 
+#import "AKIMacro.h"
+
+
+
 @interface AKIArrayModel ()
 @property (nonatomic, retain) NSMutableArray    *mutableObjects;
 
@@ -37,6 +41,17 @@
     return self;
 }
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self)
+    {
+        self.mutableObjects = [aDecoder decodeObjectForKey:@"kAKIObjects"];
+        self.count = [aDecoder decodeIntForKey:@"kAKIObjectsCount"];
+    }
+    
+    return self;
+}
+
 #pragma mark -
 #pragma mark Accessors
 
@@ -48,7 +63,6 @@
 
 - (NSUInteger)count {
     @synchronized (self) {
-//        NSLog(@"count = %lu", self.mutableObjects.count);
         return self.mutableObjects.count;
     }
 }
@@ -58,15 +72,19 @@
 
 - (void)addObject:(id)object {
     @synchronized (self) {
-        [self.mutableObjects addObject:object];
-        [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel insertModelAtIndex:self.count - 1]]; //added to const if it will work
+        if (object) {
+            [self.mutableObjects addObject:object];
+            [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel insertModelAtIndex:self.count - 1]];
+        }
     }
 }
 
 - (void)removeObject:(id)object {
     @synchronized (self) {
-        [self.mutableObjects removeObject:object];
-        [self removeObjectAtIndex:[self.mutableObjects indexOfObject:object]];
+        if (object) {
+            [self.mutableObjects removeObject:object];
+            [self removeObjectAtIndex:[self.mutableObjects indexOfObject:object]];
+        }
     }
 }
 
@@ -117,6 +135,14 @@
         default:
             return nil;
     }
+}
+
+#pragma mark -
+#pragma mark Serializable
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.objects forKey:@"kAKIObjects"];
+    [aCoder encodeInt:(int)self.count forKey:@"kAKIObjectsCount"];
 }
 
 @end

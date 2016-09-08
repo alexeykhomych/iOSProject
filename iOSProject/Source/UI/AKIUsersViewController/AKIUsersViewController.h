@@ -13,11 +13,12 @@
 @interface AKIUsersViewController : UIViewController <
     UITableViewDelegate,
     UITableViewDataSource,
-    AKIArrayModel
+    AKIArrayModel,
+    UISearchBarDelegate
 >
 
 @property (nonatomic, retain)   AKIUsersArrayModel  *model;
-@property (nonatomic, retain)   NSMutableArray      *users;
+@property (nonatomic, retain)   AKIUsersArrayModel  *filteredModel;
 
 - (IBAction)onAddButton:(id)sender;
 - (IBAction)onEditButton:(id)sender;
