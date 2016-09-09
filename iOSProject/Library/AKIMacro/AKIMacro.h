@@ -17,14 +17,14 @@
         \
         return nil; \
     }
-
+//AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 #define AKIViewControllerBaseViewProperty(viewControllerClass, propertyName, baseViewClass) \
-    @interface viewControllerClass (__AKIPrivateBaseView) \
+    @interface viewControllerClass (__AKIPrivateBaseView_##baseViewClass) \
     AKIDefineBaseViewProperty(propertyName, baseViewClass) \
     \
     @end \
     \
-    @implementation viewControllerClass (__AKIPrivateBaseView) \
+    @implementation viewControllerClass (__AKIPrivateBaseView_##baseViewClass) \
     \
     @dynamic propertyName; \
     \
@@ -57,8 +57,10 @@
 
 #define AKIConstant(type, name, value) static type const kAKI##name = value
 
-#define AKIPerformBlock(block, ...) \
+#define AKIPerformBlockWithParametr(block, parametr) \
     if (block) { \
-        block(__VA_ARGS__); \
+        block(parametr); \
     }
 
+#define AKIPerformBlock(block, ...) \
+    AKIPerformBlockWithParametr(block, __VA_ARGS__);

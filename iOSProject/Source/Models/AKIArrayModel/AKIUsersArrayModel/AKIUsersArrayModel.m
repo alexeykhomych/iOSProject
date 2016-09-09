@@ -34,11 +34,11 @@ AKIConstant(NSUInteger, UsersCount, 10);
 }
 
 - (void)fillModel {
-    AKIAsyncPerformInBackground(^{
+    [self performBlockWithNotification:^{
         for (NSUInteger i = 0; i < kAKIUsersCount; i++) {
             [self addObject:[AKIUser new]];
         }
-    });
+    }];
 }
 
 @end

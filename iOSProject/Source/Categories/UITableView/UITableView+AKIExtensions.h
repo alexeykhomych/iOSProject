@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^AKIApplyChangeBlock) (void);
+typedef void (^AKIupdateWithChangeBlock) (void);
 
 @class AKIArrayChangeModel;
 
@@ -16,7 +16,7 @@ typedef void (^AKIApplyChangeBlock) (void);
 
 - (id)cellWithClass:(Class)class;
 
-- (void)updateWithBlock:(AKIArrayChangeModel *)changeModel;
-- (void)applyChangeBlock:(AKIApplyChangeBlock)block;
+- (void)updateWithChangeModel:(AKIArrayChangeModel *)changeModel;
+- (void)updateWithChangeBlock:(AKIupdateWithChangeBlock)block;
 
 @end

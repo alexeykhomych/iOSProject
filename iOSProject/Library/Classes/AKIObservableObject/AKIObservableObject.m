@@ -8,10 +8,15 @@
 
 #import "AKIObservableObject.h"
 
-//typedef void(^AKIControllerNotificationBlock)(AKIObservationController *controller);
+#import "AKIMacro.h"
 
 @interface AKIObservableObject()
-@property (nonatomic, retain) NSHashTable *observersTable;
+@property (nonatomic, strong) NSHashTable   *observersTable;
+
+@property (nonatomic, assign) BOOL          shouldNotify;
+@property (nonatomic, assign) BOOL          notifyObservers;
+
+- (void)performBlock:(void (^)(void))block shouldNotify:(BOOL)notify;
 
 @end
 
@@ -109,6 +114,22 @@
     [self notifyObserverWithSelector:[self selectorForState:state] object:object];
 }
 
+- (void)performBlockWithoutNotification:(void (^)(void))block {
+    [self performBlock:block shouldNotify:NO];
+}
+
+- (void)performBlockWithNotification:(void (^)(void))block {
+    [self performBlock:block shouldNotify:YES];
+}
+
+- (void)performBlock:(void (^)(void))block shouldNotify:(BOOL)notify {
+    BOOL currentNotifyObservers = self.notifyObservers;
+    
+    self.notifyObservers = notify;
+    AKIPerformBlock(block);
+    self.notifyObservers = currentNotifyObservers;
+}
+
 #pragma mark -
 #pragma mark Private Methods
 
@@ -120,6 +141,10 @@
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 
 - (void)notifyObserverWithSelector:(SEL)selector object:(id)object {
+    if (!self.notifyObservers) {
+        return;
+    }
+    
     @synchronized (self) {
         NSHashTable *observers = self.observersTable;
     

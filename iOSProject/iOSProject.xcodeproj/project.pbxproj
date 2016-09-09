@@ -28,12 +28,13 @@
 		8430395D1D75E44F00083ADE /* NSMutableArray+AKIExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430395C1D75E44F00083ADE /* NSMutableArray+AKIExtension.m */; };
 		843039611D78884E00083ADE /* UIViewController+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039601D78884E00083ADE /* UIViewController+AKIExtensions.m */; };
 		843039651D79B13200083ADE /* AKIUsersArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039641D79B13200083ADE /* AKIUsersArrayModel.m */; };
-		843039951D7AF9D800083ADE /* AKIArrayChangeModelDelete.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430398D1D7AF9D800083ADE /* AKIArrayChangeModelDelete.m */; };
-		843039961D7AF9D800083ADE /* AKIArrayChangeModelInsert.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039901D7AF9D800083ADE /* AKIArrayChangeModelInsert.m */; };
-		843039971D7AF9D800083ADE /* AKIArrayChangeModelMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039941D7AF9D800083ADE /* AKIArrayChangeModelMove.m */; };
-		8430399C1D7D9F8900083ADE /* AKIArrayChangeModelOneIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430399B1D7D9F8900083ADE /* AKIArrayChangeModelOneIndex.m */; };
-		843039A11D7D9FB800083ADE /* AKIArrayChangeModelTwoIndexes.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039A01D7D9FB800083ADE /* AKIArrayChangeModelTwoIndexes.m */; };
 		843039A81D7EF99200083ADE /* AKIArrayChangeModel+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039A71D7EF99200083ADE /* AKIArrayChangeModel+AKIExtensions.m */; };
+		843039C91D82E69300083ADE /* AKIArrayChangeModelDelete.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039BD1D82E69200083ADE /* AKIArrayChangeModelDelete.m */; };
+		843039CA1D82E69300083ADE /* AKIArrayChangeModelInsert.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039C01D82E69200083ADE /* AKIArrayChangeModelInsert.m */; };
+		843039CB1D82E69300083ADE /* AKIArrayChangeModelOneIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039C21D82E69200083ADE /* AKIArrayChangeModelOneIndex.m */; };
+		843039CC1D82E69300083ADE /* AKIArrayChangeModelMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039C61D82E69200083ADE /* AKIArrayChangeModelMove.m */; };
+		843039CD1D82E69300083ADE /* AKIArrayChangeModelTwoIndexes.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039C81D82E69200083ADE /* AKIArrayChangeModelTwoIndexes.m */; };
+		843039D11D8306D500083ADE /* UIWindow+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039D01D8306D500083ADE /* UIWindow+AKIExtensions.m */; };
 		848EE67E1D48CFE700B7F780 /* iOSProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */; };
 		848EE69A1D48D3EA00B7F780 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6901D48D3EA00B7F780 /* Assets.xcassets */; };
 		848EE69B1D48D3EA00B7F780 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6911D48D3EA00B7F780 /* LaunchScreen.storyboard */; };
@@ -90,18 +91,20 @@
 		843039601D78884E00083ADE /* UIViewController+AKIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AKIExtensions.m"; sourceTree = "<group>"; };
 		843039631D79B13200083ADE /* AKIUsersArrayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIUsersArrayModel.h; sourceTree = "<group>"; };
 		843039641D79B13200083ADE /* AKIUsersArrayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIUsersArrayModel.m; sourceTree = "<group>"; };
-		8430398C1D7AF9D800083ADE /* AKIArrayChangeModelDelete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIArrayChangeModelDelete.h; sourceTree = "<group>"; };
-		8430398D1D7AF9D800083ADE /* AKIArrayChangeModelDelete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelDelete.m; sourceTree = "<group>"; };
-		8430398F1D7AF9D800083ADE /* AKIArrayChangeModelInsert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIArrayChangeModelInsert.h; sourceTree = "<group>"; };
-		843039901D7AF9D800083ADE /* AKIArrayChangeModelInsert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelInsert.m; sourceTree = "<group>"; };
-		843039931D7AF9D800083ADE /* AKIArrayChangeModelMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIArrayChangeModelMove.h; sourceTree = "<group>"; };
-		843039941D7AF9D800083ADE /* AKIArrayChangeModelMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelMove.m; sourceTree = "<group>"; };
-		843039991D7D967900083ADE /* AKIArrayChangeModelOneIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKIArrayChangeModelOneIndex.h; sourceTree = "<group>"; };
-		8430399A1D7D96CA00083ADE /* AKIArrayChangeModelTwoIndexes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKIArrayChangeModelTwoIndexes.h; sourceTree = "<group>"; };
-		8430399B1D7D9F8900083ADE /* AKIArrayChangeModelOneIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelOneIndex.m; sourceTree = "<group>"; };
-		843039A01D7D9FB800083ADE /* AKIArrayChangeModelTwoIndexes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelTwoIndexes.m; sourceTree = "<group>"; };
 		843039A61D7EF99200083ADE /* AKIArrayChangeModel+AKIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AKIArrayChangeModel+AKIExtensions.h"; sourceTree = "<group>"; };
 		843039A71D7EF99200083ADE /* AKIArrayChangeModel+AKIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AKIArrayChangeModel+AKIExtensions.m"; sourceTree = "<group>"; };
+		843039BC1D82E69200083ADE /* AKIArrayChangeModelDelete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIArrayChangeModelDelete.h; sourceTree = "<group>"; };
+		843039BD1D82E69200083ADE /* AKIArrayChangeModelDelete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelDelete.m; sourceTree = "<group>"; };
+		843039BF1D82E69200083ADE /* AKIArrayChangeModelInsert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIArrayChangeModelInsert.h; sourceTree = "<group>"; };
+		843039C01D82E69200083ADE /* AKIArrayChangeModelInsert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelInsert.m; sourceTree = "<group>"; };
+		843039C11D82E69200083ADE /* AKIArrayChangeModelOneIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIArrayChangeModelOneIndex.h; sourceTree = "<group>"; };
+		843039C21D82E69200083ADE /* AKIArrayChangeModelOneIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelOneIndex.m; sourceTree = "<group>"; };
+		843039C51D82E69200083ADE /* AKIArrayChangeModelMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIArrayChangeModelMove.h; sourceTree = "<group>"; };
+		843039C61D82E69200083ADE /* AKIArrayChangeModelMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelMove.m; sourceTree = "<group>"; };
+		843039C71D82E69200083ADE /* AKIArrayChangeModelTwoIndexes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIArrayChangeModelTwoIndexes.h; sourceTree = "<group>"; };
+		843039C81D82E69200083ADE /* AKIArrayChangeModelTwoIndexes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelTwoIndexes.m; sourceTree = "<group>"; };
+		843039CF1D8306D500083ADE /* UIWindow+AKIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+AKIExtensions.h"; sourceTree = "<group>"; };
+		843039D01D8306D500083ADE /* UIWindow+AKIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+AKIExtensions.m"; sourceTree = "<group>"; };
 		848EE65D1D48CEEE00B7F780 /* iOSProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67B1D48CFE700B7F780 /* iOSProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSProjectTests.m; sourceTree = "<group>"; };
@@ -243,6 +246,7 @@
 		843039231D6C7DD500083ADE /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				843039CE1D8306AD00083ADE /* UIWindow */,
 				8430395E1D78882400083ADE /* UIViewController */,
 				8430395A1D75E42100083ADE /* NSMutableArray */,
 				843039241D6C7DD500083ADE /* NSArray */,
@@ -342,9 +346,9 @@
 		843039561D75C08000083ADE /* AKIArrayChangeModel */ = {
 			isa = PBXGroup;
 			children = (
+				843039B91D82E69200083ADE /* AKIArrayChangeModelState */,
 				843039571D75C0B000083ADE /* AKIArrayChangeModel.h */,
 				843039581D75C0B000083ADE /* AKIArrayChangeModel.m */,
-				843039891D7AF9D800083ADE /* AKIArrayChangeModelState */,
 			);
 			path = AKIArrayChangeModel;
 			sourceTree = "<group>";
@@ -376,63 +380,6 @@
 			path = AKIUsersArrayModel;
 			sourceTree = "<group>";
 		};
-		843039891D7AF9D800083ADE /* AKIArrayChangeModelState */ = {
-			isa = PBXGroup;
-			children = (
-				843039991D7D967900083ADE /* AKIArrayChangeModelOneIndex.h */,
-				8430399B1D7D9F8900083ADE /* AKIArrayChangeModelOneIndex.m */,
-				8430399A1D7D96CA00083ADE /* AKIArrayChangeModelTwoIndexes.h */,
-				843039A01D7D9FB800083ADE /* AKIArrayChangeModelTwoIndexes.m */,
-				8430398A1D7AF9D800083ADE /* AKIArrayChangeModelOneIndex */,
-				843039911D7AF9D800083ADE /* AKIArrayChangeModelTwoIndexes */,
-			);
-			path = AKIArrayChangeModelState;
-			sourceTree = "<group>";
-		};
-		8430398A1D7AF9D800083ADE /* AKIArrayChangeModelOneIndex */ = {
-			isa = PBXGroup;
-			children = (
-				8430398B1D7AF9D800083ADE /* AKIArrayChangeModelDelete */,
-				8430398E1D7AF9D800083ADE /* AKIArrayChangeModelInsert */,
-			);
-			path = AKIArrayChangeModelOneIndex;
-			sourceTree = "<group>";
-		};
-		8430398B1D7AF9D800083ADE /* AKIArrayChangeModelDelete */ = {
-			isa = PBXGroup;
-			children = (
-				8430398C1D7AF9D800083ADE /* AKIArrayChangeModelDelete.h */,
-				8430398D1D7AF9D800083ADE /* AKIArrayChangeModelDelete.m */,
-			);
-			path = AKIArrayChangeModelDelete;
-			sourceTree = "<group>";
-		};
-		8430398E1D7AF9D800083ADE /* AKIArrayChangeModelInsert */ = {
-			isa = PBXGroup;
-			children = (
-				8430398F1D7AF9D800083ADE /* AKIArrayChangeModelInsert.h */,
-				843039901D7AF9D800083ADE /* AKIArrayChangeModelInsert.m */,
-			);
-			path = AKIArrayChangeModelInsert;
-			sourceTree = "<group>";
-		};
-		843039911D7AF9D800083ADE /* AKIArrayChangeModelTwoIndexes */ = {
-			isa = PBXGroup;
-			children = (
-				843039921D7AF9D800083ADE /* AKIArrayChangeModelMove */,
-			);
-			path = AKIArrayChangeModelTwoIndexes;
-			sourceTree = "<group>";
-		};
-		843039921D7AF9D800083ADE /* AKIArrayChangeModelMove */ = {
-			isa = PBXGroup;
-			children = (
-				843039931D7AF9D800083ADE /* AKIArrayChangeModelMove.h */,
-				843039941D7AF9D800083ADE /* AKIArrayChangeModelMove.m */,
-			);
-			path = AKIArrayChangeModelMove;
-			sourceTree = "<group>";
-		};
 		843039A51D7EF97100083ADE /* AKIArrayChangeModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,6 +387,72 @@
 				843039A71D7EF99200083ADE /* AKIArrayChangeModel+AKIExtensions.m */,
 			);
 			path = AKIArrayChangeModel;
+			sourceTree = "<group>";
+		};
+		843039B91D82E69200083ADE /* AKIArrayChangeModelState */ = {
+			isa = PBXGroup;
+			children = (
+				843039BA1D82E69200083ADE /* AKIArrayChangeModelOneIndex */,
+				843039C31D82E69200083ADE /* AKIArrayChangeModelTwoIndexes */,
+			);
+			path = AKIArrayChangeModelState;
+			sourceTree = "<group>";
+		};
+		843039BA1D82E69200083ADE /* AKIArrayChangeModelOneIndex */ = {
+			isa = PBXGroup;
+			children = (
+				843039BB1D82E69200083ADE /* AKIArrayChangeModelDelete */,
+				843039BE1D82E69200083ADE /* AKIArrayChangeModelInsert */,
+				843039C11D82E69200083ADE /* AKIArrayChangeModelOneIndex.h */,
+				843039C21D82E69200083ADE /* AKIArrayChangeModelOneIndex.m */,
+			);
+			path = AKIArrayChangeModelOneIndex;
+			sourceTree = "<group>";
+		};
+		843039BB1D82E69200083ADE /* AKIArrayChangeModelDelete */ = {
+			isa = PBXGroup;
+			children = (
+				843039BC1D82E69200083ADE /* AKIArrayChangeModelDelete.h */,
+				843039BD1D82E69200083ADE /* AKIArrayChangeModelDelete.m */,
+			);
+			path = AKIArrayChangeModelDelete;
+			sourceTree = "<group>";
+		};
+		843039BE1D82E69200083ADE /* AKIArrayChangeModelInsert */ = {
+			isa = PBXGroup;
+			children = (
+				843039BF1D82E69200083ADE /* AKIArrayChangeModelInsert.h */,
+				843039C01D82E69200083ADE /* AKIArrayChangeModelInsert.m */,
+			);
+			path = AKIArrayChangeModelInsert;
+			sourceTree = "<group>";
+		};
+		843039C31D82E69200083ADE /* AKIArrayChangeModelTwoIndexes */ = {
+			isa = PBXGroup;
+			children = (
+				843039C41D82E69200083ADE /* AKIArrayChangeModelMove */,
+				843039C71D82E69200083ADE /* AKIArrayChangeModelTwoIndexes.h */,
+				843039C81D82E69200083ADE /* AKIArrayChangeModelTwoIndexes.m */,
+			);
+			path = AKIArrayChangeModelTwoIndexes;
+			sourceTree = "<group>";
+		};
+		843039C41D82E69200083ADE /* AKIArrayChangeModelMove */ = {
+			isa = PBXGroup;
+			children = (
+				843039C51D82E69200083ADE /* AKIArrayChangeModelMove.h */,
+				843039C61D82E69200083ADE /* AKIArrayChangeModelMove.m */,
+			);
+			path = AKIArrayChangeModelMove;
+			sourceTree = "<group>";
+		};
+		843039CE1D8306AD00083ADE /* UIWindow */ = {
+			isa = PBXGroup;
+			children = (
+				843039CF1D8306D500083ADE /* UIWindow+AKIExtensions.h */,
+				843039D01D8306D500083ADE /* UIWindow+AKIExtensions.m */,
+			);
+			path = UIWindow;
 			sourceTree = "<group>";
 		};
 		848EE6541D48CEEE00B7F780 = {
@@ -711,7 +724,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				843039951D7AF9D800083ADE /* AKIArrayChangeModelDelete.m in Sources */,
+				843039D11D8306D500083ADE /* UIWindow+AKIExtensions.m in Sources */,
+				843039C91D82E69300083ADE /* AKIArrayChangeModelDelete.m in Sources */,
 				8430395D1D75E44F00083ADE /* NSMutableArray+AKIExtension.m in Sources */,
 				8430394D1D6F1D6C00083ADE /* AKIUsersViewController.m in Sources */,
 				843039081D65CC6800083ADE /* AKITableViewCell.m in Sources */,
@@ -719,23 +733,23 @@
 				843038C81D5C970100083ADE /* AKIMacro.m in Sources */,
 				843039331D6C7DD500083ADE /* UITableView+AKIExtensions.m in Sources */,
 				843039311D6C7DD500083ADE /* NSString+AKIExtensions.m in Sources */,
+				843039CC1D82E69300083ADE /* AKIArrayChangeModelMove.m in Sources */,
 				843039511D719F6700083ADE /* AKIObservableObject.m in Sources */,
 				848EE6FD1D48F7FB00B7F780 /* AKIAppDelegate.m in Sources */,
 				843039491D6F0DDC00083ADE /* AKIUserView.m in Sources */,
 				843039321D6C7DD500083ADE /* UINib+AKIExtensions.m in Sources */,
-				8430399C1D7D9F8900083ADE /* AKIArrayChangeModelOneIndex.m in Sources */,
 				843039A81D7EF99200083ADE /* AKIArrayChangeModel+AKIExtensions.m in Sources */,
+				843039CB1D82E69300083ADE /* AKIArrayChangeModelOneIndex.m in Sources */,
 				843039301D6C7DD500083ADE /* NSArray+AKIExtensions.m in Sources */,
 				843038C31D5C8D4100083ADE /* AKIUser.m in Sources */,
 				843039651D79B13200083ADE /* AKIUsersArrayModel.m in Sources */,
 				8430394A1D6F0DDC00083ADE /* AKIUserCell.m in Sources */,
+				843039CD1D82E69300083ADE /* AKIArrayChangeModelTwoIndexes.m in Sources */,
 				843038FB1D63457300083ADE /* AKIImageModel.m in Sources */,
 				848EE6D01D48DD5300B7F780 /* main.m in Sources */,
-				843039961D7AF9D800083ADE /* AKIArrayChangeModelInsert.m in Sources */,
-				843039A11D7D9FB800083ADE /* AKIArrayChangeModelTwoIndexes.m in Sources */,
+				843039CA1D82E69300083ADE /* AKIArrayChangeModelInsert.m in Sources */,
 				843039591D75C0B000083ADE /* AKIArrayChangeModel.m in Sources */,
 				8430393B1D6CB16400083ADE /* AKIGCD.m in Sources */,
-				843039971D7AF9D800083ADE /* AKIArrayChangeModelMove.m in Sources */,
 				8430391F1D6A2EFD00083ADE /* AKIArrayModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

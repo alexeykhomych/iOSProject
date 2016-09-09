@@ -39,7 +39,6 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
         [_model removeObserver:self];
         
         _model = model;
-//        _filteredModel = model;
         
         [_model addObserver:self];
     }
@@ -65,9 +64,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
     
     AKIUserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellClass];
     if (!cell) {
-        UINib *nib = [UINib nibWithClass:[AKIUserCell class]];
-        NSArray *cells = [nib instantiateWithOwner:nil options:nil];
-        cell = [cells firstObject];
+        cell = [UINib objectWithClass:[AKIUserCell class]];
     }
     
     AKIUser *user = [self.model objectAtIndexedSubscript:indexPath.row];
@@ -81,11 +78,13 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AKIAsyncPerformInBackground(^{
-        if (editingStyle == UITableViewCellEditingStyleDelete) {
-            [self.model removeObjectAtIndex:indexPath.row];
-        } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-            [self.model addObject:[AKIUser new]];
-        }
+        [self.model performBlockWithNotification:^{
+            if (editingStyle == UITableViewCellEditingStyleDelete) {
+                [self.model removeObjectAtIndex:indexPath.row];
+            } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+                [self addModel:[AKIUser new]];
+            }
+        }];
     });
 }
 
@@ -124,12 +123,12 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 - (void)arrayModel:(AKIArrayModel *)arrayModel didUpdateWithChangeModel:(AKIArrayChangeModel *)arrayChangeModel {
     AKIPrintMethod
     
-//    AKIWeakify(self);
-//    
-//    AKIAsyncPerformInMainQueue(^{
-//        AKIStrongifyAndReturnIfNil(self);
-        [self.userView.tableView updateWithBlock:arrayChangeModel];
-//    });
+    AKIWeakify(self);
+
+    AKIAsyncPerformInMainQueue(^{
+        AKIStrongifyAndReturnIfNil(self);
+        [self.userView.tableView updateWithChangeModel:arrayChangeModel];
+    });
 }
 
 - (void)arrayModelDidLoad:(AKIArrayModel *)arrayModel {
@@ -155,12 +154,12 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     AKIPrintMethod
-    self.userView.editingSearchBar = YES;
+    
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     AKIPrintMethod
-    self.userView.editingSearchBar = NO;
+    
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -168,20 +167,10 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
     [self filterContentForSearchText:searchText];
 }
 
-//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar;                     // called when keyboard search button pressed
-//- (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar __TVOS_PROHIBITED; // called when bookmark button pressed
-//- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar __TVOS_PROHIBITED;   // called when cancel button pressed
-//- (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar NS_AVAILABLE_IOS(3_2) __TVOS_PROHIBITED; // called when search results button pressed
-//
-//- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope NS_AVAILABLE_IOS(3_0);
-
 - (void)filterContentForSearchText:(NSString*)searchText {
-//    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", searchText];
-//    NSArray *result = [self.model.objects filteredArrayUsingPredicate:resultPredicate];
-//    
+    
 //    [self.userView.tableView reloadData];
     AKIPrintMethod
 }
-
 
 @end

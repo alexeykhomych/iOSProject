@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AKIUser : NSObject
-@property (nonatomic, readonly)     NSString    *fullName;
-@property (nonatomic, readonly)     UIImage     *image;
+@property (nonatomic, copy, readonly)     NSString    *fullName;
+@property (nonatomic, readonly)           UIImage     *image;
 
 @end

@@ -17,8 +17,7 @@
 @property (nonatomic, strong) IBOutlet UIButton     *editButton;
 
 @property(nonatomic, assign, getter=isEditing) BOOL editing;
-@property(nonatomic, assign, getter=isEditing) BOOL editingSearchBar;
 
-@property (nonatomic, retain) AKIUserCell *cell;
+@property (nonatomic, strong) AKIUserCell *cell;
 
 @end

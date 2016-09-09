@@ -18,10 +18,8 @@
 
 #import "AKIMacro.h"
 
-
-
 @interface AKIArrayModel ()
-@property (nonatomic, retain) NSMutableArray    *mutableObjects;
+@property (nonatomic, strong) NSMutableArray    *mutableObjects;
 
 - (void)notifyOfModelUpdateWithChange:(AKIArrayChangeModel *)changeModel;
 
@@ -36,17 +34,6 @@
     self = [super init];
     if (self) {
         self.mutableObjects = [NSMutableArray new];
-    }
-    
-    return self;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
-    if (self)
-    {
-        self.mutableObjects = [aDecoder decodeObjectForKey:@"kAKIObjects"];
-        self.count = [aDecoder decodeIntForKey:@"kAKIObjectsCount"];
     }
     
     return self;
@@ -135,14 +122,6 @@
         default:
             return nil;
     }
-}
-
-#pragma mark -
-#pragma mark Serializable
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.objects forKey:@"kAKIObjects"];
-    [aCoder encodeInt:(int)self.count forKey:@"kAKIObjectsCount"];
 }
 
 @end

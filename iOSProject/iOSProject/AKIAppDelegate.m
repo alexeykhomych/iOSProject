@@ -12,14 +12,17 @@
 
 #import "AKIUsersArrayModel.h"
 
+#import "UIWindow+AKIExtensions.h"
+
 @implementation AKIAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
+    UIWindow *window = [UIWindow fullScreen];
     self.window = window;
+    
     AKIUsersViewController *controller = [AKIUsersViewController new];
+    
     controller.model = [[AKIUsersArrayModel alloc] init];
     [controller.model fillModel];
     

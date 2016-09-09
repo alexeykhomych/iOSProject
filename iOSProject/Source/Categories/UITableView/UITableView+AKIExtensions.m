@@ -27,13 +27,13 @@
     return cell;
 }
 
-- (void)updateWithBlock:(AKIArrayChangeModel *)changeModel {
-    [self applyChangeBlock:^{
+- (void)updateWithChangeModel:(AKIArrayChangeModel *)changeModel {
+    [self updateWithChangeBlock:^{
         [changeModel applyToTableView:self];
     }];
 }
 
-- (void)applyChangeBlock:(AKIApplyChangeBlock)block {
+- (void)updateWithChangeBlock:(AKIupdateWithChangeBlock)block {
     if (!block) {
         return;
     }
