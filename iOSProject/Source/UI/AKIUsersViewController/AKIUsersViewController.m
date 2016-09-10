@@ -23,7 +23,7 @@
 
 #import "AKIGCD.h"
 
-AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
+AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 @implementation AKIUsersViewController
 

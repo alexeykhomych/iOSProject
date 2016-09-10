@@ -17,14 +17,14 @@
         \
         return nil; \
     }
-//AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
-#define AKIViewControllerBaseViewProperty(viewControllerClass, propertyName, baseViewClass) \
-    @interface viewControllerClass (__AKIPrivateBaseView_##baseViewClass) \
+
+#define AKIViewControllerBaseViewProperty(viewControllerClass, baseViewClass, propertyName) \
+    @interface viewControllerClass (__AKIPrivateBaseView_##propertyName) \
     AKIDefineBaseViewProperty(propertyName, baseViewClass) \
     \
     @end \
     \
-    @implementation viewControllerClass (__AKIPrivateBaseView_##baseViewClass) \
+    @implementation viewControllerClass (__AKIPrivateBaseView_##propertyName) \
     \
     @dynamic propertyName; \
     \
