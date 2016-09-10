@@ -34,7 +34,7 @@ AKIConstant(NSUInteger, UsersCount, 10);
 }
 
 - (void)fillModel {
-    [self performBlockWithNotification:^{
+    [self performBlockWithoutNotification:^{
         for (NSUInteger i = 0; i < kAKIUsersCount; i++) {
             [self addObject:[AKIUser new]];
         }

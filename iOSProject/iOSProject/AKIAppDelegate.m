@@ -18,7 +18,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    UIWindow *window = [UIWindow fullScreen];
+    UIWindow *window = [UIWindow window];
     self.window = window;
     
     AKIUsersViewController *controller = [AKIUsersViewController new];

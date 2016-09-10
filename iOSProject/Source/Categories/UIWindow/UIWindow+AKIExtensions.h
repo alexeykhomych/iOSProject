@@ -10,6 +10,6 @@
 
 @interface UIWindow (AKIExtensions)
 
-+ (UIWindow *)fullScreen;
++ (UIWindow *)window;
 
 @end

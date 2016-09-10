@@ -67,7 +67,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
         cell = [UINib objectWithClass:[AKIUserCell class]];
     }
     
-    AKIUser *user = [self.model objectAtIndexedSubscript:indexPath.row];
+    AKIUser *user = self.model[indexPath.row];
     cell.textLabel.text = user.fullName;
 
     return cell;
@@ -78,13 +78,11 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, userView, AKIUserView)
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AKIAsyncPerformInBackground(^{
-        [self.model performBlockWithNotification:^{
-            if (editingStyle == UITableViewCellEditingStyleDelete) {
-                [self.model removeObjectAtIndex:indexPath.row];
-            } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-                [self addModel:[AKIUser new]];
-            }
-        }];
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
+            [self.model removeObjectAtIndex:indexPath.row];
+        } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+            [self addModel:[AKIUser new]];
+        }
     });
 }
 

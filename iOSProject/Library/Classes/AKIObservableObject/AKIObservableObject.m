@@ -123,11 +123,17 @@
 }
 
 - (void)performBlock:(void (^)(void))block shouldNotify:(BOOL)notify {
-    BOOL currentNotifyObservers = self.notifyObservers;
-    
-    self.notifyObservers = notify;
-    AKIPerformBlock(block);
-    self.notifyObservers = currentNotifyObservers;
+    @synchronized (self) {
+        if (!block) {
+            return;
+        }
+        
+        BOOL currentNotifyObservers = self.notifyObservers;
+        
+        self.notifyObservers = notify;
+        AKIPerformBlock(block);
+        self.notifyObservers = currentNotifyObservers;
+    }
 }
 
 #pragma mark -
@@ -141,11 +147,11 @@
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 
 - (void)notifyObserverWithSelector:(SEL)selector object:(id)object {
-    if (!self.notifyObservers) {
-        return;
-    }
-    
     @synchronized (self) {
+        if (!self.notifyObservers) {
+            return;
+        }
+        
         NSHashTable *observers = self.observersTable;
     
         for (id observer in observers) {

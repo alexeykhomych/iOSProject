@@ -33,7 +33,7 @@
     }];
 }
 
-- (void)updateWithChangeBlock:(AKIupdateWithChangeBlock)block {
+- (void)updateWithChangeBlock:(AKITableViewUpdateBlock)block {
     if (!block) {
         return;
     }
