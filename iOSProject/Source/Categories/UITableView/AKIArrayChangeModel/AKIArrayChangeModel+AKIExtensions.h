@@ -13,21 +13,15 @@
 
 #import "AKIArrayChangeModelMove.h"
 
-@interface AKIArrayChangeModel (AKIExtensions)
+#import "AKIMacro.h"
 
-- (void)applyToTableView:(UITableView *)tableView;
+#define AKIInterfaceWithEmptyMethod(class, extensions) \
+    @interface class (extensions) \
+        - (void)applyToTableView:(id)tableView;\
+    @end
 
-@end
+AKIInterfaceWithEmptyMethod (AKIArrayChangeModel, UITableView)
 
-@interface AKIArrayChangeModelInsert (AKIExtensions)
-
-@end
-
-@interface AKIArrayChangeModelDelete (AKIExtensions)
-
-@end
-
-@interface AKIArrayChangeModelMove (AKIExtensions)
-
-@end
-
+AKIEmptyInterfaceWithExtensions (AKIArrayChangeModelInsert, UITableView)
+AKIEmptyInterfaceWithExtensions (AKIArrayChangeModelDelete, UITableView)
+AKIEmptyInterfaceWithExtensions (AKIArrayChangeModelMove, UITableView)

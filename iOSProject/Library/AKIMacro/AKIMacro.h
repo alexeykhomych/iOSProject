@@ -64,3 +64,7 @@
 
 #define AKIPerformBlock(block, ...) \
     AKIPerformBlockWithParametr(block, __VA_ARGS__);
+
+#define AKIEmptyInterfaceWithExtensions(class, extensions) \
+    @interface class (extensions) \
+    @end
