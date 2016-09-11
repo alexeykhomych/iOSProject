@@ -66,6 +66,12 @@
     }
 }
 
+- (void)addObjects:(NSArray *)objects {
+    for (id object in objects) {
+        [self addObject:object];
+    }
+}
+
 - (void)removeObject:(id)object {
     @synchronized (self) {
         if (object) {
@@ -73,6 +79,10 @@
             [self removeObjectAtIndex:[self.mutableObjects indexOfObject:object]];
         }
     }
+}
+
+- (void)removeAllObjects {
+    [self.mutableObjects removeAllObjects];
 }
 
 - (id)objectAtIndexedSubscript:(NSUInteger)index {
