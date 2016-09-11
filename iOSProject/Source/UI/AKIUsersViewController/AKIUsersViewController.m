@@ -12,6 +12,8 @@
 
 #import "UITableView+AKIExtensions.h"
 
+#import "NSArray+AKIExtensions.h"
+
 #import "AKIUser.h"
 #import "AKIUserCell.h"
 #import "AKIUserView.h"
@@ -23,9 +25,18 @@
 
 #import "AKIGCD.h"
 
+#import "AKIFilteredUsersArrayModel.h"
+
 AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
+@interface AKIUsersViewController ()
+@property (nonatomic, strong) AKIFilteredUsersArrayModel *filteredModel;
+
+@end
+
 @implementation AKIUsersViewController
+
+@synthesize model = _model;
 
 #pragma mark -
 #pragma mark Accessors
@@ -44,9 +55,10 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     }
 }
 
-//- (AKIUsersArrayModel *)model {
-//    return self.userView.editingSearchBar && self.filteredModel ? self.filteredModel : self.model;
-//}
+- (AKIUsersArrayModel *)model {
+//    return _model && !self.filteredModel ? _model : self.filteredModel;
+    return _model;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -56,7 +68,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.model.count;
+    return self.model && self.filteredModel ? self.filteredModel.count : self.model.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -67,9 +79,8 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
         cell = [UINib objectWithClass:[AKIUserCell class]];
     }
     
-    AKIUser *user = self.model[indexPath.row];
-    cell.textLabel.text = user.fullName;
-
+    cell.user = self.model[indexPath.row];
+    
     return cell;
 }
 
@@ -152,12 +163,10 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     AKIPrintMethod
-    
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     AKIPrintMethod
-    
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -166,8 +175,10 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 }
 
 - (void)filterContentForSearchText:(NSString*)searchText {
-    
-//    [self.userView.tableView reloadData];
+//    [self.filteredModel addObjects:[(AKIFilteredUsersArrayModel *)self.model filteredModelUsingString:searchText]];
+    self.filteredModel = [[AKIFilteredUsersArrayModel alloc] init];
+    [self.filteredModel filteredModel:self.model usingString:searchText];
+    [self.userView.tableView reloadData];
     AKIPrintMethod
 }
 
