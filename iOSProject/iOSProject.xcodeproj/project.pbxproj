@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841A43961D849BEF00297BF5 /* NSBundle+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A43951D849BEF00297BF5 /* NSBundle+AKIExtensions.m */; };
+		841A439A1D85E74700297BF5 /* AKIFilteredUsersArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A43991D85E74700297BF5 /* AKIFilteredUsersArrayModel.m */; };
 		843038B81D5921D000083ADE /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 843038B71D5921D000083ADE /* image.jpg */; };
 		843038C31D5C8D4100083ADE /* AKIUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 843038C21D5C8D4100083ADE /* AKIUser.m */; };
 		843038C81D5C970100083ADE /* AKIMacro.m in Sources */ = {isa = PBXBuildFile; fileRef = 843038C61D5C970100083ADE /* AKIMacro.m */; };
@@ -52,6 +54,10 @@
 		11302A621AB4E5C9756705C0 /* Pods-iOSProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSProject/Pods-iOSProject.debug.xcconfig"; sourceTree = "<group>"; };
 		664109B08106708294D9A04F /* Pods-iOSProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSProjectTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSProjectTests/Pods-iOSProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		6E034D21D28E3456E96FEDFC /* Pods-iOSProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSProject/Pods-iOSProject.release.xcconfig"; sourceTree = "<group>"; };
+		841A43941D849BEF00297BF5 /* NSBundle+AKIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+AKIExtensions.h"; sourceTree = "<group>"; };
+		841A43951D849BEF00297BF5 /* NSBundle+AKIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+AKIExtensions.m"; sourceTree = "<group>"; };
+		841A43981D85E74700297BF5 /* AKIFilteredUsersArrayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFilteredUsersArrayModel.h; sourceTree = "<group>"; };
+		841A43991D85E74700297BF5 /* AKIFilteredUsersArrayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFilteredUsersArrayModel.m; sourceTree = "<group>"; };
 		843038B71D5921D000083ADE /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 		843038C11D5C8D4100083ADE /* AKIUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIUser.h; sourceTree = "<group>"; };
 		843038C21D5C8D4100083ADE /* AKIUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIUser.m; sourceTree = "<group>"; };
@@ -140,6 +146,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		841A43931D849BCE00297BF5 /* NSBundle */ = {
+			isa = PBXGroup;
+			children = (
+				841A43941D849BEF00297BF5 /* NSBundle+AKIExtensions.h */,
+				841A43951D849BEF00297BF5 /* NSBundle+AKIExtensions.m */,
+			);
+			path = NSBundle;
+			sourceTree = "<group>";
+		};
+		841A43971D85E71500297BF5 /* AKIFilteredUsersArrayModel */ = {
+			isa = PBXGroup;
+			children = (
+				841A43981D85E74700297BF5 /* AKIFilteredUsersArrayModel.h */,
+				841A43991D85E74700297BF5 /* AKIFilteredUsersArrayModel.m */,
+			);
+			path = AKIFilteredUsersArrayModel;
+			sourceTree = "<group>";
+		};
 		843038771D50EE2100083ADE /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +270,7 @@
 		843039231D6C7DD500083ADE /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				841A43931D849BCE00297BF5 /* NSBundle */,
 				843039CE1D8306AD00083ADE /* UIWindow */,
 				8430395E1D78882400083ADE /* UIViewController */,
 				8430395A1D75E42100083ADE /* NSMutableArray */,
@@ -374,6 +399,7 @@
 		843039621D79B0FD00083ADE /* AKIUsersArrayModel */ = {
 			isa = PBXGroup;
 			children = (
+				841A43971D85E71500297BF5 /* AKIFilteredUsersArrayModel */,
 				843039631D79B13200083ADE /* AKIUsersArrayModel.h */,
 				843039641D79B13200083ADE /* AKIUsersArrayModel.m */,
 			);
@@ -726,6 +752,7 @@
 			files = (
 				843039D11D8306D500083ADE /* UIWindow+AKIExtensions.m in Sources */,
 				843039C91D82E69300083ADE /* AKIArrayChangeModelDelete.m in Sources */,
+				841A43961D849BEF00297BF5 /* NSBundle+AKIExtensions.m in Sources */,
 				8430395D1D75E44F00083ADE /* NSMutableArray+AKIExtension.m in Sources */,
 				8430394D1D6F1D6C00083ADE /* AKIUsersViewController.m in Sources */,
 				843039081D65CC6800083ADE /* AKITableViewCell.m in Sources */,
@@ -734,6 +761,7 @@
 				843039331D6C7DD500083ADE /* UITableView+AKIExtensions.m in Sources */,
 				843039311D6C7DD500083ADE /* NSString+AKIExtensions.m in Sources */,
 				843039CC1D82E69300083ADE /* AKIArrayChangeModelMove.m in Sources */,
+				841A439A1D85E74700297BF5 /* AKIFilteredUsersArrayModel.m in Sources */,
 				843039511D719F6700083ADE /* AKIObservableObject.m in Sources */,
 				848EE6FD1D48F7FB00B7F780 /* AKIAppDelegate.m in Sources */,
 				843039491D6F0DDC00083ADE /* AKIUserView.m in Sources */,
