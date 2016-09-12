@@ -12,8 +12,6 @@
 
 #import "UITableView+AKIExtensions.h"
 
-#import "NSArray+AKIExtensions.h"
-
 #import "AKIUser.h"
 #import "AKIUserCell.h"
 #import "AKIUserView.h"
@@ -56,8 +54,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 }
 
 - (AKIUsersArrayModel *)model {
-//    return _model && !self.filteredModel ? _model : self.filteredModel;
-    return _model;
+    return self.filteredModel.count ? self.filteredModel : _model;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,7 +65,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.model && self.filteredModel ? self.filteredModel.count : self.model.count;
+    return self.filteredModel.count ? self.filteredModel.count : self.model.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -175,11 +172,13 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 }
 
 - (void)filterContentForSearchText:(NSString*)searchText {
-//    [self.filteredModel addObjects:[(AKIFilteredUsersArrayModel *)self.model filteredModelUsingString:searchText]];
-    self.filteredModel = [[AKIFilteredUsersArrayModel alloc] init];
-    [self.filteredModel filteredModel:self.model usingString:searchText];
-    [self.userView.tableView reloadData];
     AKIPrintMethod
+    
+    self.filteredModel = [[AKIFilteredUsersArrayModel alloc] init];
+    
+    [self.filteredModel filteredModel:self.model usingString:searchText];
+    
+    [self.userView.tableView reloadData];
 }
 
 @end
