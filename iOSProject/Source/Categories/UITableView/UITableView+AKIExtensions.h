@@ -15,6 +15,7 @@ typedef void (^AKITableViewUpdateBlock) (void);
 @interface UITableView (AKIExtensions)
 
 - (id)cellWithClass:(Class)class;
+- (id)cellWithClass:(Class)class bundle:(NSBundle *)bundle;
 
 - (void)updateWithChangeModel:(AKIArrayChangeModel *)changeModel;
 - (void)updateWithChangeBlock:(AKITableViewUpdateBlock)block;

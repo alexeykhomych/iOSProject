@@ -14,6 +14,8 @@
 
 #import "UIWindow+AKIExtensions.h"
 
+#import "UIViewController+AKIExtensions.h"
+
 @implementation AKIAppDelegate
 
 
@@ -21,7 +23,7 @@
     UIWindow *window = [UIWindow window];
     self.window = window;
     
-    AKIUsersViewController *controller = [AKIUsersViewController new];
+    AKIUsersViewController *controller = [AKIUsersViewController viewController];
     
     controller.model = [[AKIUsersArrayModel alloc] init];
     [controller.model fillModel];

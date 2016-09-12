@@ -18,10 +18,17 @@
 
 @implementation UITableView (AKIExtensions)
 
-- (id)cellWithClass:(Class)class {
-    id cell = [self dequeueReusableCellWithIdentifier:NSStringFromClass(class)];
+- (id)cellWithClass:(Class)cls {
+    return [self cellWithClass:cls bundle:nil];
+}
+
+- (id)cellWithClass:(Class)cls bundle:(NSBundle *)bundle {
+    id class = cls;
+    UITableViewCell *cell = [self dequeueReusableCellWithIdentifier:NSStringFromClass(class)];
+    
     if (!cell) {
-        cell = [UINib objectWithClass:class];
+        UINib *nib = [UINib nibWithClass:class bundle:bundle];
+        cell = [nib objectWithClass:class];
     }
     
     return cell;

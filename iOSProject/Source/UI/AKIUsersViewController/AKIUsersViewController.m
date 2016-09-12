@@ -69,12 +69,9 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellClass = NSStringFromClass([AKIUserCell class]);
+    Class userCellClass = [AKIUserCell class];
     
-    AKIUserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellClass];
-    if (!cell) {
-        cell = [UINib objectWithClass:[AKIUserCell class]];
-    }
+    AKIUserCell *cell = [tableView cellWithClass:userCellClass];
     
     cell.user = self.model[indexPath.row];
     
@@ -86,11 +83,11 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AKIAsyncPerformInBackground(^{
-        if (editingStyle == UITableViewCellEditingStyleDelete) {
-            [self.model removeObjectAtIndex:indexPath.row];
-        } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-            [self addModel:[AKIUser new]];
-        }
+        [self.model performBlockWithNotification:^{
+            if (editingStyle == UITableViewCellEditingStyleDelete) {
+                [self.model removeObjectAtIndex:indexPath.row];
+            }
+        }];
     });
 }
 
@@ -109,7 +106,9 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 #pragma mark Interface Handling
 
 - (IBAction)onAddButton:(id)sender {
-    [self addModel:[AKIUser new]];
+    [self.model performBlockWithNotification:^{
+        [self addModel:[AKIUser new]];
+    }];
 }
 
 - (IBAction)onEditButton:(id)sender {
