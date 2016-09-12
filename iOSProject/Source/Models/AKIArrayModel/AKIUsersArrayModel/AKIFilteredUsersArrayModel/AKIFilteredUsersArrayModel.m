@@ -10,17 +10,17 @@
 
 #import "AKIUser.h"
 
+#import "NSArray+AKIExtensions.h"
+
 @implementation AKIFilteredUsersArrayModel
 
 #pragma mark -
 #pragma mark Public
 
 - (void)filteredModel:(AKIUsersArrayModel *)model usingString:(NSString *)searchText {
-    for (AKIUser *object in model.objects) {
-        if ([object.fullName containsString:searchText]) {
-            [self addObject:object];
-        }
-    }
+    [self addObjects:[model.objects filteredArrayUsingBlock:^BOOL(AKIUser *evaluatedObject, NSDictionary * bindings) {
+        return [evaluatedObject.fullName containsString:searchText];
+    }]];
 }
 
 @end

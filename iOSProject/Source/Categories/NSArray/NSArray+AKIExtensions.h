@@ -13,4 +13,6 @@
 - (id)randomObject;
 - (id)objectWithClass:(Class)class;
 
+- (NSArray *)filteredArrayUsingBlock:(id)block;
+
 @end

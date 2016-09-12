@@ -8,6 +8,8 @@
 
 #import "NSArray+AKIExtensions.h"
 
+#import "AKIUser.h"
+
 @implementation NSArray (AKIExtensions)
 
 #pragma mark -
@@ -25,6 +27,16 @@
     }
     
     return nil;
+}
+
+- (NSArray *)filteredArrayUsingBlock:(id)block {
+    if (!block) {
+        return nil;
+    }
+    
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:block];
+    
+    return [self filteredArrayUsingPredicate:predicate];
 }
 
 @end
