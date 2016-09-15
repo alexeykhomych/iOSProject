@@ -8,33 +8,32 @@
 
 #import "AKIArrayChangeModel+AKIExtensions.h"
 
-#define AKIImplementationWithEmptyMethod(class, extensions) \
-    @implementation class (extensions) \
-        - (void)applyToTableView:(id)tableView{}\
-    @end
-
-#define AKIImplementationClassWithBlock(class, extensions, block) \
-    @implementation class (extensions) \
+#define AKIImplementationClassWithBlock(class, block) \
+    @implementation class (UITableView) \
         - (void)applyToTableView:(UITableView *)tableView { \
             [tableView updateWithChangeBlock: \
                 block\
             ]; \
-        }\
+    }\
     @end
 
-AKIImplementationWithEmptyMethod(AKIArrayChangeModel, UITableView)
+#define AKIInterfaceWithBlock(class, block) \
+    @interface class (UITableView) \
+        - (void)applyToTableView:(UITableView *)tableView;\
+    @end \
+     \
+    AKIImplementationClassWithBlock(class, block)
 
-AKIImplementationClassWithBlock(AKIArrayChangeModelDelete, UITableView, ^{
+AKIInterfaceWithBlock(AKIArrayChangeModelDelete, ^{
     [tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.toIndex inSection:0]]
                      withRowAnimation:UITableViewRowAnimationAutomatic];
 })
 
-AKIImplementationClassWithBlock(AKIArrayChangeModelInsert, UITableView, ^{
+AKIInterfaceWithBlock(AKIArrayChangeModelInsert, ^{
     [tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.toIndex inSection:0]]
-                             withRowAnimation:UITableViewRowAnimationAutomatic];
+                     withRowAnimation:UITableViewRowAnimationAutomatic];
 })
-
-AKIImplementationClassWithBlock(AKIArrayChangeModelMove, UITableView, ^{
+AKIInterfaceWithBlock(AKIArrayChangeModelMove, ^{
     [tableView moveRowAtIndexPath:[NSIndexPath indexPathForItem:self.fromIndex inSection:0]
                       toIndexPath:[NSIndexPath indexPathForItem:self.toIndex inSection:0]];
 })

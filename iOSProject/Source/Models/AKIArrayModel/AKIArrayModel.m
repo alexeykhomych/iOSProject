@@ -82,7 +82,9 @@
 }
 
 - (void)removeAllObjects {
-    [self.mutableObjects removeAllObjects];
+    @synchronized (self) {
+        [self.mutableObjects removeAllObjects];
+    }
 }
 
 - (id)objectAtIndexedSubscript:(NSUInteger)index {
@@ -132,6 +134,13 @@
         default:
             return nil;
     }
+}
+
+#pragma mark -
+#pragma mark NSCopying
+
+- (id)copyWithZone:(NSZone *)zone {
+    return self.mutableObjects;
 }
 
 @end

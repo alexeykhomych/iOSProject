@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, AKIArrayModelState) {
 
 @end
 
-@interface AKIArrayModel : AKIObservableObject
+@interface AKIArrayModel : AKIObservableObject <NSCopying>
 @property (nonatomic, readonly) NSArray     *objects;
 @property (nonatomic, readonly) NSUInteger  count;
 

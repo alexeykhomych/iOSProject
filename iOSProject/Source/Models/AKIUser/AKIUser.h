@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AKIUser : NSObject
+@interface AKIUser : NSObject <NSCopying, NSCoding>
 @property (nonatomic, copy, readonly)     NSString    *fullName;
 @property (nonatomic, readonly)           UIImage     *image;
 

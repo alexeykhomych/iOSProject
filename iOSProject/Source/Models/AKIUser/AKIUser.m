@@ -41,4 +41,28 @@
     return [UIImage imageWithContentsOfFile:path];
 }
 
+#pragma mark -
+#pragma mark NSCopying
+
+#define kAKIFullNameKey @"kAKIFullName"
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    
+    self.fullName = [aDecoder decodeObjectForKey:kAKIFullNameKey];
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.fullName forKey:kAKIFullNameKey];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    AKIUser *user = [AKIUser new];
+    user.fullName = self.fullName;
+    
+    return user;
+}
+
 @end

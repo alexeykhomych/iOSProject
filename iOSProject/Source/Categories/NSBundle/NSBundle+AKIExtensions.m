@@ -21,10 +21,9 @@
 }
 
 + (id)objectWithClass:(id)class owner:(id)owner options:(NSDictionary *)options {
-    return [[[self mainBundle] loadNibNamed:NSStringFromClass([class class])
-                                      owner:owner
-                                    options:options]
-                            objectWithClass:class];
+    NSArray *objects = [[self mainBundle] loadNibNamed:NSStringFromClass([class class]) owner:owner options:options];
+    
+    return [objects objectWithClass:class];
 }
 
 @end

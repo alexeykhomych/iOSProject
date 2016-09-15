@@ -23,12 +23,16 @@
 
 #import "AKIGCD.h"
 
-#import "AKIFilteredUsersArrayModel.h"
+//#import "AKIFilteredUsersArrayModel.h"
+
+#import "AKIFilteredArrayModel.h"
 
 AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 @interface AKIUsersViewController ()
-@property (nonatomic, strong) AKIFilteredUsersArrayModel *filteredModel;
+@property (nonatomic, strong) AKIFilteredArrayModel *filteredModel;
+
+
 
 @end
 
@@ -43,7 +47,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     [super viewDidLoad];
 }
 
-- (void)setModel:(AKIUsersArrayModel *)model {
+- (void)setModel:(id)model {
     if (_model != model) {
         [_model removeObserver:self];
         
@@ -53,8 +57,8 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     }
 }
 
-- (AKIUsersArrayModel *)model {
-    return self.filteredModel.count ? self.filteredModel : _model;
+- (AKIArrayModel *)model {
+    return self.filteredModel.containerModel ? self.filteredModel : _model;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,14 +69,11 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.filteredModel.count ? self.filteredModel.count : self.model.count;
+    return self.filteredModel ? self.filteredModel.count : self.model.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    Class userCellClass = [AKIUserCell class];
-    
-    AKIUserCell *cell = [tableView cellWithClass:userCellClass];
-    
+    AKIUserCell *cell = [tableView cellWithClass:[AKIUserCell class]];
     cell.user = self.model[indexPath.row];
     
     return cell;
@@ -82,13 +83,11 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AKIAsyncPerformInBackground(^{
-        [self.model performBlockWithNotification:^{
-            if (editingStyle == UITableViewCellEditingStyleDelete) {
-                [self.model removeObjectAtIndex:indexPath.row];
-            }
-        }];
-    });
+    [self.model performBlockWithNotification:^{
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
+            [self.model removeObjectAtIndex:indexPath.row];
+        }
+    }];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -163,6 +162,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     AKIPrintMethod
+    
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -173,9 +173,12 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 - (void)filterContentForSearchText:(NSString*)searchText {
     AKIPrintMethod
     
-    self.filteredModel = [[AKIFilteredUsersArrayModel alloc] init];
+    self.filteredModel = [[AKIFilteredArrayModel alloc] init];
+    [self.filteredModel addModelToFilter:self.model];
     
-    [self.filteredModel filteredModel:self.model usingString:searchText];
+    if (![self.filteredModel filterArrayModelUsingString:searchText]) {
+        self.filteredModel = nil;
+    }
     
     [self.userView.tableView reloadData];
 }

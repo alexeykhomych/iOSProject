@@ -13,6 +13,4 @@
 - (void)save;
 - (void)load;
 
-- (void)fillModel;
-
 @end
