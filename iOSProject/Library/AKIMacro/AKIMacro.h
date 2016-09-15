@@ -19,12 +19,12 @@
     }
 
 #define AKIViewControllerBaseViewProperty(viewControllerClass, baseViewClass, propertyName) \
-    @interface viewControllerClass (__AKIPrivateBaseView_##propertyName) \
+    @interface viewControllerClass (__AKIPrivateBaseView_##baseViewClass##_##propertyName) \
     AKIDefineBaseViewProperty(propertyName, baseViewClass) \
     \
     @end \
     \
-    @implementation viewControllerClass (__AKIPrivateBaseView_##propertyName) \
+    @implementation viewControllerClass (__AKIPrivateBaseView_##baseViewClass##_##propertyName) \
     \
     @dynamic propertyName; \
     \
