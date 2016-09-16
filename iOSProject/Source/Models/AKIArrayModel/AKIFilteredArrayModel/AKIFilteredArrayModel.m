@@ -28,7 +28,7 @@
     }
 }
 
-- (BOOL)filterArrayModelUsingString:(NSString *)searchText {
+- (BOOL)filterUsingString:(NSString *)searchText {
     BOOL result = NO;
 
     if (!searchText.length) {

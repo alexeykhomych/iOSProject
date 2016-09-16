@@ -19,7 +19,7 @@
 #import "AKIMacro.h"
 
 @interface AKIAppDelegate ()
-@property (nonatomic, strong) AKIUsersViewController *controller;
+@property (nonatomic, strong) AKIUsersArrayModel *model;
 
 @end
 
@@ -35,7 +35,7 @@
     
     window.rootViewController = controller;
     
-    self.controller = controller;
+    self.model = controller.model;
     
     [window makeKeyAndVisible];
     
@@ -48,8 +48,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     AKIPrintMethod
-    
-    [self.controller.model save];
+    [self.model save];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -58,29 +57,12 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     AKIPrintMethod
-    
-    [self.controller.model load];
+    [self.model load];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     AKIPrintMethod
-}
-
-#pragma mark -
-#pragma mark Application state
-
-- (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
-{
-    AKIPrintMethod
-    
-    return YES;
-}
-
-- (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
-{
-    AKIPrintMethod
-    
-    return YES;
+    [self.model save];
 }
 
 @end

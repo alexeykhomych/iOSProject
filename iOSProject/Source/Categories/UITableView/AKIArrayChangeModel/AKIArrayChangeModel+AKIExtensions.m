@@ -33,7 +33,16 @@ AKIInterfaceWithBlock(AKIArrayChangeModelInsert, ^{
     [tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.toIndex inSection:0]]
                      withRowAnimation:UITableViewRowAnimationAutomatic];
 })
+
 AKIInterfaceWithBlock(AKIArrayChangeModelMove, ^{
     [tableView moveRowAtIndexPath:[NSIndexPath indexPathForItem:self.fromIndex inSection:0]
                       toIndexPath:[NSIndexPath indexPathForItem:self.toIndex inSection:0]];
 })
+
+@implementation AKIArrayChangeModel (UITableView)
+
+- (void)applyToTableView:(UITableView *)tableView {
+    
+}
+
+@end

@@ -15,7 +15,7 @@
 
 #import "AKIMacro.h"
 
-@interface AKIArrayChangeModel ()
+@interface AKIArrayChangeModel (UITableView)
 
 - (void)applyToTableView:(UITableView *)tableView;
 

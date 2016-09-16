@@ -23,16 +23,13 @@
 
 #import "AKIGCD.h"
 
-//#import "AKIFilteredUsersArrayModel.h"
-
 #import "AKIFilteredArrayModel.h"
 
 AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 @interface AKIUsersViewController ()
 @property (nonatomic, strong) AKIFilteredArrayModel *filteredModel;
-
-
+@property (nonatomic, assign) BOOL                  enableFilteredModel;
 
 @end
 
@@ -54,11 +51,19 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
         _model = model;
         
         [_model addObserver:self];
+        
+        [self addModelToFilter];
     }
 }
 
+- (void)addModelToFilter {
+    self.filteredModel = [[AKIFilteredArrayModel alloc] init];
+    [self.filteredModel addModelToFilter:self.model];
+}
+
 - (AKIArrayModel *)model {
-    return self.filteredModel.containerModel ? self.filteredModel : _model;
+    return self.enableFilteredModel ? self.filteredModel : _model;
+//    return _model;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,7 +74,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.filteredModel ? self.filteredModel.count : self.model.count;
+    return self.enableFilteredModel ? self.filteredModel.count : self.model.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -83,11 +88,9 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.model performBlockWithNotification:^{
-        if (editingStyle == UITableViewCellEditingStyleDelete) {
-            [self.model removeObjectAtIndex:indexPath.row];
-        }
-    }];
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.model removeObjectAtIndex:indexPath.row];
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -167,17 +170,15 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     AKIPrintMethod
+    self.enableFilteredModel = YES;
     [self filterContentForSearchText:searchText];
 }
 
 - (void)filterContentForSearchText:(NSString*)searchText {
     AKIPrintMethod
     
-    self.filteredModel = [[AKIFilteredArrayModel alloc] init];
-    [self.filteredModel addModelToFilter:self.model];
-    
-    if (![self.filteredModel filterArrayModelUsingString:searchText]) {
-        self.filteredModel = nil;
+    if (![self.filteredModel filterUsingString:searchText]) {
+        self.enableFilteredModel = NO;
     }
     
     [self.userView.tableView reloadData];

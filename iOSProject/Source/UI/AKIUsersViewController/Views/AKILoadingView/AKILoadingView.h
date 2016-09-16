@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface AKILoadingView : UIView
+@property (nonatomic, strong)   IBOutlet UIActivityIndicatorView *activityView;
+
+@property (nonatomic, readonly) BOOL visible;
 
 @end

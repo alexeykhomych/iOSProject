@@ -39,6 +39,7 @@
 		843039CC1D82E69300083ADE /* AKIArrayChangeModelMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039C61D82E69200083ADE /* AKIArrayChangeModelMove.m */; };
 		843039CD1D82E69300083ADE /* AKIArrayChangeModelTwoIndexes.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039C81D82E69200083ADE /* AKIArrayChangeModelTwoIndexes.m */; };
 		843039D11D8306D500083ADE /* UIWindow+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039D01D8306D500083ADE /* UIWindow+AKIExtensions.m */; };
+		848A319E1D8C47C400622365 /* AKILoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848A319D1D8C47C400622365 /* AKILoadingView.xib */; };
 		848EE67E1D48CFE700B7F780 /* iOSProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */; };
 		848EE69A1D48D3EA00B7F780 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6901D48D3EA00B7F780 /* Assets.xcassets */; };
 		848EE69B1D48D3EA00B7F780 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6911D48D3EA00B7F780 /* LaunchScreen.storyboard */; };
@@ -117,6 +118,7 @@
 		843039C81D82E69200083ADE /* AKIArrayChangeModelTwoIndexes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelTwoIndexes.m; sourceTree = "<group>"; };
 		843039CF1D8306D500083ADE /* UIWindow+AKIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+AKIExtensions.h"; sourceTree = "<group>"; };
 		843039D01D8306D500083ADE /* UIWindow+AKIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+AKIExtensions.m"; sourceTree = "<group>"; };
+		848A319D1D8C47C400622365 /* AKILoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKILoadingView.xib; sourceTree = "<group>"; };
 		848EE65D1D48CEEE00B7F780 /* iOSProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67B1D48CFE700B7F780 /* iOSProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSProjectTests.m; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 			children = (
 				841A43A41D8AF38400297BF5 /* AKILoadingView.h */,
 				841A43A51D8AF38400297BF5 /* AKILoadingView.m */,
+				848A319D1D8C47C400622365 /* AKILoadingView.xib */,
 			);
 			path = AKILoadingView;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 		843039421D6F0DDC00083ADE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				848A319A1D8C471A00622365 /* AKIPreview */,
 				841A43A31D8AF35700297BF5 /* AKILoadingView */,
 				841A439F1D8AF22900297BF5 /* AKIImageView */,
 				843039431D6F0DDC00083ADE /* AKIUserCell */,
@@ -505,6 +509,13 @@
 				843039D01D8306D500083ADE /* UIWindow+AKIExtensions.m */,
 			);
 			path = UIWindow;
+			sourceTree = "<group>";
+		};
+		848A319A1D8C471A00622365 /* AKIPreview */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = AKIPreview;
 			sourceTree = "<group>";
 		};
 		848EE6541D48CEEE00B7F780 = {
@@ -673,6 +684,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				848EE69B1D48D3EA00B7F780 /* LaunchScreen.storyboard in Resources */,
+				848A319E1D8C47C400622365 /* AKILoadingView.xib in Resources */,
 				843039481D6F0DDC00083ADE /* AKIUsersViewController.xib in Resources */,
 				848EE7091D490B1A00B7F780 /* Main.storyboard in Resources */,
 				848EE69A1D48D3EA00B7F780 /* Assets.xcassets in Resources */,

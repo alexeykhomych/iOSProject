@@ -37,11 +37,13 @@ AKIConstant(NSUInteger, UsersCount, 10);
     self.documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     self.path = [self.documentsPath stringByAppendingPathComponent:@"UsersArrayModel.plist"];
     
-    if ([self.fileManager fileExistsAtPath:self.path]) {
+    if (![self.fileManager fileExistsAtPath:self.path]) {
         [self.fileManager createFileAtPath:self.path contents:nil attributes:nil];
+        [self fillModel];
+        [self save];
+    } else {
+        [self load];
     }
-    
-    [self fillModel];
     
     return self;
 }
@@ -51,15 +53,22 @@ AKIConstant(NSUInteger, UsersCount, 10);
 
 - (void)save {
     @synchronized (self) {
-        [NSKeyedArchiver archiveRootObject:self toFile:self.path] ? NSLog(@"Succesfull saved file") : NSLog(@"Failed save file");
+        [NSKeyedArchiver archiveRootObject:self.objects toFile:self.path] ? NSLog(@"Succesfull saved file") : NSLog(@"Failed save file");
     }
 }
 
 - (void)load {
     @synchronized (self) {
-        [self removeAllObjects];
+        self.state = AKIArrayModelWillLoad;
         
-        /*self = */ [NSKeyedUnarchiver unarchiveObjectWithFile:self.path];
+        [self performBlockWithoutNotification:^{
+            [self removeAllObjects];
+            [self addObjects:[NSKeyedUnarchiver unarchiveObjectWithFile:self.path]];
+        }];
+        
+        self.state = AKIArrayModelLoaded;
+        
+        [self notifyOfState:self.state withObject:self.objects];
     }
 }
 

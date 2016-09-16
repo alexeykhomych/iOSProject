@@ -13,7 +13,6 @@
 @interface AKIObservableObject()
 @property (nonatomic, strong) NSHashTable   *observersTable;
 
-@property (nonatomic, assign) BOOL          shouldNotify;
 @property (nonatomic, assign) BOOL          notifyObservers;
 
 - (void)performBlock:(void (^)(void))block shouldNotify:(BOOL)notify;
@@ -29,13 +28,10 @@
 #pragma mark -
 #pragma mark Initializations and Dealocations
 
-- (void)dealloc {
-    self.observersTable = nil;
-}
-
 - (instancetype)init {
     self = [super init];
     self.observersTable = [NSHashTable weakObjectsHashTable];
+    self.notifyObservers = YES;
     
     return self;
 }

@@ -131,16 +131,33 @@
         case AKIArrayModelFailedLoading:
             return @selector(arrayModelDidFailLoading:);
 
+        case AKIArrayModelDidLoad:
+            return @selector(arrayModelDidFailLoading:);
+            
+        case AKIArrayModelWillLoad:
+            return @selector(arrayModelDidFailLoading:);
+            
         default:
             return nil;
     }
 }
 
 #pragma mark -
-#pragma mark NSCopying
+#pragma mark NSCoding
 
-- (id)copyWithZone:(NSZone *)zone {
-    return self.mutableObjects;
+#define kAKIObjects @"objects"
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        self.mutableObjects = [aDecoder decodeObjectForKey:kAKIObjects];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.objects forKey:kAKIObjects];
 }
 
 @end

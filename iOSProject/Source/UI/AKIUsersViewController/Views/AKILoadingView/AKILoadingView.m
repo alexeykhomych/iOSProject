@@ -8,6 +8,13 @@
 
 #import "AKILoadingView.h"
 
+@interface AKILoadingView ()
+@property (nonatomic, assign) BOOL visible;
+
+@end
+
 @implementation AKILoadingView
+
+
 
 @end
