@@ -35,11 +35,13 @@
         return result;
     }
     
-    [self removeAllObjects];
-    
-    [self addObjects:[self.containerModel.objects filteredArrayUsingBlock:^BOOL(AKIUser *evaluatedObject, NSDictionary * bindings) {
-        return [evaluatedObject.fullName containsString:searchText];
-    }]];
+    [self performBlockWithoutNotification:^{
+        [self removeAllObjects];
+        
+        [self addObjects:[self.containerModel.objects filteredArrayUsingBlock:^BOOL(AKIUser *evaluatedObject, NSDictionary * bindings) {
+            return [evaluatedObject.fullName containsString:searchText];
+        }]];
+    }];
     
     return !result;
 }

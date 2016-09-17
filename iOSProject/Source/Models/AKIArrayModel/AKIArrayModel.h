@@ -14,9 +14,7 @@
 @class AKIArrayChangeModel;
 
 typedef NS_ENUM(NSUInteger, AKIArrayModelState) {
-    AKIArrayModelLoaded,
     AKIArrayModelUpdated,
-    AKIArrayModelLoading,
     AKIArrayModelDidLoad,
     AKIArrayModelWillLoad,
     AKIArrayModelFailedLoading
@@ -36,7 +34,7 @@ typedef NS_ENUM(NSUInteger, AKIArrayModelState) {
 
 @end
 
-@interface AKIArrayModel : AKIObservableObject <NSCoding>
+@interface AKIArrayModel : AKIObservableObject
 @property (nonatomic, readonly) NSArray     *objects;
 @property (nonatomic, readonly) NSUInteger  count;
 

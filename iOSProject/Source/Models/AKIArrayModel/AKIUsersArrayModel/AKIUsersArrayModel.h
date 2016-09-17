@@ -9,6 +9,9 @@
 #import "AKIArrayModel.h"
 
 @interface AKIUsersArrayModel : AKIArrayModel
+@property (nonatomic, readonly)             NSFileManager   *fileManager;
+@property (nonatomic, readonly, copy)       NSString        *documentsPath;
+@property (nonatomic, readonly, copy)       NSString        *path;
 
 - (void)save;
 - (void)load;

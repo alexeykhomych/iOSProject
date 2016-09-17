@@ -165,7 +165,6 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     AKIPrintMethod
-    
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {

@@ -17,9 +17,6 @@
 AKIConstant(NSUInteger, UsersCount, 10);
 
 @interface AKIUsersArrayModel ()
-@property (nonatomic, strong)   NSFileManager   *fileManager;
-@property (nonatomic, copy)     NSString        *documentsPath;
-@property (nonatomic, copy)     NSString        *path;
 
 - (void)fillModel;
 
@@ -32,20 +29,25 @@ AKIConstant(NSUInteger, UsersCount, 10);
 
 - (instancetype)init {
     self = [super init];
-    
-    self.fileManager = [NSFileManager defaultManager];
-    self.documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    self.path = [self.documentsPath stringByAppendingPathComponent:@"UsersArrayModel.plist"];
-    
-    if (![self.fileManager fileExistsAtPath:self.path]) {
-        [self.fileManager createFileAtPath:self.path contents:nil attributes:nil];
-        [self fillModel];
-        [self save];
-    } else {
-        [self load];
-    }
-    
+
     return self;
+}
+
+#pragma mark -
+#pragma mark Accessors
+
+- (NSFileManager *)fileManager {
+    return [NSFileManager defaultManager];
+}
+
+- (NSString *)documentsPath {
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+}
+
+#define kAKIFileName @"UsersArrayModel.plist"
+
+- (NSString *)path {
+    return [self.documentsPath stringByAppendingPathComponent:kAKIFileName];
 }
 
 #pragma mark -
@@ -59,16 +61,26 @@ AKIConstant(NSUInteger, UsersCount, 10);
 
 - (void)load {
     @synchronized (self) {
-        self.state = AKIArrayModelWillLoad;
-        
-        [self performBlockWithoutNotification:^{
-            [self removeAllObjects];
-            [self addObjects:[NSKeyedUnarchiver unarchiveObjectWithFile:self.path]];
-        }];
-        
-        self.state = AKIArrayModelLoaded;
-        
-        [self notifyOfState:self.state withObject:self.objects];
+        AKIAsyncPerformInBackground(^{            
+            if (![self.fileManager fileExistsAtPath:self.path]) {
+                [self.fileManager createFileAtPath:self.path contents:nil attributes:nil];
+                [self fillModel];
+                [self save];
+            } else {
+                [self load];
+            }
+            
+            self.state = AKIArrayModelWillLoad;
+            
+            [self performBlockWithoutNotification:^{
+                [self removeAllObjects];
+                [self addObjects:[NSKeyedUnarchiver unarchiveObjectWithFile:self.path]];
+            }];
+            
+            self.state = AKIArrayModelDidLoad;
+            
+            [self notifyOfState:self.state withObject:self.objects];
+        });
     }
 }
 

@@ -21,7 +21,7 @@
 }
 
 + (id)objectWithClass:(id)class owner:(id)owner options:(NSDictionary *)options {
-    return [[self alloc] objectWithClass:class owner:owner options:options];
+    return [[self mainBundle] objectWithClass:class owner:owner options:options];
 }
 
 - (id)objectWithClass:(Class)class {
