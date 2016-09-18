@@ -33,6 +33,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 @interface AKIUsersViewController ()
 @property (nonatomic, strong) AKIFilteredArrayModel *filteredModel;
+@property (nonatomic, strong) AKILoadingView        *loadingView;
 
 @end
 
@@ -48,6 +49,8 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     
     AKILoadingView *loadingView = [NSBundle objectWithClass:[AKILoadingView class]];
     [self.view addSubview:loadingView];
+    
+    self.loadingView = loadingView;
 }
 
 - (void)setModel:(id)model {
@@ -69,7 +72,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 }
 
 - (AKIArrayModel *)model {
-    return self.filteredModel;
+    return _model;
 }
 
 - (void)filterContentForSearchText:(NSString*)searchText {
@@ -155,7 +158,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     AKIWeakify(self);
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
-        
+        [self.loadingView.activityView stopAnimating];
     });
 }
 

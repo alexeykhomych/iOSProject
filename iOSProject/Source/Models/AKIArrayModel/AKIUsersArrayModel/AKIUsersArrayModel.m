@@ -51,6 +51,10 @@ AKIConstant(NSUInteger, UsersCount, 10);
     return [self.documentsPath stringByAppendingPathComponent:kAKIFileName];
 }
 
+- (BOOL)cached {
+    return [self.fileManager fileExistsAtPath:self.path];
+}
+
 #pragma mark -
 #pragma mark Public
 
@@ -63,20 +67,17 @@ AKIConstant(NSUInteger, UsersCount, 10);
 - (void)load {
     @synchronized (self) {
         AKIAsyncPerformInBackground(^{            
-            if (![self.fileManager fileExistsAtPath:self.path]) {
-                [self.fileManager createFileAtPath:self.path contents:nil attributes:nil];
-                [self fillModel];
-                [self save];
-            } else {
-                [self load];
-            }
-            
             self.state = AKIArrayModelWillLoad;
             
-            [self performBlockWithoutNotification:^{
-                [self removeAllObjects];
-                [self addObjects:[NSKeyedUnarchiver unarchiveObjectWithFile:self.path]];
-            }];
+            if (!self.cached) {
+                [self.fileManager createFileAtPath:self.path contents:nil attributes:nil];
+                [self fillModel];
+            } else {
+                [self performBlockWithoutNotification:^{
+                    [self removeAllObjects];
+                    [self addObjects:[NSKeyedUnarchiver unarchiveObjectWithFile:self.path]];
+                }];
+            }
             
             self.state = AKIArrayModelDidLoad;
             

@@ -12,6 +12,7 @@
 @property (nonatomic, readonly)             NSFileManager   *fileManager;
 @property (nonatomic, readonly, copy)       NSString        *documentsPath;
 @property (nonatomic, readonly, copy)       NSString        *path;
+@property (nonatomic, readonly)             BOOL            cached;
 
 - (void)save;
 - (void)load;
