@@ -12,6 +12,6 @@
 @property (nonatomic, readonly) AKIArrayModel *containerModel;
 - (void)addModelToFilter:(AKIArrayModel *)model;
 
-- (BOOL)filterUsingString:(NSString *)searchText;
+- (void)filterUsingString:(NSString *)searchText;
 
 @end

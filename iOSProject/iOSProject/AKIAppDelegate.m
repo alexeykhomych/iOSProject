@@ -48,7 +48,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     AKIPrintMethod
-    [self.model save];
+//    [self.model save];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -57,12 +57,12 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     AKIPrintMethod
-    [self.model load];
+//    [self.model load];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     AKIPrintMethod
-    [self.model save];
+//    [self.model save];
 }
 
 @end

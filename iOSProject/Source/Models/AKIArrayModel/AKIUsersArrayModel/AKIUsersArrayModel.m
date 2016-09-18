@@ -29,7 +29,8 @@ AKIConstant(NSUInteger, UsersCount, 10);
 
 - (instancetype)init {
     self = [super init];
-
+    [self fillModel];
+    
     return self;
 }
 

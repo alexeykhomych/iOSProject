@@ -29,7 +29,6 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 @interface AKIUsersViewController ()
 @property (nonatomic, strong) AKIFilteredArrayModel *filteredModel;
-@property (nonatomic, assign) BOOL                  enableFilteredModel;
 
 @end
 
@@ -52,18 +51,25 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
         
         [_model addObserver:self];
         
-        [self addModelToFilter];
+        [self addModelToFilter:model];
     }
 }
 
-- (void)addModelToFilter {
+- (void)addModelToFilter:(id)model {
     self.filteredModel = [[AKIFilteredArrayModel alloc] init];
-    [self.filteredModel addModelToFilter:self.model];
+    [self.filteredModel addModelToFilter:model];
+    [self.filteredModel addObserver:self];
 }
 
 - (AKIArrayModel *)model {
-    return self.enableFilteredModel ? self.filteredModel : _model;
-//    return _model;
+    return self.filteredModel;
+}
+
+- (void)filterContentForSearchText:(NSString*)searchText {
+    AKIPrintMethod
+    [self.filteredModel filterUsingString:searchText];
+    
+    [self.userView.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -108,9 +114,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 #pragma mark Interface Handling
 
 - (IBAction)onAddButton:(id)sender {
-    [self.model performBlockWithNotification:^{
-        [self addModel:[AKIUser new]];
-    }];
+    [self addModel:[AKIUser new]];	
 }
 
 - (IBAction)onEditButton:(id)sender {
@@ -169,18 +173,9 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     AKIPrintMethod
-    self.enableFilteredModel = YES;
     [self filterContentForSearchText:searchText];
 }
 
-- (void)filterContentForSearchText:(NSString*)searchText {
-    AKIPrintMethod
-    
-    if (![self.filteredModel filterUsingString:searchText]) {
-        self.enableFilteredModel = NO;
-    }
-    
-    [self.userView.tableView reloadData];
-}
+
 
 @end

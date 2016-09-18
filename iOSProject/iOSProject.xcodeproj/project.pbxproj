@@ -372,7 +372,6 @@
 		843039421D6F0DDC00083ADE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				848A319A1D8C471A00622365 /* AKIPreview */,
 				841A43A31D8AF35700297BF5 /* AKILoadingView */,
 				841A439F1D8AF22900297BF5 /* AKIImageView */,
 				843039431D6F0DDC00083ADE /* AKIUserCell */,
@@ -509,13 +508,6 @@
 				843039D01D8306D500083ADE /* UIWindow+AKIExtensions.m */,
 			);
 			path = UIWindow;
-			sourceTree = "<group>";
-		};
-		848A319A1D8C471A00622365 /* AKIPreview */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = AKIPreview;
 			sourceTree = "<group>";
 		};
 		848EE6541D48CEEE00B7F780 = {

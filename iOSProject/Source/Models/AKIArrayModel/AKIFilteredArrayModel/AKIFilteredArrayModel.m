@@ -25,25 +25,23 @@
 - (void)addModelToFilter:(AKIArrayModel *)model {
     if (_containerModel != model) {
         _containerModel = model;
+        
+        [self filterUsingString:@""];
     }
 }
 
-- (BOOL)filterUsingString:(NSString *)searchText {
-    BOOL result = NO;
-
-    if (!searchText.length) {
-        return result;
-    }
-    
+- (void)filterUsingString:(NSString *)searchText {
     [self performBlockWithoutNotification:^{
-        [self removeAllObjects];
+        [self.containerModel removeAllObjects];
         
-        [self addObjects:[self.containerModel.objects filteredArrayUsingBlock:^BOOL(AKIUser *evaluatedObject, NSDictionary * bindings) {
-            return [evaluatedObject.fullName containsString:searchText];
-        }]];
+        if (!searchText.length) {
+            [self.containerModel addObjects:self.objects];
+        } else {
+            [self addObjects:[self.containerModel.objects filteredArrayUsingBlock:^BOOL(AKIUser *evaluatedObject, NSDictionary * bindings) {
+                return [evaluatedObject.fullName containsString:searchText];
+            }]];
+        }
     }];
-    
-    return !result;
 }
 
 @end
