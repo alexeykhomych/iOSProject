@@ -15,6 +15,15 @@
 
 @implementation AKILoadingView
 
+#pragma mark -
+#pragma mark Initializatons and Deallocations
 
+- (instancetype)init {
+    return [super init];
+}
+
+- (BOOL)visible {
+    return self.activityView.isAnimating;
+}
 
 @end

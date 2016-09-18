@@ -25,6 +25,10 @@
 
 #import "AKIFilteredArrayModel.h"
 
+#import "AKILoadingView.h"
+
+#import "NSBundle+AKIExtensions.h"
+
 AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 @interface AKIUsersViewController ()
@@ -41,6 +45,9 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    AKILoadingView *loadingView = [NSBundle objectWithClass:[AKILoadingView class]];
+    [self.view addSubview:loadingView];
 }
 
 - (void)setModel:(id)model {
