@@ -8,40 +8,61 @@
 
 #import "AKIFilteredArrayModel.h"
 
-#import "AKIUser.h"
-
 #import "NSArray+AKIExtensions.h"
+
+#import "AKIUser.h"
 
 @interface AKIFilteredArrayModel ()
 @property (nonatomic, strong) AKIArrayModel *containerModel;
+@property (nonatomic, strong) NSPredicate   *predicate;
 
 @end
 
 @implementation AKIFilteredArrayModel
 
 #pragma mark -
-#pragma mark Public
+#pragma mark Accessors
+
+- (void)setPredicate:(NSPredicate *)predicate {
+    if (_predicate != predicate) {
+        _predicate = predicate;
+    }
+}
 
 - (void)addModelToFilter:(AKIArrayModel *)model {
     if (_containerModel != model) {
         _containerModel = model;
-        
-        [self filterUsingString:@""];
+        [self addObjects:model.objects];
     }
 }
 
-- (void)filterUsingString:(NSString *)searchText {
+#pragma mark -
+#pragma mark Public
+
+- (void)filterUsingPredicate {
     [self performBlockWithoutNotification:^{
+//        [self removeAllObjects];
+//    
+//        if (!self.predicate) {
+//            [self addObjects:self.containerModel.objects];
+//            
+//            return;
+//        }
+//        
+        //[self addObjects:[self.containerModel.objects filteredArrayUsingPredicate:self.predicate]];
+        
         [self.containerModel removeAllObjects];
         
-        if (!searchText.length) {
+        if (!self.predicate) {
             [self.containerModel addObjects:self.objects];
-        } else {
-            [self addObjects:[self.containerModel.objects filteredArrayUsingBlock:^BOOL(AKIUser *evaluatedObject, NSDictionary * bindings) {
-                return [evaluatedObject.fullName containsString:searchText];
-            }]];
+            
+            return;
         }
+        
+        [self.containerModel addObjects:[self.objects filteredArrayUsingPredicate:self.predicate]];
     }];
+    
+//    self.state = AKIArrayModelUpdated;
 }
 
 @end

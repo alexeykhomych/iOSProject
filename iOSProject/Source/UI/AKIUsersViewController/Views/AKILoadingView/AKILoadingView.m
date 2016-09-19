@@ -8,22 +8,24 @@
 
 #import "AKILoadingView.h"
 
-@interface AKILoadingView ()
-@property (nonatomic, assign) BOOL visible;
-
-@end
+#import "NSBundle+AKIExtensions.h"
 
 @implementation AKILoadingView
 
 #pragma mark -
-#pragma mark Initializatons and Deallocations
+#pragma mark Class methods
 
-- (instancetype)init {
-    return [super init];
++ (instancetype)attachView {
+    AKILoadingView *view = [NSBundle objectWithClass:[AKILoadingView class]];
+    
+    return view;
 }
 
-- (BOOL)visible {
-    return self.activityView.isAnimating;
+#pragma mark -
+#pragma mark Public
+
+- (void)setVisible:(BOOL)visible {
+    self.activityView.alpha = visible;
 }
 
 @end

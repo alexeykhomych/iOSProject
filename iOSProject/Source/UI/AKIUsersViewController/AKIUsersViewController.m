@@ -23,7 +23,7 @@
 
 #import "AKIGCD.h"
 
-#import "AKIFilteredArrayModel.h"
+#import "AKIFilteredUsersArrayModel.h"
 
 #import "AKILoadingView.h"
 
@@ -32,8 +32,8 @@
 AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 @interface AKIUsersViewController ()
-@property (nonatomic, strong) AKIFilteredArrayModel *filteredModel;
-@property (nonatomic, strong) AKILoadingView        *loadingView;
+@property (nonatomic, strong) AKIFilteredUsersArrayModel    *filteredModel;
+@property (nonatomic, strong) AKILoadingView                *loadingView;
 
 @end
 
@@ -61,14 +61,13 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
         
         [_model addObserver:self];
         
-        [self addModelToFilter:model];
+        self.filteredModel = [[AKIFilteredUsersArrayModel alloc] init];
     }
 }
 
 - (void)addModelToFilter:(id)model {
-    self.filteredModel = [[AKIFilteredArrayModel alloc] init];
-//    [self.filteredModel addModelToFilter:model];
-//    [self.filteredModel addObserver:self];
+    [self.filteredModel addModelToFilter:model];
+    [self.filteredModel addObserver:self];
 }
 
 - (AKIArrayModel *)model {
@@ -152,6 +151,8 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     });
 }
 
+#define AKILoadingViewAlpha 0.0
+
 - (void)arrayModelDidLoad:(AKIArrayModel *)arrayModel {
     AKIPrintMethod
     
@@ -159,7 +160,10 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
         [self.loadingView.activityView stopAnimating];
-        [self.loadingView setHidden:YES];
+//        [self.loadingView setHidden:YES];
+        [self.loadingView setAlpha:AKILoadingViewAlpha];
+        
+        [self addModelToFilter:self.model];
         
         // didUpdate?
         [self.userView.tableView reloadData];

@@ -13,6 +13,6 @@
 
 @property (nonatomic, readonly) BOOL visible;
 
-
++ (instancetype)attachView;
 
 @end

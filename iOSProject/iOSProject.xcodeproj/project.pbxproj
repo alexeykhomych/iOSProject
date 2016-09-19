@@ -40,6 +40,7 @@
 		843039CD1D82E69300083ADE /* AKIArrayChangeModelTwoIndexes.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039C81D82E69200083ADE /* AKIArrayChangeModelTwoIndexes.m */; };
 		843039D11D8306D500083ADE /* UIWindow+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039D01D8306D500083ADE /* UIWindow+AKIExtensions.m */; };
 		848A319E1D8C47C400622365 /* AKILoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848A319D1D8C47C400622365 /* AKILoadingView.xib */; };
+		848A31A21D90097E00622365 /* AKIFilteredUsersArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848A31A11D90097E00622365 /* AKIFilteredUsersArrayModel.m */; };
 		848EE67E1D48CFE700B7F780 /* iOSProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */; };
 		848EE69A1D48D3EA00B7F780 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6901D48D3EA00B7F780 /* Assets.xcassets */; };
 		848EE69B1D48D3EA00B7F780 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6911D48D3EA00B7F780 /* LaunchScreen.storyboard */; };
@@ -119,6 +120,8 @@
 		843039CF1D8306D500083ADE /* UIWindow+AKIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+AKIExtensions.h"; sourceTree = "<group>"; };
 		843039D01D8306D500083ADE /* UIWindow+AKIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+AKIExtensions.m"; sourceTree = "<group>"; };
 		848A319D1D8C47C400622365 /* AKILoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKILoadingView.xib; sourceTree = "<group>"; };
+		848A31A01D90097E00622365 /* AKIFilteredUsersArrayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFilteredUsersArrayModel.h; sourceTree = "<group>"; };
+		848A31A11D90097E00622365 /* AKIFilteredUsersArrayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFilteredUsersArrayModel.m; sourceTree = "<group>"; };
 		848EE65D1D48CEEE00B7F780 /* iOSProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67B1D48CFE700B7F780 /* iOSProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSProjectTests.m; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 		841A439B1D89ABD100297BF5 /* AKIFilteredArrayModel */ = {
 			isa = PBXGroup;
 			children = (
+				848A319F1D90091B00622365 /* AKIFilteredUsersArrayModel */,
 				841A439C1D89ABEB00297BF5 /* AKIFilteredArrayModel.h */,
 				841A439D1D89ABEB00297BF5 /* AKIFilteredArrayModel.m */,
 			);
@@ -510,6 +514,15 @@
 			path = UIWindow;
 			sourceTree = "<group>";
 		};
+		848A319F1D90091B00622365 /* AKIFilteredUsersArrayModel */ = {
+			isa = PBXGroup;
+			children = (
+				848A31A01D90097E00622365 /* AKIFilteredUsersArrayModel.h */,
+				848A31A11D90097E00622365 /* AKIFilteredUsersArrayModel.m */,
+			);
+			path = AKIFilteredUsersArrayModel;
+			sourceTree = "<group>";
+		};
 		848EE6541D48CEEE00B7F780 = {
 			isa = PBXGroup;
 			children = (
@@ -809,6 +822,7 @@
 				848EE6D01D48DD5300B7F780 /* main.m in Sources */,
 				843039CA1D82E69300083ADE /* AKIArrayChangeModelInsert.m in Sources */,
 				843039591D75C0B000083ADE /* AKIArrayChangeModel.m in Sources */,
+				848A31A21D90097E00622365 /* AKIFilteredUsersArrayModel.m in Sources */,
 				8430393B1D6CB16400083ADE /* AKIGCD.m in Sources */,
 				8430391F1D6A2EFD00083ADE /* AKIArrayModel.m in Sources */,
 			);

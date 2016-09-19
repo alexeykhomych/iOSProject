@@ -31,6 +31,8 @@ typedef NS_ENUM(NSUInteger, AKIImageState) {
 @end
 
 @interface AKIImageView : UIView
+@property (nonatomic, readonly) AKIImageState state;
 
+- (void)load;
 
 @end

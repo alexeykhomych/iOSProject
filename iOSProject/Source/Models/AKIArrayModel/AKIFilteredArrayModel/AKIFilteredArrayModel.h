@@ -12,6 +12,9 @@
 @property (nonatomic, readonly) AKIArrayModel *containerModel;
 - (void)addModelToFilter:(AKIArrayModel *)model;
 
-- (void)filterUsingString:(NSString *)searchText;
+@property (nonatomic, readonly) NSPredicate *predicate;
+- (void)setPredicate:(NSPredicate *)predicate;
+
+- (void)filterUsingPredicate;
 
 @end

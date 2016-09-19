@@ -25,16 +25,6 @@ AKIConstant(NSUInteger, UsersCount, 10);
 @implementation AKIUsersArrayModel
 
 #pragma mark -
-#pragma mark Initializations and Deallocations
-
-- (instancetype)init {
-    self = [super init];
-//    [self fillModel];
-    
-    return self;
-}
-
-#pragma mark -
 #pragma mark Accessors
 
 - (NSFileManager *)fileManager {
@@ -80,8 +70,6 @@ AKIConstant(NSUInteger, UsersCount, 10);
             }
             
             self.state = AKIArrayModelDidLoad;
-            
-            [self notifyOfState:self.state withObject:self.objects];
         });
     }
 }
