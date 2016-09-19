@@ -29,7 +29,7 @@ AKIConstant(NSUInteger, UsersCount, 10);
 
 - (instancetype)init {
     self = [super init];
-    [self fillModel];
+//    [self fillModel];
     
     return self;
 }
@@ -66,7 +66,7 @@ AKIConstant(NSUInteger, UsersCount, 10);
 
 - (void)load {
     @synchronized (self) {
-        AKIAsyncPerformInBackground(^{            
+        AKIAsyncPerformInBackground(^{
             self.state = AKIArrayModelWillLoad;
             
             if (!self.cached) {

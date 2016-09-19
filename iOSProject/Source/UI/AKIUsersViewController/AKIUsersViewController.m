@@ -67,8 +67,8 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 - (void)addModelToFilter:(id)model {
     self.filteredModel = [[AKIFilteredArrayModel alloc] init];
-    [self.filteredModel addModelToFilter:model];
-    [self.filteredModel addObserver:self];
+//    [self.filteredModel addModelToFilter:model];
+//    [self.filteredModel addObserver:self];
 }
 
 - (AKIArrayModel *)model {
@@ -159,6 +159,10 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
         [self.loadingView.activityView stopAnimating];
+        [self.loadingView setHidden:YES];
+        
+        // didUpdate?
+        [self.userView.tableView reloadData];
     });
 }
 
