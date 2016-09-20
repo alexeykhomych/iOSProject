@@ -15,18 +15,27 @@
 @implementation AKIFilteredUsersArrayModel
 
 #pragma mark -
+#pragma mark Accessors
+
+- (void)setFilter:(NSString *)filter {
+    if (_filter != filter) {
+        _filter = filter;
+        
+        [self filter];
+    }
+}
+
+#pragma mark -
 #pragma mark Public
 
-- (void)filterUsingString:(NSString *)searchText {
-    if (!searchText.length) {
-        return;
-    }
-    
-    [self setPredicate:[NSPredicate predicateWithBlock:^BOOL(AKIUser *evaluatedObject, NSDictionary *bindings) {
-        return [evaluatedObject.fullName containsString:searchText];
-    }]];
-    
-    [self filterUsingPredicate];
+- (NSPredicate *)predicate {
+    return [NSPredicate predicateWithBlock:^BOOL(AKIUser *evaluatedObject, NSDictionary *bindings) {
+        if (!self.filter.length) {
+            return YES;
+        }
+        
+        return [evaluatedObject.fullName containsString:self.filter];
+    }];
 }
 
 @end
