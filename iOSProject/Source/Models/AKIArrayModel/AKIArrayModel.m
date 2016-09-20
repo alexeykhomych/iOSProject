@@ -87,6 +87,14 @@
     }
 }
 
+- (void)exchangeObjects:(NSArray *)objects {
+    @synchronized (self) {
+        if (objects) {
+            self.mutableObjects = [objects mutableCopy];
+        }
+    }
+}
+
 - (id)objectAtIndexedSubscript:(NSUInteger)index {
     @synchronized (self) {
         return [self.objects objectAtIndex:index];

@@ -41,6 +41,8 @@ typedef NS_ENUM(NSUInteger, AKIArrayModelState) {
 - (void)addObject:(id)object;
 - (void)addObjects:(NSArray *)objects;
 
+- (void)exchangeObjects:(NSArray *)objects;
+
 - (void)removeObject:(id)object;
 - (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)removeAllObjects;
