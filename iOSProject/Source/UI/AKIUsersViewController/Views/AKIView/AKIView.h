@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class AKILoadingView;
+
 @interface AKIView : UIView
+@property (nonatomic, strong) AKILoadingView  *loadingView;
+@property (nonatomic, assign, getter=isLoadViewVisible)  BOOL loadViewVisible;
 
 @end

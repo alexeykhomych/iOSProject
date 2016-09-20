@@ -10,22 +10,50 @@
 
 #import "NSBundle+AKIExtensions.h"
 
+#import "AKIMacro.h"
+
+AKIConstant(float, Duration, 1.0);
+
 @implementation AKILoadingView
 
 #pragma mark -
 #pragma mark Class methods
 
-+ (instancetype)attachView {
++ (instancetype)loadingViewInSuperView:(UIView *)superView {
     AKILoadingView *view = [NSBundle objectWithClass:[AKILoadingView class]];
     
     return view;
 }
 
 #pragma mark -
+#pragma mark Initializations and Deallocations
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    return [super initWithFrame:frame];
+}
+
+#pragma mark -
 #pragma mark Public
 
 - (void)setVisible:(BOOL)visible {
-    self.activityView.alpha = visible;
+    [self setVisible:visible animated:YES];
+}
+
+- (void)setVisible:(BOOL)visible animated:(BOOL)animated {
+    [self setVisible:visible animated:animated completionHandler:nil];
+}
+
+- (void)setVisible:(BOOL)visible animated:(BOOL)animated completionHandler:(AKICompletionHandler)completionHandler {
+    [UIView animateWithDuration:animated ? kAKIDuration : 0
+                     animations:^{
+                         self.activityView.alpha = visible ? 1.0 : 0;
+                     }
+                     completion:^(BOOL shouldFinish) {
+                         _visible = visible;
+                         if (completionHandler) {
+                             completionHandler();
+                         }
+                     }];
 }
 
 @end

@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^AKICompletionHandler)(void);
+
 @interface AKILoadingView : UIView
 @property (nonatomic, strong)   IBOutlet UIActivityIndicatorView *activityView;
 
-@property (nonatomic, readonly) BOOL visible;
+@property (nonatomic, readonly, getter=isVisible) BOOL visible;
 
-+ (instancetype)attachView;
++ (instancetype)loadingViewInSuperView:(UIView *)superView;
 
 @end

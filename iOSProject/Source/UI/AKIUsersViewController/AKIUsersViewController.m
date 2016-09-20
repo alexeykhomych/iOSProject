@@ -31,13 +31,10 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 @interface AKIUsersViewController ()
 @property (nonatomic, strong) AKIArrayModel    *arrayModel;
-@property (nonatomic, strong) AKILoadingView   *loadingView;
 
 @end
 
 @implementation AKIUsersViewController
-
-@synthesize model = _model;
 
 #pragma mark -
 #pragma mark Accessors
@@ -45,10 +42,8 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    AKILoadingView *loadingView = [NSBundle objectWithClass:[AKILoadingView class]];
-    [self.view addSubview:loadingView];
-    
-    self.loadingView = loadingView;
+    AKIView *view = [[AKIView alloc] init];
+    [self.view addSubview:view];
 }
 
 - (void)setModel:(AKIArrayModel *)model {
@@ -143,16 +138,14 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     });
 }
 
-#define AKILoadingViewAlpha 0.0
-
 - (void)arrayModelDidLoad:(AKIArrayModel *)arrayModel {
     AKIPrintMethod
     
     AKIWeakify(self);
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
-        [self.loadingView.activityView stopAnimating];
-        [self.loadingView setAlpha:AKILoadingViewAlpha];
+//        [self.loadingView.activityView stopAnimating];
+//        [self.loadingView setAlpha:AKILoadingViewAlpha];
     
         [self.userView.tableView reloadData];
     });
@@ -181,7 +174,5 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     AKIPrintMethod
     [self filterContentForSearchText:searchText];
 }
-
-
 
 @end
