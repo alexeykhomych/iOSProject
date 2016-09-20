@@ -8,61 +8,51 @@
 
 #import "AKIFilteredArrayModel.h"
 
+#import "AKIUser.h"
+#import "AKIGCD.h"
+
 #import "NSArray+AKIExtensions.h"
 
-#import "AKIUser.h"
-
 @interface AKIFilteredArrayModel ()
-@property (nonatomic, strong) AKIArrayModel *containerModel;
-@property (nonatomic, strong) NSPredicate   *predicate;
+@property (nonatomic, strong) AKIArrayModel *arrayModel;
 
 @end
 
 @implementation AKIFilteredArrayModel
 
 #pragma mark -
-#pragma mark Accessors
+#pragma mark Initializations and Deallocations
 
-- (void)setPredicate:(NSPredicate *)predicate {
-    if (_predicate != predicate) {
-        _predicate = predicate;
-    }
+- (instancetype)initWithModel:(id)model {
+    self = [super init];
+    self.arrayModel = model;
+    
+    return self;
 }
 
-- (void)addModelToFilter:(AKIArrayModel *)model {
-    if (_containerModel != model) {
-        _containerModel = model;
-        [self addObjects:model.objects];
+#pragma mark -
+#pragma mark Accessors
+
+- (void)setArrayModel:(AKIArrayModel *)arrayModel {
+    if (_arrayModel != arrayModel) {
+        [_arrayModel removeObserver:self];
+        
+        _arrayModel = arrayModel;
+        
+        [_arrayModel addObserver:self];
     }
 }
 
 #pragma mark -
 #pragma mark Public
 
-- (void)filterUsingPredicate {
-    [self performBlockWithoutNotification:^{
-//        [self removeAllObjects];
-//    
-//        if (!self.predicate) {
-//            [self addObjects:self.containerModel.objects];
-//            
-//            return;
-//        }
-//        
-        //[self addObjects:[self.containerModel.objects filteredArrayUsingPredicate:self.predicate]];
-        
-        [self.containerModel removeAllObjects];
-        
-        if (!self.predicate) {
-            [self.containerModel addObjects:self.objects];
-            
-            return;
-        }
-        
-        [self.containerModel addObjects:[self.objects filteredArrayUsingPredicate:self.predicate]];
-    }];
+- (void)filter {
+    AKIAsyncPerformInBackground(^{
+        NSArray *objects = [self.arrayModel.objects filteredArrayUsingPredicate:self.predicate];
+        [self exchangeObjects:objects];
+    });
     
-//    self.state = AKIArrayModelUpdated;
+    self.state = AKIArrayModelUpdated;
 }
 
 @end
