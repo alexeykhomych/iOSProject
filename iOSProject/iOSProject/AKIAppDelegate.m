@@ -30,12 +30,12 @@
     self.window = window;
     
     AKIUsersViewController *controller = [AKIUsersViewController viewController];
+    id model = [[AKIUsersArrayModel alloc] init];
     
-    controller.model = [[AKIUsersArrayModel alloc] init];
+    controller.model = model;
+    self.model = model;
     
     window.rootViewController = controller;
-    
-    self.model = controller.model;
     
     [window makeKeyAndVisible];
     
@@ -57,7 +57,6 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     AKIPrintMethod
-    [self.model load];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
