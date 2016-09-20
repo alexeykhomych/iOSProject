@@ -10,15 +10,19 @@
 
 #import "AKIUser.h"
 
-#import "AKIMacro.h"
-
 #import "AKIGCD.h"
+
+#import "NSObject+AKIExtensions.h"
+
+#import "AKIMacro.h"
 
 AKIConstant(NSUInteger, UsersCount, 10);
 
+static NSString * const kAKIFileName = @"UsersArrayModel.plist";
+
 @interface AKIUsersArrayModel ()
 
-- (void)fillModel;
+- (BOOL)shouldNotify:(AKIArrayModelState)state;
 
 @end
 
@@ -35,8 +39,6 @@ AKIConstant(NSUInteger, UsersCount, 10);
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
 }
 
-#define kAKIFileName @"UsersArrayModel.plist"
-
 - (NSString *)path {
     return [self.documentsPath stringByAppendingPathComponent:kAKIFileName];
 }
@@ -49,40 +51,46 @@ AKIConstant(NSUInteger, UsersCount, 10);
 #pragma mark Public
 
 - (void)save {
-    @synchronized (self) {
-        [NSKeyedArchiver archiveRootObject:self.objects toFile:self.path] ? NSLog(@"Succesfull saved file") : NSLog(@"Failed save file");
-    }
+    [self.fileManager createFileAtPath:self.path contents:nil attributes:nil];
+    BOOL success = [NSKeyedArchiver archiveRootObject:self.objects toFile:self.path];
+    NSLog(success ? @"Succesfull saved file" : @"Failed save file");
 }
 
 - (void)load {
-    @synchronized (self) {
-        AKIAsyncPerformInBackground(^{
-            self.state = AKIArrayModelWillLoad;
+    AKIAsyncPerformInBackground(^{
+        @synchronized (self) {
+            AKIArrayModelState state = self.state;
             
-            if (!self.cached) {
-                [self.fileManager createFileAtPath:self.path contents:nil attributes:nil];
-                [self fillModel];
-            } else {
-                [self performBlockWithoutNotification:^{
-                    [self removeAllObjects];
-                    [self addObjects:[NSKeyedUnarchiver unarchiveObjectWithFile:self.path]];
-                }];
+            if ([self shouldNotify:state]) {
+                [self notifyOfState:state];
+                
+                return;
             }
             
+            self.state = AKIArrayModelWillLoad;
+            
+            [self performBlockWithoutNotification:^{
+                id model = nil;
+                
+                if (!self.cached) {
+                    model = [AKIUser objectsWithCount:kAKIUsersCount];
+                } else {
+                    model = [NSKeyedUnarchiver unarchiveObjectWithFile:self.path];
+                }
+                
+                [self addObjects:model];
+            }];
+            
             self.state = AKIArrayModelDidLoad;
-        });
-    }
+        }
+    });
 }
 
 #pragma mark -
-#pragma mark Privat
+#pragma mark Private
 
-- (void)fillModel {
-    [self performBlockWithoutNotification:^{
-        for (NSUInteger i = 0; i < kAKIUsersCount; i++) {
-            [self addObject:[AKIUser new]];
-        }
-    }];
+- (BOOL)shouldNotify:(AKIArrayModelState)state {
+    return AKIArrayModelDidLoad == state || AKIArrayModelWillLoad == state;
 }
 
 @end

@@ -8,6 +8,8 @@
 
 #import "NSArray+AKIExtensions.h"
 
+#import "NSObject+AKIExtensions.h"
+
 #import "AKIUser.h"
 
 @implementation NSArray (AKIExtensions)
@@ -37,6 +39,20 @@
     NSPredicate *predicate = [NSPredicate predicateWithBlock:block];
     
     return [self filteredArrayUsingPredicate:predicate];
+}
+
++ (instancetype)objectsWithCount:(NSUInteger)count block:(id(^)())block {
+    if (!block) {
+        return nil;
+    }
+    
+    NSMutableArray *objects = [NSMutableArray object];
+    
+    for (NSUInteger i = 0; i < count; i++) {
+        [objects addObject:block()];
+    }
+    
+    return [self arrayWithArray:objects];
 }
 
 @end

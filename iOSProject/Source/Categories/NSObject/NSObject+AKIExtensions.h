@@ -11,5 +11,6 @@
 @interface NSObject (AKIExtensions)
 
 + (instancetype)object;
++ (NSArray *)objectsWithCount:(NSUInteger)count;
 
 @end
