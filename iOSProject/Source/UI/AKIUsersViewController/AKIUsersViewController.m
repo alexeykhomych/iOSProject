@@ -8,32 +8,30 @@
 
 #import "AKIUsersViewController.h"
 
-#import "UINib+AKIExtensions.h"
-
-#import "UITableView+AKIExtensions.h"
-
 #import "AKIUser.h"
 #import "AKIUserCell.h"
 #import "AKIUserView.h"
 
-#import "AKIMacro.h"
-
 #import "AKIArrayModel.h"
 #import "AKIArrayChangeModel.h"
+#import "AKIFilteredUsersArrayModel.h"
 
 #import "AKIGCD.h"
 
-#import "AKIFilteredUsersArrayModel.h"
-
 #import "AKILoadingView.h"
+#import "AKIView.h"
 
 #import "NSBundle+AKIExtensions.h"
+#import "UINib+AKIExtensions.h"
+#import "UITableView+AKIExtensions.h"
+
+#import "AKIMacro.h"
 
 AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 @interface AKIUsersViewController ()
-@property (nonatomic, strong) AKIFilteredUsersArrayModel    *filteredModel;
-@property (nonatomic, strong) AKILoadingView                *loadingView;
+@property (nonatomic, strong) AKIArrayModel    *arrayModel;
+@property (nonatomic, strong) AKILoadingView   *loadingView;
 
 @end
 
@@ -53,30 +51,24 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     self.loadingView = loadingView;
 }
 
-- (void)setModel:(id)model {
-    if (_model != model) {
-        [_model removeObserver:self];
+- (void)setModel:(AKIArrayModel *)model {
+    if (self.model != model) {
+        [self.arrayModel removeObserver:self];
+        self.arrayModel = model;
         
-        _model = model;
+//        self.arrayModel = [[AKIFilteredUsersArrayModel alloc] initWithModel:model];
+        if (self.isViewLoaded) {
+            [self.arrayModel load];
+        }
         
-        [_model addObserver:self];
-        
-        self.filteredModel = [[AKIFilteredUsersArrayModel alloc] init];
+        [self.arrayModel addObserver:self];
     }
-}
-
-- (void)addModelToFilter:(id)model {
-    [self.filteredModel addModelToFilter:model];
-    [self.filteredModel addObserver:self];
-}
-
-- (AKIArrayModel *)model {
-    return _model;
 }
 
 - (void)filterContentForSearchText:(NSString*)searchText {
     AKIPrintMethod
-    [self.filteredModel filterUsingString:searchText];
+    AKIFilteredUsersArrayModel *model = self.model;
+    model.filter = searchText;
     
     [self.userView.tableView reloadData];
 }
@@ -89,7 +81,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.model.count;
+    return ((AKIArrayModel *)self.model).count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -160,12 +152,8 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
         [self.loadingView.activityView stopAnimating];
-//        [self.loadingView setHidden:YES];
         [self.loadingView setAlpha:AKILoadingViewAlpha];
-        
-        [self addModelToFilter:self.model];
-        
-        // didUpdate?
+    
         [self.userView.tableView reloadData];
     });
 }

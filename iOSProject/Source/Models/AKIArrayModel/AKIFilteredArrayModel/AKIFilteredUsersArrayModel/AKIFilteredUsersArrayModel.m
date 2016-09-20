@@ -21,7 +21,7 @@
     if (_filter != filter) {
         _filter = filter;
         
-        [self filter];
+        [self filterObjects];
     }
 }
 
