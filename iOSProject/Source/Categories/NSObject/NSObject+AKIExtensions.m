@@ -8,23 +8,20 @@
 
 #import "NSObject+AKIExtensions.h"
 
+#import "AKIUser.h"
+
+#import "NSArray+AKIExtensions.h"
+
 @implementation NSObject (AKICategory)
-
-#pragma mark -
-#pragma mark Class methods
-
-+ (NSArray *)objectsWithCount:(NSUInteger)count {
-    NSMutableArray *objects = [NSMutableArray new];
-    
-    for (NSUInteger i = 0; i < count; i++) {
-        [objects addObject:[self object]];
-    }
-    
-    return objects;
-}
 
 + (instancetype)object {
     return [[self alloc] init];
+}
+
++ (NSArray *)objectsWithCount:(NSUInteger)count {
+    return [NSArray objectsWithCount:count block:^ {
+        return [self object];
+    }];
 }
 
 @end

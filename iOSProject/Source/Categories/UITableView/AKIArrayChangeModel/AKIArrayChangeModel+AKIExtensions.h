@@ -8,13 +8,6 @@
 
 #import "AKIArrayChangeModel.h"
 
-#import "AKIArrayChangeModelInsert.h"
-#import "AKIArrayChangeModelDelete.h"
-
-#import "AKIArrayChangeModelMove.h"
-
-#import "AKIMacro.h"
-
 @interface AKIArrayChangeModel (UITableView)
 
 - (void)applyToTableView:(UITableView *)tableView;

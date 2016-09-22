@@ -26,7 +26,7 @@
 @dynamic observers;
 
 #pragma mark -
-#pragma mark Initializations and Dealocations
+#pragma mark Initializations and Deallocations
 
 - (instancetype)init {
     self = [super init];
