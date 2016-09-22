@@ -27,6 +27,8 @@
 
 @implementation AKIArrayModel
 
+AKIConstant(NSUInteger, IndexNotFound, 0);
+
 #pragma mark -
 #pragma mark Init and Dealloc
 
@@ -84,6 +86,7 @@
 - (void)removeAllObjects {
     @synchronized (self) {
         [self.mutableObjects removeAllObjects];
+        self.state = AKIArrayModelUpdated;
     }
 }
 
@@ -91,6 +94,7 @@
     @synchronized (self) {
         if (objects) {
             self.mutableObjects = [objects mutableCopy];
+            self.state = AKIArrayModelUpdated;
         }
     }
 }
@@ -108,15 +112,17 @@
     }
 }
 
+- (NSUInteger)indexOfObject:(id)object {
+    @synchronized (self) {
+        return object ? [self.mutableObjects indexOfObject:object] : kAKIIndexNotFound;
+    }
+}
+
 - (void)moveObjectAtIndex:(NSUInteger)firstIndex toIndex:(NSUInteger)secondIndex {
     @synchronized (self) {
         [self.mutableObjects moveObjectFromIndex:firstIndex toIndex:secondIndex];
         [self notifyOfModelUpdateWithChange:[AKIArrayChangeModel moveModelFromIndex:firstIndex toIndex:secondIndex]];
     }
-}
-
-- (void)load {
-    
 }
 
 #pragma mark -

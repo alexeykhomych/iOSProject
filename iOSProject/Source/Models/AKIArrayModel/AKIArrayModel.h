@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AKIObservableObject.h"
+#import "AKIModel.h"
 
 @class AKIArrayModel;
 @class AKIArrayChangeModel;
@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, AKIArrayModelState) {
 
 @end
 
-@interface AKIArrayModel : AKIObservableObject
+@interface AKIArrayModel : AKIModel <AKIArrayModelObserver>
 @property (nonatomic, readonly) NSArray     *objects;
 @property (nonatomic, readonly) NSUInteger  count;
 
@@ -47,8 +47,7 @@ typedef NS_ENUM(NSUInteger, AKIArrayModelState) {
 - (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)removeAllObjects;
 
-- (void)load;
-
+- (NSUInteger)indexOfObject:(id)object;
 - (void)moveObjectAtIndex:(NSUInteger)firstIndex toIndex:(NSUInteger)secondIndex;
 
 - (id)objectAtIndexedSubscript:(NSUInteger)index;
