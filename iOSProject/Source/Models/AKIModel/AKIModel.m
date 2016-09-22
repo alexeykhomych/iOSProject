@@ -35,16 +35,16 @@
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
         case AKIModelUpdated:
-            return @selector(modelDidUpdated:);
+            return @selector(modelDidUpdated);
             
         case AKIModelFailedLoading:
-            return @selector(modelFailedLoading:);
+            return @selector(modelFailedLoading);
             
         case AKIModelDidLoad:
-            return @selector(modelDidLoad:);
+            return @selector(modelDidLoad);
             
         case AKIModelWillLoad:
-            return @selector(modelWillLoad:);
+            return @selector(modelWillLoad);
             
         default:
             return nil;

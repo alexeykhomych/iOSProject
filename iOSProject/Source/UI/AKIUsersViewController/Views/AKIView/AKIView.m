@@ -10,6 +10,8 @@
 
 #import "AKILoadingView.h"
 
+#import "AKIGCD.h"
+
 @interface AKIView ()
 
 - (void)initSubviews;
@@ -27,14 +29,6 @@
     return [super init];
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    
-    [self initSubviews];
-    
-    return self;
-}
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
@@ -49,7 +43,10 @@
 
 - (void)setLoadingView:(AKILoadingView *)loadingView {
     if (_loadingView != loadingView) {
+        [_loadingView removeFromSuperview];
         _loadingView = loadingView;
+        
+        [self addSubview:loadingView];
     }
 }
 

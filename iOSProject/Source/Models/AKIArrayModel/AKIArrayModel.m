@@ -144,10 +144,10 @@ AKIConstant(NSUInteger, IndexNotFound, 0);
             return @selector(arrayModelDidFailLoading:);
 
         case AKIArrayModelDidLoad:
-            return @selector(arrayModelDidLoad:);
+            return @selector(modelDidLoad);
             
         case AKIArrayModelWillLoad:
-            return @selector(arrayModelWillLoad:);
+            return @selector(modelWillLoad);
             
         default:
             return nil;

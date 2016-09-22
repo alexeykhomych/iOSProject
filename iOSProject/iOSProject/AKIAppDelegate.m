@@ -30,12 +30,12 @@
     self.window = window;
     
     AKIUsersViewController *controller = [AKIUsersViewController viewController];
-    id model = [[AKIUsersArrayModel alloc] init];
-    
-    controller.model = model;
-    self.model = model;
     
     window.rootViewController = controller;
+    
+    id model = [[AKIUsersArrayModel alloc] init];
+    controller.model = model;
+    self.model = model;
     
     [window makeKeyAndVisible];
     

@@ -7,7 +7,6 @@
 //
 
 #import "AKIUserView.h"
-#import "AKIUserCell.h"
 
 @implementation AKIUserView
 

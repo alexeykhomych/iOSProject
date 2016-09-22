@@ -21,6 +21,7 @@ AKIConstant(float, Duration, 1.0);
 
 + (instancetype)loadingViewInSuperView:(UIView *)superView {
     AKILoadingView *view = [NSBundle objectWithClass:[AKILoadingView class]];
+    view.frame = superView.bounds;
     
     return view;
 }
@@ -43,7 +44,9 @@ AKIConstant(float, Duration, 1.0);
     [self setVisible:visible animated:animated completionHandler:nil];
 }
 
-- (void)setVisible:(BOOL)visible animated:(BOOL)animated completionHandler:(AKICompletionHandler)completionHandler {
+- (void)    setVisible:(BOOL)visible animated:(BOOL)animated
+     completionHandler:(AKICompletionHandler)completionHandler
+{
     [UIView animateWithDuration:animated ? kAKIDuration : 0
                      animations:^{
                          self.activityView.alpha = visible ? 1.0 : 0;

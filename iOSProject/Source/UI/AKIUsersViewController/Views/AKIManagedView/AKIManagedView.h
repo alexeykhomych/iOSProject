@@ -1,0 +1,16 @@
+//
+//  AKIManagedView.h
+//  iOSProject
+//
+//  Created by Alexey Khomych on 22.09.16.
+//  Copyright © 2016 Alexey Khomych. All rights reserved.
+//
+
+#import "AKIModel.h"
+
+#import "AKIView.h"
+
+@interface AKIManagedView : AKIView <AKIObservableModel>
+@property (nonatomic, strong) AKIModel *model;
+
+@end

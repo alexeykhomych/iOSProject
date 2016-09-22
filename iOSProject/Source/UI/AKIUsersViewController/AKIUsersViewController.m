@@ -11,15 +11,14 @@
 #import "AKIUser.h"
 #import "AKIUserCell.h"
 #import "AKIUserView.h"
+#import "AKIFilteredUsersArrayModel.h"
 
 #import "AKIArrayModel.h"
 #import "AKIArrayChangeModel.h"
-#import "AKIFilteredUsersArrayModel.h"
 
 #import "AKIGCD.h"
 
-#import "AKILoadingView.h"
-#import "AKIView.h"
+#import "AKIManagedView.h"
 
 #import "NSBundle+AKIExtensions.h"
 #import "UINib+AKIExtensions.h"
@@ -30,11 +29,25 @@
 AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 @interface AKIUsersViewController ()
-@property (nonatomic, strong) AKIArrayModel    *arrayModel;
+@property (nonatomic, strong)   AKIFilteredUsersArrayModel      *filteredModel;
+@property (nonatomic, readonly) AKIArrayModel                   *dataSource;
+
+@property (nonatomic, strong)   AKIManagedView *managedView;
+
+@property (nonatomic, assign) BOOL  searching;
 
 @end
 
 @implementation AKIUsersViewController
+
+@dynamic dataSource;
+
+#pragma mark -
+#pragma mark Initializations and Deallocations
+
+- (void)dealloc {
+    self.model = nil;
+}
 
 #pragma mark -
 #pragma mark Accessors
@@ -42,28 +55,37 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    AKIView *view = [[AKIView alloc] init];
-    [self.view addSubview:view];
+    if (self.isViewLoaded) {
+        NSLog(@"LOADED");
+    }
 }
 
-- (void)setModel:(AKIArrayModel *)model {
-    if (self.model != model) {
-        [self.arrayModel removeObserver:self];
-        self.arrayModel = model;
+- (void)setModel:(AKIUsersArrayModel *)model {
+    if (_model != model) {
         
-//        self.arrayModel = [[AKIFilteredUsersArrayModel alloc] initWithModel:model];
+        [_model removeObserver:self];
+        _model = model;
+        [_model addObserver:self];
+        NSLog(@"LOADED2");
         if (self.isViewLoaded) {
-            [self.arrayModel load];
+            [_model load];
         }
         
-        [self.arrayModel addObserver:self];
+        if (model) {
+            self.filteredModel = [[AKIFilteredUsersArrayModel alloc] initWithModel:model];
+        } else {
+            self.filteredModel = nil;
+        }
+        self.managedView = [[AKIManagedView alloc] initWithFrame:self.view.bounds];
+        self.managedView.model = model;
     }
 }
 
 - (void)filterContentForSearchText:(NSString*)searchText {
     AKIPrintMethod
-    AKIFilteredUsersArrayModel *model = self.model;
-    model.filter = searchText;
+    
+    self.filteredModel.filter = searchText;
+    [self.filteredModel filterObjects];
     
     [self.userView.tableView reloadData];
 }
@@ -72,16 +94,20 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     [super didReceiveMemoryWarning];
 }
 
+- (AKIArrayModel *)dataSource {
+    return self.searching ? self.filteredModel : self.model;
+}
+
 #pragma mark -
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return ((AKIArrayModel *)self.model).count;
+    return self.dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     AKIUserCell *cell = [tableView cellWithClass:[AKIUserCell class]];
-    cell.user = self.model[indexPath.row];
+    cell.user = self.dataSource[indexPath.row];
     
     return cell;
 }
@@ -103,7 +129,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
    moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
           toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    [self.model moveObjectAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
+    [self.model moveObjectAtIndex:[self.model indexOfObject:self.dataSource[sourceIndexPath.row]] toIndex:destinationIndexPath.row];
 }
 
 #pragma mark -
@@ -144,10 +170,8 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     AKIWeakify(self);
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
-//        [self.loadingView.activityView stopAnimating];
-//        [self.loadingView setAlpha:AKILoadingViewAlpha];
-    
-        [self.userView.tableView reloadData];
+        
+       [self.userView.tableView reloadData];
     });
 }
 
@@ -157,6 +181,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 - (void)arrayModelWillLoad:(AKIArrayModel *)arrayModel {
     AKIPrintMethod
+    
 }
 
 #pragma mark -
@@ -164,10 +189,12 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     AKIPrintMethod
+    self.searching = YES;
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     AKIPrintMethod
+    self.searching = NO;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {

@@ -26,8 +26,6 @@ static NSString * const kAKIFileName = @"UsersArrayModel.plist";
 @property (nonatomic, readonly, copy)       NSString        *path;
 @property (nonatomic, readonly)             BOOL            cached;
 
-- (BOOL)shouldNotify:(AKIArrayModelState)state;
-
 @end
 
 @implementation AKIUsersArrayModel
@@ -56,8 +54,7 @@ static NSString * const kAKIFileName = @"UsersArrayModel.plist";
 
 - (void)save {
     [self.fileManager createFileAtPath:self.path contents:nil attributes:nil];
-    BOOL success = [NSKeyedArchiver archiveRootObject:self.objects toFile:self.path];
-    NSLog(success ? @"Succesfull saved file" : @"Failed save file");
+    [NSKeyedArchiver archiveRootObject:self.objects toFile:self.path];
 }
 
 - (void)load {
