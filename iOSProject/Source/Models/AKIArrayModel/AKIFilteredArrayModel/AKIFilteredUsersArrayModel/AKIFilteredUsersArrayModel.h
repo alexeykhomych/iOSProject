@@ -9,6 +9,6 @@
 #import "AKIFilteredArrayModel.h"
 
 @interface AKIFilteredUsersArrayModel : AKIFilteredArrayModel
-@property (nonatomic, strong) NSString *filter;
+@property (nonatomic, strong) NSString  *filter;
 
 @end

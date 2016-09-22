@@ -8,16 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class AKIUserCell;
-
 @interface AKIUserView : UIView
-@property (nonatomic, strong) IBOutlet UITableView     *tableView;
+@property (nonatomic, strong) IBOutlet UITableView  *tableView;
 
 @property (nonatomic, strong) IBOutlet UIButton     *addButton;
 @property (nonatomic, strong) IBOutlet UIButton     *editButton;
 
-@property(nonatomic, assign, getter=isEditing) BOOL editing;
+@property (nonatomic, strong) IBOutlet UISearchBar  *searchBar;
 
-@property (nonatomic, strong) AKIUserCell *cell;
+@property(nonatomic, assign, getter=isEditing) BOOL editing;
 
 @end

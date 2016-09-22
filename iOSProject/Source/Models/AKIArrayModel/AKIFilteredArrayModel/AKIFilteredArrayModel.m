@@ -23,6 +23,10 @@
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
+- (void)dealloc {
+    self.arrayModel = nil;
+}
+
 - (instancetype)initWithModel:(id)model {
     self = [super init];
     self.arrayModel = model;
@@ -50,11 +54,9 @@
     AKIAsyncPerformInBackground(^{
         NSArray *objects = [self.arrayModel.objects filteredArrayUsingPredicate:self.predicate];
         [self exchangeObjects:objects];
+        
+        self.state = AKIArrayModelUpdated;
     });
-    
-    self.state = AKIArrayModelUpdated;
 }
-
-
 
 @end

@@ -10,19 +10,39 @@
 
 #import "AKILoadingView.h"
 
+@interface AKIView ()
+
+- (void)initSubviews;
+
+@end
+
 @implementation AKIView
 
-@dynamic loadViewVisible;
+@dynamic loadingViewVisible;
 
 #pragma mark -
 #pragma mark Initializations and deallocations
 
 - (instancetype)init {
-    self = [super init];
-    self.loadingView = [AKILoadingView loadingViewInSuperView:self];
+    return [super init];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    
+    [self initSubviews];
     
     return self;
 }
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    
+    [self initSubviews];
+    
+    return self;
+}
+
 
 #pragma mark -
 #pragma mark Accessors
@@ -33,13 +53,36 @@
     }
 }
 
-- (BOOL)isLoadViewVisible {
+- (void)setLoadingViewVisible:(BOOL)loadingViewVisible {
+    [self.loadingView setVisible:loadingViewVisible];
+}
+
+- (BOOL)isLoadingViewVisible {
     return self.loadingView.isVisible;
+}
+
+#pragma mark -
+#pragma mark View Lifecycle
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+//    self.imageView.frame = self.bounds;
 }
 
 #pragma mark -
 #pragma mark Public
 
+#pragma mark -
+#pragma mark Private
+
+- (void)initSubviews {
+    id loadingView = [AKILoadingView loadingViewInSuperView:self];
+    self.loadingView = loadingView;
+    [self addSubview:loadingView];
+    
+    [self setNeedsLayout];
+}
 
 
 @end

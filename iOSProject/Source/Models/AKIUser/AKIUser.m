@@ -10,6 +10,10 @@
 
 #import "NSString+AKIExtensions.h"
 
+#import "AKIMacro.h"
+
+AKIStringConstant(FullNameKey, @"kAKIFullName");
+
 @interface AKIUser()
 @property (nonatomic, copy)     NSString    *fullName;
 
@@ -43,8 +47,6 @@
 
 #pragma mark -
 #pragma mark NSCopying
-
-#define kAKIFullNameKey @"kAKIFullName"
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];

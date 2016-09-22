@@ -21,6 +21,10 @@ AKIConstant(NSUInteger, UsersCount, 10);
 static NSString * const kAKIFileName = @"UsersArrayModel.plist";
 
 @interface AKIUsersArrayModel ()
+@property (nonatomic, readonly)             NSFileManager   *fileManager;
+@property (nonatomic, readonly, copy)       NSString        *documentsPath;
+@property (nonatomic, readonly, copy)       NSString        *path;
+@property (nonatomic, readonly)             BOOL            cached;
 
 - (BOOL)shouldNotify:(AKIArrayModelState)state;
 
@@ -57,18 +61,22 @@ static NSString * const kAKIFileName = @"UsersArrayModel.plist";
 }
 
 - (void)load {
-    AKIAsyncPerformInBackground(^{
-        @synchronized (self) {
-            AKIArrayModelState state = self.state;
+    @synchronized (self) {
+        AKIArrayModelState state = self.state;
+        
+        if (state == AKIArrayModelWillLoad) {
+            return;
+        }
+        
+        if (state == AKIArrayModelDidLoad) {
+            [self notifyOfState:state];
             
-            if ([self shouldNotify:state]) {
-                [self notifyOfState:state];
-                
-                return;
-            }
-            
-            self.state = AKIArrayModelWillLoad;
-            
+            return;
+        }
+        
+        self.state = AKIArrayModelWillLoad;
+        
+        AKIAsyncPerformInBackground(^{
             [self performBlockWithoutNotification:^{
                 id model = nil;
                 
@@ -82,15 +90,8 @@ static NSString * const kAKIFileName = @"UsersArrayModel.plist";
             }];
             
             self.state = AKIArrayModelDidLoad;
-        }
-    });
-}
-
-#pragma mark -
-#pragma mark Private
-
-- (BOOL)shouldNotify:(AKIArrayModelState)state {
-    return AKIArrayModelDidLoad == state || AKIArrayModelWillLoad == state;
+        });
+    }
 }
 
 @end

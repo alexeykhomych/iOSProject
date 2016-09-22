@@ -8,12 +8,17 @@
 
 #import "AKIImageView.h"
 
+#import "AKIImageModel.h"
+
 #import "AKIGCD.h"
 
 #import "AKIUserCell.h"
 
 @interface AKIImageView ()
+@property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, assign) AKIImageState state;
+
+- (void)initSubviews;
 
 @end
 
@@ -23,13 +28,13 @@
 #pragma mark Initializations and Deallocations
 
 - (instancetype)init {
-    self = [super init];
-    
-    return self;
+    return [super init];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
+    
+    [self initSubviews];
     
     return self;
 }
@@ -37,22 +42,18 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
+    [self initSubviews];
+    
     return self;
 }
 
 #pragma mark -
-#pragma mark Public
+#pragma mark View Lifecycle
 
-- (void)load {
-    @synchronized (self) {
-        self.state = AKIImageWillLoad;
-        
-        AKIAsyncPerformInBackground(^{
-            
-        });
-        
-        self.state = AKIImageDidLoad;
-    }
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.imageView.frame = self.bounds;
 }
 
 #pragma mark -
@@ -75,6 +76,32 @@
         default:
             return nil;
     }
+}
+
+#pragma mark -
+#pragma mark Public
+
+- (void)load {
+    @synchronized (self) {
+        self.state = AKIImageWillLoad;
+        
+        AKIAsyncPerformInBackground(^{
+            
+        });
+        
+        self.state = AKIImageDidLoad;
+    }
+}
+
+#pragma mark -
+#pragma mark Private
+
+- (void)initSubviews {
+    id imageView = [[UIImageView alloc] init];
+    self.imageView = imageView;
+    [self addSubview:imageView];
+    
+    [self setNeedsLayout];
 }
 
 @end
