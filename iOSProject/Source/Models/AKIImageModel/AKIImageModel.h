@@ -11,13 +11,19 @@
 #import "AKIModel.h"
 
 typedef NS_ENUM(NSUInteger, AKIImageModelState) {
-    AKIImageModelUnloaded,
-    AKIImageModelLoading,
-    AKIImageModelLoaded,
-    AKIImageModelFailedLoading
+    AKIImageModelFailedLoading = AKIModelFailedLoading,
+    AKIImageModelUnloaded
 };
 
-@interface AKIImageModel : AKIModel
+@protocol AKIImageModelObserver <NSObject>
+
+@optional
+- (void)imageModelFailedLoading;
+- (void)imageModelUnloaded;
+
+@end
+
+@interface AKIImageModel : AKIModel <AKIImageModelObserver>
 @property (nonatomic, readonly) UIImage *image;
 @property (nonatomic, readonly) NSURL   *url;
 
@@ -25,7 +31,6 @@ typedef NS_ENUM(NSUInteger, AKIImageModelState) {
 
 - (instancetype)initWithURL:(NSURL *)url;
 
-- (void)load;
 - (void)dump;
 
 @end

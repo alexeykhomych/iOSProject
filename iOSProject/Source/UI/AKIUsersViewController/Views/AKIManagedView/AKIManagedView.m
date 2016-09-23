@@ -40,4 +40,12 @@
     });
 }
 
+- (void)modelDidUpdated {
+    
+}
+
+- (void)modelFailedLoading {
+    
+}
+
 @end

@@ -10,12 +10,12 @@
 
 #import "AKIMacro.h"
 
+#import "AKIGCD.h"
+
 @interface AKIImageModel()
 @property (nonatomic, strong) UIImage       *image;
 @property (nonatomic, strong) NSURL         *url;
 @property (nonatomic, strong) NSOperation   *operation;
-
-- (NSOperation *)imageLoadingOperation;
 
 @end
 
@@ -58,23 +58,6 @@
 #pragma mark -
 #pragma mark Public
 
-- (void)load {
-    @synchronized (self) {
-        if (AKIImageModelLoading == self.state) {
-            return;
-        }
-        
-        if (AKIImageModelLoaded == self.state) {
-            [self notifyOfState:AKIImageModelLoaded];
-            return;
-        }
-        
-        self.state = AKIImageModelLoading;
-    }
-    
-    self.operation = [self imageLoadingOperation];
-}
-
 - (void)dump {
     self.operation = nil;
     self.image = nil;
@@ -84,22 +67,28 @@
 #pragma mark -
 #pragma mark Private
 
-- (NSOperation *)imageLoadingOperation {
-    AKIWeakify(self);
-    
-    NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
-        AKIStrongifyAndReturnIfNil(self);
+- (void)performLoading {
+    AKIAsyncPerformInBackground(^{
         self.image = [UIImage imageWithContentsOfFile:[self.url absoluteString]];
-    }];
-    
-    operation.completionBlock = ^{
-        AKIStrongify(self);
-        @synchronized (self) {
-            self.state = self.image ? AKIImageModelLoaded : AKIImageModelLoading;
-        }
-    };
+        
+        self.state = self.image ? AKIModelDidLoad : AKIModelWillLoad;
+    });
+}
 
-    return operation;
+#pragma mark -
+#pragma mark AKIObservableObject
+
+- (SEL)selectorForState:(NSUInteger)state {
+    switch (state) {
+        case AKIImageModelFailedLoading:
+            return @selector(imageModelFailedLoading);
+        
+        case AKIImageModelUnloaded:
+            return @selector(imageModelUnloaded);
+            
+        default:
+            return nil;
+    }
 }
 
 @end
