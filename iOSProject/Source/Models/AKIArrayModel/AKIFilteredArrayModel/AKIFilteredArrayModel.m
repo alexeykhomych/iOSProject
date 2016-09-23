@@ -55,7 +55,7 @@
         NSArray *objects = [self.arrayModel.objects filteredArrayUsingPredicate:self.predicate];
         [self exchangeObjects:objects];
         
-        self.state = AKIArrayModelUpdated;
+        self.state = AKIModelUpdated;
     });
 }
 

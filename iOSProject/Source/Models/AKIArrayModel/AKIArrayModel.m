@@ -77,7 +77,6 @@ AKIConstant(NSUInteger, IndexNotFound, 0);
 - (void)removeObject:(id)object {
     @synchronized (self) {
         if (object) {
-            [self.mutableObjects removeObject:object];
             [self removeObjectAtIndex:[self.mutableObjects indexOfObject:object]];
         }
     }
@@ -85,8 +84,9 @@ AKIConstant(NSUInteger, IndexNotFound, 0);
 
 - (void)removeAllObjects {
     @synchronized (self) {
-        [self.mutableObjects removeAllObjects];
-        self.state = AKIArrayModelUpdated;
+        for (id object in self.objects) {
+            [self removeObject:object];
+        }
     }
 }
 
@@ -94,7 +94,7 @@ AKIConstant(NSUInteger, IndexNotFound, 0);
     @synchronized (self) {
         if (objects) {
             self.mutableObjects = [objects mutableCopy];
-            self.state = AKIArrayModelUpdated;
+            self.state = AKIModelUpdated;
         }
     }
 }
@@ -129,7 +129,7 @@ AKIConstant(NSUInteger, IndexNotFound, 0);
 #pragma mark Private
 
 - (void)notifyOfModelUpdateWithChange:(AKIArrayChangeModel *)changeModel {
-    [self notifyOfState:AKIArrayModelUpdated withObject:changeModel];
+    [self notifyOfState:AKIModelUpdated withObject:changeModel];
 }
 
 #pragma mark -
@@ -137,17 +137,17 @@ AKIConstant(NSUInteger, IndexNotFound, 0);
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
-        case AKIArrayModelUpdated:
+        case AKIModelUpdated:
             return @selector(arrayModel:didUpdateWithChangeModel:);
             
-        case AKIArrayModelFailedLoading:
-            return @selector(arrayModelDidFailLoading:);
-
-        case AKIArrayModelDidLoad:
-            return @selector(modelDidLoad);
-            
-        case AKIArrayModelWillLoad:
-            return @selector(modelWillLoad);
+//        case AKIArrayModelFailedLoading:
+//            return @selector(arrayModelDidFailLoading:);
+//
+//        case AKIArrayModelDidLoad:
+//            return @selector(modelDidLoad);
+//            
+//        case AKIArrayModelWillLoad:
+//            return @selector(modelWillLoad);
             
         default:
             return nil;

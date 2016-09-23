@@ -13,24 +13,10 @@
 @class AKIArrayModel;
 @class AKIArrayChangeModel;
 
-typedef NS_ENUM(NSUInteger, AKIArrayModelState) {
-    AKIArrayModelUpdated,
-    AKIArrayModelDidLoad,
-    AKIArrayModelWillLoad,
-    AKIArrayModelFailedLoading
-};
-
 @protocol AKIArrayModelObserver <NSObject>
 
 @optional
 - (void)arrayModel:(AKIArrayModel *)arrayModel didUpdateWithChangeModel:(AKIArrayChangeModel *)arrayChangeModel;
-
-- (void)arrayModelDidLoad:(AKIArrayModel *)arrayModel;
-- (void)arrayModelDidFailLoading:(AKIArrayModel *)arrayModel;
-- (void)arrayModelWillLoad:(AKIArrayModel *)arrayModel;
-
-- (void)encodeWithCoder:(NSCoder *)aCoder;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder;
 
 @end
 

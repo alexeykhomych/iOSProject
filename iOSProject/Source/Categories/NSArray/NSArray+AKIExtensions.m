@@ -20,7 +20,6 @@
     }
     
     NSMutableArray *objects = [NSMutableArray object];
-    
     for (NSUInteger i = 0; i < count; i++) {
         [objects addObject:block()];
     }

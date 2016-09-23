@@ -57,22 +57,8 @@ static NSString * const kAKIFileName = @"UsersArrayModel.plist";
     [NSKeyedArchiver archiveRootObject:self.objects toFile:self.path];
 }
 
-- (void)load {
+- (void)performLoading {
     @synchronized (self) {
-        AKIArrayModelState state = self.state;
-        
-        if (state == AKIArrayModelWillLoad) {
-            return;
-        }
-        
-        if (state == AKIArrayModelDidLoad) {
-            [self notifyOfState:state];
-            
-            return;
-        }
-        
-        self.state = AKIArrayModelWillLoad;
-        
         AKIAsyncPerformInBackground(^{
             [self performBlockWithoutNotification:^{
                 id model = nil;
@@ -86,7 +72,7 @@ static NSString * const kAKIFileName = @"UsersArrayModel.plist";
                 [self addObjects:model];
             }];
             
-            self.state = AKIArrayModelDidLoad;
+            self.state = AKIModelDidLoad;
         });
     }
 }

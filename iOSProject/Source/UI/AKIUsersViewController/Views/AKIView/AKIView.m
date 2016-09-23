@@ -25,10 +25,6 @@
 #pragma mark -
 #pragma mark Initializations and deallocations
 
-- (instancetype)init {
-    return [super init];
-}
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
@@ -37,6 +33,13 @@
     return self;
 }
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    
+    [self initSubviews];
+    
+    return self;
+}
 
 #pragma mark -
 #pragma mark Accessors
@@ -51,11 +54,17 @@
 }
 
 - (void)setLoadingViewVisible:(BOOL)loadingViewVisible {
-    [self.loadingView setVisible:loadingViewVisible];
+    self.loadingView.visible = loadingViewVisible;
 }
 
 - (BOOL)isLoadingViewVisible {
     return self.loadingView.isVisible;
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    
 }
 
 #pragma mark -

@@ -15,18 +15,26 @@
 
 - (void)load {
     @synchronized (self) {
-        if (AKIModelWillLoad == self.state) {
-            return;
-        }
-        
-        if (AKIModelDidLoad == self.state) {
-            [self notifyOfState:AKIModelDidLoad];
+        AKIModelState state = self.state;
+
+        if ([self shouldNotifyObserver:state]) {
+            [self notifyOfState:state];
             
             return;
         }
         
-        self.state = AKIModelDidLoad;
+        state = AKIModelWillLoad;
+        
+        [self performLoading];
     }
+}
+
+- (BOOL)shouldNotifyObserver:(AKIModelState)state {
+    return AKIModelDidLoad == state || AKIModelWillLoad == state;
+}
+
+- (void)performLoading {
+    self.state = AKIModelDidLoad;
 }
 
 #pragma mark -

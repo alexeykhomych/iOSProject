@@ -16,7 +16,6 @@
 
 @interface AKIImageView ()
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, assign) AKIImageState state;
 
 - (void)initSubviews;
 
@@ -26,10 +25,6 @@
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
-
-- (instancetype)init {
-    return [super init];
-}
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -83,13 +78,13 @@
 
 - (void)load {
     @synchronized (self) {
-        self.state = AKIImageWillLoad;
+//        self.state = AKIImageWillLoad;
         
         AKIAsyncPerformInBackground(^{
             
         });
         
-        self.state = AKIImageDidLoad;
+//        self.state = AKIImageDidLoad;
     }
 }
 

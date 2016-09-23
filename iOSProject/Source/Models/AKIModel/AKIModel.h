@@ -29,5 +29,7 @@ typedef NS_ENUM(NSUInteger, AKIModelState) {
 @interface AKIModel : AKIObservableObject
 
 - (void)load;
+- (void)performLoading;
+- (BOOL)shouldNotifyObserver:(AKIModelState)state;
 
 @end
