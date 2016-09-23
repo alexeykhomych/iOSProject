@@ -11,6 +11,5 @@
 @interface AKIUsersArrayModel : AKIArrayModel
 
 - (void)save;
-- (void)load;
 
 @end

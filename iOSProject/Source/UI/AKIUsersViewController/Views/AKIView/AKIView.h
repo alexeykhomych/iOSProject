@@ -11,6 +11,8 @@
 @class AKILoadingView;
 
 @interface AKIView : UIView
+@property (nonatomic, strong) IBOutlet UIView *subView;
+
 @property (nonatomic, strong) AKILoadingView  *loadingView;
 @property (nonatomic, assign, getter=isLoadingViewVisible)  BOOL loadingViewVisible;
 

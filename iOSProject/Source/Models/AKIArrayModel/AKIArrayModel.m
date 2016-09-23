@@ -84,7 +84,7 @@ AKIConstant(NSUInteger, IndexNotFound, 0);
 
 - (void)removeAllObjects {
     @synchronized (self) {
-        for (id object in self.objects) {
+        for (id object in self.mutableObjects) {
             [self removeObject:object];
         }
     }
@@ -139,15 +139,6 @@ AKIConstant(NSUInteger, IndexNotFound, 0);
     switch (state) {
         case AKIModelUpdated:
             return @selector(arrayModel:didUpdateWithChangeModel:);
-            
-//        case AKIArrayModelFailedLoading:
-//            return @selector(arrayModelDidFailLoading:);
-//
-//        case AKIArrayModelDidLoad:
-//            return @selector(modelDidLoad);
-//            
-//        case AKIArrayModelWillLoad:
-//            return @selector(modelWillLoad);
             
         default:
             return nil;

@@ -78,13 +78,7 @@
 
 - (void)load {
     @synchronized (self) {
-//        self.state = AKIImageWillLoad;
-        
-        AKIAsyncPerformInBackground(^{
-            
-        });
-        
-//        self.state = AKIImageDidLoad;
+
     }
 }
 

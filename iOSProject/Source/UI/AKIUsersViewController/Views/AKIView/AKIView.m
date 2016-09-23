@@ -12,9 +12,15 @@
 
 #import "AKIGCD.h"
 
+#import "UINib+AKIExtensions.h"
+
 @interface AKIView ()
 
 - (void)initSubviews;
+- (void)initLoadingView;
+
+- (void)subviewToFront:(UIView *)view;
+- (void)subviewToBack:(UIView *)view;
 
 @end
 
@@ -23,7 +29,11 @@
 @dynamic loadingViewVisible;
 
 #pragma mark -
-#pragma mark Initializations and deallocations
+#pragma mark Initializations and Deallocations
+
+- (void)dealloc {
+    self.loadingView = nil;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -54,7 +64,10 @@
 }
 
 - (void)setLoadingViewVisible:(BOOL)loadingViewVisible {
-    self.loadingView.visible = loadingViewVisible;
+    AKILoadingView *loadingView = self.loadingView;
+    
+    loadingViewVisible ? [self subviewToFront:loadingView] : [self subviewToBack:loadingView];
+    loadingView.visible = loadingViewVisible;
 }
 
 - (BOOL)isLoadingViewVisible {
@@ -64,7 +77,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    
+    if (!self.loadingView) {
+        [self initSubviews];
+    }
 }
 
 #pragma mark -
@@ -72,23 +87,40 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-//    self.imageView.frame = self.bounds;
 }
 
 #pragma mark -
 #pragma mark Public
 
-#pragma mark -
-#pragma mark Private
-
 - (void)initSubviews {
-    id loadingView = [AKILoadingView loadingViewInSuperView:self];
-    self.loadingView = loadingView;
-    [self addSubview:loadingView];
+    [self initLoadingView];
     
     [self setNeedsLayout];
 }
 
+#pragma mark -
+#pragma mark Private
+
+- (void)initLoadingView {
+    AKILoadingView *loadingView = [AKILoadingView loadingViewInSuperView:self];
+    loadingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin
+                                        |UIViewAutoresizingFlexibleWidth
+                                        |UIViewAutoresizingFlexibleRightMargin
+                                        |UIViewAutoresizingFlexibleTopMargin
+                                        |UIViewAutoresizingFlexibleHeight
+                                        |UIViewAutoresizingFlexibleBottomMargin;
+    
+    self.loadingView = loadingView;
+    
+    
+}
+
+- (void)subviewToFront:(UIView *)view {
+    [self bringSubviewToFront:view];
+}
+
+- (void)subviewToBack:(UIView *)view {
+    [self sendSubviewToBack:view];
+}
 
 @end

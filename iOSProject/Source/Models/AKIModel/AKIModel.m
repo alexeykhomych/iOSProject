@@ -8,6 +8,13 @@
 
 #import "AKIModel.h"
 
+@interface AKIModel ()
+
+- (void)performLoading;
+- (BOOL)shouldNotifyObserver:(AKIModelState)state;
+
+@end
+
 @implementation AKIModel
 
 #pragma mark -
