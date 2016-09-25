@@ -59,21 +59,19 @@ static NSString * const kAKIFileName = @"UsersArrayModel.plist";
 
 - (void)performLoading {
     @synchronized (self) {
-        AKIAsyncPerformInBackground(^{
-            [self performBlockWithoutNotification:^{
-                id model = nil;
-                
-                if (!self.cached) {
-                    model = [AKIUser objectsWithCount:kAKIUsersCount];
-                } else {
-                    model = [NSKeyedUnarchiver unarchiveObjectWithFile:self.path];
-                }
-                
-                [self addObjects:model];
-            }];
+        [self performBlockWithoutNotification:^{
+            id model = nil;
             
-            self.state = AKIModelDidLoad;
-        });
+            if (!self.cached) {
+                model = [AKIUser objectsWithCount:kAKIUsersCount];
+            } else {
+                model = [NSKeyedUnarchiver unarchiveObjectWithFile:self.path];
+            }
+        
+            [self addObjects:model];
+        }];
+    
+        self.state = AKIModelDidLoad;
     }
 }
 

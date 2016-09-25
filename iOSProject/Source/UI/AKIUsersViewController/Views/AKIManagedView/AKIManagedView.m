@@ -22,29 +22,31 @@
         _model = model;
         
         [_model addObserver:self];
+        
+        [_model load];
     }
 }
 
 #pragma mark -
 #pragma mark Observable
 
-- (void)modelWillLoad {    
+- (void)modelWillLoad:(id)model {    
     AKIAsyncPerformInMainQueue(^{
         self.loadingViewVisible = YES;
     });
 }
 
-- (void)modelDidLoad {
+- (void)modelDidLoad:(id)model {
     AKIAsyncPerformInMainQueue(^{
         self.loadingViewVisible = NO;
     });
 }
 
-- (void)modelDidUpdated {
+- (void)modelDidUpdated:(id)model {
     
 }
 
-- (void)modelFailedLoading {
+- (void)modelFailedLoading:(id)model {
     
 }
 

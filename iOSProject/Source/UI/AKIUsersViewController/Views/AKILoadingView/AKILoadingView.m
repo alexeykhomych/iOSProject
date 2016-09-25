@@ -47,6 +47,12 @@ AKIConstant(float, Duration, 1.0);
 - (void)    setVisible:(BOOL)visible animated:(BOOL)animated
      completionHandler:(AKICompletionHandler)completionHandler
 {
+    if (_visible == visible) {
+        return;
+    }
+    
+    [self.superview bringSubviewToFront:self];
+    
     [UIView animateWithDuration:animated ? kAKIDuration : 0
                      animations:^{
                          self.activityView.alpha = visible ? 1.0 : 0;

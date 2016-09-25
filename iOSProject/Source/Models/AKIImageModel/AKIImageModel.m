@@ -15,7 +15,6 @@
 @interface AKIImageModel()
 @property (nonatomic, strong) UIImage       *image;
 @property (nonatomic, strong) NSURL         *url;
-@property (nonatomic, strong) NSOperation   *operation;
 
 @end
 
@@ -31,10 +30,6 @@
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
-- (void)dealloc {
-    self.operation = nil;
-}
-
 - (instancetype)initWithURL:(NSURL *)url {
     self = [self init];
     
@@ -48,20 +43,12 @@
 #pragma mark -
 #pragma mark Accessors
 
-- (void)setOperation:(NSOperation *)operation {
-    if (_operation != operation) {
-        [_operation cancel];
-        _operation = operation;
-    }
-}
 
 #pragma mark -
 #pragma mark Public
 
 - (void)dump {
-    self.operation = nil;
     self.image = nil;
-    self.state = AKIImageModelUnloaded;
 }
 
 #pragma mark -
@@ -73,22 +60,6 @@
         
         self.state = self.image ? AKIModelDidLoad : AKIModelWillLoad;
     });
-}
-
-#pragma mark -
-#pragma mark AKIObservableObject
-
-- (SEL)selectorForState:(NSUInteger)state {
-    switch (state) {
-        case AKIImageModelFailedLoading:
-            return @selector(imageModelFailedLoading);
-        
-        case AKIImageModelUnloaded:
-            return @selector(imageModelUnloaded);
-            
-        default:
-            return nil;
-    }
 }
 
 @end

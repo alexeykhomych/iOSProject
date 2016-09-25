@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 #import "AKIUsersArrayModel.h"
-#import "AKIManagedView.h"
 
 @interface AKIUsersViewController : UIViewController <
     UITableViewDelegate,

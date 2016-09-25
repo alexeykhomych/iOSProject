@@ -10,6 +10,8 @@
 
 #import "AKIUser.h"
 
+#import "AKIImageView.h"
+
 @implementation AKIUserCell
 
 #pragma mark -
@@ -38,15 +40,9 @@
 #pragma mark Public
 
 - (void)fillWithModel:(AKIUser *)user {
-    self.fullNameLabel.text = self.user.fullName;
-    self.userImageView.image = user.image;
-    
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
-        UIImage *image = user.image;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.userImageView.image = image;
-        });
-    });
+    self.fullNameLabel.text = user.fullName;
+    AKIImageModel *model = user.imageModel;
+    self.userImageView.imageModel = model;
 }
 
 @end

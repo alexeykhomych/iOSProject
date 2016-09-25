@@ -6,33 +6,13 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AKIManagedView.h"
 
-#import "AKIObservableObject.h"
+@class AKIImageModel;
 
-typedef NS_ENUM(NSUInteger, AKIImageState) {
-    AKIImageDidUnload,
-    AKIImageDidLoad,
-    AKIImageWillLoad,
-    AKIImageDidFailLoading,
-};
+@interface AKIImageView : AKIManagedView <AKIObservableModel>
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
 
-@class AKIImageView;
-
-@protocol AKIImageViewObserver <NSObject>
-
-@optional
-
-- (void)modelDidUnload:(AKIImageView *)model;
-- (void)modelDidLoad:(AKIImageView *)model;
-- (void)modelWillLoad:(AKIImageView *)model;
-- (void)modelDidFailLoading:(AKIImageView *)model;
-
-@end
-
-@interface AKIImageView : UIView
-@property (nonatomic, readonly) AKIImageState state;
-
-- (void)load;
+@property (nonatomic, strong) AKIImageModel *imageModel;
 
 @end

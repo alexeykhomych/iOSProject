@@ -19,9 +19,6 @@
 - (void)initSubviews;
 - (void)initLoadingView;
 
-- (void)subviewToFront:(UIView *)view;
-- (void)subviewToBack:(UIView *)view;
-
 @end
 
 @implementation AKIView
@@ -64,10 +61,7 @@
 }
 
 - (void)setLoadingViewVisible:(BOOL)loadingViewVisible {
-    AKILoadingView *loadingView = self.loadingView;
-    
-    loadingViewVisible ? [self subviewToFront:loadingView] : [self subviewToBack:loadingView];
-    loadingView.visible = loadingViewVisible;
+    self.loadingView.visible = loadingViewVisible;
 }
 
 - (BOOL)isLoadingViewVisible {
@@ -92,15 +86,6 @@
 #pragma mark -
 #pragma mark Public
 
-- (void)initSubviews {
-    [self initLoadingView];
-    
-    [self setNeedsLayout];
-}
-
-#pragma mark -
-#pragma mark Private
-
 - (void)initLoadingView {
     AKILoadingView *loadingView = [AKILoadingView loadingViewInSuperView:self];
     loadingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin
@@ -111,16 +96,15 @@
                                         |UIViewAutoresizingFlexibleBottomMargin;
     
     self.loadingView = loadingView;
-    
-    
 }
 
-- (void)subviewToFront:(UIView *)view {
-    [self bringSubviewToFront:view];
-}
+#pragma mark -
+#pragma mark Private
 
-- (void)subviewToBack:(UIView *)view {
-    [self sendSubviewToBack:view];
+- (void)initSubviews {
+    [self initLoadingView];
+    
+    [self setNeedsLayout];
 }
 
 @end

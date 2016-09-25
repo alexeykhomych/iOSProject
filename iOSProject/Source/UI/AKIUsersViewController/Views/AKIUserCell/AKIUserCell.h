@@ -9,10 +9,11 @@
 #import "AKITableViewCell.h"
 
 @class AKIUser;
+@class AKIImageView;
 
 @interface AKIUserCell : AKITableViewCell
-@property (nonatomic, strong)   IBOutlet    UILabel     *fullNameLabel;
-@property (nonatomic, strong)   IBOutlet    UIImageView *userImageView;
+@property (nonatomic, strong)   IBOutlet UILabel        *fullNameLabel;
+@property (nonatomic, strong)   IBOutlet AKIImageView   *userImageView;
 @property (nonatomic, strong)   AKIUser                 *user;
 
 - (void)fillWithModel:(AKIUser *)user;

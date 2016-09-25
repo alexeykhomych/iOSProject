@@ -15,7 +15,6 @@
 #import "AKIUserCell.h"
 
 @interface AKIImageView ()
-@property (nonatomic, strong) UIImageView *imageView;
 
 - (void)initSubviews;
 
@@ -43,6 +42,30 @@
 }
 
 #pragma mark -
+#pragma mark Accessors
+
+- (void)setImageModel:(AKIImageModel *)imageModel {
+    NSLog(@"");
+    if (_imageModel != imageModel) {
+        [_imageModel removeObserver:self];
+       
+        _imageModel = imageModel;
+        
+        [_imageModel addObserver:self];
+        
+        [_imageModel load];
+    }
+}
+
+- (void)setImageView:(UIImageView *)imageView {
+    if (_imageView != imageView) {
+        [_imageView removeFromSuperview];
+        _imageView = imageView;
+        [self addSubview:imageView];
+    }
+}
+
+#pragma mark -
 #pragma mark View Lifecycle
 
 - (void)layoutSubviews {
@@ -52,35 +75,7 @@
 }
 
 #pragma mark -
-#pragma mark AKIObservableObject
-
-- (SEL)selectorForState:(NSUInteger)state {
-    switch (state) {
-        case AKIImageDidUnload:
-            return @selector(modelDidUnload:);
-            
-        case AKIImageDidLoad:
-            return @selector(modelDidLoad:);
-            
-        case AKIImageWillLoad:
-            return @selector(modelWillLoad:);
-            
-        case AKIImageDidFailLoading:
-            return @selector(modelDidFailLoading:);
-            
-        default:
-            return nil;
-    }
-}
-
-#pragma mark -
 #pragma mark Public
-
-- (void)load {
-    @synchronized (self) {
-
-    }
-}
 
 #pragma mark -
 #pragma mark Private
