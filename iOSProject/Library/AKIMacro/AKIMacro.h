@@ -9,8 +9,8 @@
 #define AKIDefineBaseViewProperty(propertyName, viewClass) \
     @property (nonatomic, readonly) viewClass   *propertyName;
 
-#define AKIBaseViewGetterSynthesize(selector, viewClass) \
-    - (viewClass *)selector { \
+#define AKIBaseViewGetterSynthesize(viewClass, propertyName) \
+    - (viewClass *)propertyName { \
         if ([self isViewLoaded] && [self.view isKindOfClass:[viewClass class]]) { \
             return (viewClass *)self.view; \
         } \
@@ -28,7 +28,7 @@
     \
     @dynamic propertyName; \
     \
-    AKIBaseViewGetterSynthesize(propertyName, baseViewClass) \
+    AKIBaseViewGetterSynthesize(baseViewClass, propertyName) \
     \
     @end
 
@@ -57,7 +57,7 @@
 
 #define AKIConstant(type, name, value) static type const kAKI##name = value
 
-#define AKIStringConstant(name, value) static NSString const *kAKI##name = value
+#define AKIStringConstant(name, value) static NSString * const kAKI##name = value 
 
 #define AKIPerformBlockWithParametr(block, parametr) \
     if (block) { \

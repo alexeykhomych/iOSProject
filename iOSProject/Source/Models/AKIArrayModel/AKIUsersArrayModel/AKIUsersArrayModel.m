@@ -17,8 +17,7 @@
 #import "AKIMacro.h"
 
 AKIConstant(NSUInteger, UsersCount, 10);
-
-static NSString * const kAKIFileName = @"UsersArrayModel.plist";
+AKIStringConstant(FileName, @"UsersArrayModel.plist");
 
 @interface AKIUsersArrayModel ()
 @property (nonatomic, readonly)             NSFileManager   *fileManager;

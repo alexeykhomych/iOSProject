@@ -56,7 +56,7 @@
 
 - (void)performLoading {
     AKIAsyncPerformInBackground(^{
-        self.image = [UIImage imageWithContentsOfFile:[self.url absoluteString]];
+        self.image = [UIImage imageWithContentsOfFile:[self.url path]];
         
         self.state = self.image ? AKIModelDidLoad : AKIModelWillLoad;
     });

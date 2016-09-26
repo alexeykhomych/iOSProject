@@ -10,6 +10,8 @@
 
 #import "AKIGCD.h"
 
+#import "AKIMacro.h"
+
 @implementation AKIManagedView
 
 #pragma mark -
@@ -22,23 +24,27 @@
         _model = model;
         
         [_model addObserver:self];
-        
-        [_model load];
     }
 }
 
 #pragma mark -
 #pragma mark Observable
 
-- (void)modelWillLoad:(id)model {    
+- (void)modelWillLoad:(id)model {
+    AKIWeakify(self);
     AKIAsyncPerformInMainQueue(^{
+        AKIStrongifyAndReturnIfNil(self);
         self.loadingViewVisible = YES;
+        AKIPrintMethod
     });
 }
 
 - (void)modelDidLoad:(id)model {
+    AKIWeakify(self);
     AKIAsyncPerformInMainQueue(^{
+        AKIStrongifyAndReturnIfNil(self);
         self.loadingViewVisible = NO;
+        AKIPrintMethod
     });
 }
 

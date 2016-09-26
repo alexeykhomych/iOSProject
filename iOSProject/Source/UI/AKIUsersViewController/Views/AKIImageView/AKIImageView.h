@@ -8,9 +8,10 @@
 
 #import "AKIManagedView.h"
 
+@class AKIView;
 @class AKIImageModel;
 
-@interface AKIImageView : AKIManagedView <AKIObservableModel>
+@interface AKIImageView : AKIView
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
 
 @property (nonatomic, strong) AKIImageModel *imageModel;

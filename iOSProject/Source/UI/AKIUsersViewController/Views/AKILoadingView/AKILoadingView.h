@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AKIView.h"
+
 typedef void (^AKICompletionHandler)(void);
 
 @interface AKILoadingView : UIView

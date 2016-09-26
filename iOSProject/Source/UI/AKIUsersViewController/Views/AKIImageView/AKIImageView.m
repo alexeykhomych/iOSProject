@@ -45,9 +45,10 @@
 #pragma mark Accessors
 
 - (void)setImageModel:(AKIImageModel *)imageModel {
-    NSLog(@"");
     if (_imageModel != imageModel) {
         [_imageModel removeObserver:self];
+        
+        [_imageModel dump];
        
         _imageModel = imageModel;
         

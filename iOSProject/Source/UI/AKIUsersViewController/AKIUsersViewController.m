@@ -32,8 +32,6 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 @property (nonatomic, strong)   AKIFilteredUsersArrayModel      *filteredModel;
 @property (nonatomic, readonly) AKIArrayModel                   *dataSource;
 
-@property (nonatomic, strong)   AKIManagedView *managedView;
-
 @property (nonatomic, assign) BOOL  searching;
 
 @end
@@ -61,23 +59,14 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 }
 
 - (void)setModel:(AKIUsersArrayModel *)model {
-    if (_model != model) {
-        
-        [_model removeObserver:self];
-        _model = model;
-        [_model addObserver:self];
-        NSLog(@"LOADED2");
-        if (self.isViewLoaded) {
-            [_model load];
-        }
+    if (super.model != model) {
+        super.model = model;
         
         if (model) {
             self.filteredModel = [[AKIFilteredUsersArrayModel alloc] initWithModel:model];
         } else {
             self.filteredModel = nil;
         }
-        self.managedView = [[AKIManagedView alloc] initWithFrame:self.view.bounds];
-        self.managedView.model = model;
     }
 }
 
@@ -133,6 +122,16 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 }
 
 #pragma mark -
+#pragma mark UITableViewDelegate
+
+- (void)    tableView:(UITableView *)tableView
+ didEndDisplayingCell:(AKIUserCell *)cell
+    forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.user = nil;
+}
+
+#pragma mark -
 #pragma mark Interface Handling
 
 - (IBAction)onAddButton:(id)sender {
@@ -170,18 +169,8 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     AKIWeakify(self);
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
-        
        [self.userView.tableView reloadData];
     });
-}
-
-- (void)arrayModelDidFailLoading:(AKIArrayModel *)arrayModel {
-    AKIPrintMethod
-}
-
-- (void)arrayModelWillLoad:(AKIArrayModel *)arrayModel {
-    AKIPrintMethod
-    
 }
 
 #pragma mark -

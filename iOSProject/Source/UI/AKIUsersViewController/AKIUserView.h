@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AKIUserView : UIView
+#import "AKIManagedView.h"
+
+@interface AKIUserView : AKIManagedView
 @property (nonatomic, strong) IBOutlet UITableView  *tableView;
 
 @property (nonatomic, strong) IBOutlet UIButton     *addButton;
