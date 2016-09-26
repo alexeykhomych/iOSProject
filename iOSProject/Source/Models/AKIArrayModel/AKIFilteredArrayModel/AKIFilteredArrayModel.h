@@ -8,7 +8,7 @@
 
 #import "AKIArrayModel.h"
 
-@interface AKIFilteredArrayModel : AKIArrayModel <AKIArrayModelObserver>
+@interface AKIFilteredArrayModel : AKIArrayModel
 @property (nonatomic, readonly) NSPredicate *predicate;
 
 - (instancetype)initWithModel:(id)model;

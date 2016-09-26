@@ -141,7 +141,7 @@ AKIConstant(NSUInteger, IndexNotFound, 0);
             return @selector(arrayModel:didUpdateWithChangeModel:);
             
         default:
-            return nil;
+            return [super selectorForState:state];
     }
 }
 

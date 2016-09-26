@@ -41,24 +41,28 @@ AKIConstant(float, Duration, 1.0);
 }
 
 - (void)setVisible:(BOOL)visible animated:(BOOL)animated {
-    [self setVisible:visible animated:animated completionHandler:nil];
+    if (visible) {
+        [self setVisible:visible animated:animated completionHandler:nil];
+    } else {
+        AKIWeakify(self);
+        [self setVisible:visible animated:animated completionHandler:^{
+            AKIStrongify(self);
+            [self removeFromSuperview];
+        }];
+    }
 }
 
 - (void)    setVisible:(BOOL)visible animated:(BOOL)animated
      completionHandler:(AKICompletionHandler)completionHandler
 {
-    if (_visible == visible) {
-        return;
-    }
-    
     [self.superview bringSubviewToFront:self];
-    
     [UIView animateWithDuration:animated ? kAKIDuration : 0
                      animations:^{
                          self.activityView.alpha = visible ? 1.0 : 0;
                      }
                      completion:^(BOOL shouldFinish) {
                          _visible = visible;
+                         
                          if (completionHandler) {
                              completionHandler();
                          }

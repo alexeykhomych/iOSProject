@@ -52,10 +52,6 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    if (self.isViewLoaded) {
-        NSLog(@"LOADED");
-    }
 }
 
 - (void)setModel:(AKIUsersArrayModel *)model {

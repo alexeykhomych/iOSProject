@@ -12,19 +12,9 @@
 
 #import "AKIMacro.h"
 
-//AKIViewControllerBaseViewProperty(AKIManagedViewController, AKIManagedView, managedView)
+AKIViewControllerBaseViewProperty(AKIManagedViewController, AKIManagedView, managedView)
 
 @implementation AKIManagedViewController
-
-//@dynamic managedView;
-
-- (AKIManagedView *)managedView { \
-    if ([self isViewLoaded] && [self.view isKindOfClass:[AKIManagedView class]]) { \
-        return (AKIManagedView *)self.view; \
-    } \
-    \
-    return nil; \
-}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -10,7 +10,7 @@
 
 #import "AKIView.h"
 
-@interface AKIManagedView : AKIView <AKIObservableModel>
+@interface AKIManagedView : AKIView
 @property (nonatomic, strong) AKIModel *model;
 
 @end

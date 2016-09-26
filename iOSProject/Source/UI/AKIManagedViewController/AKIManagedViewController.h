@@ -14,7 +14,7 @@
 @class AKIModel;
 
 @interface AKIManagedViewController : UIViewController <AKIObservableModel>
-@property (nonatomic, readonly) AKIManagedView *managedView;
-@property (nonatomic, strong) AKIModel *model;
+@property (nonatomic, readonly) AKIManagedView  *managedView;
+@property (nonatomic, strong)   AKIModel        *model;
 
 @end
