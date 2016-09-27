@@ -1,5 +1,5 @@
 //
-//  AKIManagedViewController.h
+//  AKILoadingViewContainerController.h
 //  iOSProject
 //
 //  Created by Alexey Khomych on 26.09.16.
@@ -10,11 +10,11 @@
 
 #import "AKIModel.h" 
 
-@class AKIManagedView;
+@class AKILoadingViewContainer;
 @class AKIModel;
 
-@interface AKIManagedViewController : UIViewController <AKIObservableModel>
-@property (nonatomic, readonly) AKIManagedView  *managedView;
+@interface AKISuperViewController : UIViewController <AKIObservableModel>
+@property (nonatomic, readonly) AKILoadingViewContainer  *container;
 @property (nonatomic, strong)   AKIModel        *model;
 
 @end

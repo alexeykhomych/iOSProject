@@ -57,21 +57,19 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
 }
 
 - (void)performLoading {
-    @synchronized (self) {
-        [self performBlockWithoutNotification:^{
-            id model = nil;
-            
-            if (!self.cached) {
-                model = [AKIUser objectsWithCount:kAKIUsersCount];
-            } else {
-                model = [NSKeyedUnarchiver unarchiveObjectWithFile:self.path];
-            }
+    [self performBlockWithoutNotification:^{
+        id model = nil;
         
-            [self addObjects:model];
-        }];
+        if (!self.cached) {
+            model = [AKIUser objectsWithCount:kAKIUsersCount];
+        } else {
+            model = [NSKeyedUnarchiver unarchiveObjectWithFile:self.path];
+        }
+        
+        [self addObjects:model];
+    }];
     
-        self.state = AKIModelDidLoad;
-    }
+    self.state = AKIModelDidLoad;
 }
 
 @end

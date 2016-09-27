@@ -19,9 +19,9 @@ AKIConstant(float, Duration, 1.0);
 #pragma mark -
 #pragma mark Class methods
 
-+ (instancetype)loadingViewInSuperView:(UIView *)superView {
++ (instancetype)loadingViewInSuperview:(UIView *)superview {
     AKILoadingView *view = [NSBundle objectWithClass:[AKILoadingView class]];
-    view.frame = superView.bounds;
+    view.frame = superview.bounds;
     
     return view;
 }
@@ -41,19 +41,18 @@ AKIConstant(float, Duration, 1.0);
 }
 
 - (void)setVisible:(BOOL)visible animated:(BOOL)animated {
-    if (visible) {
-        [self setVisible:visible animated:animated completionHandler:nil];
-    } else {
-        AKIWeakify(self);
-        [self setVisible:visible animated:animated completionHandler:^{
+    AKIWeakify(self);
+    [self setVisible:visible animated:animated completionHandler:^{
+        if (!visible) {
             AKIStrongify(self);
             [self removeFromSuperview];
-        }];
-    }
+        }
+    }];
 }
 
-- (void)    setVisible:(BOOL)visible animated:(BOOL)animated
-     completionHandler:(AKICompletionHandler)completionHandler
+- (void)setVisible:(BOOL)visible
+          animated:(BOOL)animated
+ completionHandler:(AKICompletionHandler)completionHandler
 {
     [self.superview bringSubviewToFront:self];
     [UIView animateWithDuration:animated ? kAKIDuration : 0

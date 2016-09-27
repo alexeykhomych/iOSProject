@@ -6,11 +6,11 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIManagedViewController.h"
+#import "AKISuperViewController.h"
 
 #import "AKIUsersArrayModel.h"
 
-@interface AKIUsersViewController : AKIManagedViewController <
+@interface AKIUsersViewController : AKISuperViewController <
     UITableViewDelegate,
     UITableViewDataSource,
     UISearchBarDelegate,

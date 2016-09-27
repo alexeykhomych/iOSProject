@@ -1,20 +1,20 @@
 //
-//  AKIManagedViewController.m
+//  AKILoadingViewContainerController.m
 //  iOSProject
 //
 //  Created by Alexey Khomych on 26.09.16.
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIManagedViewController.h"
+#import "AKISuperViewController.h"
 
-#import "AKIManagedView.h"
+#import "AKILoadingViewContainer.h"
 
 #import "AKIMacro.h"
 
-AKIViewControllerBaseViewProperty(AKIManagedViewController, AKIManagedView, managedView)
+@implementation AKISuperViewController
 
-@implementation AKIManagedViewController
+AKIBaseViewGetterSynthesize(AKILoadingViewContainer, container)
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -23,7 +23,7 @@ AKIViewControllerBaseViewProperty(AKIManagedViewController, AKIManagedView, mana
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.managedView.model = self.model;
+    self.container.model = self.model;
     [self.model load];
 }
 

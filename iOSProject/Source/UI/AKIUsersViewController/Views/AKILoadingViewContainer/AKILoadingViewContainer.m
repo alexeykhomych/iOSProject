@@ -1,18 +1,18 @@
 //
-//  AKIManagedView.m
+//  AKILoadingViewContainer.m
 //  iOSProject
 //
 //  Created by Alexey Khomych on 22.09.16.
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIManagedView.h"
+#import "AKILoadingViewContainer.h"
 
 #import "AKIGCD.h"
 
 #import "AKIMacro.h"
 
-@implementation AKIManagedView
+@implementation AKILoadingViewContainer
 
 #pragma mark -
 #pragma mark Public
@@ -48,11 +48,11 @@
     });
 }
 
-- (void)modelDidUpdated:(id)model {
+- (void)modelDidUpdate:(id)model {
     
 }
 
-- (void)modelFailedLoading:(id)model {
+- (void)modelDidFailLoading:(id)model {
     
 }
 

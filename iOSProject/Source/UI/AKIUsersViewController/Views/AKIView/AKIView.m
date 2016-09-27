@@ -17,7 +17,6 @@
 @interface AKIView ()
 
 - (void)initSubviews;
-- (void)initLoadingView;
 
 @end
 
@@ -89,13 +88,10 @@
 #pragma mark Public
 
 - (void)initLoadingView {
-    AKILoadingView *loadingView = [AKILoadingView loadingViewInSuperView:self];
+    AKILoadingView *loadingView = [AKILoadingView loadingViewInSuperview:self];
     loadingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin
-                                        |UIViewAutoresizingFlexibleWidth
-                                        |UIViewAutoresizingFlexibleRightMargin
-                                        |UIViewAutoresizingFlexibleTopMargin
-                                        |UIViewAutoresizingFlexibleHeight
-                                        |UIViewAutoresizingFlexibleBottomMargin;
+                                    |UIViewAutoresizingFlexibleRightMargin
+                                    |UIViewAutoresizingFlexibleBottomMargin;
     
     self.loadingView = loadingView;
 }
@@ -104,9 +100,10 @@
 #pragma mark Private
 
 - (void)initSubviews {
+//    self.loadingView = [self initLoadingView];
     [self initLoadingView];
-    
     [self setNeedsLayout];
+    
 }
 
 @end

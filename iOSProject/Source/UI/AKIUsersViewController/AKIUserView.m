@@ -6,7 +6,7 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIUserView.h"
+#import "AKIUserView.h" 
 
 @implementation AKIUserView
 

@@ -10,6 +10,7 @@
     @property (nonatomic, readonly) viewClass   *propertyName;
 
 #define AKIBaseViewGetterSynthesize(viewClass, propertyName) \
+    @dynamic propertyName; \
     - (viewClass *)propertyName { \
         if ([self isViewLoaded] && [self.view isKindOfClass:[viewClass class]]) { \
             return (viewClass *)self.view; \
@@ -26,7 +27,6 @@
     \
     @implementation viewControllerClass (__AKIPrivateBaseView_##baseViewClass##_##propertyName) \
     \
-    @dynamic propertyName; \
     \
     AKIBaseViewGetterSynthesize(baseViewClass, propertyName) \
     \

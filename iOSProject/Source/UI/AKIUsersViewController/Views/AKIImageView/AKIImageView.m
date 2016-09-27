@@ -16,7 +16,7 @@
 
 @interface AKIImageView ()
 
-- (void)initSubviews;
+- (void)imageViewAutoresizing;
 
 @end
 
@@ -26,19 +26,11 @@
 #pragma mark Initializations and Deallocations
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    
-    [self initSubviews];
-    
-    return self;
+    return [super initWithCoder:aDecoder];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    
-    [self initSubviews];
-    
-    return self;
+    return [super initWithFrame:frame];
 }
 
 #pragma mark -
@@ -47,13 +39,11 @@
 - (void)setImageModel:(AKIImageModel *)imageModel {
     if (_imageModel != imageModel) {
         [_imageModel removeObserver:self];
-        
-        [_imageModel dump];
        
         _imageModel = imageModel;
         
         [_imageModel addObserver:self];
-        
+
         [_imageModel load];
     }
 }
@@ -62,31 +52,20 @@
     if (_imageView != imageView) {
         [_imageView removeFromSuperview];
         _imageView = imageView;
+        
+        [self imageViewAutoresizing];
+        
         [self addSubview:imageView];
     }
 }
 
 #pragma mark -
-#pragma mark View Lifecycle
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    self.imageView.frame = self.bounds;
-}
-
-#pragma mark -
-#pragma mark Public
-
-#pragma mark -
 #pragma mark Private
 
-- (void)initSubviews {
-    id imageView = [[UIImageView alloc] init];
-    self.imageView = imageView;
-    [self addSubview:imageView];
-    
-    [self setNeedsLayout];
+- (void)imageViewAutoresizing {
+    self.imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin
+                                        |UIViewAutoresizingFlexibleRightMargin
+                                        |UIViewAutoresizingFlexibleBottomMargin;
 }
 
 @end

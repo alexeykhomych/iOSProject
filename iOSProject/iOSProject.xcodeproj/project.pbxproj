@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		84190E291D994A8500C4E3C9 /* AKIManagedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84190E281D994A8500C4E3C9 /* AKIManagedViewController.m */; };
+		84190E2D1D9A78B600C4E3C9 /* AKILoadingViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84190E2C1D9A78B600C4E3C9 /* AKILoadingViewContainer.m */; };
 		841A43961D849BEF00297BF5 /* NSBundle+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A43951D849BEF00297BF5 /* NSBundle+AKIExtensions.m */; };
 		841A439E1D89ABEC00297BF5 /* AKIFilteredArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A439D1D89ABEB00297BF5 /* AKIFilteredArrayModel.m */; };
 		841A43A21D8AF2D600297BF5 /* AKIImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A43A11D8AF2D600297BF5 /* AKIImageView.m */; };
@@ -40,12 +40,12 @@
 		843039CC1D82E69300083ADE /* AKIArrayChangeModelMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039C61D82E69200083ADE /* AKIArrayChangeModelMove.m */; };
 		843039CD1D82E69300083ADE /* AKIArrayChangeModelTwoIndexes.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039C81D82E69200083ADE /* AKIArrayChangeModelTwoIndexes.m */; };
 		843039D11D8306D500083ADE /* UIWindow+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 843039D01D8306D500083ADE /* UIWindow+AKIExtensions.m */; };
+		846E38C31D9ACDE300E9E164 /* AKISuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E38C21D9ACDE300E9E164 /* AKISuperViewController.m */; };
 		848A319E1D8C47C400622365 /* AKILoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848A319D1D8C47C400622365 /* AKILoadingView.xib */; };
 		848A31A21D90097E00622365 /* AKIFilteredUsersArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848A31A11D90097E00622365 /* AKIFilteredUsersArrayModel.m */; };
 		848A31A61D907D9100622365 /* NSObject+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 848A31A51D907D9100622365 /* NSObject+AKIExtensions.m */; };
 		848A31AA1D91684F00622365 /* AKIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848A31A91D91684F00622365 /* AKIView.m */; };
 		848A31AE1D92B32700622365 /* AKIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848A31AD1D92B32700622365 /* AKIModel.m */; };
-		848A31C21D942A8C00622365 /* AKIManagedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 848A31C11D942A8C00622365 /* AKIManagedView.m */; };
 		848EE67E1D48CFE700B7F780 /* iOSProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */; };
 		848EE69A1D48D3EA00B7F780 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6901D48D3EA00B7F780 /* Assets.xcassets */; };
 		848EE69B1D48D3EA00B7F780 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6911D48D3EA00B7F780 /* LaunchScreen.storyboard */; };
@@ -63,8 +63,8 @@
 		11302A621AB4E5C9756705C0 /* Pods-iOSProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSProject/Pods-iOSProject.debug.xcconfig"; sourceTree = "<group>"; };
 		664109B08106708294D9A04F /* Pods-iOSProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSProjectTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSProjectTests/Pods-iOSProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		6E034D21D28E3456E96FEDFC /* Pods-iOSProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSProject/Pods-iOSProject.release.xcconfig"; sourceTree = "<group>"; };
-		84190E271D994A8500C4E3C9 /* AKIManagedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIManagedViewController.h; sourceTree = "<group>"; };
-		84190E281D994A8500C4E3C9 /* AKIManagedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIManagedViewController.m; sourceTree = "<group>"; };
+		84190E2B1D9A78B600C4E3C9 /* AKILoadingViewContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKILoadingViewContainer.h; sourceTree = "<group>"; };
+		84190E2C1D9A78B600C4E3C9 /* AKILoadingViewContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKILoadingViewContainer.m; sourceTree = "<group>"; };
 		841A43941D849BEF00297BF5 /* NSBundle+AKIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+AKIExtensions.h"; sourceTree = "<group>"; };
 		841A43951D849BEF00297BF5 /* NSBundle+AKIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+AKIExtensions.m"; sourceTree = "<group>"; };
 		841A439C1D89ABEB00297BF5 /* AKIFilteredArrayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFilteredArrayModel.h; sourceTree = "<group>"; };
@@ -126,6 +126,8 @@
 		843039C81D82E69200083ADE /* AKIArrayChangeModelTwoIndexes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayChangeModelTwoIndexes.m; sourceTree = "<group>"; };
 		843039CF1D8306D500083ADE /* UIWindow+AKIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+AKIExtensions.h"; sourceTree = "<group>"; };
 		843039D01D8306D500083ADE /* UIWindow+AKIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+AKIExtensions.m"; sourceTree = "<group>"; };
+		846E38C11D9ACDE300E9E164 /* AKISuperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKISuperViewController.h; sourceTree = "<group>"; };
+		846E38C21D9ACDE300E9E164 /* AKISuperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKISuperViewController.m; sourceTree = "<group>"; };
 		848A319D1D8C47C400622365 /* AKILoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKILoadingView.xib; sourceTree = "<group>"; };
 		848A31A01D90097E00622365 /* AKIFilteredUsersArrayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFilteredUsersArrayModel.h; sourceTree = "<group>"; };
 		848A31A11D90097E00622365 /* AKIFilteredUsersArrayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFilteredUsersArrayModel.m; sourceTree = "<group>"; };
@@ -135,8 +137,6 @@
 		848A31A91D91684F00622365 /* AKIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIView.m; sourceTree = "<group>"; };
 		848A31AC1D92B32700622365 /* AKIModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIModel.h; sourceTree = "<group>"; };
 		848A31AD1D92B32700622365 /* AKIModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIModel.m; sourceTree = "<group>"; };
-		848A31C01D942A8C00622365 /* AKIManagedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIManagedView.h; sourceTree = "<group>"; };
-		848A31C11D942A8C00622365 /* AKIManagedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIManagedView.m; sourceTree = "<group>"; };
 		848EE65D1D48CEEE00B7F780 /* iOSProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67B1D48CFE700B7F780 /* iOSProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSProjectTests.m; sourceTree = "<group>"; };
@@ -172,13 +172,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		84190E261D994A6100C4E3C9 /* AKIManagedViewController */ = {
+		84190E2A1D9A78B600C4E3C9 /* AKILoadingViewContainer */ = {
 			isa = PBXGroup;
 			children = (
-				84190E271D994A8500C4E3C9 /* AKIManagedViewController.h */,
-				84190E281D994A8500C4E3C9 /* AKIManagedViewController.m */,
+				84190E2B1D9A78B600C4E3C9 /* AKILoadingViewContainer.h */,
+				84190E2C1D9A78B600C4E3C9 /* AKILoadingViewContainer.m */,
 			);
-			path = AKIManagedViewController;
+			path = AKILoadingViewContainer;
 			sourceTree = "<group>";
 		};
 		841A43931D849BCE00297BF5 /* NSBundle */ = {
@@ -223,7 +223,6 @@
 			isa = PBXGroup;
 			children = (
 				843039231D6C7DD500083ADE /* Categories */,
-				848EE68F1D48D3EA00B7F780 /* Resources */,
 				8430387D1D50EE2100083ADE /* Models */,
 				843038811D50EE2100083ADE /* UI */,
 			);
@@ -245,7 +244,7 @@
 		843038811D50EE2100083ADE /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				84190E261D994A6100C4E3C9 /* AKIManagedViewController */,
+				846E38C01D9ACDE300E9E164 /* AKISuperViewController */,
 				8430393C1D6F0DDB00083ADE /* AKIUsersViewController */,
 			);
 			path = UI;
@@ -403,7 +402,7 @@
 		843039421D6F0DDC00083ADE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				848A31BF1D942A8C00622365 /* AKIManagedView */,
+				84190E2A1D9A78B600C4E3C9 /* AKILoadingViewContainer */,
 				848A31A71D91682600622365 /* AKIView */,
 				841A43A31D8AF35700297BF5 /* AKILoadingView */,
 				841A439F1D8AF22900297BF5 /* AKIImageView */,
@@ -543,6 +542,15 @@
 			path = UIWindow;
 			sourceTree = "<group>";
 		};
+		846E38C01D9ACDE300E9E164 /* AKISuperViewController */ = {
+			isa = PBXGroup;
+			children = (
+				846E38C11D9ACDE300E9E164 /* AKISuperViewController.h */,
+				846E38C21D9ACDE300E9E164 /* AKISuperViewController.m */,
+			);
+			path = AKISuperViewController;
+			sourceTree = "<group>";
+		};
 		848A319F1D90091B00622365 /* AKIFilteredUsersArrayModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -579,19 +587,11 @@
 			path = AKIModel;
 			sourceTree = "<group>";
 		};
-		848A31BF1D942A8C00622365 /* AKIManagedView */ = {
-			isa = PBXGroup;
-			children = (
-				848A31C01D942A8C00622365 /* AKIManagedView.h */,
-				848A31C11D942A8C00622365 /* AKIManagedView.m */,
-			);
-			path = AKIManagedView;
-			sourceTree = "<group>";
-		};
 		848EE6541D48CEEE00B7F780 = {
 			isa = PBXGroup;
 			children = (
 				843038941D50EE3200083ADE /* Library */,
+				848EE68F1D48D3EA00B7F780 /* Resources */,
 				843038771D50EE2100083ADE /* Source */,
 				848EE6CC1D48DD5300B7F780 /* iOSProject */,
 				848EE67C1D48CFE700B7F780 /* iOSProjectTests */,
@@ -627,8 +627,7 @@
 				848EE6901D48D3EA00B7F780 /* Assets.xcassets */,
 				848EE6911D48D3EA00B7F780 /* LaunchScreen.storyboard */,
 			);
-			name = Resources;
-			path = ../Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		848EE6C91D48D79F00B7F780 /* Specs */ = {
@@ -861,6 +860,7 @@
 				848A31AE1D92B32700622365 /* AKIModel.m in Sources */,
 				848A31AA1D91684F00622365 /* AKIView.m in Sources */,
 				843039D11D8306D500083ADE /* UIWindow+AKIExtensions.m in Sources */,
+				84190E2D1D9A78B600C4E3C9 /* AKILoadingViewContainer.m in Sources */,
 				843039C91D82E69300083ADE /* AKIArrayChangeModelDelete.m in Sources */,
 				841A43961D849BEF00297BF5 /* NSBundle+AKIExtensions.m in Sources */,
 				8430395D1D75E44F00083ADE /* NSMutableArray+AKIExtension.m in Sources */,
@@ -881,11 +881,10 @@
 				843039CB1D82E69300083ADE /* AKIArrayChangeModelOneIndex.m in Sources */,
 				841A43A61D8AF38400297BF5 /* AKILoadingView.m in Sources */,
 				843039301D6C7DD500083ADE /* NSArray+AKIExtensions.m in Sources */,
-				84190E291D994A8500C4E3C9 /* AKIManagedViewController.m in Sources */,
 				843038C31D5C8D4100083ADE /* AKIUser.m in Sources */,
+				846E38C31D9ACDE300E9E164 /* AKISuperViewController.m in Sources */,
 				843039651D79B13200083ADE /* AKIUsersArrayModel.m in Sources */,
 				8430394A1D6F0DDC00083ADE /* AKIUserCell.m in Sources */,
-				848A31C21D942A8C00622365 /* AKIManagedView.m in Sources */,
 				841A43A21D8AF2D600297BF5 /* AKIImageView.m in Sources */,
 				843039CD1D82E69300083ADE /* AKIArrayChangeModelTwoIndexes.m in Sources */,
 				843038FB1D63457300083ADE /* AKIImageModel.m in Sources */,

@@ -28,6 +28,10 @@
 }
 
 - (instancetype)initWithModel:(id)model {
+    if (!model) {
+        return nil;
+    }
+    
     self = [super init];
     self.arrayModel = model;
     

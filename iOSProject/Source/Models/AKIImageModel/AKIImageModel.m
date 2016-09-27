@@ -8,11 +8,11 @@
 
 #import "AKIImageModel.h"
 
-#import "AKIMacro.h"
-
 #import "AKIGCD.h"
 
-@interface AKIImageModel()
+#import "AKIMacro.h"
+
+@interface AKIImageModel ()
 @property (nonatomic, strong) UIImage       *image;
 @property (nonatomic, strong) NSURL         *url;
 
@@ -41,25 +41,11 @@
 }
 
 #pragma mark -
-#pragma mark Accessors
-
-
-#pragma mark -
-#pragma mark Public
-
-- (void)dump {
-    self.image = nil;
-}
-
-#pragma mark -
 #pragma mark Private
 
-- (void)performLoading {
-    AKIAsyncPerformInBackground(^{
-        self.image = [UIImage imageWithContentsOfFile:[self.url path]];
-        
-        self.state = self.image ? AKIModelDidLoad : AKIModelWillLoad;
-    });
+- (void)performLoading {    
+    self.image = [UIImage imageWithContentsOfFile:[self.url path]];
+    self.state = self.image ? AKIModelDidLoad : AKIModelWillLoad;
 }
 
 @end

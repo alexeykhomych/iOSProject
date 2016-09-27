@@ -14,15 +14,15 @@ typedef NS_ENUM(NSUInteger, AKIModelState) {
     AKIModelUpdated,
     AKIModelDidLoad,
     AKIModelWillLoad,
-    AKIModelFailedLoading
+    AKIModelDidFailLoading
 };
 
 @protocol AKIObservableModel <NSObject>
 
-- (void)modelDidUpdated:(id)model;
+- (void)modelDidUpdate:(id)model;
 - (void)modelWillLoad:(id)model;
 - (void)modelDidLoad:(id)model;
-- (void)modelFailedLoading:(id)model;
+- (void)modelDidFailLoading:(id)model;
 
 @end
 

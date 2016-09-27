@@ -17,6 +17,6 @@ typedef void (^AKICompletionHandler)(void);
 - (void)setVisible:(BOOL)visible animated:(BOOL)animated;
 - (void)setVisible:(BOOL)visible animated:(BOOL)animated completionHandler:(AKICompletionHandler)completionHandler;
 
-+ (instancetype)loadingViewInSuperView:(UIView *)superView;
++ (instancetype)loadingViewInSuperview:(UIView *)superview;
 
 @end

@@ -6,9 +6,8 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIManagedView.h"
+#import "AKIView.h"
 
-@class AKIView;
 @class AKIImageModel;
 
 @interface AKIImageView : AKIView

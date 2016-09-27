@@ -18,7 +18,7 @@
 
 #import "AKIGCD.h"
 
-#import "AKIManagedView.h"
+#import "AKILoadingViewContainer.h"
 
 #import "NSBundle+AKIExtensions.h"
 #import "UINib+AKIExtensions.h"
@@ -39,6 +39,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 @implementation AKIUsersViewController
 
 @dynamic dataSource;
+@dynamic model;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -55,22 +56,21 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 }
 
 - (void)setModel:(AKIUsersArrayModel *)model {
-    if (super.model != model) {
-        super.model = model;
+    if ([super model] != model) {
+        [super setModel:model];
         
-        if (model) {
-            self.filteredModel = [[AKIFilteredUsersArrayModel alloc] initWithModel:model];
-        } else {
-            self.filteredModel = nil;
-        }
+        self.filteredModel = [[AKIFilteredUsersArrayModel alloc] initWithModel:model];
     }
 }
 
 - (void)filterContentForSearchText:(NSString*)searchText {
     AKIPrintMethod
+    AKIFilteredUsersArrayModel *filteredModel = self.filteredModel;
     
-    self.filteredModel.filter = searchText;
-    [self.filteredModel filterObjects];
+    filteredModel.filter = searchText;
+    [filteredModel filterObjects];
+    
+    self.filteredModel = filteredModel;
     
     [self.userView.tableView reloadData];
 }

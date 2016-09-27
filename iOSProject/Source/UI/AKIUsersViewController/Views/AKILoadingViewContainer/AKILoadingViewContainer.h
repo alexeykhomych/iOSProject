@@ -1,5 +1,5 @@
 //
-//  AKIManagedView.h
+//  AKILoadingViewContainer.h
 //  iOSProject
 //
 //  Created by Alexey Khomych on 22.09.16.
@@ -10,7 +10,7 @@
 
 #import "AKIView.h"
 
-@interface AKIManagedView : AKIView
+@interface AKILoadingViewContainer : AKIView
 @property (nonatomic, strong) AKIModel *model;
 
 @end

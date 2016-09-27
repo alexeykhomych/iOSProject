@@ -18,6 +18,4 @@
 
 - (instancetype)initWithURL:(NSURL *)url;
 
-- (void)dump;
-
 @end
