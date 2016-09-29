@@ -22,7 +22,7 @@ AKIConstant(float, Duration, 1.0);
 + (instancetype)loadingViewInSuperview:(UIView *)superview {
     AKILoadingView *view = [NSBundle objectWithClass:[AKILoadingView class]];
     view.frame = superview.bounds;
-    
+    view.activityView.frame = superview.bounds;
     return view;
 }
 

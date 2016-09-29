@@ -35,7 +35,6 @@
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
         self.loadingViewVisible = YES;
-        AKIPrintMethod
     });
 }
 
@@ -44,7 +43,6 @@
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
         self.loadingViewVisible = NO;
-        AKIPrintMethod
     });
 }
 
