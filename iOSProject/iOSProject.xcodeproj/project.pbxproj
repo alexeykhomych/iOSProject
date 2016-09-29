@@ -44,6 +44,7 @@
 		846E38DA1D9C10DE00E9E164 /* AKIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E38D51D9C10DE00E9E164 /* AKIView.m */; };
 		846E38DD1D9C110E00E9E164 /* AKIUsersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E38DB1D9C110E00E9E164 /* AKIUsersView.m */; };
 		846E38E11D9D339300E9E164 /* NSNotificationCenter+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E38E01D9D339300E9E164 /* NSNotificationCenter+AKIExtensions.m */; };
+		846E38E51D9D64A100E9E164 /* AKIImageModelCached.m in Sources */ = {isa = PBXBuildFile; fileRef = 846E38E41D9D64A100E9E164 /* AKIImageModelCached.m */; };
 		848A31A21D90097E00622365 /* AKIFilteredUsersArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848A31A11D90097E00622365 /* AKIFilteredUsersArrayModel.m */; };
 		848A31A61D907D9100622365 /* NSObject+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 848A31A51D907D9100622365 /* NSObject+AKIExtensions.m */; };
 		848A31AE1D92B32700622365 /* AKIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848A31AD1D92B32700622365 /* AKIModel.m */; };
@@ -134,6 +135,8 @@
 		846E38DC1D9C110E00E9E164 /* AKIUsersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIUsersView.h; sourceTree = "<group>"; };
 		846E38DF1D9D339300E9E164 /* NSNotificationCenter+AKIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+AKIExtensions.h"; sourceTree = "<group>"; };
 		846E38E01D9D339300E9E164 /* NSNotificationCenter+AKIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotificationCenter+AKIExtensions.m"; sourceTree = "<group>"; };
+		846E38E31D9D64A100E9E164 /* AKIImageModelCached.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIImageModelCached.h; sourceTree = "<group>"; };
+		846E38E41D9D64A100E9E164 /* AKIImageModelCached.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIImageModelCached.m; sourceTree = "<group>"; };
 		848A31A01D90097E00622365 /* AKIFilteredUsersArrayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFilteredUsersArrayModel.h; sourceTree = "<group>"; };
 		848A31A11D90097E00622365 /* AKIFilteredUsersArrayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFilteredUsersArrayModel.m; sourceTree = "<group>"; };
 		848A31A41D907D9100622365 /* NSObject+AKIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AKIExtensions.h"; sourceTree = "<group>"; };
@@ -211,6 +214,7 @@
 				843039561D75C08000083ADE /* AKIArrayChangeModel */,
 				8430391C1D6A2EE400083ADE /* AKIArrayModel */,
 				843038F81D63457300083ADE /* AKIImageModel */,
+				846E38E21D9D63C100E9E164 /* AKIImageModelCached */,
 				843038C01D5C8D4100083ADE /* AKIUser */,
 			);
 			path = Models;
@@ -581,6 +585,15 @@
 			path = NSNotificationCenter;
 			sourceTree = "<group>";
 		};
+		846E38E21D9D63C100E9E164 /* AKIImageModelCached */ = {
+			isa = PBXGroup;
+			children = (
+				846E38E31D9D64A100E9E164 /* AKIImageModelCached.h */,
+				846E38E41D9D64A100E9E164 /* AKIImageModelCached.m */,
+			);
+			path = AKIImageModelCached;
+			sourceTree = "<group>";
+		};
 		848A319F1D90091B00622365 /* AKIFilteredUsersArrayModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -911,6 +924,7 @@
 				843038FB1D63457300083ADE /* AKIImageModel.m in Sources */,
 				848EE6D01D48DD5300B7F780 /* main.m in Sources */,
 				846E38E11D9D339300E9E164 /* NSNotificationCenter+AKIExtensions.m in Sources */,
+				846E38E51D9D64A100E9E164 /* AKIImageModelCached.m in Sources */,
 				843039CA1D82E69300083ADE /* AKIArrayChangeModelInsert.m in Sources */,
 				843039591D75C0B000083ADE /* AKIArrayChangeModel.m in Sources */,
 				848A31A21D90097E00622365 /* AKIFilteredUsersArrayModel.m in Sources */,

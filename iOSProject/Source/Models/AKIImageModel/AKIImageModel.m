@@ -16,6 +16,11 @@
 @property (nonatomic, strong) UIImage       *image;
 @property (nonatomic, strong) NSURL         *url;
 
+@property (nonatomic, copy)     NSString    *imageName;
+@property (nonatomic, assign)   BOOL        cached;
+
+- (void)downloadImage:(NSString *)path;
+
 - (NSURL *)defaultURL;
 
 @end
@@ -43,6 +48,16 @@
 #pragma mark -
 #pragma mark Private
 
+- (void)load {
+    if (!self.cached) {
+        [self downloadImage:self.url.absoluteString];
+        
+        return;
+    }
+    
+    [super load];
+}
+
 - (void)performLoading {    
     UIImage *image = [UIImage imageWithContentsOfFile:[self.url path]];
     self.image = image;
@@ -51,6 +66,15 @@
 
 - (NSURL *)defaultURL {
     return [[NSBundle mainBundle] URLForResource:@"image" withExtension:@"jpg"];
+}
+
+- (void)downloadImage:(NSString *)path {
+    AKIAsyncPerformInBackground(^{
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
+        self.image = [UIImage imageWithData:data];
+        
+        self.state = AKIModelDidLoad;
+    });
 }
 
 @end
