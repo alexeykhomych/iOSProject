@@ -94,7 +94,7 @@ AKIConstant(NSUInteger, IndexNotFound, 0);
     @synchronized (self) {
         if (objects) {
             self.mutableObjects = [objects mutableCopy];
-            self.state = AKIModelUpdated;
+            [self notifyOfState:AKIArrayModelDidUpdate];
         }
     }
 }
@@ -129,7 +129,7 @@ AKIConstant(NSUInteger, IndexNotFound, 0);
 #pragma mark Private
 
 - (void)notifyOfModelUpdateWithChange:(AKIArrayChangeModel *)changeModel {
-    [self notifyOfState:AKIModelUpdated withObject:changeModel];
+    [self notifyOfState:AKIArrayModelDidUpdate withObject:changeModel];
 }
 
 #pragma mark -
@@ -137,7 +137,7 @@ AKIConstant(NSUInteger, IndexNotFound, 0);
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
-        case AKIModelUpdated:
+        case AKIArrayModelDidUpdate:
             return @selector(arrayModel:didUpdateWithChangeModel:);
             
         default:

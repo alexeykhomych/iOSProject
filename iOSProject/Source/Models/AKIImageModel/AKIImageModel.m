@@ -16,6 +16,8 @@
 @property (nonatomic, strong) UIImage       *image;
 @property (nonatomic, strong) NSURL         *url;
 
+- (NSURL *)defaultURL;
+
 @end
 
 @implementation AKIImageModel
@@ -33,9 +35,7 @@
 - (instancetype)initWithURL:(NSURL *)url {
     self = [self init];
     
-    if (self) {
-        self.url = url;
-    }
+    self.url = url ? url : [self defaultURL];
     
     return self;
 }
@@ -44,8 +44,13 @@
 #pragma mark Private
 
 - (void)performLoading {    
-    self.image = [UIImage imageWithContentsOfFile:[self.url path]];
-    self.state = self.image ? AKIModelDidLoad : AKIModelWillLoad;
+    UIImage *image = [UIImage imageWithContentsOfFile:[self.url path]];
+    self.image = image;
+    self.state = image ? AKIModelDidLoad : AKIModelWillLoad;
+}
+
+- (NSURL *)defaultURL {
+    return [[NSBundle mainBundle] URLForResource:@"image" withExtension:@"jpg"];
 }
 
 @end

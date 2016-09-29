@@ -14,6 +14,7 @@
 @property (nonatomic, strong) IBOutlet AKILoadingView  *loadingView;
 @property (nonatomic, assign, getter=isLoadingViewVisible)  BOOL loadingViewVisible;
 
+//don't call this method directly, method for overload
 - (void)initLoadingView;
 
 @end

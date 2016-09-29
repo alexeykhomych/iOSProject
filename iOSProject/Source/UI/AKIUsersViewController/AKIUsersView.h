@@ -1,5 +1,5 @@
 //
-//  AKIUserView.h
+//  AKIUsersView.h
 //  iOSProject
 //
 //  Created by Alexey Khomych on 28.07.16.
@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AKIView.h"
+#import "AKILoadingViewContainer.h"
 
-@interface AKIUserView : AKIView
+@interface AKIUsersView : AKILoadingViewContainer
 @property (nonatomic, strong) IBOutlet UITableView  *tableView;
 
 @property (nonatomic, strong) IBOutlet UIButton     *addButton;

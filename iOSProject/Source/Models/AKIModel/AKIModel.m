@@ -44,7 +44,7 @@
 }
 
 - (void)performLoading {
-    self.state = AKIModelDidLoad;
+    
 }
 
 #pragma mark -

@@ -18,6 +18,7 @@
 
 AKIConstant(NSUInteger, UsersCount, 10);
 AKIStringConstant(FileName, @"UsersArrayModel.plist");
+AKIStringConstant(PerformDataSave, @"performDataSave");
 
 @interface AKIUsersArrayModel ()
 @property (nonatomic, readonly)             NSFileManager   *fileManager;
@@ -28,6 +29,28 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
 @end
 
 @implementation AKIUsersArrayModel
+
+#pragma mark -
+#pragma mark Initializations and Deallocations
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kAKIPerformDataSave object:nil];
+}
+
+- (instancetype)init {
+    self = [super init];
+    
+    id block = ^{
+        [self save];
+    };
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:kAKIPerformDataSave
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:block];
+    
+    return self;
+}
 
 #pragma mark -
 #pragma mark Accessors
@@ -57,6 +80,7 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
 }
 
 - (void)performLoading {
+    sleep(1);
     [self performBlockWithoutNotification:^{
         id model = nil;
         

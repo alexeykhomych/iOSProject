@@ -1,5 +1,5 @@
 //
-//  AKILoadingViewContainerController.h
+//  AKIAbstractViewController.h
 //  iOSProject
 //
 //  Created by Alexey Khomych on 26.09.16.
@@ -13,8 +13,7 @@
 @class AKILoadingViewContainer;
 @class AKIModel;
 
-@interface AKISuperViewController : UIViewController <AKIObservableModel>
-@property (nonatomic, readonly) AKILoadingViewContainer  *container;
+@interface AKIAbstractViewController : UIViewController <AKIObservableModel>
 @property (nonatomic, strong)   AKIModel        *model;
 
 @end

@@ -10,7 +10,7 @@
 
 #import "AKIUser.h"
 #import "AKIUserCell.h"
-#import "AKIUserView.h"
+#import "AKIUsersView.h"
 #import "AKIFilteredUsersArrayModel.h"
 
 #import "AKIArrayModel.h"
@@ -26,7 +26,7 @@
 
 #import "AKIMacro.h"
 
-AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
+AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUsersView, usersView)
 
 @interface AKIUsersViewController ()
 @property (nonatomic, strong)   AKIFilteredUsersArrayModel      *filteredModel;
@@ -39,7 +39,6 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 @implementation AKIUsersViewController
 
 @dynamic dataSource;
-@dynamic model;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -50,10 +49,6 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
 #pragma mark -
 #pragma mark Accessors
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
 
 - (void)setModel:(AKIUsersArrayModel *)model {
     if ([super model] != model) {
@@ -68,19 +63,19 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
     AKIFilteredUsersArrayModel *filteredModel = self.filteredModel;
     
     filteredModel.filter = searchText;
-    [filteredModel filterObjects];
     
-    self.filteredModel = filteredModel;
-    
-    [self.userView.tableView reloadData];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+    [self.usersView.tableView reloadData];
 }
 
 - (AKIArrayModel *)dataSource {
     return self.searching ? self.filteredModel : self.model;
+}
+
+#pragma mark -
+#pragma mark View Lifecycle
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 #pragma mark -
@@ -114,7 +109,8 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
    moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
           toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    [self.model moveObjectAtIndex:[self.model indexOfObject:self.dataSource[sourceIndexPath.row]] toIndex:destinationIndexPath.row];
+    [self.model moveObjectAtIndex:[self.model indexOfObject:self.dataSource[sourceIndexPath.row]]
+                          toIndex:destinationIndexPath.row];
 }
 
 #pragma mark -
@@ -135,7 +131,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 }
 
 - (IBAction)onEditButton:(id)sender {
-    [self.userView setEditing:!self.userView.editing];
+    [self.usersView setEditing:!self.usersView.editing];
 }
 
 #pragma mark -
@@ -155,17 +151,17 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
-        [self.userView.tableView updateWithChangeModel:arrayChangeModel];
+        [self.usersView.tableView updateWithChangeModel:arrayChangeModel];
     });
 }
 
-- (void)arrayModelDidLoad:(AKIArrayModel *)arrayModel {
+- (void)modelDidLoad:(AKIArrayModel *)arrayModel {
     AKIPrintMethod
     
     AKIWeakify(self);
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
-       [self.userView.tableView reloadData];
+       [self.usersView.tableView reloadData];
     });
 }
 

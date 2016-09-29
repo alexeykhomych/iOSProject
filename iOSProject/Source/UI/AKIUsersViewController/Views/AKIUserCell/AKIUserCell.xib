@@ -13,6 +13,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" id="fAV-5M-ayp" customClass="AKIImageView">
+                        <rect key="frame" x="0.0" y="0.0" width="91" height="43"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yDA-7A-yB5">
+                                <rect key="frame" x="0.0" y="0.0" width="91" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="imageView" destination="yDA-7A-yB5" id="zgN-gZ-zyS"/>
+                        </connections>
+                    </view>
                     <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Vl-pW-DpC">
                         <rect key="frame" x="94" y="0.0" width="226" height="43"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -20,15 +34,11 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yDA-7A-yB5">
-                        <rect key="frame" x="0.0" y="0.0" width="91" height="43"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="fullNameLabel" destination="7Vl-pW-DpC" id="HEt-jL-5c9"/>
-                <outlet property="userImageView" destination="yDA-7A-yB5" id="wlk-Yb-Don"/>
+                <outlet property="userImageView" destination="fAV-5M-ayp" id="QED-v3-Mof"/>
             </connections>
             <point key="canvasLocation" x="345" y="244"/>
         </tableViewCell>

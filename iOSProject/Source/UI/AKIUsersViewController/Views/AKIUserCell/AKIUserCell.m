@@ -41,7 +41,6 @@
 
 - (void)fillWithModel:(AKIUser *)user {
     self.fullNameLabel.text = user.fullName;
-    self.userImageView = [[AKIImageView alloc] init];
     self.userImageView.imageModel = user.imageModel;
 }
 

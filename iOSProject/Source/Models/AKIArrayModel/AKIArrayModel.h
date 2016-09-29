@@ -10,6 +10,10 @@
 
 #import "AKIModel.h"
 
+typedef NS_ENUM(NSUInteger, AKIArrayModelState) {
+    AKIArrayModelDidUpdate = AKIModelStateCount
+};
+
 @class AKIArrayModel;
 @class AKIArrayChangeModel;
 

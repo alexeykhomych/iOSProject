@@ -63,11 +63,11 @@
     self.loadingView.visible = loadingViewVisible;
 }
 
-//- (BOOL)isLoadingViewVisible {
-//    @synchronized (self) {
-//        return self.loadingView.isVisible;
-//    }
-//}
+- (BOOL)isLoadingViewVisible {
+    @synchronized (self) {
+        return self.loadingView.isVisible;
+    }
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -100,10 +100,8 @@
 #pragma mark Private
 
 - (void)initSubviews {
-//    self.loadingView = [self initLoadingView];
     [self initLoadingView];
     [self setNeedsLayout];
-    
 }
 
 @end
