@@ -16,10 +16,6 @@
 
 #import "UIViewController+AKIExtensions.h"
 
-#import "AKIMacro.h"
-
-AKIStringConstant(PerformDataSave, @"performDataSave");
-
 @interface AKIAppDelegate ()
 @property (nonatomic, strong) AKIUsersArrayModel *model;
 
@@ -45,25 +41,23 @@ AKIStringConstant(PerformDataSave, @"performDataSave");
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    AKIPrintMethod
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    AKIPrintMethod
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAKIPerformDataSave object:nil];
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    AKIPrintMethod
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    AKIPrintMethod
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    AKIPrintMethod
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAKIPerformDataSave object:nil];
+    
 }
 
 @end

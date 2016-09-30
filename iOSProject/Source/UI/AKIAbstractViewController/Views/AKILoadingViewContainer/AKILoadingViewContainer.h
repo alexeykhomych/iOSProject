@@ -10,7 +10,7 @@
 
 #import "AKIView.h"
 
-@interface AKILoadingViewContainer : AKIView
+@interface AKILoadingViewContainer : AKIView <AKIObservableModel>
 @property (nonatomic, strong) AKIModel *model;
 
 @end

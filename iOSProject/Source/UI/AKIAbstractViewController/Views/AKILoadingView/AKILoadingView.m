@@ -22,7 +22,14 @@ AKIConstant(float, Duration, 1.0);
 + (instancetype)loadingViewInSuperview:(UIView *)superview {
     AKILoadingView *view = [NSBundle objectWithClass:[AKILoadingView class]];
     view.frame = superview.bounds;
-    view.activityView.frame = superview.bounds;
+    
+    view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin
+                                | UIViewAutoresizingFlexibleWidth
+                                | UIViewAutoresizingFlexibleRightMargin
+                                | UIViewAutoresizingFlexibleRightMargin
+                                | UIViewAutoresizingFlexibleTopMargin
+                                | UIViewAutoresizingFlexibleHeight;
+    
     return view;
 }
 
@@ -57,7 +64,7 @@ AKIConstant(float, Duration, 1.0);
     [self.superview bringSubviewToFront:self];
     [UIView animateWithDuration:animated ? kAKIDuration : 0
                      animations:^{
-                         self.activityView.alpha = visible ? 1.0 : 0;
+                         self.activityIndicatorView.alpha = visible ? 1.0 : 0;
                      }
                      completion:^(BOOL shouldFinish) {
                          _visible = visible;

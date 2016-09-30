@@ -17,7 +17,7 @@
     AKIArrayModelObserver
 >
 
-@property (nonatomic, strong) id model;
+@property (nonatomic, strong) AKIUsersArrayModel *model;
 
 - (IBAction)onAddButton:(id)sender;
 - (IBAction)onEditButton:(id)sender;

@@ -7,13 +7,12 @@
 //
 
 #import "AKIView.h"
+#import "AKILoadingViewContainer.h"
 
 @class AKIImageModel;
 
-@interface AKIImageView : AKIView
+@interface AKIImageView : AKILoadingViewContainer
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) AKIImageModel *imageModel;
-
-- (void)imageViewAutoresizing:(UIViewAutoresizing)autoresizing;
 
 @end

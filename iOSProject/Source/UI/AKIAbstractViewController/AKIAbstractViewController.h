@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AKIModel.h" 
+#import "AKIModel.h"
 
 @class AKILoadingViewContainer;
-@class AKIModel;
 
 @interface AKIAbstractViewController : UIViewController <AKIObservableModel>
-@property (nonatomic, strong)   AKIModel        *model;
+@property (nonatomic, strong)   id        model;
 
 @end

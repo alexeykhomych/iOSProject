@@ -48,17 +48,13 @@
 #pragma mark -
 #pragma mark Private
 
-- (void)load {
+- (void)performLoading {
     if (!self.cached) {
         [self downloadImage:self.url.absoluteString];
         
         return;
     }
     
-    [super load];
-}
-
-- (void)performLoading {    
     UIImage *image = [UIImage imageWithContentsOfFile:[self.url path]];
     self.image = image;
     self.state = image ? AKIModelDidLoad : AKIModelWillLoad;

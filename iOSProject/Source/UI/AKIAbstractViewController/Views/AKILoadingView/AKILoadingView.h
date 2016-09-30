@@ -11,7 +11,7 @@
 typedef void (^AKICompletionHandler)(void);
 
 @interface AKILoadingView : UIView
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 
 @property (nonatomic, assign, getter=isVisible) BOOL visible;
 - (void)setVisible:(BOOL)visible animated:(BOOL)animated;

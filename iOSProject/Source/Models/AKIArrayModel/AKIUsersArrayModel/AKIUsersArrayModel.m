@@ -18,13 +18,21 @@
 
 AKIConstant(NSUInteger, UsersCount, 10);
 AKIStringConstant(FileName, @"UsersArrayModel.plist");
-AKIStringConstant(PerformDataSave, @"performDataSave");
 
 @interface AKIUsersArrayModel ()
 @property (nonatomic, readonly)             NSFileManager   *fileManager;
 @property (nonatomic, readonly, copy)       NSString        *documentsPath;
 @property (nonatomic, readonly, copy)       NSString        *path;
 @property (nonatomic, readonly)             BOOL            cached;
+
+@property (nonatomic, strong)   id          observer;
+@property (nonatomic, readonly) NSArray     *appNotifications;
+
+- (void)startObservingForName:(NSString *)name withBlock:(void(^)(void))block;
+- (void)stopObservingForName:(NSString *)name;
+
+- (void)startObservingForNames:(NSArray *)names withBlock:(void(^)(void))block;
+- (void)stopObservingForNames:(NSArray *)names;
 
 @end
 
@@ -34,7 +42,7 @@ AKIStringConstant(PerformDataSave, @"performDataSave");
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kAKIPerformDataSave object:nil];
+    [self stopObservingForNames:self.appNotifications];
 }
 
 - (instancetype)init {
@@ -44,10 +52,7 @@ AKIStringConstant(PerformDataSave, @"performDataSave");
         [self save];
     };
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:kAKIPerformDataSave
-                                                      object:nil
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:block];
+    [self startObservingForNames:self.appNotifications withBlock:block];
     
     return self;
 }
@@ -71,6 +76,10 @@ AKIStringConstant(PerformDataSave, @"performDataSave");
     return [self.fileManager fileExistsAtPath:self.path];
 }
 
+- (NSArray *)appNotifications {
+    return @[UIApplicationWillTerminateNotification, UIApplicationDidEnterBackgroundNotification];
+}
+
 #pragma mark -
 #pragma mark Public
 
@@ -80,7 +89,6 @@ AKIStringConstant(PerformDataSave, @"performDataSave");
 }
 
 - (void)performLoading {
-    sleep(1);
     [self performBlockWithoutNotification:^{
         id model = nil;
         
@@ -94,6 +102,34 @@ AKIStringConstant(PerformDataSave, @"performDataSave");
     }];
     
     self.state = AKIModelDidLoad;
+}
+
+#pragma mark -
+#pragma mark Privat
+
+- (void)startObservingForName:(NSString *)name withBlock:(void(^)(void))block {
+    self.observer = [[NSNotificationCenter defaultCenter] addObserverForName:name
+                                        object:nil
+                                         queue:nil
+                                    usingBlock:^(NSNotification *note){
+                                        AKIPerformBlock(block);
+                                    }];
+}
+
+- (void)stopObservingForName:(NSString *)name {
+    [[NSNotificationCenter defaultCenter] removeObserver:self.observer name:name object:nil];
+}
+
+- (void)startObservingForNames:(NSArray *)names withBlock:(void(^)(void))block {
+    for (NSString *name in names) {
+        [self startObservingForName:name withBlock:block];
+    }
+}
+
+- (void)stopObservingForNames:(NSArray *)names {
+    for (NSString *name in names) {
+        [self stopObservingForName:name];
+    }
 }
 
 @end

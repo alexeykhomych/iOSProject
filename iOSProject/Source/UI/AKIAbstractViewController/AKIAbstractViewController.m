@@ -13,7 +13,7 @@
 #import "AKIMacro.h"
 
 @interface AKIAbstractViewController ()
-@property (nonatomic, strong) AKILoadingViewContainer  *container;
+@property (nonatomic, readonly) AKILoadingViewContainer  *container;
 
 @end
 
@@ -31,8 +31,10 @@ AKIBaseViewGetterSynthesize(AKILoadingViewContainer, container)
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.container.model = self.model;
-    [self.model load];
+    AKIModel *model = self.model;
+    
+    self.container.model = model;
+    [model load];
 }
 
 - (void)didReceiveMemoryWarning {

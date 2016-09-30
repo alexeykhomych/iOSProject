@@ -63,8 +63,6 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUsersView, usersVie
     AKIFilteredUsersArrayModel *filteredModel = self.filteredModel;
     
     filteredModel.filter = searchText;
-    
-    [self.usersView.tableView reloadData];
 }
 
 - (AKIArrayModel *)dataSource {

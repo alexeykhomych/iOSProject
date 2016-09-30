@@ -14,12 +14,6 @@
 
 #import "UINib+AKIExtensions.h"
 
-@interface AKIView ()
-
-- (void)initSubviews;
-
-@end
-
 @implementation AKIView
 
 @dynamic loadingViewVisible;
@@ -34,7 +28,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
-    [self initSubviews];
+    self.loadingView = [self defaultLoadingView];
     
     return self;
 }
@@ -42,7 +36,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     
-    [self initSubviews];
+    self.loadingView = [self defaultLoadingView];
     
     return self;
 }
@@ -73,35 +67,15 @@
     [super awakeFromNib];
     
     if (!self.loadingView) {
-        [self initSubviews];
+        self.loadingView = [self defaultLoadingView];
     }
-}
-
-#pragma mark -
-#pragma mark View Lifecycle
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
 }
 
 #pragma mark -
 #pragma mark Public
 
-- (void)initLoadingView {
-    AKILoadingView *loadingView = [AKILoadingView loadingViewInSuperview:self];
-    loadingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin
-                                    |UIViewAutoresizingFlexibleRightMargin
-                                    |UIViewAutoresizingFlexibleBottomMargin;
-    
-    self.loadingView = loadingView;
-}
-
-#pragma mark -
-#pragma mark Private
-
-- (void)initSubviews {
-    [self initLoadingView];
-    [self setNeedsLayout];
+- (AKILoadingView *)defaultLoadingView {
+    return [AKILoadingView loadingViewInSuperview:self];
 }
 
 @end
