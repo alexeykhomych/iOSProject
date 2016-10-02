@@ -13,14 +13,18 @@
 #import "AKIMacro.h"
 
 @interface AKIImageModel ()
-@property (nonatomic, strong) UIImage       *image;
-@property (nonatomic, strong) NSURL         *url;
+@property (nonatomic, strong)       UIImage     *image;
+@property (nonatomic, strong)       NSURL       *url;
+@property (nonatomic, readonly)     BOOL        cached;
 
-@property (nonatomic, copy)     NSString    *imageName;
-@property (nonatomic, assign)   BOOL        cached;
+@property (nonatomic, strong) NSMutableDictionary *cache;
 
-- (void)downloadImage:(NSString *)path;
 
+@property (nonatomic, readonly)             NSFileManager   *fileManager;
+@property (nonatomic, readonly, copy)       NSString        *path;
+@property (nonatomic, readonly, copy)       NSString        *fileName;
+
+- (void)downloadImageFromInternet;
 - (NSURL *)defaultURL;
 
 @end
@@ -40,17 +44,43 @@
 - (instancetype)initWithURL:(NSURL *)url {
     self = [self init];
     
-    self.url = url ? url : [self defaultURL];
+//    self.url = url ? url : [self defaultURL];
+    self.url = [NSURL URLWithString:@"https://i.ytimg.com/vi/qPhQsaXjkZ8/maxresdefault.jpg"];
     
     return self;
 }
 
 #pragma mark -
+#pragma mark Accessors
+
+- (NSFileManager *)fileManager {
+    return [NSFileManager defaultManager];
+}
+
+- (NSString *)fileName {
+    NSArray *separated = [self.url.absoluteString componentsSeparatedByString:@"/"];
+    
+    return [separated lastObject];
+}
+
+- (NSString *)path {
+    return [NSHomeDirectory() stringByAppendingString:@"Documents"];
+}
+
+- (BOOL)cached {
+    return [self.cache objectForKey:self.path];
+}
+
+#pragma mark -
 #pragma mark Private
+
+- (NSURL *)defaultURL {
+    return [[NSBundle mainBundle] executableURL];
+}
 
 - (void)performLoading {
     if (!self.cached) {
-        [self downloadImage:self.url.absoluteString];
+        [self downloadImageFromInternet];
         
         return;
     }
@@ -60,17 +90,20 @@
     self.state = image ? AKIModelDidLoad : AKIModelWillLoad;
 }
 
-- (NSURL *)defaultURL {
-    return [[NSBundle mainBundle] URLForResource:@"image" withExtension:@"jpg"];
-}
-
-- (void)downloadImage:(NSString *)path {
+- (void)downloadImageFromInternet {
     AKIAsyncPerformInBackground(^{
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
+        NSData *data = [NSData dataWithContentsOfURL:self.url];
+        [data writeToFile:self.fileName atomically:YES];
         self.image = [UIImage imageWithData:data];
+        
+        [self save];
         
         self.state = AKIModelDidLoad;
     });
+}
+
+- (void)save {
+    [self.cache setObject:self.image forKey:self.url.absoluteString];
 }
 
 @end

@@ -395,9 +395,9 @@
 		8498D6491DA12C19004376FF /* AKIFilteredArrayModel */ = {
 			isa = PBXGroup;
 			children = (
+				8498D64C1DA12C19004376FF /* AKIFilteredUsersArrayModel */,
 				8498D64A1DA12C19004376FF /* AKIFilteredArrayModel.h */,
 				8498D64B1DA12C19004376FF /* AKIFilteredArrayModel.m */,
-				8498D64C1DA12C19004376FF /* AKIFilteredUsersArrayModel */,
 			);
 			path = AKIFilteredArrayModel;
 			sourceTree = "<group>";

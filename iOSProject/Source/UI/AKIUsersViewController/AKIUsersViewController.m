@@ -59,9 +59,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUsersView, usersVie
 }
 
 - (void)filterContentForSearchText:(NSString*)searchText {
-    AKIPrintMethod
     AKIFilteredUsersArrayModel *filteredModel = self.filteredModel;
-    
     filteredModel.filter = searchText;
 }
 
@@ -136,10 +134,7 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUsersView, usersVie
 #pragma mark Notifications
 
 - (void)arrayModel:(AKIArrayModel *)arrayModel didUpdateWithChangeModel:(AKIArrayChangeModel *)arrayChangeModel {
-    AKIPrintMethod
-    
     AKIWeakify(self);
-
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
         [self.usersView.tableView updateWithChangeModel:arrayChangeModel];
@@ -147,8 +142,6 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUsersView, usersVie
 }
 
 - (void)modelDidLoad:(AKIArrayModel *)arrayModel {
-    AKIPrintMethod
-    
     AKIWeakify(self);
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
@@ -160,17 +153,14 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUsersView, usersVie
 #pragma mark UISearchBar
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    AKIPrintMethod
     self.searching = YES;
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    AKIPrintMethod
     self.searching = NO;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    AKIPrintMethod
     [self filterContentForSearchText:searchText];
 }
 
