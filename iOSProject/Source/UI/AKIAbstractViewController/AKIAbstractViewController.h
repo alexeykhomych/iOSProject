@@ -12,7 +12,7 @@
 
 @class AKILoadingViewContainer;
 
-@interface AKIAbstractViewController : UIViewController <AKIObservableModel>
+@interface AKIAbstractViewController : UIViewController <AKIModelObserver>
 @property (nonatomic, strong)   id        model;
 
 @end

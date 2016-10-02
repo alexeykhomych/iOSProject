@@ -16,11 +16,6 @@
 
 #import "UIViewController+AKIExtensions.h"
 
-@interface AKIAppDelegate ()
-@property (nonatomic, strong) AKIUsersArrayModel *model;
-
-@end
-
 @implementation AKIAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -31,11 +26,9 @@
     
     window.rootViewController = controller;
     
-    id model = [[AKIUsersArrayModel alloc] init];
-    controller.model = model;
-    self.model = model;
-    
     [window makeKeyAndVisible];
+    
+    controller.model = [[AKIUsersArrayModel alloc] init];
     
     return YES;
 }

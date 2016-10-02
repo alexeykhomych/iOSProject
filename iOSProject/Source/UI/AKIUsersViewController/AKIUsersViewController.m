@@ -70,13 +70,6 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUsersView, usersVie
 }
 
 #pragma mark -
-#pragma mark View Lifecycle
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-#pragma mark -
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

@@ -10,13 +10,13 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="AKIUserView" id="i5M-Pr-FkT" customClass="AKIUsersView">
+        <view contentMode="scaleToFill" restorationIdentifier="AKIUserView" id="i5M-Pr-FkT" customClass="AKIUsersView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <navigationBar contentMode="scaleToFill" restorationIdentifier="UINavigationBar" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" id="eew-Zf-W4T">
                     <rect key="frame" x="0.0" y="24" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <items>
                         <navigationItem title="Users" id="c73-XV-Rn9">
                             <barButtonItem key="leftBarButtonItem" title="+" id="spV-VE-N56">
@@ -32,6 +32,15 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
+                <tableView contentMode="scaleToFill" restorationIdentifier="UITableView" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="OPu-bI-i6B">
+                    <rect key="frame" x="0.0" y="112" width="320" height="456"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="fhA-72-TyA"/>
+                        <outlet property="delegate" destination="-1" id="hPa-Qi-6zH"/>
+                    </connections>
+                </tableView>
                 <searchBar contentMode="redraw" restorationIdentifier="UISearchBar" id="co3-0i-sQr">
                     <rect key="frame" x="0.0" y="68" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -40,15 +49,6 @@
                         <outlet property="delegate" destination="-1" id="f7U-PT-Owg"/>
                     </connections>
                 </searchBar>
-                <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="UITableView" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="OPu-bI-i6B">
-                    <rect key="frame" x="0.0" y="112" width="320" height="456"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="fhA-72-TyA"/>
-                        <outlet property="delegate" destination="-1" id="hPa-Qi-6zH"/>
-                    </connections>
-                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <connections>

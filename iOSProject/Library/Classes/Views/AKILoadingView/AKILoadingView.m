@@ -23,11 +23,7 @@ AKIConstant(float, Duration, 1.0);
     AKILoadingView *view = [NSBundle objectWithClass:[AKILoadingView class]];
     view.frame = superview.bounds;
     
-    view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin
-                                | UIViewAutoresizingFlexibleWidth
-                                | UIViewAutoresizingFlexibleRightMargin
-                                | UIViewAutoresizingFlexibleRightMargin
-                                | UIViewAutoresizingFlexibleTopMargin
+    view.autoresizingMask = UIViewAutoresizingFlexibleWidth
                                 | UIViewAutoresizingFlexibleHeight;
     
     return view;
@@ -64,7 +60,7 @@ AKIConstant(float, Duration, 1.0);
     [self.superview bringSubviewToFront:self];
     [UIView animateWithDuration:animated ? kAKIDuration : 0
                      animations:^{
-                         self.activityIndicatorView.alpha = visible ? 1.0 : 0;
+                         self.alpha = visible ? 1.0 : 0;
                      }
                      completion:^(BOOL shouldFinish) {
                          _visible = visible;

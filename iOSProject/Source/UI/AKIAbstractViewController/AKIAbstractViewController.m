@@ -12,28 +12,19 @@
 
 #import "AKIMacro.h"
 
-@interface AKIAbstractViewController ()
-@property (nonatomic, readonly) AKILoadingViewContainer  *container;
-
-@end
+AKIViewControllerBaseViewProperty(AKIAbstractViewController, AKILoadingViewContainer, loadingViewContainer)
 
 @implementation AKIAbstractViewController
-
-AKIBaseViewGetterSynthesize(AKILoadingViewContainer, container)
 
 #pragma mark -
 #pragma mark View lifecycle
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     AKIModel *model = self.model;
     
-    self.container.model = model;
+    self.loadingViewContainer.model = model;
     [model load];
 }
 

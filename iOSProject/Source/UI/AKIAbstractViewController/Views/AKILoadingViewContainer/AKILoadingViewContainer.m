@@ -20,16 +20,6 @@
     return view;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    
-    return self;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-}
-
 #pragma mark -
 #pragma mark Public
 

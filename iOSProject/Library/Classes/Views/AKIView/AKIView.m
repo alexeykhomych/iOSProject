@@ -25,22 +25,6 @@
     self.loadingView = nil;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    
-    self.loadingView = [self defaultLoadingView];
-    
-    return self;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    
-    self.loadingView = [self defaultLoadingView];
-    
-    return self;
-}
-
 #pragma mark -
 #pragma mark Accessors
 
@@ -62,6 +46,9 @@
         return self.loadingView.isVisible;
     }
 }
+
+#pragma mark -
+#pragma mark View Lifecycle
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -25,14 +25,14 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
 @property (nonatomic, readonly, copy)       NSString        *path;
 @property (nonatomic, readonly)             BOOL            cached;
 
-@property (nonatomic, strong)   id          observer;
-@property (nonatomic, readonly) NSArray     *appNotifications;
+@property (nonatomic, strong)       NSMutableDictionary     *dictionaryObservers;
+@property (nonatomic, readonly)     NSArray                 *appNotifications;
 
-- (void)startObservingForName:(NSString *)name withBlock:(void(^)(void))block;
-- (void)stopObservingForName:(NSString *)name;
+- (void)startObservingForNotificationName:(NSString *)name withBlock:(void(^)(void))block;
+- (void)stopObservingForNotificationName:(NSString *)name;
 
-- (void)startObservingForNames:(NSArray *)names withBlock:(void(^)(void))block;
-- (void)stopObservingForNames:(NSArray *)names;
+- (void)startObservingForNotificationNames:(NSArray *)names withBlock:(void(^)(void))block;
+- (void)stopObservingForNotificationNames:(NSArray *)names;
 
 @end
 
@@ -42,7 +42,7 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    [self stopObservingForNames:self.appNotifications];
+    [self stopObservingForNotificationNames:self.appNotifications];
 }
 
 - (instancetype)init {
@@ -52,7 +52,9 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
         [self save];
     };
     
-    [self startObservingForNames:self.appNotifications withBlock:block];
+    self.dictionaryObservers = [NSMutableDictionary new];
+    
+    [self startObservingForNotificationNames:self.appNotifications withBlock:block];
     
     return self;
 }
@@ -107,29 +109,31 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
 #pragma mark -
 #pragma mark Privat
 
-- (void)startObservingForName:(NSString *)name withBlock:(void(^)(void))block {
-    self.observer = [[NSNotificationCenter defaultCenter] addObserverForName:name
-                                        object:nil
-                                         queue:nil
-                                    usingBlock:^(NSNotification *note){
-                                        AKIPerformBlock(block);
-                                    }];
-}
-
-- (void)stopObservingForName:(NSString *)name {
-    [[NSNotificationCenter defaultCenter] removeObserver:self.observer name:name object:nil];
-}
-
-- (void)startObservingForNames:(NSArray *)names withBlock:(void(^)(void))block {
+- (void)startObservingForNotificationNames:(NSArray *)names withBlock:(void(^)(void))block {
     for (NSString *name in names) {
-        [self startObservingForName:name withBlock:block];
+        [self startObservingForNotificationName:name withBlock:block];
     }
 }
 
-- (void)stopObservingForNames:(NSArray *)names {
+- (void)startObservingForNotificationName:(NSString *)name withBlock:(void(^)(void))block {
+    id observer = [[NSNotificationCenter defaultCenter] addObserverForName:name
+                                                                    object:nil
+                                                                     queue:nil
+                                                                usingBlock:^(NSNotification *note){
+                                                                    AKIPerformBlock(block);
+                                                                }];
+    
+    [self.dictionaryObservers setObject:observer forKey:name];
+}
+
+- (void)stopObservingForNotificationNames:(NSArray *)names {
     for (NSString *name in names) {
-        [self stopObservingForName:name];
+        [self stopObservingForNotificationName:name];
     }
+}
+
+- (void)stopObservingForNotificationName:(NSString *)name {
+    [[NSNotificationCenter defaultCenter] removeObserver:[self.dictionaryObservers objectForKey:name] name:name object:nil];
 }
 
 @end

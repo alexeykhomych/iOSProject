@@ -43,11 +43,7 @@
 
 - (void)initSubviews {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-    imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin
-                                    | UIViewAutoresizingFlexibleWidth
-                                    | UIViewAutoresizingFlexibleRightMargin
-                                    | UIViewAutoresizingFlexibleRightMargin
-                                    | UIViewAutoresizingFlexibleTopMargin
+    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth
                                     | UIViewAutoresizingFlexibleHeight;
     
     self.imageView = imageView;
@@ -93,8 +89,10 @@
 }
 
 - (void)modelDidFailLoading:(AKIImageModel *)model {
-    AKIAsyncPerformInBackground(^{
-       [self.imageModel load]; 
+    AKIWeakify(self);
+    AKIAsyncPerformInMainQueue(^{
+        AKIStrongifyAndReturnIfNil(self);
+        [self.imageModel load];
     });
 }
 
