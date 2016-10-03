@@ -84,63 +84,27 @@
         [self downloadImageFromInternet];
     }
     
-    UIImage *image = [UIImage imageWithContentsOfFile:[self.url path]];
+    UIImage *image = [UIImage imageWithContentsOfFile:self.path];
     self.image = image;
     self.state = image ? AKIModelDidLoad : AKIModelWillLoad;
 }
 
 - (void)downloadImageFromInternet {
-    AKIAsyncPerformInBackground(^{
-        NSError *error = nil;
-        NSData *data = [NSData dataWithContentsOfURL:self.url options:nil error:&error];
-        [data writeToFile:self.path atomically:YES];
-        self.image = [UIImage imageWithData:data];
-        
-//        [self save];
-        
-        self.state = AKIModelDidLoad;
-    });
-}
-
-#pragma mark -
-#pragma mark TEST
-
--(UIImage *)getImageFromURL:(NSString *)fileURL {
-    NSError *error = nil;
+    NSURLSessionDownloadTask *downloadImageTask = [[NSURLSession sharedSession]
+                                                   downloadTaskWithURL:self.url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+                                                       NSData *data = [NSData dataWithContentsOfURL:location];
+                                                       UIImage *downloadedImage = [UIImage imageWithData:data];
+                                                       
+                                                       [data writeToFile:self.path atomically:YES];
+                                                       
+                                                       if (!downloadedImage) {
+                                                           self.state = AKIModelDidFailLoading;
+                                                       }
+                                                       
+//                                                       self.image = downloadedImage;
+                                                   }];
     
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
-    UIImage *result = [UIImage imageWithData:data];
-    
-    return result;
-}
-
--(void)saveImage:(UIImage *)image withFileName:(NSString *)imageName ofType:(NSString *)extension inDirectory:(NSString *)directoryPath {
-    if ([[extension lowercaseString] isEqualToString:@"png"]) {
-        [UIImagePNGRepresentation(image) writeToFile:[directoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", imageName, @"png"]] options:NSAtomicWrite error:nil];
-    } else if ([[extension lowercaseString] isEqualToString:@"jpg"] || [[extension lowercaseString] isEqualToString:@"jpeg"]) {
-        [UIImageJPEGRepresentation(image, 1.0) writeToFile:[directoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", imageName, @"jpg"]] options:NSAtomicWrite error:nil];
-    } else {
-        NSLog(@"Image Save Failed\nExtension: (%@) is not recognized, use (PNG/JPG)", extension);
-    }
-}
-
--(UIImage *)loadImage:(NSString *)fileName ofType:(NSString *)extension inDirectory:(NSString *)directoryPath {
-    UIImage *result = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/%@.%@", directoryPath, fileName, extension]];
-    
-    return result;
-}
-
-- (void)test {
-    NSString * documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    
-    //Get Image From URL
-    UIImage * imageFromURL = [self getImageFromURL:@"http://www.yourdomain.com/yourImage.png"];
-    
-    //Save Image to Directory
-    [self saveImage:imageFromURL withFileName:@"My Image" ofType:@"png" inDirectory:documentsDirectoryPath];
-    
-    //Load Image From Directory
-    UIImage *imageFromWeb = [self loadImage:@"My Image" ofType:@"png" inDirectory:documentsDirectoryPath];
+    [downloadImageTask resume];
 }
 
 @end
