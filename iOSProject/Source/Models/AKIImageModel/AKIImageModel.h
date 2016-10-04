@@ -12,7 +12,7 @@
 
 @interface AKIImageModel : AKIModel
 @property (nonatomic, readonly) UIImage *image;
-@property (nonatomic, readonly) NSURL   *url;
+@property (nonatomic, strong)   NSURL   *url;
 
 + (instancetype)imageWithURL:(NSURL *)url;
 

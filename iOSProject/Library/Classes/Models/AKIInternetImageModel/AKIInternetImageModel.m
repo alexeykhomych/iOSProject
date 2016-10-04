@@ -19,6 +19,8 @@
 @property (nonatomic, readonly, copy)       NSString        *fileName;
 @property (nonatomic, readonly, copy)       NSString        *filePath;
 
+- (AKICompletionHandler)completionHandler;
+
 @end
 
 @implementation AKIInternetImageModel
@@ -87,9 +89,8 @@
     return completionHandler;
 }
 
-- (void)downloadImageFromInternet {
-    NSURLSessionDownloadTask *downloadTask = self.downloadTask;
-    downloadTask = [self.session downloadTaskWithURL:self.url completionHandler:[self completionHandler]];
+- (void)performLoading {
+    self.downloadTask = [self.session downloadTaskWithURL:self.url completionHandler:[self completionHandler]];
 }
 
 @end

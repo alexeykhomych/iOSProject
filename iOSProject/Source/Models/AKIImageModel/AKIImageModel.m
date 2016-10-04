@@ -47,5 +47,4 @@
     self.state = downloadedImage ? AKIModelDidLoad : AKIModelDidFailLoading;
 }
 
-
 @end

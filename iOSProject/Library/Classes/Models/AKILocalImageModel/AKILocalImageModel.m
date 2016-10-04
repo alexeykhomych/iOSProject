@@ -9,11 +9,13 @@
 #import "AKILocalImageModel.h"
 
 @interface AKILocalImageModel ()
-@property (nonatomic, strong)       NSURL       *imageURL;
+@property (nonatomic, strong)       NSURL       *url;
 
 @end
 
 @implementation AKILocalImageModel
+
+@dynamic url;
 
 #pragma mark -
 #pragma mark Class methods
@@ -27,7 +29,7 @@
 
 - (instancetype)initWithURL:(NSURL *)url {
     self = [self init];
-    self.imageURL = url;
+    self.url = url;
     
     return self;
 }
@@ -35,8 +37,8 @@
 #pragma mark -
 #pragma mark Private
 
-- (void)performLoading {    
-    [self finishDownloadingImage:[UIImage imageWithContentsOfFile:self.imageURL.path]];
+- (void)performLoading {
+    [self finishDownloadingImage:[UIImage imageWithContentsOfFile:self.url.path]];
 }
 
 @end
