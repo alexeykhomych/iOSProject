@@ -27,6 +27,8 @@
 
 @implementation AKIArrayModel
 
+AKIConstant(NSUInteger, IndexNotFound, 0);
+
 #pragma mark -
 #pragma mark Init and Dealloc
 
@@ -75,7 +77,6 @@
 - (void)removeObject:(id)object {
     @synchronized (self) {
         if (object) {
-            [self.mutableObjects removeObject:object];
             [self removeObjectAtIndex:[self.mutableObjects indexOfObject:object]];
         }
     }
@@ -83,7 +84,18 @@
 
 - (void)removeAllObjects {
     @synchronized (self) {
-        [self.mutableObjects removeAllObjects];
+        for (id object in self.mutableObjects) {
+            [self removeObject:object];
+        }
+    }
+}
+
+- (void)exchangeObjects:(NSArray *)objects {
+    @synchronized (self) {
+        if (objects) {
+            self.mutableObjects = [objects mutableCopy];
+            [self notifyOfState:AKIArrayModelDidUpdate];
+        }
     }
 }
 
@@ -100,6 +112,12 @@
     }
 }
 
+- (NSUInteger)indexOfObject:(id)object {
+    @synchronized (self) {
+        return object ? [self.mutableObjects indexOfObject:object] : kAKIIndexNotFound;
+    }
+}
+
 - (void)moveObjectAtIndex:(NSUInteger)firstIndex toIndex:(NSUInteger)secondIndex {
     @synchronized (self) {
         [self.mutableObjects moveObjectFromIndex:firstIndex toIndex:secondIndex];
@@ -111,7 +129,7 @@
 #pragma mark Private
 
 - (void)notifyOfModelUpdateWithChange:(AKIArrayChangeModel *)changeModel {
-    [self notifyOfState:AKIArrayModelUpdated withObject:changeModel];
+    [self notifyOfState:AKIArrayModelDidUpdate withObject:changeModel];
 }
 
 #pragma mark -
@@ -119,20 +137,11 @@
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
-        case AKIArrayModelUpdated:
+        case AKIArrayModelDidUpdate:
             return @selector(arrayModel:didUpdateWithChangeModel:);
             
-        case AKIArrayModelFailedLoading:
-            return @selector(arrayModelDidFailLoading:);
-
-        case AKIArrayModelDidLoad:
-            return @selector(arrayModelDidLoad:);
-            
-        case AKIArrayModelWillLoad:
-            return @selector(arrayModelWillLoad:);
-            
         default:
-            return nil;
+            return [super selectorForState:state];
     }
 }
 

@@ -10,10 +10,23 @@
 
 #import "AKIUser.h"
 
+#import "NSObject+AKIExtensions.h"
+
 @implementation NSArray (AKIExtensions)
 
-#pragma mark -
-#pragma mark Class methods
++ (instancetype)objectsWithCount:(NSUInteger)count block:(id(^)())block {
+    if (!block) {
+        return nil;
+    }
+    
+    NSMutableArray *objects = [NSMutableArray object];
+    for (NSUInteger i = 0; i < count; i++) {
+        [objects addObject:block()];
+    }
+    
+    return [self arrayWithArray:objects];
+}
+
 
 - (id)randomObject {
     return [self objectAtIndex:arc4random_uniform((u_int32_t)self.count)];

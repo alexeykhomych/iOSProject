@@ -12,15 +12,9 @@
 
 @implementation NSString (AKIExtensions)
 
-#pragma mark -
-#pragma mark Class methods
-
 + (NSString *)fullName {
     return [NSString stringWithFormat:@"%@ %@", [self randomName], [self randomSurname]];
 }
-
-#pragma mark -
-#pragma mark Private methods
 
 + (NSString *)randomName {
     static  NSArray *names = nil;

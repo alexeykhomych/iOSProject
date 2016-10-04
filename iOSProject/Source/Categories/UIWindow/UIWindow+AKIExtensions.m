@@ -10,9 +10,6 @@
 
 @implementation UIWindow (AKIExtensions)
 
-#pragma mark -
-#pragma mark Class methods
-
 + (UIWindow *)window {
     return [[self alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 }

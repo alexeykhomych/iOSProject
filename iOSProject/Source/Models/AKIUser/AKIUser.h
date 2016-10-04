@@ -10,8 +10,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class AKIImageModel;
+
 @interface AKIUser : NSObject <NSCopying, NSCoding>
-@property (nonatomic, copy, readonly)     NSString    *fullName;
-@property (nonatomic, readonly)           UIImage     *image;
+@property (nonatomic, copy, readonly) NSString          *fullName;
+@property (nonatomic, readonly)       AKIImageModel     *imageModel;
 
 @end

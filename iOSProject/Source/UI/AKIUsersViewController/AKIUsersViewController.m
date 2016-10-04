@@ -8,78 +8,75 @@
 
 #import "AKIUsersViewController.h"
 
-#import "UINib+AKIExtensions.h"
-
-#import "UITableView+AKIExtensions.h"
-
 #import "AKIUser.h"
 #import "AKIUserCell.h"
-#import "AKIUserView.h"
-
-#import "AKIMacro.h"
+#import "AKIUsersView.h"
+#import "AKIFilteredUsersArrayModel.h"
 
 #import "AKIArrayModel.h"
 #import "AKIArrayChangeModel.h"
 
 #import "AKIGCD.h"
 
-#import "AKIFilteredArrayModel.h"
+#import "AKILoadingViewContainer.h"
 
-AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
+#import "NSBundle+AKIExtensions.h"
+#import "UINib+AKIExtensions.h"
+#import "UITableView+AKIExtensions.h"
+
+#import "AKIMacro.h"
+
+AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUsersView, usersView)
 
 @interface AKIUsersViewController ()
-@property (nonatomic, strong) AKIFilteredArrayModel *filteredModel;
-@property (nonatomic, assign) BOOL                  enableFilteredModel;
+@property (nonatomic, strong)   AKIFilteredUsersArrayModel      *filteredModel;
+@property (nonatomic, readonly) AKIArrayModel                   *dataSource;
+
+@property (nonatomic, assign) BOOL  searching;
 
 @end
 
 @implementation AKIUsersViewController
 
-@synthesize model = _model;
+@dynamic dataSource;
+
+#pragma mark -
+#pragma mark Initializations and Deallocations
+
+- (void)dealloc {
+    self.model = nil;
+}
 
 #pragma mark -
 #pragma mark Accessors
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
-- (void)setModel:(id)model {
-    if (_model != model) {
-        [_model removeObserver:self];
+- (void)setModel:(AKIUsersArrayModel *)model {
+    if ([super model] != model) {
+        [super setModel:model];
         
-        _model = model;
-        
-        [_model addObserver:self];
-        
-        [self addModelToFilter];
+        self.filteredModel = [[AKIFilteredUsersArrayModel alloc] initWithModel:model];
     }
 }
 
-- (void)addModelToFilter {
-    self.filteredModel = [[AKIFilteredArrayModel alloc] init];
-    [self.filteredModel addModelToFilter:self.model];
+- (void)filterContentForSearchText:(NSString*)searchText {
+    AKIFilteredUsersArrayModel *filteredModel = self.filteredModel;
+    filteredModel.filter = searchText;
 }
 
-- (AKIArrayModel *)model {
-    return self.enableFilteredModel ? self.filteredModel : _model;
-//    return _model;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (AKIArrayModel *)dataSource {
+    return self.searching ? self.filteredModel : self.model;
 }
 
 #pragma mark -
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.model.count;
+    return self.dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     AKIUserCell *cell = [tableView cellWithClass:[AKIUserCell class]];
-    cell.user = self.model[indexPath.row];
+    cell.user = self.dataSource[indexPath.row];
     
     return cell;
 }
@@ -101,20 +98,29 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
    moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
           toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    [self.model moveObjectAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
+    [self.model moveObjectAtIndex:[self.model indexOfObject:self.dataSource[sourceIndexPath.row]]
+                          toIndex:destinationIndexPath.row];
+}
+
+#pragma mark -
+#pragma mark UITableViewDelegate
+
+- (void)    tableView:(UITableView *)tableView
+ didEndDisplayingCell:(AKIUserCell *)cell
+    forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.user = nil;
 }
 
 #pragma mark -
 #pragma mark Interface Handling
 
 - (IBAction)onAddButton:(id)sender {
-    [self.model performBlockWithNotification:^{
-        [self addModel:[AKIUser new]];
-    }];
+    [self addModel:[AKIUser new]];	
 }
 
 - (IBAction)onEditButton:(id)sender {
-    [self.userView setEditing:!self.userView.editing];
+    [self.usersView setEditing:!self.usersView.editing];
 }
 
 #pragma mark -
@@ -128,59 +134,34 @@ AKIViewControllerBaseViewProperty(AKIUsersViewController, AKIUserView, userView)
 #pragma mark Notifications
 
 - (void)arrayModel:(AKIArrayModel *)arrayModel didUpdateWithChangeModel:(AKIArrayChangeModel *)arrayChangeModel {
-    AKIPrintMethod
-    
-    AKIWeakify(self);
-
-    AKIAsyncPerformInMainQueue(^{
-        AKIStrongifyAndReturnIfNil(self);
-        [self.userView.tableView updateWithChangeModel:arrayChangeModel];
-    });
-}
-
-- (void)arrayModelDidLoad:(AKIArrayModel *)arrayModel {
-    AKIPrintMethod
-    
     AKIWeakify(self);
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
-        
+        [self.usersView.tableView updateWithChangeModel:arrayChangeModel];
     });
 }
 
-- (void)arrayModelDidFailLoading:(AKIArrayModel *)arrayModel {
-    AKIPrintMethod
-}
-
-- (void)arrayModelWillLoad:(AKIArrayModel *)arrayModel {
-    AKIPrintMethod
+- (void)modelDidLoad:(AKIArrayModel *)arrayModel {
+    AKIWeakify(self);
+    AKIAsyncPerformInMainQueue(^{
+        AKIStrongifyAndReturnIfNil(self);
+       [self.usersView.tableView reloadData];
+    });
 }
 
 #pragma mark -
 #pragma mark UISearchBar
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    AKIPrintMethod
+    self.searching = YES;
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    AKIPrintMethod
+    self.searching = NO;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    AKIPrintMethod
-    self.enableFilteredModel = YES;
     [self filterContentForSearchText:searchText];
-}
-
-- (void)filterContentForSearchText:(NSString*)searchText {
-    AKIPrintMethod
-    
-    if (![self.filteredModel filterUsingString:searchText]) {
-        self.enableFilteredModel = NO;
-    }
-    
-    [self.userView.tableView reloadData];
 }
 
 @end

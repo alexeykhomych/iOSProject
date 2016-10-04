@@ -6,18 +6,18 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AKIAbstractViewController.h"
 
 #import "AKIUsersArrayModel.h"
 
-@interface AKIUsersViewController : UIViewController <
+@interface AKIUsersViewController : AKIAbstractViewController <
     UITableViewDelegate,
     UITableViewDataSource,
     UISearchBarDelegate,
     AKIArrayModelObserver
 >
 
-@property (nonatomic, strong)   AKIUsersArrayModel  *model;
+@property (nonatomic, strong) AKIUsersArrayModel *model;
 
 - (IBAction)onAddButton:(id)sender;
 - (IBAction)onEditButton:(id)sender;

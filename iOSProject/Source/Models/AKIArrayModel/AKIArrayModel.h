@@ -8,43 +8,36 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AKIObservableObject.h"
+#import "AKIModel.h"
+
+typedef NS_ENUM(NSUInteger, AKIArrayModelState) {
+    AKIArrayModelDidUpdate = AKIModelStateCount
+};
 
 @class AKIArrayModel;
 @class AKIArrayChangeModel;
-
-typedef NS_ENUM(NSUInteger, AKIArrayModelState) {
-    AKIArrayModelUpdated,
-    AKIArrayModelDidLoad,
-    AKIArrayModelWillLoad,
-    AKIArrayModelFailedLoading
-};
 
 @protocol AKIArrayModelObserver <NSObject>
 
 @optional
 - (void)arrayModel:(AKIArrayModel *)arrayModel didUpdateWithChangeModel:(AKIArrayChangeModel *)arrayChangeModel;
 
-- (void)arrayModelDidLoad:(AKIArrayModel *)arrayModel;
-- (void)arrayModelDidFailLoading:(AKIArrayModel *)arrayModel;
-- (void)arrayModelWillLoad:(AKIArrayModel *)arrayModel;
-
-- (void)encodeWithCoder:(NSCoder *)aCoder;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder;
-
 @end
 
-@interface AKIArrayModel : AKIObservableObject
+@interface AKIArrayModel : AKIModel <AKIArrayModelObserver>
 @property (nonatomic, readonly) NSArray     *objects;
 @property (nonatomic, readonly) NSUInteger  count;
 
 - (void)addObject:(id)object;
 - (void)addObjects:(NSArray *)objects;
 
+- (void)exchangeObjects:(NSArray *)objects;
+
 - (void)removeObject:(id)object;
 - (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)removeAllObjects;
 
+- (NSUInteger)indexOfObject:(id)object;
 - (void)moveObjectAtIndex:(NSUInteger)firstIndex toIndex:(NSUInteger)secondIndex;
 
 - (id)objectAtIndexedSubscript:(NSUInteger)index;

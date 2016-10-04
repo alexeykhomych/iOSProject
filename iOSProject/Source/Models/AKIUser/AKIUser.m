@@ -8,16 +8,22 @@
 
 #import "AKIUser.h"
 
+#import "AKIImageModel.h"
+
 #import "NSString+AKIExtensions.h"
 
+#import "AKIMacro.h"
+
+AKIStringConstant(FullNameKey, @"kAKIFullName");
+
 @interface AKIUser()
-@property (nonatomic, copy)     NSString    *fullName;
+@property (nonatomic, copy) NSString *fullName;
 
 @end
 
 @implementation AKIUser
 
-@dynamic image;
+@dynamic imageModel;
 
 #pragma mark -
 #pragma mark Initialization and Deallocation 
@@ -35,16 +41,15 @@
 #pragma mark -
 #pragma mark Accessors
 
-- (UIImage *)image {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"image" ofType:@"jpg"];
+- (AKIImageModel *)imageModel {
+//    NSURL *url = [[NSBundle mainBundle] URLForResource:@"image" withExtension:@"jpg"];
+    NSURL *url = [NSURL URLWithString:@"http://mirgif.com/humor/prikol104.jpg"];
     
-    return [UIImage imageWithContentsOfFile:path];
+    return [AKIImageModel imageWithURL:url];
 }
 
 #pragma mark -
 #pragma mark NSCopying
-
-#define kAKIFullNameKey @"kAKIFullName"
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];

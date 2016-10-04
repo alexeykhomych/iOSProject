@@ -9,41 +9,58 @@
 #import "AKIFilteredArrayModel.h"
 
 #import "AKIUser.h"
+#import "AKIGCD.h"
 
 #import "NSArray+AKIExtensions.h"
 
 @interface AKIFilteredArrayModel ()
-@property (nonatomic, strong) AKIArrayModel *containerModel;
+@property (nonatomic, strong) AKIArrayModel *arrayModel;
 
 @end
 
 @implementation AKIFilteredArrayModel
 
 #pragma mark -
-#pragma mark Public
+#pragma mark Initializations and Deallocations
 
-- (void)addModelToFilter:(AKIArrayModel *)model {
-    if (_containerModel != model) {
-        _containerModel = model;
+- (void)dealloc {
+    self.arrayModel = nil;
+}
+
+- (instancetype)initWithModel:(id)model {
+    if (!model) {
+        return nil;
+    }
+    
+    self = [super init];
+    self.arrayModel = model;
+    
+    return self;
+}
+
+#pragma mark -
+#pragma mark Accessors
+
+- (void)setArrayModel:(AKIArrayModel *)arrayModel {
+    if (_arrayModel != arrayModel) {
+        [_arrayModel removeObserver:self];
+        
+        _arrayModel = arrayModel;
+        
+        [_arrayModel addObserver:self];
     }
 }
 
-- (BOOL)filterUsingString:(NSString *)searchText {
-    BOOL result = NO;
+#pragma mark -
+#pragma mark Public
 
-    if (!searchText.length) {
-        return result;
-    }
-    
-    [self performBlockWithoutNotification:^{
-        [self removeAllObjects];
+- (void)filterObjects {
+    AKIAsyncPerformInBackground(^{
+        NSArray *objects = [self.arrayModel.objects filteredArrayUsingPredicate:self.predicate];
+        [self exchangeObjects:objects];
         
-        [self addObjects:[self.containerModel.objects filteredArrayUsingBlock:^BOOL(AKIUser *evaluatedObject, NSDictionary * bindings) {
-            return [evaluatedObject.fullName containsString:searchText];
-        }]];
-    }];
-    
-    return !result;
+        self.state = AKIModelUpdated;
+    });
 }
 
 @end

@@ -16,13 +16,6 @@
 
 #import "UIViewController+AKIExtensions.h"
 
-#import "AKIMacro.h"
-
-@interface AKIAppDelegate ()
-@property (nonatomic, strong) AKIUsersArrayModel *model;
-
-@end
-
 @implementation AKIAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -31,38 +24,33 @@
     
     AKIUsersViewController *controller = [AKIUsersViewController viewController];
     
-    controller.model = [[AKIUsersArrayModel alloc] init];
-    
     window.rootViewController = controller;
     
-    self.model = controller.model;
-    
     [window makeKeyAndVisible];
+    
+    controller.model = [[AKIUsersArrayModel alloc] init];
     
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    AKIPrintMethod
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    AKIPrintMethod
-    [self.model save];
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    AKIPrintMethod
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    AKIPrintMethod
-    [self.model load];
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    AKIPrintMethod
-    [self.model save];
+    
 }
 
 @end

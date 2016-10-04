@@ -8,24 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AKIObservableObject.h"
+#import "AKIModel.h"
 
-typedef NS_ENUM(NSUInteger, AKIImageModelState) {
-    AKIImageModelUnloaded,
-    AKIImageModelLoading,
-    AKIImageModelLoaded,
-    AKIImageModelFailedLoading
-};
-
-@interface AKIImageModel : AKIObservableObject
+@interface AKIImageModel : AKIModel
 @property (nonatomic, readonly) UIImage *image;
-@property (nonatomic, readonly) NSURL   *url;
+@property (nonatomic, strong)   NSURL   *url;
 
 + (instancetype)imageWithURL:(NSURL *)url;
 
 - (instancetype)initWithURL:(NSURL *)url;
 
-- (void)load;
-- (void)dump;
+- (void)finishDownloadingImage:(UIImage *)downloadedImage;
 
 @end

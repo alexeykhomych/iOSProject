@@ -1,15 +1,14 @@
 //
-//  AKIUserView.m
+//  AKIUsersView.m
 //  iOSProject
 //
 //  Created by Alexey Khomych on 28.07.16.
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIUserView.h"
-#import "AKIUserCell.h"
+#import "AKIUsersView.h"
 
-@implementation AKIUserView
+@implementation AKIUsersView
 
 @dynamic editing;
 

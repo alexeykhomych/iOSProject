@@ -9,9 +9,10 @@
 #import "AKIArrayModel.h"
 
 @interface AKIFilteredArrayModel : AKIArrayModel
-@property (nonatomic, readonly) AKIArrayModel *containerModel;
-- (void)addModelToFilter:(AKIArrayModel *)model;
+@property (nonatomic, readonly) NSPredicate *predicate;
 
-- (BOOL)filterUsingString:(NSString *)searchText;
+- (instancetype)initWithModel:(id)model;
+
+- (void)filterObjects;
 
 @end

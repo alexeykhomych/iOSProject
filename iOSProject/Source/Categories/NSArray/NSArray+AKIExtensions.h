@@ -15,4 +15,6 @@
 
 - (NSArray *)filteredArrayUsingBlock:(id)block;
 
++ (instancetype)objectsWithCount:(NSUInteger)count block:(id(^)())block;
+
 @end
