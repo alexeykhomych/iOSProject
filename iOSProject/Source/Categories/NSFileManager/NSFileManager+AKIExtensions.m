@@ -10,4 +10,16 @@
 
 @implementation NSFileManager (AKIExtensions)
 
++ (NSString *)pathForDocuments {
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+}
+
++ (NSString *)pathForLibrary {
+    return [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
+}
+
++ (NSString *)pathForCachedFiles {
+    return [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
+}
+
 @end
