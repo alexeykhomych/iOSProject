@@ -42,7 +42,8 @@ AKIStringConstant(FullNameKey, @"kAKIFullName");
 #pragma mark Accessors
 
 - (AKIImageModel *)imageModel {
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"image" withExtension:@"jpg"];
+//    NSURL *url = [[NSBundle mainBundle] URLForResource:@"image" withExtension:@"jpg"];
+    NSURL *url = [NSURL URLWithString:@"http://mirgif.com/humor/prikol104.jpg"];
     
     return [AKIImageModel imageWithURL:url];
 }
