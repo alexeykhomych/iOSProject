@@ -18,4 +18,6 @@
 
 - (instancetype)initWithURL:(NSURL *)url;
 
+- (void)finishDownloadingImage:(UIImage *)downloadedImage;
+
 @end

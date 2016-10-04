@@ -6,20 +6,12 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIModel.h"
+#import "AKIImageModel.h"
 
 #import <UIKit/UIKit.h>
 
-@interface AKILocalImageModel : AKIModel
-@property (nonatomic, readonly)             NSFileManager   *fileManager;
-@property (nonatomic, readonly, copy)       NSString        *path;
-@property (nonatomic, readonly, copy)       NSString        *fileName;
-@property (nonatomic, readonly, copy)       NSString        *filePath;
-
-@property (nonatomic, readonly)       NSURL       *url;
+@interface AKILocalImageModel : AKIImageModel
 
 + (instancetype)imageWithURL:(NSURL *)url;
-
-- (void)finishDownloadingImage:(UIImage *)downloadedImage;
 
 @end

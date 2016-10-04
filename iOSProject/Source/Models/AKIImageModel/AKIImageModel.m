@@ -9,11 +9,13 @@
 #import "AKIImageModel.h"
 
 #import "AKILocalImageModel.h"
+#import "AKIInternetImageModel.h"
+
+#import "NSFileManager+AKIExtensions.h"
 
 @interface AKIImageModel ()
 @property (nonatomic, strong) UIImage *image;
-
-- (NSURL *)defaultURL;
+@property (nonatomic, readonly) BOOL cached;
 
 @end
 
@@ -23,7 +25,9 @@
 #pragma mark Class methods
 
 + (instancetype)imageWithURL:(NSURL *)url {
-    return [[super alloc] initWithURL:url];
+    Class class = url.isFileURL ? [AKILocalImageModel class] : [AKIInternetImageModel class];
+    
+    return [[class alloc] initWithURL:url];
 }
 
 #pragma mark -
@@ -31,17 +35,12 @@
 
 - (instancetype)initWithURL:(NSURL *)url {
     self = [self init];
-    self.localImageModel = [AKILocalImageModel imageWithURL:url];
     
     return self;
 }
 
 #pragma mark -
-#pragma mark Accessors
-
-- (NSURL *)defaultURL {
-    return [[NSBundle mainBundle] executableURL];
-}
+#pragma mark Public
 
 - (void)finishDownloadingImage:(UIImage *)downloadedImage {
     self.image = downloadedImage;
