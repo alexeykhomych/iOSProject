@@ -10,19 +10,24 @@
 
 #import "AKIGCD.h"
 
+#import "NSFileManager+AKIExtensions.h"
+
 #import "AKIMacro.h"
+
+AKIStringConstant(FileName, @"Images");
 
 @interface AKIImageModel ()
 @property (nonatomic, strong)       UIImage     *image;
 @property (nonatomic, strong)       NSURL       *url;
 @property (nonatomic, readonly)     BOOL        cached;
 
-@property (nonatomic, strong) NSMutableDictionary *cache;
-
-
 @property (nonatomic, readonly)             NSFileManager   *fileManager;
 @property (nonatomic, readonly, copy)       NSString        *path;
 @property (nonatomic, readonly, copy)       NSString        *fileName;
+@property (nonatomic, readonly, copy)       NSString        *filePath;
+
+@property (nonatomic, readonly) NSURLSession *session;
+@property (nonatomic, strong)   NSURLSessionDownloadTask    *downloadTask;
 
 - (void)downloadImageFromInternet;
 - (NSURL *)defaultURL;
@@ -46,7 +51,6 @@
     
 //    self.url = url ? url : [self defaultURL];
     self.url = [NSURL URLWithString:@"http://mirgif.com/humor/prikol104.jpg"];
-    self.cache = [NSMutableDictionary new];
     
     return self;
 }
@@ -59,17 +63,25 @@
 }
 
 - (NSString *)fileName {
-    NSArray *separated = [self.url.absoluteString componentsSeparatedByString:@"/"];
+    NSCharacterSet *characterSet = [NSCharacterSet URLUserAllowedCharacterSet];
     
-    return [separated lastObject];
+    return [self.url.absoluteString stringByAddingPercentEncodingWithAllowedCharacters:characterSet];
+}
+
+- (NSString *)filePath {
+    return [self.path stringByAppendingPathComponent:self.fileName];
 }
 
 - (NSString *)path {
-    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    return [NSFileManager pathForDocuments];
 }
 
 - (BOOL)cached {
-    return [self.fileManager fileExistsAtPath:[self.path stringByAppendingPathComponent:self.fileName]];
+    return [self.fileManager fileExistsAtPath:self.filePath];
+}
+
+- (NSURLSession *)session {
+    return [NSURLSession sharedSession];
 }
 
 #pragma mark -
@@ -82,29 +94,36 @@
 - (void)performLoading {
     if (!self.cached) {
         [self downloadImageFromInternet];
+        
+        return;
     }
     
-    UIImage *image = [UIImage imageWithContentsOfFile:self.path];
-    self.image = image;
-    self.state = image ? AKIModelDidLoad : AKIModelWillLoad;
+    UIImage *downloadedImage = [UIImage imageWithContentsOfFile:self.filePath];
+    [self finishDownloadingImage:downloadedImage];
 }
 
 - (void)downloadImageFromInternet {
-    NSURLSessionDownloadTask *downloadImageTask = [[NSURLSession sharedSession]
-                                                   downloadTaskWithURL:self.url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-                                                       NSData *data = [NSData dataWithContentsOfURL:location];
-                                                       UIImage *downloadedImage = [UIImage imageWithData:data];
-                                                       
-                                                       [data writeToFile:self.path atomically:YES];
-                                                       
-                                                       if (!downloadedImage) {
-                                                           self.state = AKIModelDidFailLoading;
-                                                       }
-                                                       
-//                                                       self.image = downloadedImage;
-                                                   }];
+    id completionHandler = ^(NSURL *location, NSURLResponse *response, NSError *error) {
+        NSData *data = [NSData dataWithContentsOfURL:location];
+        UIImage *downloadedImage = [UIImage imageWithData:data];
+        
+        [data writeToFile:self.filePath atomically:YES];
+        
+        if (!downloadedImage) {
+            self.state = AKIModelDidFailLoading;
+        }
+        
+        [self finishDownloadingImage:downloadedImage];
+    };
     
-    [downloadImageTask resume];
+    NSURLSessionDownloadTask *downloadTask = self.downloadTask;
+    downloadTask = [self.session downloadTaskWithURL:self.url completionHandler:completionHandler];
+    [downloadTask resume];
+}
+
+- (void)finishDownloadingImage:(UIImage *)downloadedImage {
+    self.image = downloadedImage;
+    self.state = downloadedImage ? AKIModelDidLoad : AKIModelDidFailLoading;
 }
 
 @end
