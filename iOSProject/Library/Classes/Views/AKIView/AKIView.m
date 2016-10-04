@@ -25,6 +25,14 @@
     self.loadingView = nil;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    
+    self.loadingView = [self defaultLoadingView];
+    
+    return self;
+}
+
 #pragma mark -
 #pragma mark Accessors
 

@@ -25,7 +25,7 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
 @property (nonatomic, readonly, copy)       NSString        *path;
 @property (nonatomic, readonly)             BOOL            cached;
 
-@property (nonatomic, strong)       NSMutableDictionary     *dictionaryObservers;
+@property (nonatomic, strong)       NSMutableDictionary     *observerDictionary;
 @property (nonatomic, readonly)     NSArray                 *appNotifications;
 
 - (void)startObservingForNotificationName:(NSString *)name withBlock:(void(^)(void))block;
@@ -52,7 +52,7 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
         [self save];
     };
     
-    self.dictionaryObservers = [NSMutableDictionary new];
+    self.observerDictionary = [NSMutableDictionary new];
     
     [self startObservingForNotificationNames:self.appNotifications withBlock:block];
     
@@ -123,7 +123,7 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
                                                                     AKIPerformBlock(block);
                                                                 }];
     
-    [self.dictionaryObservers setObject:observer forKey:name];
+    [self.observerDictionary setObject:observer forKey:name];
 }
 
 - (void)stopObservingForNotificationNames:(NSArray *)names {
@@ -133,7 +133,7 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
 }
 
 - (void)stopObservingForNotificationName:(NSString *)name {
-    [[NSNotificationCenter defaultCenter] removeObserver:[self.dictionaryObservers objectForKey:name] name:name object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:[self.observerDictionary objectForKey:name] name:name object:nil];
 }
 
 @end

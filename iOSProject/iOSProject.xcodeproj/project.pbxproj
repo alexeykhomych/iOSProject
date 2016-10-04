@@ -56,6 +56,7 @@
 		8498D6BF1DA12C29004376FF /* AKILoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498D6AF1DA12C29004376FF /* AKILoadingView.m */; };
 		8498D6C01DA12C29004376FF /* AKILoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8498D6B01DA12C29004376FF /* AKILoadingView.xib */; };
 		8498D6C11DA12C29004376FF /* AKIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498D6B31DA12C29004376FF /* AKIView.m */; };
+		84F9A95D1DA3C6CF00976209 /* NSFileManager+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A95C1DA3C6CF00976209 /* NSFileManager+AKIExtensions.m */; };
 		C550B8DBB0EE0507BFA3F1C1 /* libPods-iOSProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAF4BDE66977EDE9EA23314F /* libPods-iOSProject.a */; };
 		CEDD97692454920BF46A0BC8 /* libPods-iOSProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1DD131D430834B8AAACB0A2 /* libPods-iOSProjectTests.a */; };
 /* End PBXBuildFile section */
@@ -150,6 +151,8 @@
 		8498D6B01DA12C29004376FF /* AKILoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKILoadingView.xib; sourceTree = "<group>"; };
 		8498D6B21DA12C29004376FF /* AKIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIView.h; sourceTree = "<group>"; };
 		8498D6B31DA12C29004376FF /* AKIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIView.m; sourceTree = "<group>"; };
+		84F9A95B1DA3C6CF00976209 /* NSFileManager+AKIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+AKIExtensions.h"; sourceTree = "<group>"; };
+		84F9A95C1DA3C6CF00976209 /* NSFileManager+AKIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+AKIExtensions.m"; sourceTree = "<group>"; };
 		C1DD131D430834B8AAACB0A2 /* libPods-iOSProjectTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOSProjectTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADE9593A11952A892FE14DC /* Pods-iOSProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSProjectTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSProjectTests/Pods-iOSProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DAF4BDE66977EDE9EA23314F /* libPods-iOSProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOSProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -257,6 +260,7 @@
 		8498D6231DA12C19004376FF /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				84F9A95A1DA3C6CF00976209 /* NSFileManager */,
 				8498D6241DA12C19004376FF /* NSArray */,
 				8498D6271DA12C19004376FF /* NSBundle */,
 				8498D62A1DA12C19004376FF /* NSMutableArray */,
@@ -685,6 +689,15 @@
 			path = AKIView;
 			sourceTree = "<group>";
 		};
+		84F9A95A1DA3C6CF00976209 /* NSFileManager */ = {
+			isa = PBXGroup;
+			children = (
+				84F9A95B1DA3C6CF00976209 /* NSFileManager+AKIExtensions.h */,
+				84F9A95C1DA3C6CF00976209 /* NSFileManager+AKIExtensions.m */,
+			);
+			path = NSFileManager;
+			sourceTree = "<group>";
+		};
 		E26017C6903F18B5D7B3C254 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -910,6 +923,7 @@
 				8498D6801DA12C19004376FF /* AKIImageView.m in Sources */,
 				8498D6711DA12C19004376FF /* NSNotificationCenter+AKIExtensions.m in Sources */,
 				8498D6721DA12C19004376FF /* NSObject+AKIExtensions.m in Sources */,
+				84F9A95D1DA3C6CF00976209 /* NSFileManager+AKIExtensions.m in Sources */,
 				848EE6FD1D48F7FB00B7F780 /* AKIAppDelegate.m in Sources */,
 				8498D6731DA12C19004376FF /* NSString+AKIExtensions.m in Sources */,
 				848EE6D01D48DD5300B7F780 /* main.m in Sources */,
