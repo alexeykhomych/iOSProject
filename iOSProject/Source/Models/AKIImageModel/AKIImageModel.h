@@ -11,8 +11,8 @@
 #import "AKIModel.h"
 
 @interface AKIImageModel : AKIModel
-@property (nonatomic, readonly) UIImage *image;
-@property (nonatomic, readonly)   NSURL   *url;
+@property (nonatomic, readonly) UIImage             *image;
+@property (nonatomic, readonly) NSURL               *url;
 
 + (instancetype)imageWithURL:(NSURL *)url;
 

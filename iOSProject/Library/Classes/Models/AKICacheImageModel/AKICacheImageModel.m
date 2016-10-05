@@ -16,6 +16,19 @@
 @implementation AKICacheImageModel
 
 #pragma mark -
+#pragma mark Class methods
+
++ (instancetype)cache {
+    static dispatch_once_t onceToken;
+    static AKICacheImageModel *cacheImageModel = nil;
+    dispatch_once(&onceToken, ^{
+        cacheImageModel = [[AKICacheImageModel alloc] init];
+    });
+    
+    return cacheImageModel;
+}
+
+#pragma mark -
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
@@ -33,19 +46,27 @@
 #pragma mark Accessors
 
 - (id)objectForKey:(NSString *)key {
-    return [self.cache objectForKey:key];
+    @synchronized (self) {
+        return [self.cache objectForKey:key];
+    }
 }
 
 - (void)addObject:(id)object forKey:(NSString *)key {
-    [self.cache setObject:object forKey:key];
+    @synchronized (self) {
+        [self.cache setObject:object forKey:key];
+    }
 }
 
 - (void)removeObjectForKey:(NSString *)key {
-    [self.cache removeObjectForKey:key];
+    @synchronized (self) {
+        [self.cache removeObjectForKey:key];
+    }
 }
 
 - (void)removeAllObjects {
-    [self.cache removeAllObjects];
+    @synchronized (self) {
+        [self.cache removeAllObjects];
+    }
 }
 
 @end

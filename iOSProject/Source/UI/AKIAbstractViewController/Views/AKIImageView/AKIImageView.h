@@ -8,11 +8,13 @@
 
 #import "AKIView.h"
 #import "AKILoadingViewContainer.h"
+#import "AKICacheImageModel.h"
 
 @class AKIImageModel;
 
 @interface AKIImageView : AKILoadingViewContainer
-@property (nonatomic, strong) IBOutlet UIImageView *imageView;
-@property (nonatomic, strong) AKIImageModel *imageModel;
+@property (nonatomic, strong) IBOutlet UIImageView  *imageView;
+@property (nonatomic, strong)   AKIImageModel       *imageModel;
+@property (nonatomic, readonly) AKICacheImageModel  *cacheImageModel;
 
 @end

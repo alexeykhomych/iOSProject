@@ -11,6 +11,8 @@
 @interface AKICacheImageModel : NSObject
 @property (nonatomic, readonly) NSCache *cache;
 
++ (instancetype)cache;
+
 - (void)addObject:(id)object forKey:(NSString *)key;
 - (void)removeObjectForKey:(NSString *)key;
 - (void)removeAllObjects;
