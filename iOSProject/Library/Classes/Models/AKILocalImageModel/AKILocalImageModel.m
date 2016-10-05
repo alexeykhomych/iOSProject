@@ -15,7 +15,7 @@
 
 @implementation AKILocalImageModel
 
-@dynamic url;
+@synthesize url = _url;
 
 #pragma mark -
 #pragma mark Class methods
@@ -25,20 +25,10 @@
 }
 
 #pragma mark -
-#pragma mark Initializations and Deallocations
-
-- (instancetype)initWithURL:(NSURL *)url {
-    self = [self init];
-    self.url = url;
-    
-    return self;
-}
-
-#pragma mark -
 #pragma mark Private
 
 - (void)performLoading {
-    [self finishDownloadingImage:[UIImage imageWithContentsOfFile:self.url.path]];
+    [self finishLoadingImage:[UIImage imageWithContentsOfFile:self.url.path]];
 }
 
 @end

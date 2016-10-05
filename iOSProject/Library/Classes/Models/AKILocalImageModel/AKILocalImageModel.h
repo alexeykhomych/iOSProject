@@ -12,6 +12,4 @@
 
 @interface AKILocalImageModel : AKIImageModel
 
-+ (instancetype)imageWithURL:(NSURL *)url;
-
 @end

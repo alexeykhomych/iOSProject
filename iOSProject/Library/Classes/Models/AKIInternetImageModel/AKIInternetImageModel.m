@@ -11,7 +11,7 @@
 #import "NSFileManager+AKIExtensions.h"
 
 @interface AKIInternetImageModel ()
-@property (nonatomic, readonly) NSURLSession *session;
+@property (nonatomic, readonly) NSURLSession                *session;
 @property (nonatomic, strong)   NSURLSessionDownloadTask    *downloadTask;
 
 @property (nonatomic, readonly)             NSFileManager   *fileManager;
@@ -62,7 +62,7 @@
 }
 
 - (NSString *)path {
-    return [NSFileManager pathForDocuments];
+    return [NSFileManager documentsPath];
 }
 
 - (BOOL)cached {
@@ -73,20 +73,14 @@
 #pragma mark Privat
 
 - (AKICompletionHandler)completionHandler {
-    id completionHandler = ^(NSURL *location, NSURLResponse *response, NSError *error) {
+    return ^(NSURL *location, NSURLResponse *response, NSError *error) {
         NSData *data = [NSData dataWithContentsOfURL:location];
         UIImage *downloadedImage = [UIImage imageWithData:data];
         
-        [data writeToFile:self.filePath atomically:YES];
+        [self.fileManager copyItemAtPath:location.path toPath:self.filePath error:&error];
         
-        if (!downloadedImage) {
-            self.state = AKIModelDidFailLoading;
-        }
-        
-        [self finishDownloadingImage:downloadedImage];
-    };
-    
-    return completionHandler;
+        [self finishLoadingImage:downloadedImage];
+    };;
 }
 
 - (void)performLoading {

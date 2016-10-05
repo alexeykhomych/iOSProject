@@ -8,18 +8,26 @@
 
 #import "NSFileManager+AKIExtensions.h"
 
+#define AKIDispatchOnceFileManagerWithFolder(folder) \
+    static dispatch_once_t onceToken; \
+    static id result = nil; \
+    dispatch_once(&onceToken, ^{ \
+        result = [NSSearchPathForDirectoriesInDomains(folder, NSUserDomainMask, YES) firstObject]; \
+    }); \
+    return result
+
 @implementation NSFileManager (AKIExtensions)
 
-+ (NSString *)pathForDocuments {
-    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
++ (NSString *)documentsPath {
+    AKIDispatchOnceFileManagerWithFolder(NSDocumentDirectory);
 }
 
-+ (NSString *)pathForLibrary {
-    return [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
++ (NSString *)libraryPath {
+    AKIDispatchOnceFileManagerWithFolder(NSLibraryDirectory);
 }
 
-+ (NSString *)pathForCachedFiles {
-    return [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
++ (NSString *)cachedFilesPath {
+    AKIDispatchOnceFileManagerWithFolder(NSLibraryDirectory);
 }
 
 @end

@@ -9,13 +9,11 @@
 #import "AKIImageModel.h"
 
 #import "AKILocalImageModel.h"
-#import "AKIInternetImageModel.h"
-
-#import "NSFileManager+AKIExtensions.h"
+#import "AKIInternetImageModel.h"		
 
 @interface AKIImageModel ()
-@property (nonatomic, strong) UIImage *image;
-@property (nonatomic, readonly) BOOL cached;
+@property (nonatomic, strong) UIImage   *image;
+@property (nonatomic, strong) NSURL     *url;
 
 @end
 
@@ -36,15 +34,17 @@
 - (instancetype)initWithURL:(NSURL *)url {
     self = [self init];
     
+    self.url = url;
+    
     return self;
 }
 
 #pragma mark -
 #pragma mark Public
 
-- (void)finishDownloadingImage:(UIImage *)downloadedImage {
-    self.image = downloadedImage;
-    self.state = downloadedImage ? AKIModelDidLoad : AKIModelDidFailLoading;
+- (void)finishLoadingImage:(UIImage *)loadedImage {
+    self.image = loadedImage;
+    self.state = loadedImage ? AKIModelDidLoad : AKIModelDidFailLoading;
 }
 
 @end
