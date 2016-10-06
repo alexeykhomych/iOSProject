@@ -20,11 +20,6 @@
 
 #import "AKIMacro.h"
 
-@interface AKIImageView ()
-@property (nonatomic, strong) AKICacheImageModel *cacheImageModel;
-
-@end
-
 @implementation AKIImageView
 
 #pragma mark -
@@ -52,7 +47,6 @@
                                     | UIViewAutoresizingFlexibleHeight;
     
     self.imageView = imageView;
-    self.cacheImageModel = [AKICacheImageModel cache];
 }
 
 #pragma mark -
@@ -67,7 +61,6 @@
         [_imageModel addObserver:self];
         
         self.model = _imageModel;
-        [self.cacheImageModel addObject:imageModel forKey:imageModel.url.absoluteString];
         
         [_imageModel load];
     }
