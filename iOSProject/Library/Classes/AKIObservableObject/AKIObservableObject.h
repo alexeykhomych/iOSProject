@@ -10,6 +10,8 @@
 
 @class AKIBlockObservationController;
 
+typedef void (^AKIVoidBlock)(void);
+
 @interface AKIObservableObject : NSObject
 @property (nonatomic, readonly) NSSet       *observers;
 @property (nonatomic, assign)   NSUInteger  state;
@@ -30,7 +32,7 @@
 
 - (void)notifyObserverWithSelector:(SEL)selector object:(id)object;
 
-- (void)performBlockWithoutNotification:(void (^)(void))block;
-- (void)performBlockWithNotification:(void (^)(void))block;
+- (void)performBlockWithoutNotification:(AKIVoidBlock)block;
+- (void)performBlockWithNotification:(AKIVoidBlock)block;
 
 @end

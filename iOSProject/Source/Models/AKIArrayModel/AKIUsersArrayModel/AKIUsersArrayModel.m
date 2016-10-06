@@ -19,6 +19,8 @@
 AKIConstant(NSUInteger, UsersCount, 10);
 AKIStringConstant(FileName, @"UsersArrayModel.plist");
 
+//typedef void ^(AKIVo);
+
 @interface AKIUsersArrayModel ()
 @property (nonatomic, readonly)             NSFileManager   *fileManager;
 @property (nonatomic, readonly, copy)       NSString        *documentsPath;
@@ -28,10 +30,10 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
 @property (nonatomic, strong)       NSMutableDictionary     *observerDictionary;
 @property (nonatomic, readonly)     NSArray                 *appNotifications;
 
-- (void)startObservingForNotificationName:(NSString *)name withBlock:(void(^)(void))block;
+- (void)startObservingForNotificationName:(NSString *)name withBlock:(AKIVoidBlock)block;
 - (void)stopObservingForNotificationName:(NSString *)name;
 
-- (void)startObservingForNotificationNames:(NSArray *)names withBlock:(void(^)(void))block;
+- (void)startObservingForNotificationNames:(NSArray *)names withBlock:(AKIVoidBlock)block;
 - (void)stopObservingForNotificationNames:(NSArray *)names;
 
 @end
@@ -109,13 +111,13 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
 #pragma mark -
 #pragma mark Privat
 
-- (void)startObservingForNotificationNames:(NSArray *)names withBlock:(void(^)(void))block {
+- (void)startObservingForNotificationNames:(NSArray *)names withBlock:(AKIVoidBlock)block {
     for (NSString *name in names) {
         [self startObservingForNotificationName:name withBlock:block];
     }
 }
 
-- (void)startObservingForNotificationName:(NSString *)name withBlock:(void(^)(void))block {
+- (void)startObservingForNotificationName:(NSString *)name withBlock:(AKIVoidBlock)block {
     id observer = [[NSNotificationCenter defaultCenter] addObserverForName:name
                                                                     object:nil
                                                                      queue:nil

@@ -87,9 +87,9 @@
     self.downloadTask = [self.session downloadTaskWithURL:self.url completionHandler:[self completionHandler]];
 }
 
-- (void)modelDidFailLoading:(id)model {
+- (void)modelDidFailLoading:(AKIImageModel *)model {
     [self.fileManager removeItemAtPath:self.filePath error:nil];
-    [self load];
+    [model load];
 }
 
 @end
