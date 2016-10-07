@@ -11,12 +11,12 @@
 #import "AKILocalImageModel.h"
 #import "AKIInternetImageModel.h"		
 
-#import "AKICacheImageModel.h"
+#import "AKIImageModelCache.h"
 
 @interface AKIImageModel ()
 @property (nonatomic, strong) UIImage   *image;
 @property (nonatomic, strong) NSURL     *url;
-@property (nonatomic, strong) AKICacheImageModel *cacheImageModel;
+@property (nonatomic, strong) AKIImageModelCache *cachedObjects;
 
 @end
 
@@ -26,6 +26,15 @@
 #pragma mark Class methods
 
 + (instancetype)imageWithURL:(NSURL *)url {
+    AKIImageModelCache *cachedObjects = [AKIImageModelCache cache];
+    
+    AKIImageModel *model = [cachedObjects objectForKey:url];
+    
+    if (model) {
+        NSLog(@"cached");
+        return model;
+    }
+    
     Class class = url.isFileURL ? [AKILocalImageModel class] : [AKIInternetImageModel class];
     
     return [[class alloc] initWithURL:url];
@@ -35,21 +44,15 @@
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    [self.cacheImageModel removeObjectForKey:self.url.absoluteString];
+    [self.cachedObjects removeObjectForKey:self.url];
 }
 
 - (instancetype)initWithURL:(NSURL *)url {
     self = [self init];
-    self.cacheImageModel = [AKICacheImageModel cache];
-    
-    id model = [self.cacheImageModel objectForKey:url.absoluteString];
-    
-    if (model) {
-        return model;
-    }
     
     self.url = url;
-    [self.cacheImageModel addObject:self forKey:url.absoluteString];
+    self.cachedObjects = [AKIImageModelCache cache];
+    [self.cachedObjects setObject:self forKey:self.url];
     
     return self;
 }
@@ -60,10 +63,6 @@
 - (void)finishLoadingImage:(UIImage *)loadedImage {
     self.image = loadedImage;
     self.state = loadedImage ? AKIModelDidLoad : AKIModelDidFailLoading;
-}
-
-- (void)modelDidFailLoading:(id)model {
-    
 }
 
 @end

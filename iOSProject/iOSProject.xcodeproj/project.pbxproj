@@ -56,10 +56,10 @@
 		8498D6C01DA12C29004376FF /* AKILoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8498D6B01DA12C29004376FF /* AKILoadingView.xib */; };
 		8498D6C11DA12C29004376FF /* AKIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498D6B31DA12C29004376FF /* AKIView.m */; };
 		84F9A95D1DA3C6CF00976209 /* NSFileManager+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A95C1DA3C6CF00976209 /* NSFileManager+AKIExtensions.m */; };
-		84F9A9871DA6858F00976209 /* AKICacheImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A97C1DA6858F00976209 /* AKICacheImageModel.m */; };
 		84F9A9891DA6858F00976209 /* AKIImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9801DA6858F00976209 /* AKIImageModel.m */; };
 		84F9A98A1DA6858F00976209 /* AKIInternetImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9831DA6858F00976209 /* AKIInternetImageModel.m */; };
 		84F9A98B1DA6858F00976209 /* AKILocalImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9861DA6858F00976209 /* AKILocalImageModel.m */; };
+		84F9A99E1DA7CF5900976209 /* AKIImageModelCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A99D1DA7CF5900976209 /* AKIImageModelCache.m */; };
 		C550B8DBB0EE0507BFA3F1C1 /* libPods-iOSProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAF4BDE66977EDE9EA23314F /* libPods-iOSProject.a */; };
 		CEDD97692454920BF46A0BC8 /* libPods-iOSProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1DD131D430834B8AAACB0A2 /* libPods-iOSProjectTests.a */; };
 /* End PBXBuildFile section */
@@ -154,14 +154,14 @@
 		8498D6B31DA12C29004376FF /* AKIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIView.m; sourceTree = "<group>"; };
 		84F9A95B1DA3C6CF00976209 /* NSFileManager+AKIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+AKIExtensions.h"; sourceTree = "<group>"; };
 		84F9A95C1DA3C6CF00976209 /* NSFileManager+AKIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+AKIExtensions.m"; sourceTree = "<group>"; };
-		84F9A97B1DA6858F00976209 /* AKICacheImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKICacheImageModel.h; sourceTree = "<group>"; };
-		84F9A97C1DA6858F00976209 /* AKICacheImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKICacheImageModel.m; sourceTree = "<group>"; };
 		84F9A97F1DA6858F00976209 /* AKIImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIImageModel.h; sourceTree = "<group>"; };
 		84F9A9801DA6858F00976209 /* AKIImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIImageModel.m; sourceTree = "<group>"; };
 		84F9A9821DA6858F00976209 /* AKIInternetImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIInternetImageModel.h; sourceTree = "<group>"; };
 		84F9A9831DA6858F00976209 /* AKIInternetImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIInternetImageModel.m; sourceTree = "<group>"; };
 		84F9A9851DA6858F00976209 /* AKILocalImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKILocalImageModel.h; sourceTree = "<group>"; };
 		84F9A9861DA6858F00976209 /* AKILocalImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKILocalImageModel.m; sourceTree = "<group>"; };
+		84F9A99C1DA7CF5900976209 /* AKIImageModelCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIImageModelCache.h; sourceTree = "<group>"; };
+		84F9A99D1DA7CF5900976209 /* AKIImageModelCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIImageModelCache.m; sourceTree = "<group>"; };
 		C1DD131D430834B8AAACB0A2 /* libPods-iOSProjectTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOSProjectTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADE9593A11952A892FE14DC /* Pods-iOSProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSProjectTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSProjectTests/Pods-iOSProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DAF4BDE66977EDE9EA23314F /* libPods-iOSProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOSProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -701,21 +701,12 @@
 		84F9A9791DA6858F00976209 /* AKIImage */ = {
 			isa = PBXGroup;
 			children = (
-				84F9A97A1DA6858F00976209 /* AKICacheImageModel */,
+				84F9A99B1DA7CF5900976209 /* AKIImageModelCache */,
 				84F9A97E1DA6858F00976209 /* AKIImageModel */,
 				84F9A9811DA6858F00976209 /* AKIInternetImageModel */,
 				84F9A9841DA6858F00976209 /* AKILocalImageModel */,
 			);
 			path = AKIImage;
-			sourceTree = "<group>";
-		};
-		84F9A97A1DA6858F00976209 /* AKICacheImageModel */ = {
-			isa = PBXGroup;
-			children = (
-				84F9A97B1DA6858F00976209 /* AKICacheImageModel.h */,
-				84F9A97C1DA6858F00976209 /* AKICacheImageModel.m */,
-			);
-			path = AKICacheImageModel;
 			sourceTree = "<group>";
 		};
 		84F9A97E1DA6858F00976209 /* AKIImageModel */ = {
@@ -743,6 +734,15 @@
 				84F9A9861DA6858F00976209 /* AKILocalImageModel.m */,
 			);
 			path = AKILocalImageModel;
+			sourceTree = "<group>";
+		};
+		84F9A99B1DA7CF5900976209 /* AKIImageModelCache */ = {
+			isa = PBXGroup;
+			children = (
+				84F9A99C1DA7CF5900976209 /* AKIImageModelCache.h */,
+				84F9A99D1DA7CF5900976209 /* AKIImageModelCache.m */,
+			);
+			path = AKIImageModelCache;
 			sourceTree = "<group>";
 		};
 		E26017C6903F18B5D7B3C254 /* Pods */ = {
@@ -956,7 +956,6 @@
 			files = (
 				8498D6851DA12C19004376FF /* AKIUserCell.m in Sources */,
 				8498D6821DA12C19004376FF /* AKIUsersView.m in Sources */,
-				84F9A9871DA6858F00976209 /* AKICacheImageModel.m in Sources */,
 				8498D67A1DA12C19004376FF /* AKIFilteredArrayModel.m in Sources */,
 				8498D6BE1DA12C29004376FF /* AKIModel.m in Sources */,
 				84F9A98B1DA6858F00976209 /* AKILocalImageModel.m in Sources */,
@@ -974,6 +973,7 @@
 				84F9A95D1DA3C6CF00976209 /* NSFileManager+AKIExtensions.m in Sources */,
 				84F9A98A1DA6858F00976209 /* AKIInternetImageModel.m in Sources */,
 				848EE6FD1D48F7FB00B7F780 /* AKIAppDelegate.m in Sources */,
+				84F9A99E1DA7CF5900976209 /* AKIImageModelCache.m in Sources */,
 				8498D6731DA12C19004376FF /* NSString+AKIExtensions.m in Sources */,
 				848EE6D01D48DD5300B7F780 /* main.m in Sources */,
 				8498D6BB1DA12C29004376FF /* AKIArrayChangeModelOneIndex.m in Sources */,

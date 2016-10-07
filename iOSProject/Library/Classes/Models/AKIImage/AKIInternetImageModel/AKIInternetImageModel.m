@@ -10,6 +10,8 @@
 
 #import "NSFileManager+AKIExtensions.h"
 
+typedef void (^AKICompletionHandler)(NSURL *location, NSURLResponse *response, NSError *error);
+
 @interface AKIInternetImageModel ()
 @property (nonatomic, readonly) NSURLSession                *session;
 @property (nonatomic, strong)   NSURLSessionDownloadTask    *downloadTask;
@@ -20,10 +22,14 @@
 @property (nonatomic, readonly, copy)       NSString        *filePath;
 
 - (AKICompletionHandler)completionHandler;
+- (void)removeCorruptedImage;
 
 @end
 
 @implementation AKIInternetImageModel
+
+@dynamic session;
+@dynamic fileManager;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -74,10 +80,12 @@
 
 - (AKICompletionHandler)completionHandler {
     return ^(NSURL *location, NSURLResponse *response, NSError *error) {
-        NSData *data = [NSData dataWithContentsOfURL:location];
-        UIImage *downloadedImage = [UIImage imageWithData:data];
+        UIImage *downloadedImage = nil;
         
-        [self.fileManager copyItemAtPath:location.path toPath:self.filePath error:&error];
+        if (!error) {
+            [self.fileManager copyItemAtPath:location.path toPath:self.filePath error:NULL];
+            downloadedImage = [UIImage imageNamed:self.filePath];
+        }
         
         [self finishLoadingImage:downloadedImage];
     };;
@@ -87,9 +95,8 @@
     self.downloadTask = [self.session downloadTaskWithURL:self.url completionHandler:[self completionHandler]];
 }
 
-- (void)modelDidFailLoading:(AKIImageModel *)model {
-    [self.fileManager removeItemAtPath:self.filePath error:nil];
-    [model load];
+- (void)removeCorruptedImage {
+    [self.fileManager removeItemAtPath:self.filePath error:NULL];
 }
 
 @end

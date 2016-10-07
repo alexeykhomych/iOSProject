@@ -13,13 +13,12 @@
 #import "AKIGCD.h"
 
 #import "NSObject+AKIExtensions.h"
+#import "NSFileManager+AKIExtensions.h"
 
 #import "AKIMacro.h"
 
 AKIConstant(NSUInteger, UsersCount, 10);
 AKIStringConstant(FileName, @"UsersArrayModel.plist");
-
-//typedef void ^(AKIVo);
 
 @interface AKIUsersArrayModel ()
 @property (nonatomic, readonly)             NSFileManager   *fileManager;
@@ -30,11 +29,11 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
 @property (nonatomic, strong)       NSMutableDictionary     *observerDictionary;
 @property (nonatomic, readonly)     NSArray                 *appNotifications;
 
-- (void)startObservingForNotificationName:(NSString *)name withBlock:(AKIVoidBlock)block;
-- (void)stopObservingForNotificationName:(NSString *)name;
+- (void)startObservingNotificationName:(NSString *)name withBlock:(AKIVoidBlock)block;
+- (void)stopObservingNotificationName:(NSString *)name;
 
-- (void)startObservingForNotificationNames:(NSArray *)names withBlock:(AKIVoidBlock)block;
-- (void)stopObservingForNotificationNames:(NSArray *)names;
+- (void)startObservingNotificationNames:(NSArray *)names withBlock:(AKIVoidBlock)block;
+- (void)stopObservingNotificationNames:(NSArray *)names;
 
 @end
 
@@ -44,7 +43,7 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    [self stopObservingForNotificationNames:self.appNotifications];
+    [self stopObservingNotificationNames:self.appNotifications];
 }
 
 - (instancetype)init {
@@ -56,7 +55,7 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
     
     self.observerDictionary = [NSMutableDictionary new];
     
-    [self startObservingForNotificationNames:self.appNotifications withBlock:block];
+    [self startObservingNotificationNames:self.appNotifications withBlock:block];
     
     return self;
 }
@@ -111,13 +110,13 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
 #pragma mark -
 #pragma mark Privat
 
-- (void)startObservingForNotificationNames:(NSArray *)names withBlock:(AKIVoidBlock)block {
+- (void)startObservingNotificationNames:(NSArray *)names withBlock:(AKIVoidBlock)block {
     for (NSString *name in names) {
-        [self startObservingForNotificationName:name withBlock:block];
+        [self startObservingNotificationName:name withBlock:block];
     }
 }
 
-- (void)startObservingForNotificationName:(NSString *)name withBlock:(AKIVoidBlock)block {
+- (void)startObservingNotificationName:(NSString *)name withBlock:(AKIVoidBlock)block {
     id observer = [[NSNotificationCenter defaultCenter] addObserverForName:name
                                                                     object:nil
                                                                      queue:nil
@@ -128,13 +127,13 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
     [self.observerDictionary setObject:observer forKey:name];
 }
 
-- (void)stopObservingForNotificationNames:(NSArray *)names {
+- (void)stopObservingNotificationNames:(NSArray *)names {
     for (NSString *name in names) {
-        [self stopObservingForNotificationName:name];
+        [self stopObservingNotificationName:name];
     }
 }
 
-- (void)stopObservingForNotificationName:(NSString *)name {
+- (void)stopObservingNotificationName:(NSString *)name {
     [[NSNotificationCenter defaultCenter] removeObserver:[self.observerDictionary objectForKey:name] name:name object:nil];
 }
 
