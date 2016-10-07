@@ -20,9 +20,11 @@ typedef void (^AKICompletionHandler)(NSURL *location, NSURLResponse *response, N
 @property (nonatomic, readonly, copy)       NSString        *path;
 @property (nonatomic, readonly, copy)       NSString        *fileName;
 @property (nonatomic, readonly, copy)       NSString        *filePath;
+@property (nonatomic, readonly) BOOL cached;
 
 - (AKICompletionHandler)completionHandler;
 - (void)removeCorruptedImage;
+- (NSURL *)fileURL;
 
 @end
 
@@ -67,6 +69,10 @@ typedef void (^AKICompletionHandler)(NSURL *location, NSURLResponse *response, N
     return [self.path stringByAppendingPathComponent:self.fileName];
 }
 
+- (NSURL *)fileURL {
+    return self.url;
+}
+
 - (NSString *)path {
     return [NSFileManager documentsPath];
 }
@@ -92,11 +98,24 @@ typedef void (^AKICompletionHandler)(NSURL *location, NSURLResponse *response, N
 }
 
 - (void)performLoading {
-    self.downloadTask = [self.session downloadTaskWithURL:self.url completionHandler:[self completionHandler]];
+    if (self.cached) {
+        UIImage *image = [self loadImageAtURL:self.fileURL];
+        if (image) {
+            [self finishLoadingImage:image];
+        } else {
+            [self removeCorruptedImage];
+        }
+        
+        [self loadFromInternet];
+    }
 }
 
 - (void)removeCorruptedImage {
     [self.fileManager removeItemAtPath:self.filePath error:NULL];
+}
+
+- (void)loadFromInternet {
+    self.downloadTask = [self.session downloadTaskWithURL:self.url completionHandler:[self completionHandler]];
 }
 
 @end

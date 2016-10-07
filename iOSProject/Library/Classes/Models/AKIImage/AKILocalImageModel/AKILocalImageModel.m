@@ -11,10 +11,17 @@
 @implementation AKILocalImageModel
 
 #pragma mark -
+#pragma mark Public
+
+- (UIImage *)loadImageAtURL:(NSURL *)url {
+    return [UIImage imageWithContentsOfFile:ur];
+}
+
+#pragma mark -
 #pragma mark Private
 
 - (void)performLoading {
-    [self finishLoadingImage:[UIImage imageWithContentsOfFile:self.url]];
+    [self finishLoadingImage:[self loadImageAtURL:self.url]];
 }
 
 @end

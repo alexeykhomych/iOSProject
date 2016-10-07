@@ -8,6 +8,8 @@
 
 #import "AKIImageModelCache.h"
 
+#import "AKIImageModel.h"
+
 @interface AKIImageModelCache ()
 @property (nonatomic, strong) NSMapTable *mapTable;
 
@@ -37,7 +39,7 @@
 
 - (instancetype)init {
     self = [super init];
-    self.mapTable = [NSMapTable weakToWeakObjectsMapTable];
+    self.mapTable = [NSMapTable strongToWeakObjectsMapTable];
     
     return self;
 }
@@ -51,15 +53,15 @@
     }
 }
 
-- (void)setObject:(id)object forKey:(NSURL *)key {
+- (void)addObject:(AKIImageModel *)model {
     @synchronized (self) {
-        [self.mapTable setObject:object forKey:key];
+        [self.mapTable setObject:model forKey:model.url];
     }
 }
 
-- (void)removeObjectForKey:(NSURL *)key {
+- (void)removeObject:(AKIImageModel *)model {
     @synchronized (self) {
-        [self.mapTable removeObjectForKey:key];
+        [self.mapTable removeObjectForKey:model.url];
     }
 }
 

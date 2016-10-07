@@ -12,4 +12,6 @@
 
 @interface AKILocalImageModel : AKIImageModel
 
+- (UIImage *)loadImageAtURL:(NSURL *)url;
+
 @end

@@ -8,6 +8,17 @@
 
 #import "NSFileManager+AKIExtensions.h"
 
+#define AKICreateDirectoryAtPath(path) \
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) { \
+        [fileManager createDirectoryAtPath:path \
+                withIntermediateDirectories:YES \
+                                attributes:nil \
+                                    error:NULL]; \
+    }
+
+#define AKIFilePath(path, file) \
+    return [[self path] stringByAppendingPathComponent:file];
+
 #define AKIDispatchOnceFileManagerWithFolder(folder) \
     static dispatch_once_t onceToken; \
     static id result = nil; \
@@ -15,6 +26,8 @@
         result = [NSSearchPathForDirectoriesInDomains(folder, NSUserDomainMask, YES) firstObject]; \
     }); \
     return result
+
+#define test(funcName, path, content)
 
 @implementation NSFileManager (AKIExtensions)
 

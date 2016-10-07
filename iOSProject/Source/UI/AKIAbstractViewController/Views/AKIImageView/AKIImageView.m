@@ -104,8 +104,7 @@
     AKIWeakify(self);
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
-        NSLog(@"DID FAIL LOADING");
-//        [self.imageModel load];
+
     });
 }
 

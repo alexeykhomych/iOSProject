@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class AKIImageModel;
+
 @interface AKIImageModelCache : NSObject
 
 + (instancetype)cache;
 
-- (void)setObject:(id)object forKey:(NSURL *)key;
-- (void)removeObjectForKey:(NSURL *)key;
+- (void)addObject:(AKIImageModel *)model;
+- (void)removeObject:(AKIImageModel *)model;
 
 - (id)objectForKey:(NSURL *)key;
 

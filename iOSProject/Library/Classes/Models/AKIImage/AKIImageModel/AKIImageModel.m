@@ -16,7 +16,6 @@
 @interface AKIImageModel ()
 @property (nonatomic, strong) UIImage   *image;
 @property (nonatomic, strong) NSURL     *url;
-@property (nonatomic, strong) AKIImageModelCache *cachedObjects;
 
 @end
 
@@ -31,7 +30,6 @@
     AKIImageModel *model = [cachedObjects objectForKey:url];
     
     if (model) {
-        NSLog(@"cached");
         return model;
     }
     
@@ -44,15 +42,14 @@
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    [self.cachedObjects removeObjectForKey:self.url];
+    [[AKIImageModelCache cache] removeObject:self]
 }
 
 - (instancetype)initWithURL:(NSURL *)url {
     self = [self init];
     
     self.url = url;
-    self.cachedObjects = [AKIImageModelCache cache];
-    [self.cachedObjects setObject:self forKey:self.url];
+    [[AKIImageModelCache cache] addObject:self];
     
     return self;
 }
