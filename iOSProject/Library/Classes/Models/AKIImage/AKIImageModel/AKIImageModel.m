@@ -1,4 +1,4 @@
-//
+ //
 //  AKIImageModel.m
 //  iOSProject
 //
@@ -9,13 +9,13 @@
 #import "AKIImageModel.h"
 
 #import "AKILocalImageModel.h"
-#import "AKIInternetImageModel.h"
+#import "AKIInternetImageModel.h"		
 
-#import "NSFileManager+AKIExtensions.h"
+#import "AKIImageModelCache.h"
 
 @interface AKIImageModel ()
-@property (nonatomic, strong) UIImage *image;
-@property (nonatomic, readonly) BOOL cached;
+@property (nonatomic, strong) UIImage   *image;
+@property (nonatomic, strong) NSURL     *url;
 
 @end
 
@@ -24,7 +24,13 @@
 #pragma mark -
 #pragma mark Class methods
 
-+ (instancetype)imageWithURL:(NSURL *)url {
++ (instancetype)imageWithURL:(NSURL *)url {    
+    AKIImageModel *model = [[AKIImageModelCache cache] objectForKey:url];
+    
+    if (model) {
+        return model;
+    }
+    
     Class class = url.isFileURL ? [AKILocalImageModel class] : [AKIInternetImageModel class];
     
     return [[class alloc] initWithURL:url];
@@ -33,8 +39,15 @@
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
+- (void)dealloc {
+    [[AKIImageModelCache cache] removeObject:self];
+}
+
 - (instancetype)initWithURL:(NSURL *)url {
     self = [self init];
+    
+    self.url = url;
+    [[AKIImageModelCache cache] addObject:self];
     
     return self;
 }
@@ -42,9 +55,9 @@
 #pragma mark -
 #pragma mark Public
 
-- (void)finishDownloadingImage:(UIImage *)downloadedImage {
-    self.image = downloadedImage;
-    self.state = downloadedImage ? AKIModelDidLoad : AKIModelDidFailLoading;
+- (void)finishLoadingImage:(UIImage *)loadedImage {
+    self.image = loadedImage;
+    self.state = loadedImage ? AKIModelDidLoad : AKIModelDidFailLoading;
 }
 
 @end

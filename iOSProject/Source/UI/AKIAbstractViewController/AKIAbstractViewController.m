@@ -17,7 +17,7 @@ AKIViewControllerBaseViewProperty(AKIAbstractViewController, AKILoadingViewConta
 @implementation AKIAbstractViewController
 
 #pragma mark -
-#pragma mark View lifecycle
+#pragma mark View Life Cycle
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

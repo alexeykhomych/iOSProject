@@ -36,17 +36,29 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     
-    [self initSubviews];
+    if (!self.imageView) {
+        [self initSubviews];
+    }
     
     return self;
 }
 
 - (void)initSubviews {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth
-                                    | UIViewAutoresizingFlexibleHeight;
+    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     self.imageView = imageView;
+}
+
+#pragma mark -
+#pragma mark Views Lifecycle
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    if (!self.imageView) {
+        [self initSubviews];
+    }
 }
 
 #pragma mark -
@@ -92,7 +104,7 @@
     AKIWeakify(self);
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
-        [self.imageModel load];
+
     });
 }
 

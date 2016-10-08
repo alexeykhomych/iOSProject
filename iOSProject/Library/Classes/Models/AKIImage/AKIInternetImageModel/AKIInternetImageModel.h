@@ -8,8 +8,6 @@
 
 #import "AKILocalImageModel.h"
 
-typedef void (^AKICompletionHandler)(NSURL *location, NSURLResponse *response, NSError *error);
-
 @interface AKIInternetImageModel : AKILocalImageModel
 
 @end

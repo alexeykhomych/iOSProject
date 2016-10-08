@@ -10,8 +10,8 @@
 
 @interface NSFileManager (AKIExtensions)
 
-+ (NSString *)pathForDocuments;
-+ (NSString *)pathForLibrary;
-+ (NSString *)pathForCachedFiles;
++ (NSString *)documentsPath;
++ (NSString *)libraryPath;
++ (NSString *)cachedFilesPathWithFolder:(NSString *)folderName;
 
 @end

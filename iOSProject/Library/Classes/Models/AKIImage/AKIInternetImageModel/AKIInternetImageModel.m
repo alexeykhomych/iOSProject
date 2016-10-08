@@ -10,20 +10,28 @@
 
 #import "NSFileManager+AKIExtensions.h"
 
+typedef void (^AKICompletionHandler)(NSURL *location, NSURLResponse *response, NSError *error);
+
 @interface AKIInternetImageModel ()
-@property (nonatomic, readonly) NSURLSession *session;
+@property (nonatomic, readonly) NSURLSession                *session;
 @property (nonatomic, strong)   NSURLSessionDownloadTask    *downloadTask;
 
 @property (nonatomic, readonly)             NSFileManager   *fileManager;
 @property (nonatomic, readonly, copy)       NSString        *path;
 @property (nonatomic, readonly, copy)       NSString        *fileName;
 @property (nonatomic, readonly, copy)       NSString        *filePath;
+@property (nonatomic, readonly) BOOL cached;
 
 - (AKICompletionHandler)completionHandler;
+- (void)removeCorruptedImage;
+- (NSURL *)fileURL;
 
 @end
 
 @implementation AKIInternetImageModel
+
+@dynamic session;
+@dynamic fileManager;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -61,8 +69,12 @@
     return [self.path stringByAppendingPathComponent:self.fileName];
 }
 
+- (NSURL *)fileURL {
+    return self.url;
+}
+
 - (NSString *)path {
-    return [NSFileManager pathForDocuments];
+    return [NSFileManager documentsPath];
 }
 
 - (BOOL)cached {
@@ -73,23 +85,36 @@
 #pragma mark Privat
 
 - (AKICompletionHandler)completionHandler {
-    id completionHandler = ^(NSURL *location, NSURLResponse *response, NSError *error) {
-        NSData *data = [NSData dataWithContentsOfURL:location];
-        UIImage *downloadedImage = [UIImage imageWithData:data];
+    return ^(NSURL *location, NSURLResponse *response, NSError *error) {
+        UIImage *downloadedImage = nil;
         
-        [data writeToFile:self.filePath atomically:YES];
-        
-        if (!downloadedImage) {
-            self.state = AKIModelDidFailLoading;
+        if (!error) {
+            [self.fileManager copyItemAtPath:location.path toPath:self.filePath error:NULL];
+            downloadedImage = [UIImage imageNamed:self.filePath];
         }
         
-        [self finishDownloadingImage:downloadedImage];
-    };
-    
-    return completionHandler;
+        [self finishLoadingImage:downloadedImage];
+    };;
 }
 
 - (void)performLoading {
+    if (self.cached) {
+        UIImage *image = [self loadImageAtURL:self.fileURL];
+        if (image) {
+            [self finishLoadingImage:image];
+        } else {
+            [self removeCorruptedImage];
+        }
+        
+        [self loadFromInternet];
+    }
+}
+
+- (void)removeCorruptedImage {
+    [self.fileManager removeItemAtPath:self.filePath error:NULL];
+}
+
+- (void)loadFromInternet {
     self.downloadTask = [self.session downloadTaskWithURL:self.url completionHandler:[self completionHandler]];
 }
 

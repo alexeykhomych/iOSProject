@@ -12,7 +12,7 @@
 @class AKIImageModel;
 
 @interface AKIImageView : AKILoadingViewContainer
-@property (nonatomic, strong) IBOutlet UIImageView *imageView;
-@property (nonatomic, strong) AKIImageModel *imageModel;
+@property (nonatomic, strong) IBOutlet  UIImageView         *imageView;
+@property (nonatomic, strong)           AKIImageModel       *imageModel;
 
 @end

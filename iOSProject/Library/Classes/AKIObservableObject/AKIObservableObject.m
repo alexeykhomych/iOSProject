@@ -110,11 +110,11 @@
     [self notifyObserverWithSelector:[self selectorForState:state] object:object];
 }
 
-- (void)performBlockWithoutNotification:(void (^)(void))block {
+- (void)performBlockWithoutNotification:(AKIVoidBlock)block {
     [self performBlock:block shouldNotify:NO];
 }
 
-- (void)performBlockWithNotification:(void (^)(void))block {
+- (void)performBlockWithNotification:(AKIVoidBlock)block {
     [self performBlock:block shouldNotify:YES];
 }
 

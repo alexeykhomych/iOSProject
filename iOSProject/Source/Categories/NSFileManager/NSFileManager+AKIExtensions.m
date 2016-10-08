@@ -8,18 +8,43 @@
 
 #import "NSFileManager+AKIExtensions.h"
 
+#define AKICreateDirectoryAtPath(path) \
+    NSFileManager *fileManager = [NSFileManager defaultManager];\
+    if (![fileManager fileExistsAtPath:path]) { \
+        [fileManager createDirectoryAtPath:path \
+                withIntermediateDirectories:YES \
+                                attributes:nil \
+                                    error:NULL]; \
+    }
+
+#define AKIFolderPath(path, folder) \
+    [[NSSearchPathForDirectoriesInDomains(path, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:folder]
+
+#define AKIDispatchOnceFileManagerWithFolder(funcName, path, folderName) \
+    static dispatch_once_t onceToken; \
+    static id result = nil; \
+    dispatch_once(&onceToken, ^{ \
+        AKICreateDirectoryAtPath(AKIFolderPath(path, folderName)); \
+        result = [NSSearchPathForDirectoriesInDomains(path, NSUserDomainMask, YES) firstObject]; \
+    }); \
+    return result;
+
+#define AKIImplementationDispatchOnceFunctionReturnResult(funcName, path) \
+    AKIImplementationDispatchOnceFunctionWithFolderNameReturnResult(funcName, path, @"")
+
+#define AKIImplementationDispatchOnceFunctionWithFolderNameReturnResult(funcName, path, folderName) \
+    + (NSString *)funcName {\
+        AKIDispatchOnceFileManagerWithFolder(funcName, path, folderName) \
+    }
+
 @implementation NSFileManager (AKIExtensions)
 
-+ (NSString *)pathForDocuments {
-    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-}
 
-+ (NSString *)pathForLibrary {
-    return [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
-}
+AKIImplementationDispatchOnceFunctionReturnResult(documentsPath, NSDocumentDirectory)
+AKIImplementationDispatchOnceFunctionReturnResult(libraryPath, NSLibraryDirectory)
 
-+ (NSString *)pathForCachedFiles {
-    return [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
++ (NSString *)cachedFilesPathWithFolder:(NSString *)folderName {
+    AKIDispatchOnceFileManagerWithFolder(cachedFilesPathWithFolder, NSLibraryDirectory, folderName)
 }
 
 @end

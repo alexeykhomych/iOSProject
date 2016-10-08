@@ -56,7 +56,7 @@
 }
 
 #pragma mark -
-#pragma mark View Lifecycle
+#pragma mark View Life Cycle
 
 - (void)awakeFromNib {
     [super awakeFromNib];
