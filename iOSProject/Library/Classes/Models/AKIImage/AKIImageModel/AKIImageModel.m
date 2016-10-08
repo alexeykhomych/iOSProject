@@ -24,10 +24,8 @@
 #pragma mark -
 #pragma mark Class methods
 
-+ (instancetype)imageWithURL:(NSURL *)url {
-    AKIImageModelCache *cachedObjects = [AKIImageModelCache cache];
-    
-    AKIImageModel *model = [cachedObjects objectForKey:url];
++ (instancetype)imageWithURL:(NSURL *)url {    
+    AKIImageModel *model = [[AKIImageModelCache cache] objectForKey:url];
     
     if (model) {
         return model;
@@ -42,7 +40,7 @@
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    [[AKIImageModelCache cache] removeObject:self]
+    [[AKIImageModelCache cache] removeObject:self];
 }
 
 - (instancetype)initWithURL:(NSURL *)url {

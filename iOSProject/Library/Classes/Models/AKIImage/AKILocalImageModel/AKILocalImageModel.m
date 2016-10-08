@@ -14,7 +14,7 @@
 #pragma mark Public
 
 - (UIImage *)loadImageAtURL:(NSURL *)url {
-    return [UIImage imageWithContentsOfFile:ur];
+    return [UIImage imageWithContentsOfFile:url.absoluteString];
 }
 
 #pragma mark -
