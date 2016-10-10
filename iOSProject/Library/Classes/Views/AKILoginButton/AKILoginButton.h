@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AKILoginButton : UIButton
+typedef void (^AKICompletionHandler)(void);
+
+@interface AKILoginButton : UIView
+@property (nonatomic, strong) IBOutlet UIButton *loginButton;
+@property (nonatomic, assign, getter=isVisible) BOOL visible;
+
++ (instancetype)loginButtonInSuperview:(UIView *)superview;
+
+
 
 @end

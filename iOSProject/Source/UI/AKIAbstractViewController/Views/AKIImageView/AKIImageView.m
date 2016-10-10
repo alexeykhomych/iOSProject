@@ -12,8 +12,6 @@
 
 #import "AKIGCD.h"
 
-#import "AKIUserCell.h"
-
 #import "AKILoadingView.h"
 
 #import "AKILoadingViewContainer.h"

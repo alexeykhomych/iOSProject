@@ -8,6 +8,13 @@
 
 #import "AKIAbstractViewController.h"
 
-@interface AKIFacebookFriendsViewController : AKIAbstractViewController
+#import "AKIArrayModel.h"
+
+@interface AKIFacebookFriendsViewController :  AKIAbstractViewController <
+    UITableViewDelegate,
+    UITableViewDataSource,
+    UISearchBarDelegate,
+    AKIArrayModelObserver
+>
 
 @end

@@ -14,6 +14,8 @@
 
 @interface AKIUser : NSObject <NSCopying, NSCoding>
 @property (nonatomic, copy, readonly) NSString          *fullName;
+@property (nonatomic, copy, readonly) NSString          *country;
+@property (nonatomic, copy, readonly) NSString          *city;
 @property (nonatomic, readonly)       AKIImageModel     *imageModel;
 
 @end

@@ -8,6 +8,10 @@
 
 #import "AKIAbstractViewController.h"
 
+#import "AKIFacebookLoginButton.h"
+
 @interface AKIFacebookLoginViewController : AKIAbstractViewController
+
+- (IBAction)onLoginButton:(id)sender;
 
 @end

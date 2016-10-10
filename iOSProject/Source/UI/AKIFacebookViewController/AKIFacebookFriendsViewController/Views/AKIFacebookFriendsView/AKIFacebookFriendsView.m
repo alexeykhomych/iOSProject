@@ -10,12 +10,17 @@
 
 @implementation AKIFacebookFriendsView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+@dynamic editing;
+
+#pragma mark -
+#pragma mark Public
+
+- (void)setEditing:(BOOL)editing {
+    self.tableView.editing = editing;
 }
-*/
+
+- (BOOL)isEditing {
+    return self.tableView.editing;
+}
 
 @end

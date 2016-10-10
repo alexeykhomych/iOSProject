@@ -9,5 +9,6 @@
 #import "AKILoadingViewContainer.h"
 
 @interface AKIFacebookNavigationView : AKILoadingViewContainer
+@property (nonatomic, strong) IBOutlet UINavigationController *navigationController;
 
 @end

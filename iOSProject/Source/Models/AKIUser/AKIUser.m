@@ -17,7 +17,9 @@
 AKIStringConstant(FullNameKey, @"kAKIFullName");
 
 @interface AKIUser()
-@property (nonatomic, copy) NSString *fullName;
+@property (nonatomic, copy) NSString    *fullName;
+@property (nonatomic, copy) NSString    *country;
+@property (nonatomic, copy) NSString    *city;
 
 @end
 

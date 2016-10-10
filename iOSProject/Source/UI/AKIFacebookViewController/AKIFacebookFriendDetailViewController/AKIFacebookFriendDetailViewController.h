@@ -8,6 +8,11 @@
 
 #import "AKIAbstractViewController.h"
 
+#import "AKIFacebookFriendsDetailView.h"
+
+@class AKIUser;
+
 @interface AKIFacebookFriendDetailViewController : AKIAbstractViewController
+@property (nonatomic, strong) AKIUser *user;
 
 @end

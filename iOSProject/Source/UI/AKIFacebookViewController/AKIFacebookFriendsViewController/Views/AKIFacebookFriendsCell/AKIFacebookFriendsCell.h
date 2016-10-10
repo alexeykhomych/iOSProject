@@ -9,5 +9,6 @@
 #import "AKITableViewCell.h"
 
 @interface AKIFacebookFriendsCell : AKITableViewCell
+@property (nonatomic, strong) id user;
 
 @end

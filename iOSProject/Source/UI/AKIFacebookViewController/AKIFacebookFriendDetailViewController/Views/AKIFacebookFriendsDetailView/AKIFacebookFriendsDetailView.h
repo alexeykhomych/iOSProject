@@ -9,5 +9,10 @@
 #import "AKILoadingViewContainer.h"
 
 @interface AKIFacebookFriendsDetailView : AKILoadingViewContainer
+@property (nonatomic, strong) IBOutlet UIImageView  *imageView;
+
+@property (nonatomic, strong) IBOutlet UILabel      *friendName;
+@property (nonatomic, strong) IBOutlet UILabel      *city;
+@property (nonatomic, strong) IBOutlet UILabel      *birthday;
 
 @end

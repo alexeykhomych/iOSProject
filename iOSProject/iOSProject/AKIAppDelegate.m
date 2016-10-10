@@ -8,9 +8,9 @@
 
 #import "AKIAppDelegate.h"
 
-#import "AKIUsersViewController.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-#import "AKIUsersArrayModel.h"
+#import "AKIFacebookFriendsViewController.h"
 
 #import "UIWindow+AKIExtensions.h"
 
@@ -19,16 +19,19 @@
 @implementation AKIAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
+    
     UIWindow *window = [UIWindow window];
     self.window = window;
+
+    AKIFacebookFriendsViewController *controller = [AKIFacebookFriendsViewController viewController];
     
-    AKIUsersViewController *controller = [AKIUsersViewController viewController];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
     
-    window.rootViewController = controller;
-    
+    window.rootViewController = navigationController;
+
     [window makeKeyAndVisible];
-    
-    controller.model = [[AKIUsersArrayModel alloc] init];
     
     return YES;
 }
@@ -46,11 +49,21 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    
+    [FBSDKAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
 }
 
 @end

@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AKIFacebookLoginButton : UIButton
+#import "AKIView.h"
+
+#import "AKIModel.h"
+
+@interface AKIFacebookLoginButton : AKIView <AKIModelObserver>
+@property (nonatomic, strong) AKIModel *model;
 
 @end
