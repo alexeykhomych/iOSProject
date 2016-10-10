@@ -37,6 +37,15 @@
         AKIDispatchOnceFileManagerWithFolder(funcName, path, folderName) \
     }
 
+#define AKIDispatchOnce(field, type, block) \
+    static dispatch_once_t onceToken; \
+    static type field = nil; \
+    dispatch_once(&onceToken, ^{ \
+        AKICreateDirectoryAtPath(AKIFolderPath(path, folderName)); \
+        retult = block; \
+    }); \
+    return result;
+
 @implementation NSFileManager (AKIExtensions)
 
 
@@ -45,6 +54,9 @@ AKIImplementationDispatchOnceFunctionReturnResult(libraryPath, NSLibraryDirector
 
 + (NSString *)cachedFilesPathWithFolder:(NSString *)folderName {
     AKIDispatchOnceFileManagerWithFolder(cachedFilesPathWithFolder, NSLibraryDirectory, folderName)
+
+    
+//    AKIDispatchOnce(result, NSString*, [NSSearchPathForDirectoriesInDomains(path, NSUserDomainMask, YES) firstObject]);
 }
 
 @end

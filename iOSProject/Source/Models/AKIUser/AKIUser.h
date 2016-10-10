@@ -13,7 +13,7 @@
 @class AKIImageModel;
 
 @interface AKIUser : NSObject <NSCopying, NSCoding>
-@property (nonatomic, copy, readonly) NSString          *userID;
+@property (nonatomic, copy, readonly) NSString          *ID;
 @property (nonatomic, copy, readonly) NSString          *firstName;
 @property (nonatomic, copy, readonly) NSString          *secondName;
 @property (nonatomic, copy, readonly) NSString          *country;

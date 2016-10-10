@@ -29,8 +29,6 @@
 		8498D6771DA12C19004376FF /* UIViewController+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498D6411DA12C19004376FF /* UIViewController+AKIExtensions.m */; };
 		8498D6781DA12C19004376FF /* UIWindow+AKIExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498D6441DA12C19004376FF /* UIWindow+AKIExtensions.m */; };
 		8498D6791DA12C19004376FF /* AKIArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498D6481DA12C19004376FF /* AKIArrayModel.m */; };
-		8498D67A1DA12C19004376FF /* AKIFilteredArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498D64B1DA12C19004376FF /* AKIFilteredArrayModel.m */; };
-		8498D67B1DA12C19004376FF /* AKIFilteredUsersArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498D64E1DA12C19004376FF /* AKIFilteredUsersArrayModel.m */; };
 		8498D67C1DA12C19004376FF /* AKIUsersArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498D6511DA12C19004376FF /* AKIUsersArrayModel.m */; };
 		8498D67E1DA12C19004376FF /* AKIUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498D6571DA12C19004376FF /* AKIUser.m */; };
 		8498D67F1DA12C19004376FF /* AKIAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498D65B1DA12C19004376FF /* AKIAbstractViewController.m */; };
@@ -121,10 +119,6 @@
 		8498D6441DA12C19004376FF /* UIWindow+AKIExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+AKIExtensions.m"; sourceTree = "<group>"; };
 		8498D6471DA12C19004376FF /* AKIArrayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIArrayModel.h; sourceTree = "<group>"; };
 		8498D6481DA12C19004376FF /* AKIArrayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIArrayModel.m; sourceTree = "<group>"; };
-		8498D64A1DA12C19004376FF /* AKIFilteredArrayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFilteredArrayModel.h; sourceTree = "<group>"; };
-		8498D64B1DA12C19004376FF /* AKIFilteredArrayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFilteredArrayModel.m; sourceTree = "<group>"; };
-		8498D64D1DA12C19004376FF /* AKIFilteredUsersArrayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFilteredUsersArrayModel.h; sourceTree = "<group>"; };
-		8498D64E1DA12C19004376FF /* AKIFilteredUsersArrayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFilteredUsersArrayModel.m; sourceTree = "<group>"; };
 		8498D6501DA12C19004376FF /* AKIUsersArrayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIUsersArrayModel.h; sourceTree = "<group>"; };
 		8498D6511DA12C19004376FF /* AKIUsersArrayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIUsersArrayModel.m; sourceTree = "<group>"; };
 		8498D6561DA12C19004376FF /* AKIUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIUser.h; sourceTree = "<group>"; };
@@ -447,30 +441,10 @@
 			isa = PBXGroup;
 			children = (
 				8498D64F1DA12C19004376FF /* AKIUsersArrayModel */,
-				8498D6491DA12C19004376FF /* AKIFilteredArrayModel */,
 				8498D6471DA12C19004376FF /* AKIArrayModel.h */,
 				8498D6481DA12C19004376FF /* AKIArrayModel.m */,
 			);
 			path = AKIArrayModel;
-			sourceTree = "<group>";
-		};
-		8498D6491DA12C19004376FF /* AKIFilteredArrayModel */ = {
-			isa = PBXGroup;
-			children = (
-				8498D64C1DA12C19004376FF /* AKIFilteredUsersArrayModel */,
-				8498D64A1DA12C19004376FF /* AKIFilteredArrayModel.h */,
-				8498D64B1DA12C19004376FF /* AKIFilteredArrayModel.m */,
-			);
-			path = AKIFilteredArrayModel;
-			sourceTree = "<group>";
-		};
-		8498D64C1DA12C19004376FF /* AKIFilteredUsersArrayModel */ = {
-			isa = PBXGroup;
-			children = (
-				8498D64D1DA12C19004376FF /* AKIFilteredUsersArrayModel.h */,
-				8498D64E1DA12C19004376FF /* AKIFilteredUsersArrayModel.m */,
-			);
-			path = AKIFilteredUsersArrayModel;
 			sourceTree = "<group>";
 		};
 		8498D64F1DA12C19004376FF /* AKIUsersArrayModel */ = {
@@ -608,9 +582,9 @@
 		8498D6961DA12C29004376FF /* AKIArrayChangeModel */ = {
 			isa = PBXGroup;
 			children = (
+				8498D6991DA12C29004376FF /* AKIArrayChangeModelState */,
 				8498D6971DA12C29004376FF /* AKIArrayChangeModel.h */,
 				8498D6981DA12C29004376FF /* AKIArrayChangeModel.m */,
-				8498D6991DA12C29004376FF /* AKIArrayChangeModelState */,
 			);
 			path = AKIArrayChangeModel;
 			sourceTree = "<group>";
@@ -1141,7 +1115,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				84F9A9B71DAAB73F00976209 /* AKIFacebookFriendsViewController.m in Sources */,
-				8498D67A1DA12C19004376FF /* AKIFilteredArrayModel.m in Sources */,
 				84F9A9E71DABD7B100976209 /* AKILoginButton.m in Sources */,
 				84F9A9F31DABE39E00976209 /* AKILoginContext.m in Sources */,
 				8498D6BE1DA12C29004376FF /* AKIModel.m in Sources */,
@@ -1173,7 +1146,6 @@
 				84F9A9C31DAAC5C800976209 /* AKIFacebookNavigationViewController.m in Sources */,
 				8498D6B91DA12C29004376FF /* AKIArrayChangeModelDelete.m in Sources */,
 				84F9A9D71DABACC500976209 /* AKIFacebookFriendsView.m in Sources */,
-				8498D67B1DA12C19004376FF /* AKIFilteredUsersArrayModel.m in Sources */,
 				84F9A9EF1DABE34D00976209 /* AKIContext.m in Sources */,
 				84F9A9E31DABC41E00976209 /* AKIFacebookNavigationView.m in Sources */,
 				8498D67C1DA12C19004376FF /* AKIUsersArrayModel.m in Sources */,

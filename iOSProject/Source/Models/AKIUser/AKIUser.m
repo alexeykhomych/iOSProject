@@ -14,10 +14,14 @@
 
 #import "AKIMacro.h"
 
-AKIStringConstant(FullNameKey, @"kAKIFullName");
+AKIStringConstant(ID, @"kAKIID");
+AKIStringConstant(FirstName, @"kAKIFirstName");
+AKIStringConstant(SecondName, @"kAKISecondName");
+AKIStringConstant(Country, @"kAKICountry");
+AKIStringConstant(City, @"kAKICity");
 
 @interface AKIUser()
-@property (nonatomic, copy) NSString    *userID;
+@property (nonatomic, copy) NSString    *ID;
 @property (nonatomic, copy) NSString    *firstName;
 @property (nonatomic, copy) NSString    *secondName;
 @property (nonatomic, copy) NSString    *country;
@@ -55,23 +59,34 @@ AKIStringConstant(FullNameKey, @"kAKIFullName");
 #pragma mark -
 #pragma mark NSCopying
 
+#define AKIDecode(object, key) self.object = [aDecoder decodeObjectForKey:key];
+
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     
 //    self.fullName = [aDecoder decodeObjectForKey:kAKIFullNameKey];
     
+    AKIDecode(ID, kAKIID)
+    AKIDecode(firstName, kAKIFirstName)
+    AKIDecode(secondName, kAKISecondName)
+    AKIDecode(country, kAKICountry)
+    AKIDecode(city, kAKICity);
+    
     return self;
 }
 
+#undef AKIDecode
+
+#define AKIEncode(object, key) [aCoder encodeObject:object forKey:key];
+
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-//    [aCoder encodeObject:self.fullName forKey:kAKIFullNameKey];
+    AKIEncode(self.ID, kAKIID)
+    AKIEncode(self.firstName, kAKIFirstName)
+    AKIEncode(self.secondName, kAKISecondName)
+    AKIEncode(self.country, kAKICountry)
+    AKIEncode(self.city, kAKICity)
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-    AKIUser *user = [AKIUser new];
-//    user.fullName = self.fullName;
-    
-    return user;
-}
+#undef AKIEncode
 
 @end

@@ -86,14 +86,9 @@ typedef void (^AKICompletionHandler)(NSURL *location, NSURLResponse *response, N
 
 - (AKICompletionHandler)completionHandler {
     return ^(NSURL *location, NSURLResponse *response, NSError *error) {
-        UIImage *downloadedImage = nil;
-        
         if (!error) {
             [self.fileManager copyItemAtPath:location.path toPath:self.filePath error:NULL];
-            downloadedImage = [UIImage imageNamed:self.filePath];
         }
-        
-        [self finishLoadingImage:downloadedImage];
     };;
 }
 
@@ -105,9 +100,9 @@ typedef void (^AKICompletionHandler)(NSURL *location, NSURLResponse *response, N
         } else {
             [self removeCorruptedImage];
         }
-        
-        [self loadFromInternet];
     }
+    
+    [self loadFromInternet];
 }
 
 - (void)removeCorruptedImage {
