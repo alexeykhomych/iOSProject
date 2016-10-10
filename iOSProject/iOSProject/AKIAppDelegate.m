@@ -10,7 +10,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-#import "AKIFacebookFriendsViewController.h"
+#import "AKIFacebookLoginViewController.h"
 
 #import "UIWindow+AKIExtensions.h"
 
@@ -25,7 +25,7 @@
     UIWindow *window = [UIWindow window];
     self.window = window;
 
-    AKIFacebookFriendsViewController *controller = [AKIFacebookFriendsViewController viewController];
+    AKIFacebookLoginViewController *controller = [AKIFacebookLoginViewController viewController];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
     

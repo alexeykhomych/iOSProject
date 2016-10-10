@@ -75,6 +75,9 @@
 		84F9A9E31DABC41E00976209 /* AKIFacebookNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9E21DABC41E00976209 /* AKIFacebookNavigationView.m */; };
 		84F9A9E71DABD7B100976209 /* AKILoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9E61DABD7B100976209 /* AKILoginButton.m */; };
 		84F9A9EB1DABD8F500976209 /* AKILoginButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A9EA1DABD8F500976209 /* AKILoginButton.xib */; };
+		84F9A9EF1DABE34D00976209 /* AKIContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9EE1DABE34D00976209 /* AKIContext.m */; };
+		84F9A9F31DABE39E00976209 /* AKILoginContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9F21DABE39E00976209 /* AKILoginContext.m */; };
+		84F9A9F71DABE3BE00976209 /* AKIFriendsContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9F61DABE3BE00976209 /* AKIFriendsContext.m */; };
 		C550B8DBB0EE0507BFA3F1C1 /* libPods-iOSProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAF4BDE66977EDE9EA23314F /* libPods-iOSProject.a */; };
 		CEDD97692454920BF46A0BC8 /* libPods-iOSProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1DD131D430834B8AAACB0A2 /* libPods-iOSProjectTests.a */; };
 /* End PBXBuildFile section */
@@ -199,6 +202,12 @@
 		84F9A9E51DABD7B100976209 /* AKILoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKILoginButton.h; sourceTree = "<group>"; };
 		84F9A9E61DABD7B100976209 /* AKILoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKILoginButton.m; sourceTree = "<group>"; };
 		84F9A9EA1DABD8F500976209 /* AKILoginButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKILoginButton.xib; sourceTree = "<group>"; };
+		84F9A9ED1DABE34D00976209 /* AKIContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIContext.h; sourceTree = "<group>"; };
+		84F9A9EE1DABE34D00976209 /* AKIContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIContext.m; sourceTree = "<group>"; };
+		84F9A9F11DABE39E00976209 /* AKILoginContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKILoginContext.h; sourceTree = "<group>"; };
+		84F9A9F21DABE39E00976209 /* AKILoginContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKILoginContext.m; sourceTree = "<group>"; };
+		84F9A9F51DABE3BE00976209 /* AKIFriendsContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFriendsContext.h; sourceTree = "<group>"; };
+		84F9A9F61DABE3BE00976209 /* AKIFriendsContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFriendsContext.m; sourceTree = "<group>"; };
 		C1DD131D430834B8AAACB0A2 /* libPods-iOSProjectTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOSProjectTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADE9593A11952A892FE14DC /* Pods-iOSProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSProjectTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSProjectTests/Pods-iOSProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DAF4BDE66977EDE9EA23314F /* libPods-iOSProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOSProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -588,6 +597,7 @@
 		8498D6951DA12C29004376FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				84F9A9EC1DABE33200976209 /* AKIContext */,
 				84F9A9791DA6858F00976209 /* AKIImage */,
 				8498D6961DA12C29004376FF /* AKIArrayChangeModel */,
 				8498D6A91DA12C29004376FF /* AKIModel */,
@@ -884,6 +894,35 @@
 			path = AKILoginButton;
 			sourceTree = "<group>";
 		};
+		84F9A9EC1DABE33200976209 /* AKIContext */ = {
+			isa = PBXGroup;
+			children = (
+				84F9A9F41DABE3AB00976209 /* AKIFriendsContext */,
+				84F9A9F01DABE38300976209 /* AKILoginContext */,
+				84F9A9ED1DABE34D00976209 /* AKIContext.h */,
+				84F9A9EE1DABE34D00976209 /* AKIContext.m */,
+			);
+			path = AKIContext;
+			sourceTree = "<group>";
+		};
+		84F9A9F01DABE38300976209 /* AKILoginContext */ = {
+			isa = PBXGroup;
+			children = (
+				84F9A9F11DABE39E00976209 /* AKILoginContext.h */,
+				84F9A9F21DABE39E00976209 /* AKILoginContext.m */,
+			);
+			path = AKILoginContext;
+			sourceTree = "<group>";
+		};
+		84F9A9F41DABE3AB00976209 /* AKIFriendsContext */ = {
+			isa = PBXGroup;
+			children = (
+				84F9A9F51DABE3BE00976209 /* AKIFriendsContext.h */,
+				84F9A9F61DABE3BE00976209 /* AKIFriendsContext.m */,
+			);
+			path = AKIFriendsContext;
+			sourceTree = "<group>";
+		};
 		E26017C6903F18B5D7B3C254 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1104,6 +1143,7 @@
 				84F9A9B71DAAB73F00976209 /* AKIFacebookFriendsViewController.m in Sources */,
 				8498D67A1DA12C19004376FF /* AKIFilteredArrayModel.m in Sources */,
 				84F9A9E71DABD7B100976209 /* AKILoginButton.m in Sources */,
+				84F9A9F31DABE39E00976209 /* AKILoginContext.m in Sources */,
 				8498D6BE1DA12C29004376FF /* AKIModel.m in Sources */,
 				84F9A9C81DAACBAE00976209 /* AKIFacebookLoginButton.m in Sources */,
 				84F9A98B1DA6858F00976209 /* AKILocalImageModel.m in Sources */,
@@ -1134,10 +1174,12 @@
 				8498D6B91DA12C29004376FF /* AKIArrayChangeModelDelete.m in Sources */,
 				84F9A9D71DABACC500976209 /* AKIFacebookFriendsView.m in Sources */,
 				8498D67B1DA12C19004376FF /* AKIFilteredUsersArrayModel.m in Sources */,
+				84F9A9EF1DABE34D00976209 /* AKIContext.m in Sources */,
 				84F9A9E31DABC41E00976209 /* AKIFacebookNavigationView.m in Sources */,
 				8498D67C1DA12C19004376FF /* AKIUsersArrayModel.m in Sources */,
 				8498D6741DA12C19004376FF /* UINib+AKIExtensions.m in Sources */,
 				84F9A9891DA6858F00976209 /* AKIImageModel.m in Sources */,
+				84F9A9F71DABE3BE00976209 /* AKIFriendsContext.m in Sources */,
 				8498D6751DA12C19004376FF /* AKIArrayChangeModel+AKIExtensions.m in Sources */,
 				8498D6BA1DA12C29004376FF /* AKIArrayChangeModelInsert.m in Sources */,
 				8498D67E1DA12C19004376FF /* AKIUser.m in Sources */,

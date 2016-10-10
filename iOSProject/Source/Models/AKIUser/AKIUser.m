@@ -17,7 +17,9 @@
 AKIStringConstant(FullNameKey, @"kAKIFullName");
 
 @interface AKIUser()
-@property (nonatomic, copy) NSString    *fullName;
+@property (nonatomic, copy) NSString    *userID;
+@property (nonatomic, copy) NSString    *firstName;
+@property (nonatomic, copy) NSString    *secondName;
 @property (nonatomic, copy) NSString    *country;
 @property (nonatomic, copy) NSString    *city;
 
@@ -34,7 +36,7 @@ AKIStringConstant(FullNameKey, @"kAKIFullName");
     self = [super init];
     
     if (self) {
-        self.fullName = [NSString fullName];
+//        self.fullName = [NSString fullName];
     }
     
     return self;
@@ -56,18 +58,18 @@ AKIStringConstant(FullNameKey, @"kAKIFullName");
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     
-    self.fullName = [aDecoder decodeObjectForKey:kAKIFullNameKey];
+//    self.fullName = [aDecoder decodeObjectForKey:kAKIFullNameKey];
     
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.fullName forKey:kAKIFullNameKey];
+//    [aCoder encodeObject:self.fullName forKey:kAKIFullNameKey];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
     AKIUser *user = [AKIUser new];
-    user.fullName = self.fullName;
+//    user.fullName = self.fullName;
     
     return user;
 }
