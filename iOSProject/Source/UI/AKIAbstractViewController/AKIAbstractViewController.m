@@ -21,11 +21,6 @@ AKIViewControllerBaseViewProperty(AKIAbstractViewController, AKILoadingViewConta
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    AKIModel *model = self.model;
-    
-    self.loadingViewContainer.model = model;
-    [model load];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,13 +30,13 @@ AKIViewControllerBaseViewProperty(AKIAbstractViewController, AKILoadingViewConta
 #pragma mark -
 #pragma mark Accessors
 
-- (void)setModel:(AKIModel *)model {
-    if (_model != model) {
-        [_model removeObserver:self];
+- (void)setContext:(id)context {
+    if (_context != context) {
+        [_context removeObserver:self];
         
-        _model = model;
+        _context = context;
         
-        [_model addObserver:self];
+        [_context addObserver:self];
     }
 }
 

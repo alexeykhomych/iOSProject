@@ -13,6 +13,8 @@
 @class AKILoadingViewContainer;
 
 @interface AKIAbstractViewController : UIViewController <AKIModelObserver>
-@property (nonatomic, strong)   id        model;
+@property (nonatomic, strong) id context;
+
+- (void)loadContext;
 
 @end

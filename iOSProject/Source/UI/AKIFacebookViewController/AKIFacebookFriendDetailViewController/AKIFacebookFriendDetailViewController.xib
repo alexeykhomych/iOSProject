@@ -69,8 +69,8 @@
             <connections>
                 <outlet property="birthday" destination="UGt-Jj-KDY" id="5cB-EE-y6F"/>
                 <outlet property="city" destination="Tea-Pa-z7J" id="Je6-Xh-cyu"/>
-                <outlet property="friendName" destination="dcd-ih-oWI" id="jfZ-jQ-nNx"/>
                 <outlet property="imageView" destination="u1x-FE-MbA" id="XWf-pw-xGb"/>
+                <outlet property="name" destination="dcd-ih-oWI" id="pJX-ci-DaW"/>
             </connections>
         </view>
     </objects>

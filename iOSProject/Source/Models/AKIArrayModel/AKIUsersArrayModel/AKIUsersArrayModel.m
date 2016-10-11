@@ -79,9 +79,9 @@ AKIStringConstant(FileName, @"UsersArrayModel.plist");
     return [self.fileManager fileExistsAtPath:self.path];
 }
 
-- (NSArray *)appNotifications {
-    return @[UIApplicationWillTerminateNotification, UIApplicationDidEnterBackgroundNotification];
-}
+//- (NSArray *)appNotifications {
+//    return @[UIApplicationWillTerminateNotification, UIApplicationDidEnterBackgroundNotification];
+//}
 
 #pragma mark -
 #pragma mark Public

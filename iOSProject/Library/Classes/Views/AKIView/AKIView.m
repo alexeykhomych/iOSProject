@@ -10,8 +10,6 @@
 
 #import "AKILoadingView.h"
 
-#import "AKILoginButton.h"
-
 #import "AKIGCD.h"
 
 #import "UINib+AKIExtensions.h"
@@ -25,14 +23,12 @@
 
 - (void)dealloc {
     self.loadingView = nil;
-    self.loginButton = nil;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     self.loadingView = [self defaultLoadingView];
-    self.loginButton = [self defaultLoginButton];
     
     return self;
 }
@@ -49,15 +45,6 @@
     }
 }
 
-- (void)setLoginButton:(AKILoginButton *)loginButton {
-    if (_loginButton != loginButton) {
-        [_loginButton removeFromSuperview];
-        _loginButton = loginButton;
-        
-        [self addSubview:loginButton];
-    }
-}
-
 - (void)setLoadingViewVisible:(BOOL)loadingViewVisible {
     self.loadingView.visible = loadingViewVisible;
 }
@@ -65,16 +52,6 @@
 - (BOOL)isLoadingViewVisible {
     @synchronized (self) {
         return self.loadingView.isVisible;
-    }
-}
-
-- (void)setLoginButtonVisible:(BOOL)loginButtonVisible {
-    self.loginButton.visible = loginButtonVisible;
-}
-
-- (BOOL)isLoginButtonVisible {
-    @synchronized (self) {
-        return self.loginButton.isVisible;
     }
 }
 
@@ -93,11 +70,8 @@
 #pragma mark Public
 
 - (AKILoadingView *)defaultLoadingView {
-    return [AKILoadingView loadingViewInSuperview:self];
-}
-
-- (AKILoginButton *)defaultLoginButton {
-    return [AKILoginButton loginButtonInSuperview:self];
+//    return [AKILoadingView loadingViewInSuperview:self];
+    return nil;
 }
 
 @end

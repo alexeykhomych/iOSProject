@@ -9,6 +9,6 @@
 #import "AKIContext.h"
 
 @interface AKIFriendsContext : AKIContext
-@property (nonatomic, readonly) NSArray *friends;
+
 
 @end

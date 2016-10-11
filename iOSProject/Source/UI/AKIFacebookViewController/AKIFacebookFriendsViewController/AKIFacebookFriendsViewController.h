@@ -17,4 +17,6 @@
     AKIArrayModelObserver
 >
 
+@property (nonatomic, strong) AKIArrayModel *model;
+
 @end

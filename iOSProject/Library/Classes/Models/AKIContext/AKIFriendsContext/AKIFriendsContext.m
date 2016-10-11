@@ -10,19 +10,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-@interface AKIFriendsContext ()
-@property (nonatomic, strong) NSMutableArray *mutableFriends;
-
-@end
-
 @implementation AKIFriendsContext
-
-#pragma mark -
-#pragma mark Accessors
-
-- (NSArray *)friends {
-    return [self.mutableFriends copy];
-}
 
 #pragma mark -
 #pragma mark Public
@@ -33,7 +21,18 @@
                                   parameters:nil
                                   HTTPMethod:@"GET"];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        if (error) {
+            return;
+        }
         
+        NSArray *items = [(NSDictionary *)result objectForKey:@"data"];
+        AKIArrayModel *model = [AKIArrayModel new];
+        
+        for (int i=0; i< items.count; i++) {
+            [model addObject:[items objectAtIndex:i]];
+        }
+        
+        self.model = model;
     }];
 }
 

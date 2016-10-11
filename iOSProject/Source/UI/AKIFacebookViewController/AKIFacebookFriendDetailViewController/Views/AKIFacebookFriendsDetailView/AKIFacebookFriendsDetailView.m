@@ -8,14 +8,17 @@
 
 #import "AKIFacebookFriendsDetailView.h"
 
+#import "AKIUser.h"
+
 @implementation AKIFacebookFriendsDetailView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)setUser:(AKIUser *)user {
+    if (_user != user) {
+        self.name.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.secondName];
+        self.city.text = [NSString stringWithFormat:@"%@, %@", user.city, user.country];
+        self.birthday.text = self.user.birthday;
+//        self.imageView.image = user.imageModel;
+    }
 }
-*/
 
 @end

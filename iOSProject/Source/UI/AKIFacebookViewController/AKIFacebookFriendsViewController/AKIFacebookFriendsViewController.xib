@@ -22,29 +22,16 @@
                         <rect key="frame" x="0.0" y="109" width="400" height="491"/>
                     </variation>
                 </tableView>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xa-3C-Uap">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <items>
-                        <navigationItem title="Title" id="MTK-3t-5Rj">
-                            <barButtonItem key="leftBarButtonItem" systemItem="redo" id="5Cd-yV-bhJ"/>
-                        </navigationItem>
-                    </items>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="0.0" y="36" width="400" height="44"/>
-                    </variation>
-                </navigationBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <variation key="default">
                 <mask key="subviews">
                     <exclude reference="f2m-Kb-b1T"/>
-                    <exclude reference="2xa-3C-Uap"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
                 <mask key="subviews">
                     <include reference="f2m-Kb-b1T"/>
-                    <include reference="2xa-3C-Uap"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="610" y="241"/>

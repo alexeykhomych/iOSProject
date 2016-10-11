@@ -8,16 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-#import <UIKit/UIKit.h>
+#import "AKIModel.h"
 
 @class AKIImageModel;
 
-@interface AKIUser : NSObject <NSCopying, NSCoding>
-@property (nonatomic, copy, readonly) NSString          *ID;
-@property (nonatomic, copy, readonly) NSString          *firstName;
-@property (nonatomic, copy, readonly) NSString          *secondName;
-@property (nonatomic, copy, readonly) NSString          *country;
-@property (nonatomic, copy, readonly) NSString          *city;
-@property (nonatomic, readonly)       AKIImageModel     *imageModel;
+@interface AKIUser : AKIModel <NSCoding, AKIModelObserver>
+@property (nonatomic, copy)     NSString          *ID;
+@property (nonatomic, copy)     NSString          *firstName;
+@property (nonatomic, copy)     NSString          *secondName;
+@property (nonatomic, copy)     NSString          *birthday;
+@property (nonatomic, copy)     NSString          *country;
+@property (nonatomic, copy)     NSString          *city;
+@property (nonatomic, readonly) AKIImageModel     *imageModel;
 
 @end

@@ -10,31 +10,21 @@
 
 #import "AKIImageModel.h"
 
-#import "NSString+AKIExtensions.h"
+#import "NSFileManager+AKIExtensions.h"
 
 #import "AKIMacro.h"
 
 AKIStringConstant(ID, @"kAKIID");
 AKIStringConstant(FirstName, @"kAKIFirstName");
 AKIStringConstant(SecondName, @"kAKISecondName");
+AKIStringConstant(Birthday, @"kAKIBirthday");
 AKIStringConstant(Country, @"kAKICountry");
 AKIStringConstant(City, @"kAKICity");
 
-@interface AKIUser()
-@property (nonatomic, copy) NSString    *ID;
-@property (nonatomic, copy) NSString    *firstName;
-@property (nonatomic, copy) NSString    *secondName;
-@property (nonatomic, copy) NSString    *country;
-@property (nonatomic, copy) NSString    *city;
-
-@end
-
 @implementation AKIUser
 
-@dynamic imageModel;
-
 #pragma mark -
-#pragma mark Initialization and Deallocation 
+#pragma mark Initializations and Deallocations
 
 - (instancetype)init {
     self = [super init];
@@ -64,11 +54,10 @@ AKIStringConstant(City, @"kAKICity");
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     
-//    self.fullName = [aDecoder decodeObjectForKey:kAKIFullNameKey];
-    
     AKIDecode(ID, kAKIID)
     AKIDecode(firstName, kAKIFirstName)
     AKIDecode(secondName, kAKISecondName)
+    AKIDecode(birthday, kAKIBirthday)
     AKIDecode(country, kAKICountry)
     AKIDecode(city, kAKICity);
     
@@ -83,6 +72,7 @@ AKIStringConstant(City, @"kAKICity");
     AKIEncode(self.ID, kAKIID)
     AKIEncode(self.firstName, kAKIFirstName)
     AKIEncode(self.secondName, kAKISecondName)
+    AKIEncode(self.birthday, kAKIBirthday)
     AKIEncode(self.country, kAKICountry)
     AKIEncode(self.city, kAKICity)
 }

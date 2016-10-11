@@ -13,11 +13,8 @@
 
 @interface AKIView : UIView
 @property (nonatomic, strong) IBOutlet AKILoadingView               *loadingView;
-@property (nonatomic, strong) IBOutlet AKILoginButton               *loginButton;
 @property (nonatomic, assign, getter=isLoadingViewVisible)  BOOL    loadingViewVisible;
-@property (nonatomic, assign, getter=isLoginButtonVisible)  BOOL    loginButtonVisible;
 
 - (AKILoadingView *)defaultLoadingView;
-- (AKILoginButton *)defaultLoginButton;
 
 @end

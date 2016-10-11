@@ -13,6 +13,8 @@
 #import "AKIFacebookFriendsView.h"
 #import "AKIFacebookFriendDetailViewController.h"
 
+#import "AKIFriendsContext.h"
+
 #import "AKIUser.h"
 
 #import "AKIGCD.h"
@@ -28,8 +30,27 @@ AKIViewControllerBaseViewProperty(AKIFacebookFriendsViewController, AKIFacebookF
 
 @implementation AKIFacebookFriendsViewController
 
+#pragma mark -
+#pragma mark Accessors
+
+- (void)setModel:(AKIArrayModel *)model {
+    if (_model != model) {
+        [_model removeObserver:self];
+        _model = model;
+        [_model addObserver:self];
+    }
+}
+
+#pragma mark -
+#pragma mark View Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    AKIFriendsContext *context = [AKIFriendsContext new];
+    [context execute];
+    
+    self.model = context.model;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,9 +92,9 @@ AKIViewControllerBaseViewProperty(AKIFacebookFriendsViewController, AKIFacebookF
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     AKIFacebookFriendsCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     AKIUser *user = cell.user;
+    
     AKIFacebookFriendDetailViewController *controller = [AKIFacebookFriendDetailViewController new];
     controller.user = user;
-    
     [self.navigationController pushViewController:controller animated:YES];
 }
 
