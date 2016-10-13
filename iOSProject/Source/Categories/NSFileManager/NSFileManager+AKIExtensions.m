@@ -8,6 +8,8 @@
 
 #import "NSFileManager+AKIExtensions.h"
 
+#import "AKIMacro.h"
+
 #define AKICreateDirectoryAtPath(path) \
     NSFileManager *fileManager = [NSFileManager defaultManager];\
     if (![fileManager fileExistsAtPath:path]) { \
@@ -21,13 +23,10 @@
     [[NSSearchPathForDirectoriesInDomains(path, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:folder]
 
 #define AKIDispatchOnceFileManagerWithFolder(funcName, path, folderName) \
-    static dispatch_once_t onceToken; \
-    static id result = nil; \
-    dispatch_once(&onceToken, ^{ \
-        AKICreateDirectoryAtPath(AKIFolderPath(path, folderName)); \
-        result = [NSSearchPathForDirectoriesInDomains(path, NSUserDomainMask, YES) firstObject]; \
-    }); \
-    return result;
+    AKICreateDirectoryAtPath(AKIFolderPath(path, folderName)); \
+    AKIReturnOnce(funcName, NSString, ^{ \
+        return [NSSearchPathForDirectoriesInDomains(path, NSUserDomainMask, YES) firstObject]; \
+    })
 
 #define AKIImplementationDispatchOnceFunctionReturnResult(funcName, path) \
     AKIImplementationDispatchOnceFunctionWithFolderNameReturnResult(funcName, path, @"")
@@ -37,26 +36,13 @@
         AKIDispatchOnceFileManagerWithFolder(funcName, path, folderName) \
     }
 
-#define AKIDispatchOnce(field, type, block) \
-    static dispatch_once_t onceToken; \
-    static type field = nil; \
-    dispatch_once(&onceToken, ^{ \
-        AKICreateDirectoryAtPath(AKIFolderPath(path, folderName)); \
-        retult = block; \
-    }); \
-    return result;
-
 @implementation NSFileManager (AKIExtensions)
-
 
 AKIImplementationDispatchOnceFunctionReturnResult(documentsPath, NSDocumentDirectory)
 AKIImplementationDispatchOnceFunctionReturnResult(libraryPath, NSLibraryDirectory)
 
 + (NSString *)cachedFilesPathWithFolder:(NSString *)folderName {
-    AKIDispatchOnceFileManagerWithFolder(cachedFilesPathWithFolder, NSLibraryDirectory, folderName)
-
-    
-//    AKIDispatchOnce(result, NSString*, [NSSearchPathForDirectoriesInDomains(path, NSUserDomainMask, YES) firstObject]);
+    AKIReturnOnce(result, NSString, ^{ return [NSString new];});
 }
 
 @end

@@ -6,6 +6,16 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
+#define AKIReturnOnce(result, type, block) \
+    static dispatch_once_t onceToken; \
+    static type *result = nil; \
+    dispatch_once(&onceToken, ^{ \
+        if (block) { \
+            result = block(); \
+        }\
+    }); \
+    return result;
+
 #define AKIDefineBaseViewProperty(propertyName, viewClass) \
     @property (nonatomic, readonly) viewClass   *propertyName;
 
@@ -15,21 +25,18 @@
         if ([self isViewLoaded] && [self.view isKindOfClass:[viewClass class]]) { \
             return (viewClass *)self.view; \
         } \
-        \
         return nil; \
     }
 
 #define AKIViewControllerBaseViewProperty(viewControllerClass, baseViewClass, propertyName) \
     @interface viewControllerClass (__AKIPrivateBaseView_##baseViewClass##_##propertyName) \
-    AKIDefineBaseViewProperty(propertyName, baseViewClass) \
-    \
+        AKIDefineBaseViewProperty(propertyName, baseViewClass) \
+        \
     @end \
-    \
     @implementation viewControllerClass (__AKIPrivateBaseView_##baseViewClass##_##propertyName) \
-    \
-    \
-    AKIBaseViewGetterSynthesize(baseViewClass, propertyName) \
-    \
+        \
+        AKIBaseViewGetterSynthesize(baseViewClass, propertyName) \
+            \
     @end
 
 #define AKIWeakify(variable) \
@@ -57,7 +64,7 @@
 
 #define AKIConstant(type, name, value) static type const kAKI##name = value
 
-#define AKIStringConstant(name, value) static NSString * const kAKI##name = value 
+#define AKIStringConstant(name, value) static NSString * const kAKI##name = value
 
 #define AKIPerformBlockWithParametr(block, parametr) \
     if (block) { \
