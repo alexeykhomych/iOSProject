@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		843038B81D5921D000083ADE /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 843038B71D5921D000083ADE /* image.jpg */; };
+		8443A5911DAE7F9700839E69 /* AKIFBConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 8443A5901DAE7F9700839E69 /* AKIFBConst.m */; };
 		844CD2091DAD2DA500FA8F5C /* facebook.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 844CD2081DAD2DA500FA8F5C /* facebook.jpg */; };
+		8486CA611DAFCA4E002B29F1 /* AKIFacebookContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 8486CA601DAFCA4E002B29F1 /* AKIFacebookContext.m */; };
 		848EE67E1D48CFE700B7F780 /* iOSProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */; };
 		848EE69A1D48D3EA00B7F780 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6901D48D3EA00B7F780 /* Assets.xcassets */; };
 		848EE69B1D48D3EA00B7F780 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6911D48D3EA00B7F780 /* LaunchScreen.storyboard */; };
@@ -64,14 +66,11 @@
 		84F9A9B81DAAB73F00976209 /* AKIFacebookFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A9B61DAAB73F00976209 /* AKIFacebookFriendsViewController.xib */; };
 		84F9A9BD1DAAB76C00976209 /* AKIFacebookFriendDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9BB1DAAB76C00976209 /* AKIFacebookFriendDetailViewController.m */; };
 		84F9A9BE1DAAB76C00976209 /* AKIFacebookFriendDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A9BC1DAAB76C00976209 /* AKIFacebookFriendDetailViewController.xib */; };
-		84F9A9C31DAAC5C800976209 /* AKIFacebookNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9C11DAAC5C800976209 /* AKIFacebookNavigationViewController.m */; };
-		84F9A9C41DAAC5C800976209 /* AKIFacebookNavigationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A9C21DAAC5C800976209 /* AKIFacebookNavigationViewController.xib */; };
 		84F9A9C81DAACBAE00976209 /* AKIFacebookLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9C71DAACBAE00976209 /* AKIFacebookLoginButton.m */; };
 		84F9A9D01DAAD02D00976209 /* AKIFacebookFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9CF1DAAD02D00976209 /* AKIFacebookFriendsCell.m */; };
 		84F9A9D21DAAD06B00976209 /* AKIFacebookFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A9D11DAAD06B00976209 /* AKIFacebookFriendsCell.xib */; };
 		84F9A9D71DABACC500976209 /* AKIFacebookFriendsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9D61DABACC500976209 /* AKIFacebookFriendsView.m */; };
 		84F9A9DF1DABB98D00976209 /* AKIFacebookFriendsDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9DE1DABB98D00976209 /* AKIFacebookFriendsDetailView.m */; };
-		84F9A9E31DABC41E00976209 /* AKIFacebookNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9E21DABC41E00976209 /* AKIFacebookNavigationView.m */; };
 		84F9A9EF1DABE34D00976209 /* AKIContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9EE1DABE34D00976209 /* AKIContext.m */; };
 		84F9A9F31DABE39E00976209 /* AKILoginContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9F21DABE39E00976209 /* AKILoginContext.m */; };
 		84F9A9F71DABE3BE00976209 /* AKIFriendsContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9F61DABE3BE00976209 /* AKIFriendsContext.m */; };
@@ -84,7 +83,11 @@
 		664109B08106708294D9A04F /* Pods-iOSProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSProjectTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSProjectTests/Pods-iOSProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		6E034D21D28E3456E96FEDFC /* Pods-iOSProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSProject/Pods-iOSProject.release.xcconfig"; sourceTree = "<group>"; };
 		843038B71D5921D000083ADE /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
+		8443A58F1DAE7F9700839E69 /* AKIFBConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFBConst.h; sourceTree = "<group>"; };
+		8443A5901DAE7F9700839E69 /* AKIFBConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFBConst.m; sourceTree = "<group>"; };
 		844CD2081DAD2DA500FA8F5C /* facebook.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = facebook.jpg; sourceTree = "<group>"; };
+		8486CA5F1DAFCA4E002B29F1 /* AKIFacebookContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFacebookContext.h; sourceTree = "<group>"; };
+		8486CA601DAFCA4E002B29F1 /* AKIFacebookContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFacebookContext.m; sourceTree = "<group>"; };
 		848EE65D1D48CEEE00B7F780 /* iOSProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67B1D48CFE700B7F780 /* iOSProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSProjectTests.m; sourceTree = "<group>"; };
@@ -179,9 +182,6 @@
 		84F9A9BA1DAAB76C00976209 /* AKIFacebookFriendDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFacebookFriendDetailViewController.h; sourceTree = "<group>"; };
 		84F9A9BB1DAAB76C00976209 /* AKIFacebookFriendDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFacebookFriendDetailViewController.m; sourceTree = "<group>"; };
 		84F9A9BC1DAAB76C00976209 /* AKIFacebookFriendDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKIFacebookFriendDetailViewController.xib; sourceTree = "<group>"; };
-		84F9A9C01DAAC5C800976209 /* AKIFacebookNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFacebookNavigationViewController.h; sourceTree = "<group>"; };
-		84F9A9C11DAAC5C800976209 /* AKIFacebookNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFacebookNavigationViewController.m; sourceTree = "<group>"; };
-		84F9A9C21DAAC5C800976209 /* AKIFacebookNavigationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKIFacebookNavigationViewController.xib; sourceTree = "<group>"; };
 		84F9A9C61DAACBAE00976209 /* AKIFacebookLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFacebookLoginButton.h; sourceTree = "<group>"; };
 		84F9A9C71DAACBAE00976209 /* AKIFacebookLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFacebookLoginButton.m; sourceTree = "<group>"; };
 		84F9A9CE1DAAD02D00976209 /* AKIFacebookFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFacebookFriendsCell.h; sourceTree = "<group>"; };
@@ -191,8 +191,6 @@
 		84F9A9D61DABACC500976209 /* AKIFacebookFriendsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFacebookFriendsView.m; sourceTree = "<group>"; };
 		84F9A9DD1DABB98D00976209 /* AKIFacebookFriendsDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFacebookFriendsDetailView.h; sourceTree = "<group>"; };
 		84F9A9DE1DABB98D00976209 /* AKIFacebookFriendsDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFacebookFriendsDetailView.m; sourceTree = "<group>"; };
-		84F9A9E11DABC41E00976209 /* AKIFacebookNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFacebookNavigationView.h; sourceTree = "<group>"; };
-		84F9A9E21DABC41E00976209 /* AKIFacebookNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFacebookNavigationView.m; sourceTree = "<group>"; };
 		84F9A9ED1DABE34D00976209 /* AKIContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIContext.h; sourceTree = "<group>"; };
 		84F9A9EE1DABE34D00976209 /* AKIContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIContext.m; sourceTree = "<group>"; };
 		84F9A9F11DABE39E00976209 /* AKILoginContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKILoginContext.h; sourceTree = "<group>"; };
@@ -235,6 +233,32 @@
 				843038B71D5921D000083ADE /* image.jpg */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		8443A58D1DAE7F5000839E69 /* AKIConst */ = {
+			isa = PBXGroup;
+			children = (
+				8443A58E1DAE7F6C00839E69 /* AKIFBConst */,
+			);
+			path = AKIConst;
+			sourceTree = "<group>";
+		};
+		8443A58E1DAE7F6C00839E69 /* AKIFBConst */ = {
+			isa = PBXGroup;
+			children = (
+				8443A58F1DAE7F9700839E69 /* AKIFBConst.h */,
+				8443A5901DAE7F9700839E69 /* AKIFBConst.m */,
+			);
+			path = AKIFBConst;
+			sourceTree = "<group>";
+		};
+		8486CA5E1DAFCA28002B29F1 /* AKIFacebookContext */ = {
+			isa = PBXGroup;
+			children = (
+				8486CA5F1DAFCA4E002B29F1 /* AKIFacebookContext.h */,
+				8486CA601DAFCA4E002B29F1 /* AKIFacebookContext.m */,
+			);
+			path = AKIFacebookContext;
 			sourceTree = "<group>";
 		};
 		848EE6541D48CEEE00B7F780 = {
@@ -512,6 +536,7 @@
 		8498D6871DA12C29004376FF /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				8443A58D1DAE7F5000839E69 /* AKIConst */,
 				8498D6881DA12C29004376FF /* AKIMacro */,
 				8498D68B1DA12C29004376FF /* Classes */,
 			);
@@ -740,7 +765,6 @@
 		84F9A9A71DAAB65500976209 /* AKIFacebookViewController */ = {
 			isa = PBXGroup;
 			children = (
-				84F9A9BF1DAAC5AA00976209 /* AKIFacebookNavigationViewController */,
 				84F9A9B91DAAB74300976209 /* AKIFacebookFriendDetailViewController */,
 				84F9A9B31DAAB71300976209 /* AKIFacebookFriendsViewController */,
 				84F9A9AD1DAAB70C00976209 /* AKIFacebookLoginViewController */,
@@ -779,17 +803,6 @@
 				84F9A9BC1DAAB76C00976209 /* AKIFacebookFriendDetailViewController.xib */,
 			);
 			path = AKIFacebookFriendDetailViewController;
-			sourceTree = "<group>";
-		};
-		84F9A9BF1DAAC5AA00976209 /* AKIFacebookNavigationViewController */ = {
-			isa = PBXGroup;
-			children = (
-				84F9A9E01DABC3FB00976209 /* Views */,
-				84F9A9C01DAAC5C800976209 /* AKIFacebookNavigationViewController.h */,
-				84F9A9C11DAAC5C800976209 /* AKIFacebookNavigationViewController.m */,
-				84F9A9C21DAAC5C800976209 /* AKIFacebookNavigationViewController.xib */,
-			);
-			path = AKIFacebookNavigationViewController;
 			sourceTree = "<group>";
 		};
 		84F9A9C51DAACB8700976209 /* Views */ = {
@@ -846,18 +859,10 @@
 			path = AKIFacebookFriendsDetailView;
 			sourceTree = "<group>";
 		};
-		84F9A9E01DABC3FB00976209 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				84F9A9E11DABC41E00976209 /* AKIFacebookNavigationView.h */,
-				84F9A9E21DABC41E00976209 /* AKIFacebookNavigationView.m */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		84F9A9EC1DABE33200976209 /* AKIContext */ = {
 			isa = PBXGroup;
 			children = (
+				8486CA5E1DAFCA28002B29F1 /* AKIFacebookContext */,
 				84F9A9F41DABE3AB00976209 /* AKIFriendsContext */,
 				84F9A9F01DABE38300976209 /* AKILoginContext */,
 				84F9A9ED1DABE34D00976209 /* AKIContext.h */,
@@ -998,7 +1003,6 @@
 				8498D6C01DA12C29004376FF /* AKILoadingView.xib in Resources */,
 				848EE7091D490B1A00B7F780 /* Main.storyboard in Resources */,
 				848EE69A1D48D3EA00B7F780 /* Assets.xcassets in Resources */,
-				84F9A9C41DAAC5C800976209 /* AKIFacebookNavigationViewController.xib in Resources */,
 				848EE6CF1D48DD5300B7F780 /* Info.plist in Resources */,
 				843038B81D5921D000083ADE /* image.jpg in Resources */,
 				844CD2091DAD2DA500FA8F5C /* facebook.jpg in Resources */,
@@ -1112,12 +1116,14 @@
 				8498D6B61DA12C29004376FF /* AKIObservableObject.m in Sources */,
 				8498D6BF1DA12C29004376FF /* AKILoadingView.m in Sources */,
 				8498D6B41DA12C29004376FF /* AKIMacro.m in Sources */,
+				8486CA611DAFCA4E002B29F1 /* AKIFacebookContext.m in Sources */,
 				8498D6BC1DA12C29004376FF /* AKIArrayChangeModelMove.m in Sources */,
 				8498D6811DA12C19004376FF /* AKILoadingViewContainer.m in Sources */,
 				8498D6801DA12C19004376FF /* AKIImageView.m in Sources */,
 				8498D6711DA12C19004376FF /* NSNotificationCenter+AKIExtensions.m in Sources */,
 				8498D6721DA12C19004376FF /* NSObject+AKIExtensions.m in Sources */,
 				84F9A95D1DA3C6CF00976209 /* NSFileManager+AKIExtensions.m in Sources */,
+				8443A5911DAE7F9700839E69 /* AKIFBConst.m in Sources */,
 				84F9A98A1DA6858F00976209 /* AKIInternetImageModel.m in Sources */,
 				848EE6FD1D48F7FB00B7F780 /* AKIAppDelegate.m in Sources */,
 				84F9A99E1DA7CF5900976209 /* AKIImageModelCache.m in Sources */,
@@ -1129,11 +1135,9 @@
 				8498D6781DA12C19004376FF /* UIWindow+AKIExtensions.m in Sources */,
 				84F9A9BD1DAAB76C00976209 /* AKIFacebookFriendDetailViewController.m in Sources */,
 				84F9A9D01DAAD02D00976209 /* AKIFacebookFriendsCell.m in Sources */,
-				84F9A9C31DAAC5C800976209 /* AKIFacebookNavigationViewController.m in Sources */,
 				8498D6B91DA12C29004376FF /* AKIArrayChangeModelDelete.m in Sources */,
 				84F9A9D71DABACC500976209 /* AKIFacebookFriendsView.m in Sources */,
 				84F9A9EF1DABE34D00976209 /* AKIContext.m in Sources */,
-				84F9A9E31DABC41E00976209 /* AKIFacebookNavigationView.m in Sources */,
 				8498D67C1DA12C19004376FF /* AKIUsersArrayModel.m in Sources */,
 				8498D6741DA12C19004376FF /* UINib+AKIExtensions.m in Sources */,
 				84F9A9891DA6858F00976209 /* AKIImageModel.m in Sources */,

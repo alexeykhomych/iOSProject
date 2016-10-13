@@ -13,8 +13,6 @@
 #import "AKIArrayModel.h"
 
 @interface AKIContext : NSObject
-@property (nonatomic, strong) AKIUser       *user;
-@property (nonatomic, strong) AKIArrayModel *model;
 
 - (void)execute;
 - (void)cancel;

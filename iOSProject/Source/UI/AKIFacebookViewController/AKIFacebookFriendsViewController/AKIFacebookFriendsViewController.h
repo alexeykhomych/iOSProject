@@ -10,6 +10,8 @@
 
 #import "AKIArrayModel.h"
 
+@class AKIUser;
+
 @interface AKIFacebookFriendsViewController :  AKIAbstractViewController <
     UITableViewDelegate,
     UITableViewDataSource,

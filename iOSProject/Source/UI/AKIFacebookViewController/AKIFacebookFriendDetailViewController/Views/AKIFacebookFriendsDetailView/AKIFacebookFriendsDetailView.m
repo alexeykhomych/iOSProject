@@ -14,7 +14,7 @@
 
 - (void)setUser:(AKIUser *)user {
     if (_user != user) {
-        self.name.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.secondName];
+        self.name.text = user.name;
         self.city.text = [NSString stringWithFormat:@"%@, %@", user.city, user.country];
         self.birthday.text = self.user.birthday;
 //        self.imageView.image = user.imageModel;
