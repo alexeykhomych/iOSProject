@@ -47,6 +47,8 @@
         [self.user performBlockWithoutNotification:^{
             [self.user.friends addObjects:model.objects];
         }];
+        
+        self.user.state = AKIModelDidLoad;
     };
 }
 

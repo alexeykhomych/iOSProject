@@ -10,7 +10,7 @@
 
 #import "AKIImageModel.h"
 
-#import "AKIArrayModel.h"
+#import "AKIFBFriends.h"
 
 #import "NSFileManager+AKIExtensions.h"
 

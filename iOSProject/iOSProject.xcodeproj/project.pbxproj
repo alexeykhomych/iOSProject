@@ -11,6 +11,7 @@
 		8443A5911DAE7F9700839E69 /* AKIFBConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 8443A5901DAE7F9700839E69 /* AKIFBConst.m */; };
 		844CD2091DAD2DA500FA8F5C /* facebook.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 844CD2081DAD2DA500FA8F5C /* facebook.jpg */; };
 		8486CA611DAFCA4E002B29F1 /* AKIFacebookContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 8486CA601DAFCA4E002B29F1 /* AKIFacebookContext.m */; };
+		8486CA651DAFEE7A002B29F1 /* AKIFBFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 8486CA641DAFEE7A002B29F1 /* AKIFBFriends.m */; };
 		848EE67E1D48CFE700B7F780 /* iOSProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */; };
 		848EE69A1D48D3EA00B7F780 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6901D48D3EA00B7F780 /* Assets.xcassets */; };
 		848EE69B1D48D3EA00B7F780 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6911D48D3EA00B7F780 /* LaunchScreen.storyboard */; };
@@ -88,6 +89,8 @@
 		844CD2081DAD2DA500FA8F5C /* facebook.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = facebook.jpg; sourceTree = "<group>"; };
 		8486CA5F1DAFCA4E002B29F1 /* AKIFacebookContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFacebookContext.h; sourceTree = "<group>"; };
 		8486CA601DAFCA4E002B29F1 /* AKIFacebookContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFacebookContext.m; sourceTree = "<group>"; };
+		8486CA631DAFEE7A002B29F1 /* AKIFBFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFBFriends.h; sourceTree = "<group>"; };
+		8486CA641DAFEE7A002B29F1 /* AKIFBFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFBFriends.m; sourceTree = "<group>"; };
 		848EE65D1D48CEEE00B7F780 /* iOSProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67B1D48CFE700B7F780 /* iOSProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSProjectTests.m; sourceTree = "<group>"; };
@@ -259,6 +262,15 @@
 				8486CA601DAFCA4E002B29F1 /* AKIFacebookContext.m */,
 			);
 			path = AKIFacebookContext;
+			sourceTree = "<group>";
+		};
+		8486CA621DAFEE59002B29F1 /* AKIFBFriends */ = {
+			isa = PBXGroup;
+			children = (
+				8486CA631DAFEE7A002B29F1 /* AKIFBFriends.h */,
+				8486CA641DAFEE7A002B29F1 /* AKIFBFriends.m */,
+			);
+			path = AKIFBFriends;
 			sourceTree = "<group>";
 		};
 		848EE6541D48CEEE00B7F780 = {
@@ -594,6 +606,7 @@
 		8498D6951DA12C29004376FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8486CA621DAFEE59002B29F1 /* AKIFBFriends */,
 				84F9A9EC1DABE33200976209 /* AKIContext */,
 				84F9A9791DA6858F00976209 /* AKIImage */,
 				8498D6961DA12C29004376FF /* AKIArrayChangeModel */,
@@ -1136,6 +1149,7 @@
 				84F9A9BD1DAAB76C00976209 /* AKIFacebookFriendDetailViewController.m in Sources */,
 				84F9A9D01DAAD02D00976209 /* AKIFacebookFriendsCell.m in Sources */,
 				8498D6B91DA12C29004376FF /* AKIArrayChangeModelDelete.m in Sources */,
+				8486CA651DAFEE7A002B29F1 /* AKIFBFriends.m in Sources */,
 				84F9A9D71DABACC500976209 /* AKIFacebookFriendsView.m in Sources */,
 				84F9A9EF1DABE34D00976209 /* AKIContext.m in Sources */,
 				8498D67C1DA12C19004376FF /* AKIUsersArrayModel.m in Sources */,

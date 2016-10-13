@@ -56,7 +56,6 @@ AKIViewControllerBaseViewProperty(AKIFacebookFriendsViewController, AKIFacebookF
     [super viewDidLoad];
     
     [self loadModel];
-    [self.friendsView.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -137,14 +136,15 @@ AKIViewControllerBaseViewProperty(AKIFacebookFriendsViewController, AKIFacebookF
 #pragma mark Private
 
 - (void)loadModel {
+    
     AKIFriendsContext *context = [AKIFriendsContext new];
     
     context.user = self.user;
+    
     self.context = context;
+    self.model = context.user.friends;
     
     [context execute];
-    
-    self.model = context.user.friends;
 }
 
 @end

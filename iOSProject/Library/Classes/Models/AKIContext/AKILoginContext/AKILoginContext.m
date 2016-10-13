@@ -36,19 +36,14 @@
         }
         
         user.ID = result.token.userID;
-        user.state = AKIModelDidLoad;
     };
-}
-
-- (id)permission {
-    return @[kAKILoginPermissions];
 }
 
 #pragma mark -
 #pragma mark Public
 
 - (void)execute {
-    [[FBSDKLoginManager new] logInWithReadPermissions:[self permission]
+    [[FBSDKLoginManager new] logInWithReadPermissions:@[kAKILoginPermissions]
                                    fromViewController:self.controller
                                               handler:[self completionHandler]];
 }
