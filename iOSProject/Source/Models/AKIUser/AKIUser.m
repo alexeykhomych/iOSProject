@@ -10,16 +10,24 @@
 
 #import "AKIImageModel.h"
 
+#import "AKIArrayModel.h"
+
 #import "NSFileManager+AKIExtensions.h"
 
 #import "AKIMacro.h"
 
-AKIStringConstant(ID, @"kAKIID");
-AKIStringConstant(FirstName, @"kAKIFirstName");
-AKIStringConstant(SecondName, @"kAKISecondName");
-AKIStringConstant(Birthday, @"kAKIBirthday");
-AKIStringConstant(Country, @"kAKICountry");
-AKIStringConstant(City, @"kAKICity");
+#define AKIKeyConstant(value) AKIStringConstant(value, @"kAKI" #value);
+
+AKIKeyConstant(ID)
+AKIKeyConstant(Name)
+AKIKeyConstant(Birthday)
+AKIKeyConstant(Country)
+AKIKeyConstant(City)
+
+@interface AKIUser ()
+//@property (nonatomic, strong) AKIArrayModel *friends;
+
+@end
 
 @implementation AKIUser
 
@@ -30,7 +38,7 @@ AKIStringConstant(City, @"kAKICity");
     self = [super init];
     
     if (self) {
-//        self.fullName = [NSString fullName];
+        self.friends = [AKIArrayModel new];
     }
     
     return self;
@@ -55,8 +63,7 @@ AKIStringConstant(City, @"kAKICity");
     self = [super init];
     
     AKIDecode(ID, kAKIID)
-    AKIDecode(firstName, kAKIFirstName)
-    AKIDecode(secondName, kAKISecondName)
+    AKIDecode(name, kAKIName)
     AKIDecode(birthday, kAKIBirthday)
     AKIDecode(country, kAKICountry)
     AKIDecode(city, kAKICity);
@@ -70,8 +77,7 @@ AKIStringConstant(City, @"kAKICity");
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     AKIEncode(self.ID, kAKIID)
-    AKIEncode(self.firstName, kAKIFirstName)
-    AKIEncode(self.secondName, kAKISecondName)
+    AKIEncode(self.name, kAKIName)
     AKIEncode(self.birthday, kAKIBirthday)
     AKIEncode(self.country, kAKICountry)
     AKIEncode(self.city, kAKICity)

@@ -10,15 +10,16 @@
 
 #import "AKIModel.h"
 
+@class AKIArrayModel;
 @class AKIImageModel;
 
 @interface AKIUser : AKIModel <NSCoding, AKIModelObserver>
 @property (nonatomic, copy)     NSString          *ID;
-@property (nonatomic, copy)     NSString          *firstName;
-@property (nonatomic, copy)     NSString          *secondName;
+@property (nonatomic, copy)     NSString          *name;
 @property (nonatomic, copy)     NSString          *birthday;
 @property (nonatomic, copy)     NSString          *country;
 @property (nonatomic, copy)     NSString          *city;
 @property (nonatomic, readonly) AKIImageModel     *imageModel;
+@property (nonatomic, strong) AKIArrayModel     *friends;
 
 @end
