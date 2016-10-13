@@ -14,25 +14,43 @@
 
 #import "AKIUser.h"
 
-#import "AKIMacro.h"
+#import "AKIFBConst.h"
 
-AKIStringConstant(LoginPermissions, @"public_profile");
+#import "AKIFacebookLoginViewController.h"
+
+#import "AKIMacro.h"
 
 @implementation AKILoginContext
 
+#pragma mark -
+#pragma mark Accessors
+
+- (id)completionHandler {
+    return ^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+        AKIUser *user = self.user;
+        
+        if (error || !result) {
+            user.state = AKIModelDidFailLoading;
+            
+            return;
+        }
+        
+        user.ID = result.token.userID;
+        user.state = AKIModelDidLoad;
+    };
+}
+
+- (id)permission {
+    return @[kAKILoginPermissions];
+}
+
+#pragma mark -
+#pragma mark Public
+
 - (void)execute {
-    [[FBSDKLoginManager new] logInWithReadPermissions:@[kAKILoginPermissions]
-                                   fromViewController:(UIViewController *)self.controller
-                                              handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                                  AKIUser *user = self.user;
-                                                  
-                                                  if (error || !result) {
-                                                      user.state = AKIModelDidFailLoading;
-                                                  }
-                                                  
-                                                  user.ID = result.token.userID;
-                                                  user.state = AKIModelDidLoad;
-                                              }];
+    [[FBSDKLoginManager new] logInWithReadPermissions:[self permission]
+                                   fromViewController:self.controller
+                                              handler:[self completionHandler]];
 }
 
 @end

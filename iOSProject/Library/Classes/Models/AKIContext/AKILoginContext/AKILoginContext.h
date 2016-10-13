@@ -12,5 +12,6 @@
 
 @interface AKILoginContext : AKIContext
 @property (nonatomic, strong) AKIFacebookLoginViewController *controller;
+@property (nonatomic, strong) AKIUser *user;
 
 @end

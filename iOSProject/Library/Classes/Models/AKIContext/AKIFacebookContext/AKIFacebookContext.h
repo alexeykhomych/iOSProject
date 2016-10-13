@@ -9,5 +9,9 @@
 #import "AKIContext.h"
 
 @interface AKIFacebookContext : AKIContext
+@property (nonatomic, readonly) id request;
+
+//override in children
+- (id)completionHandler;
 
 @end
