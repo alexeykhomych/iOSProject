@@ -28,7 +28,15 @@
 
 AKIViewControllerBaseViewProperty(AKIFacebookFriendsViewController, AKIFacebookFriendsView, friendsView)
 
+@interface AKIFacebookFriendsViewController ()
+
+- (void)loadModel;
+
+@end
+
 @implementation AKIFacebookFriendsViewController
+
+@synthesize model = _model;
 
 #pragma mark -
 #pragma mark Accessors
@@ -47,10 +55,8 @@ AKIViewControllerBaseViewProperty(AKIFacebookFriendsViewController, AKIFacebookF
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    AKIFriendsContext *context = [AKIFriendsContext new];
-    [context execute];
-    
-    self.model = context.model;
+    [self loadModel];
+    [self.friendsView.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,7 +80,7 @@ AKIViewControllerBaseViewProperty(AKIFacebookFriendsViewController, AKIFacebookF
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.model.count;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,6 +131,20 @@ AKIViewControllerBaseViewProperty(AKIFacebookFriendsViewController, AKIFacebookF
         AKIStrongifyAndReturnIfNil(self);
         [self.friendsView.tableView reloadData];
     });
+}
+
+#pragma mark -
+#pragma mark Private
+
+- (void)loadModel {
+    AKIFriendsContext *context = [AKIFriendsContext new];
+    
+    context.user = self.user;
+    self.context = context;
+    
+    [context execute];
+    
+    self.model = context.user.friends;
 }
 
 @end

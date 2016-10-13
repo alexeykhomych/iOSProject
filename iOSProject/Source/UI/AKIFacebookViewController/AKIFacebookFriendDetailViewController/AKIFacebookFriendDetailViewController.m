@@ -10,20 +10,37 @@
 
 #import "AKIUser.h"
 
+#import "AKIFacebookFriendsDetailView.h"
+
+#import "AKIMacro.h"
+
+AKIViewControllerBaseViewProperty(AKIFacebookFriendDetailViewController, AKIFacebookFriendsDetailView, detailView)
+
 @interface AKIFacebookFriendDetailViewController ()
+
+- (void)fillUser;
 
 @end
 
 @implementation AKIFacebookFriendDetailViewController
 
+#pragma mark -
+#pragma mark View Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self fillUser];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+- (void)fillUser {
+    AKIUser *user = self.user;
+    self.detailView.name.text = user.name;
+    self.detailView.city.text = user.city;
+    self.detailView.birthday.text = user.birthday;
 }
 
 @end

@@ -18,12 +18,17 @@
 
 #import "UIViewController+AKIExtensions.h"
 
-@interface AKIFacebookLoginViewController ()
-@property (nonatomic, strong) AKIUser *user;
-
-@end
-
 @implementation AKIFacebookLoginViewController
+
+#pragma mark -
+#pragma mark Initializations and Deallocations
+
+- (instancetype)init {
+    self = [super init];
+    self.user = [AKIUser new];
+    
+    return self;
+}
 
 #pragma mark -
 #pragma mark View Lifecycle
@@ -40,22 +45,12 @@
 #pragma mark Interface Handling
 
 - (IBAction)onLoginButton:(id)sender {
-    AKILoginContext *login = [AKILoginContext new];
-    [login execute];
+    [self loadContext];
+    [self.context execute];
     
     AKIFacebookFriendsViewController *controller = [AKIFacebookFriendsViewController viewController];
+    controller.user = self.user;
     [self.navigationController pushViewController:controller animated:YES];
-}
-
-#pragma mark -
-#pragma mark Accessors
-
-- (void)setUser:(AKIUser *)user {
-    if (_user != user) {
-        [_user removeObserver:self];
-        _user = user;
-        [_user addObserver:self];
-    }
 }
 
 #pragma mark -

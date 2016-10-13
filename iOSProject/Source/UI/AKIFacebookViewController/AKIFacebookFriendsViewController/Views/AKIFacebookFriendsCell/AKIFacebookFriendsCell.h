@@ -8,7 +8,13 @@
 
 #import "AKITableViewCell.h"
 
+#import "AKIImageView.h"
+
+@class AKIUser;
+
 @interface AKIFacebookFriendsCell : AKITableViewCell
-@property (nonatomic, strong) id user;
+@property (nonatomic, strong) IBOutlet UILabel          *userName;
+@property (nonatomic, strong) IBOutlet AKIImageView     *userImage;
+@property (nonatomic, strong) AKIUser *user;
 
 @end

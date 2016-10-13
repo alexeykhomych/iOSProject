@@ -8,14 +8,34 @@
 
 #import "AKIFacebookFriendsCell.h"
 
+#import "AKIUser.h"
+
 @implementation AKIFacebookFriendsCell
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+#pragma mark -
+#pragma mark Initializations and deallocations
+
+- (void)dealloc {
+    self.user = nil;
 }
-*/
+
+#pragma mark -
+#pragma mark Accessors
+
+- (void)setUser:(AKIUser *)user {
+    if (_user != user) {
+        _user = user;
+        
+        [self fillWithModel:_user];
+    }
+}
+
+#pragma mark -
+#pragma mark Public Implementations
+
+- (void)fillWithModel:(AKIUser *)user {
+    self.userName.text = self.user.name;
+//    self.userImage.image = user.imageModel;
+}
 
 @end

@@ -10,6 +10,10 @@
 
 #import "AKILoadingViewContainer.h"
 
+#import "AKIArrayModel.h"
+
+#import "AKIUser.h"
+
 #import "AKIMacro.h"
 
 AKIViewControllerBaseViewProperty(AKIAbstractViewController, AKILoadingViewContainer, loadingViewContainer)
@@ -37,6 +41,14 @@ AKIViewControllerBaseViewProperty(AKIAbstractViewController, AKILoadingViewConta
         _context = context;
         
         [_context addObserver:self];
+    }
+}
+
+- (void)setUser:(AKIUser *)user {
+    if (_user != user) {
+        [_user removeObserver:self];
+        _user = user;
+        [_user addObserver:self];
     }
 }
 
