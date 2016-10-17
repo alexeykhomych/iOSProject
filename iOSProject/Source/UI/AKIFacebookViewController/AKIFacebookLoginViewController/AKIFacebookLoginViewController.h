@@ -10,7 +10,10 @@
 
 #import "AKIFacebookLoginButton.h"
 
+@class AKIUser;
+
 @interface AKIFacebookLoginViewController : AKIAbstractViewController
+@property (nonatomic, strong) AKIUser *user;
 
 - (IBAction)onLoginButton:(id)sender;
 

@@ -8,10 +8,11 @@
 
 #import "AKILoadingViewContainer.h"
 
+@class AKIImageView;
 @class AKIUser;
 
 @interface AKIFacebookFriendsDetailView : AKILoadingViewContainer
-@property (nonatomic, strong) IBOutlet UIImageView  *imageView;
+@property (nonatomic, strong) IBOutlet AKIImageView  *imageView;
 
 @property (nonatomic, strong) IBOutlet UILabel      *name;
 @property (nonatomic, strong) IBOutlet UILabel      *city;

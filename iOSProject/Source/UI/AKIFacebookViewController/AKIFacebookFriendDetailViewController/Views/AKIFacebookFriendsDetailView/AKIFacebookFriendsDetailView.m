@@ -10,14 +10,17 @@
 
 #import "AKIUser.h"
 
+#import "AKIImageView.h"
+
 @implementation AKIFacebookFriendsDetailView
 
 - (void)setUser:(AKIUser *)user {
     if (_user != user) {
+        _user = user;
         self.name.text = user.name;
         self.city.text = [NSString stringWithFormat:@"%@, %@", user.city, user.country];
         self.birthday.text = self.user.birthday;
-//        self.imageView.image = user.imageModel;
+        self.imageView.imageModel = user.imageModel;
     }
 }
 

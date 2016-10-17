@@ -12,6 +12,8 @@
 
 #import "AKIFBFriends.h"
 
+#import "AKIArrayModel.h"
+
 #import "NSFileManager+AKIExtensions.h"
 
 #import "AKIMacro.h"
@@ -48,10 +50,7 @@ AKIKeyConstant(City)
 #pragma mark Accessors
 
 - (AKIImageModel *)imageModel {
-//    NSURL *url = [[NSBundle mainBundle] URLForResource:@"image" withExtension:@"jpg"];
-    NSURL *url = [NSURL URLWithString:@"http://mirgif.com/humor/prikol104.jpg"];
-    
-    return [AKIImageModel imageWithURL:url];
+    return [AKIImageModel imageWithURL:self.url];
 }
 
 #pragma mark -

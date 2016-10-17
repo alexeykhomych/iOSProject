@@ -10,15 +10,21 @@
 
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
+#import "AKIFacebookFriendsViewController.h"
+
 #import "AKILoginContext.h"
 
 #import "AKIUser.h"
 
-#import "AKIFacebookFriendsViewController.h"
+#import "AKIGCD.h"
 
 #import "UIViewController+AKIExtensions.h"
 
+#import "AKIMacro.h"
+
 @implementation AKIFacebookLoginViewController
+
+@synthesize user = _user;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -35,6 +41,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.user = [AKIUser new];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,11 +53,6 @@
 
 - (IBAction)onLoginButton:(id)sender {
     [self loadContext];
-    [self.context execute];
-    
-    AKIFacebookFriendsViewController *controller = [AKIFacebookFriendsViewController viewController];
-    controller.user = self.user;
-    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark -
@@ -62,6 +64,41 @@
     loginContext.controller = self;
     
     self.context = loginContext;
+    
+    [self.context execute];
+}
+
+- (void)setUser:(AKIUser *)user {
+    if (_user != user) {
+        [_user removeObserver:self];
+        _user = user;
+        [_user addObserver:self];
+    }
+}
+
+#pragma mark -
+#pragma mark Observing
+
+- (void)modelDidLoad:(AKIUser *)user {
+    AKIWeakify(self);
+    AKIAsyncPerformInMainQueue(^{
+        AKIStrongifyAndReturnIfNil(self);
+        AKIFacebookFriendsViewController *controller = [AKIFacebookFriendsViewController viewController];
+        controller.user = self.user;
+        
+        [self.navigationController pushViewController:controller animated:YES];
+    });
+}
+
+- (void)modelDidFailLoading:(AKIUser *)user {
+    [self loadCachedData];
+}
+
+#pragma mark -
+#pragma mark Private
+
+- (void)loadCachedData {
+    
 }
 
 @end

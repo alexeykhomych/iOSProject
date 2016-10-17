@@ -12,13 +12,17 @@
 
 #import "AKIFacebookFriendsDetailView.h"
 
+#import "AKIFriendDetailContext.h"
+
+#import "AKIGCD.h"
+
 #import "AKIMacro.h"
 
 AKIViewControllerBaseViewProperty(AKIFacebookFriendDetailViewController, AKIFacebookFriendsDetailView, detailView)
 
 @interface AKIFacebookFriendDetailViewController ()
 
-- (void)fillUser;
+- (void)loadCachedData;
 
 @end
 
@@ -29,18 +33,43 @@ AKIViewControllerBaseViewProperty(AKIFacebookFriendDetailViewController, AKIFace
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self fillUser];
+    
+    [self loadContext];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (void)fillUser {
-    AKIUser *user = self.user;
-    self.detailView.name.text = user.name;
-    self.detailView.city.text = user.city;
-    self.detailView.birthday.text = user.birthday;
+#pragma mark -
+#pragma mark Observing
+
+- (void)modelDidLoad:(AKIUser *)user {
+    AKIWeakify(self);
+    AKIAsyncPerformInMainQueue(^{
+        AKIStrongifyAndReturnIfNil(self);
+        self.detailView.user = self.user;
+    });
+}
+
+- (void)modelDidFailLoading:(AKIUser *)user {
+    [self loadCachedData];
+}
+
+#pragma mark -
+#pragma mark Private
+
+- (void)loadContext {
+    AKIFriendDetailContext *context = [AKIFriendDetailContext new];
+    context.user = self.user;
+    
+    self.context = context;
+    
+    [context execute];
+}
+
+- (void)loadCachedData {
+    
 }
 
 @end

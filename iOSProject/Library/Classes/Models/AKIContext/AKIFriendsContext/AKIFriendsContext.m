@@ -82,33 +82,4 @@
     self.model.state = AKIModelDidLoad;
 }
 
-- (void)testData {
-    for (NSUInteger i = 0; i < 5; i++) {
-        AKIUser *friend = [AKIUser new];
-        friend.ID = [NSString stringWithFormat:@"%lu", 1234+i];
-        friend.name = @"werwerrew";
-        friend.birthday = @"24 December 1992";
-        [self.model addObject:friend];
-    }
-}
-
 @end
-
-/*
- {
-	"friends": {
- "data": [
- {
- "name": dsada
- "id":dasdsad
- },
- {
- "name":dsad
- "id":dsad
- }
-	],
-	"paging": {...}
-	},
-	"id":dsadasd
- }
- */

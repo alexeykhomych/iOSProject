@@ -11,6 +11,5 @@
 @class AKIFriendsContext;
 
 @interface AKIFBFriends : AKIArrayModel
-@property (nonatomic, strong) AKIFriendsContext *context;
 
 @end

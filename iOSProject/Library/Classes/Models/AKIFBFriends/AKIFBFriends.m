@@ -10,14 +10,10 @@
 
 #import "AKIFriendsContext.h"
 
+#import "AKIArrayModel.h"
+
 @implementation AKIFBFriends
 
-#pragma mark -
-#pragma mark Public
 
-- (void)performLoading {
-    [self.context execute];
-    self.state = AKIModelDidLoad;
-}
 
 @end
