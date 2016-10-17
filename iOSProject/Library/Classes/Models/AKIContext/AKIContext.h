@@ -12,7 +12,10 @@
 
 #import "AKIArrayModel.h"
 
-@interface AKIContext : NSObject
+#import "AKIObservableObject.h"
+
+@interface AKIContext : AKIObservableObject
+@property (nonatomic, strong) id model;
 
 - (void)execute;
 - (void)cancel;

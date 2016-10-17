@@ -75,6 +75,7 @@
 		84F9A9EF1DABE34D00976209 /* AKIContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9EE1DABE34D00976209 /* AKIContext.m */; };
 		84F9A9F31DABE39E00976209 /* AKILoginContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9F21DABE39E00976209 /* AKILoginContext.m */; };
 		84F9A9F71DABE3BE00976209 /* AKIFriendsContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9F61DABE3BE00976209 /* AKIFriendsContext.m */; };
+		84FAD99D1DB4F64100BB1E4B /* AKIFriendDetailContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAD99C1DB4F64100BB1E4B /* AKIFriendDetailContext.m */; };
 		C550B8DBB0EE0507BFA3F1C1 /* libPods-iOSProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAF4BDE66977EDE9EA23314F /* libPods-iOSProject.a */; };
 		CEDD97692454920BF46A0BC8 /* libPods-iOSProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1DD131D430834B8AAACB0A2 /* libPods-iOSProjectTests.a */; };
 /* End PBXBuildFile section */
@@ -200,6 +201,8 @@
 		84F9A9F21DABE39E00976209 /* AKILoginContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKILoginContext.m; sourceTree = "<group>"; };
 		84F9A9F51DABE3BE00976209 /* AKIFriendsContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFriendsContext.h; sourceTree = "<group>"; };
 		84F9A9F61DABE3BE00976209 /* AKIFriendsContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFriendsContext.m; sourceTree = "<group>"; };
+		84FAD99B1DB4F64100BB1E4B /* AKIFriendDetailContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFriendDetailContext.h; sourceTree = "<group>"; };
+		84FAD99C1DB4F64100BB1E4B /* AKIFriendDetailContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFriendDetailContext.m; sourceTree = "<group>"; };
 		C1DD131D430834B8AAACB0A2 /* libPods-iOSProjectTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOSProjectTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADE9593A11952A892FE14DC /* Pods-iOSProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSProjectTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSProjectTests/Pods-iOSProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DAF4BDE66977EDE9EA23314F /* libPods-iOSProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOSProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -875,6 +878,7 @@
 		84F9A9EC1DABE33200976209 /* AKIContext */ = {
 			isa = PBXGroup;
 			children = (
+				84FAD99A1DB4F62A00BB1E4B /* AKIFriendDetailContext */,
 				8486CA5E1DAFCA28002B29F1 /* AKIFacebookContext */,
 				84F9A9F41DABE3AB00976209 /* AKIFriendsContext */,
 				84F9A9F01DABE38300976209 /* AKILoginContext */,
@@ -900,6 +904,15 @@
 				84F9A9F61DABE3BE00976209 /* AKIFriendsContext.m */,
 			);
 			path = AKIFriendsContext;
+			sourceTree = "<group>";
+		};
+		84FAD99A1DB4F62A00BB1E4B /* AKIFriendDetailContext */ = {
+			isa = PBXGroup;
+			children = (
+				84FAD99B1DB4F64100BB1E4B /* AKIFriendDetailContext.h */,
+				84FAD99C1DB4F64100BB1E4B /* AKIFriendDetailContext.m */,
+			);
+			name = AKIFriendDetailContext;
 			sourceTree = "<group>";
 		};
 		E26017C6903F18B5D7B3C254 /* Pods */ = {
@@ -1146,6 +1159,7 @@
 				84F9A9B11DAAB70C00976209 /* AKIFacebookLoginViewController.m in Sources */,
 				8498D6C11DA12C29004376FF /* AKIView.m in Sources */,
 				8498D6781DA12C19004376FF /* UIWindow+AKIExtensions.m in Sources */,
+				84FAD99D1DB4F64100BB1E4B /* AKIFriendDetailContext.m in Sources */,
 				84F9A9BD1DAAB76C00976209 /* AKIFacebookFriendDetailViewController.m in Sources */,
 				84F9A9D01DAAD02D00976209 /* AKIFacebookFriendsCell.m in Sources */,
 				8498D6B91DA12C29004376FF /* AKIArrayChangeModelDelete.m in Sources */,

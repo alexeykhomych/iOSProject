@@ -16,14 +16,16 @@
 
 #import "AKIFBConst.h"
 
-#import "AKIFacebookLoginViewController.h"
-
 #import "AKIMacro.h"
 
 @implementation AKILoginContext
 
 #pragma mark -
 #pragma mark Accessors
+
+- (NSString *)path {
+    return [NSString stringWithFormat:@"%@%@", kAKIFBMe, kAKIFBFriendsRequest];
+}
 
 - (id)completionHandler {
     return ^(FBSDKLoginManagerLoginResult *result, NSError *error) {
@@ -42,10 +44,12 @@
 #pragma mark -
 #pragma mark Public
 
-- (void)execute {
-    [[FBSDKLoginManager new] logInWithReadPermissions:@[kAKILoginPermissions]
+- (void)performExecute {
+    [[FBSDKLoginManager new] logInWithReadPermissions:@[kAKIFBLoginPermissions]
                                    fromViewController:self.controller
                                               handler:[self completionHandler]];
+    
+    self.user.state = AKIModelDidLoad;
 }
 
 @end

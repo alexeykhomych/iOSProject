@@ -16,46 +16,46 @@
 
 #import "AKIMacro.h"
 
+@interface AKIFriendsContext ()
+@property (nonatomic, strong) AKIArrayModel *model;
+
+- (void)parseData:(NSDictionary *)data;
+
+@end
+
 @implementation AKIFriendsContext
+
+@synthesize model = _model;
 
 #pragma mark -
 #pragma mark Accessors
 
+- (NSString *)path {
+    return [NSString stringWithFormat:@"%@%@", kAKIFBMe, kAKIFBFriendsRequest];
+}
+
 - (FBSDKGraphRequest *)request {
-    return [[FBSDKGraphRequest alloc] initWithGraphPath:kAKIFriendsRequest
+    return [[FBSDKGraphRequest alloc] initWithGraphPath:self.path
                                              parameters:nil
-                                             HTTPMethod:kAKIGET];
+                                             HTTPMethod:kAKIFBGET];
 }
 
 - (id)completionHandler {
     return ^(FBSDKGraphRequestConnection *connection, NSDictionary *result, NSError *error) {
         if (error) {
-            return;
-        }
-        
-        NSArray *friends = result[@"data"];
-        AKIArrayModel *model = [AKIArrayModel new];
-        
-        for (NSDictionary *friendsDictionary in friends) {
-            AKIUser *friend = [AKIUser new];
-            friend.ID = friendsDictionary[@"id"];
-            friend.name = friendsDictionary[@"name"];
+            self.model.state = AKIModelDidFailLoading;
             
-            [model addObject:friend];
-        }
+            return;
+        } 
         
-        [self.user performBlockWithoutNotification:^{
-            [self.user.friends addObjects:model.objects];
-        }];
-        
-        self.user.state = AKIModelDidLoad;
+        [self parseData:result];
     };
 }
 
 #pragma mark -
 #pragma mark Public
 
-- (void)execute {
+- (void)performExecute {
     FBSDKGraphRequest *request = [self request];
     [request startWithCompletionHandler:[self completionHandler]];
 }
@@ -63,13 +63,32 @@
 #pragma mark -
 #pragma mark Private
 
+- (void)parseData:(NSDictionary *)data {
+    NSArray *friends = data[kAKIFBData];
+    AKIArrayModel *model = [AKIArrayModel new];
+    
+    for (NSDictionary *friendsDictionary in friends) {
+        AKIUser *friend = [AKIUser new];
+        friend.ID = friendsDictionary[kAKIFBID];
+        friend.name = friendsDictionary[kAKIFBName];
+        
+        [model addObject:friend];
+    }
+    
+    [self.model performBlockWithoutNotification:^{
+        [self.model addObjects:model.objects];
+    }];
+    
+    self.model.state = AKIModelDidLoad;
+}
+
 - (void)testData {
     for (NSUInteger i = 0; i < 5; i++) {
         AKIUser *friend = [AKIUser new];
         friend.ID = [NSString stringWithFormat:@"%lu", 1234+i];
         friend.name = @"werwerrew";
         friend.birthday = @"24 December 1992";
-        [self.user.friends addObject:friend];
+        [self.model addObject:friend];
     }
 }
 

@@ -6,9 +6,10 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIContext.h"
+#import "AKIFacebookContext.h"
 
-@interface AKIFriendsContext : AKIContext
-@property (nonatomic, strong) AKIUser *user;
+@class AKIUser;
+
+@interface AKIFriendsContext : AKIFacebookContext
 
 @end
