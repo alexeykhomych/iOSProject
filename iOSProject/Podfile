@@ -1,7 +1,9 @@
 #Kiwi -> docs
 
 target 'iOSProject' do
-
+	pod 'FBSDKCoreKit'
+    pod 'FBSDKLoginKit'
+    pod 'FBSDKShareKit'
 end
 
 target 'iOSProjectTests' do

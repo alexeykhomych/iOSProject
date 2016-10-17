@@ -12,6 +12,10 @@
 		844CD2091DAD2DA500FA8F5C /* facebook.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 844CD2081DAD2DA500FA8F5C /* facebook.jpg */; };
 		8486CA611DAFCA4E002B29F1 /* AKIFacebookContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 8486CA601DAFCA4E002B29F1 /* AKIFacebookContext.m */; };
 		8486CA651DAFEE7A002B29F1 /* AKIFBFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 8486CA641DAFEE7A002B29F1 /* AKIFBFriends.m */; };
+		8486CA6A1DB1142B002B29F1 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8486CA661DB1142B002B29F1 /* Bolts.framework */; };
+		8486CA6B1DB1142B002B29F1 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8486CA671DB1142B002B29F1 /* FBSDKCoreKit.framework */; };
+		8486CA6C1DB1142B002B29F1 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8486CA681DB1142B002B29F1 /* FBSDKLoginKit.framework */; };
+		8486CA6D1DB1142B002B29F1 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8486CA691DB1142B002B29F1 /* FBSDKShareKit.framework */; };
 		848EE67E1D48CFE700B7F780 /* iOSProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */; };
 		848EE69A1D48D3EA00B7F780 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6901D48D3EA00B7F780 /* Assets.xcassets */; };
 		848EE69B1D48D3EA00B7F780 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848EE6911D48D3EA00B7F780 /* LaunchScreen.storyboard */; };
@@ -57,10 +61,6 @@
 		84F9A98A1DA6858F00976209 /* AKIInternetImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9831DA6858F00976209 /* AKIInternetImageModel.m */; };
 		84F9A98B1DA6858F00976209 /* AKILocalImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9861DA6858F00976209 /* AKILocalImageModel.m */; };
 		84F9A99E1DA7CF5900976209 /* AKIImageModelCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A99D1DA7CF5900976209 /* AKIImageModelCache.m */; };
-		84F9A9A21DAA481E00976209 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F9A99F1DAA481E00976209 /* FBSDKCoreKit.framework */; };
-		84F9A9A31DAA481F00976209 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F9A9A01DAA481E00976209 /* FBSDKLoginKit.framework */; };
-		84F9A9A41DAA481F00976209 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F9A9A11DAA481E00976209 /* FBSDKShareKit.framework */; };
-		84F9A9A61DAA4F4600976209 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F9A9A51DAA4F4600976209 /* Bolts.framework */; };
 		84F9A9B11DAAB70C00976209 /* AKIFacebookLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9AF1DAAB70C00976209 /* AKIFacebookLoginViewController.m */; };
 		84F9A9B21DAAB70C00976209 /* AKIFacebookLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F9A9B01DAAB70C00976209 /* AKIFacebookLoginViewController.xib */; };
 		84F9A9B71DAAB73F00976209 /* AKIFacebookFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9A9B51DAAB73F00976209 /* AKIFacebookFriendsViewController.m */; };
@@ -91,6 +91,10 @@
 		8486CA601DAFCA4E002B29F1 /* AKIFacebookContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFacebookContext.m; sourceTree = "<group>"; };
 		8486CA631DAFEE7A002B29F1 /* AKIFBFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFBFriends.h; sourceTree = "<group>"; };
 		8486CA641DAFEE7A002B29F1 /* AKIFBFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFBFriends.m; sourceTree = "<group>"; };
+		8486CA661DB1142B002B29F1 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Pods/Bolts.framework; sourceTree = "<group>"; };
+		8486CA671DB1142B002B29F1 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Pods/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		8486CA681DB1142B002B29F1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Pods/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		8486CA691DB1142B002B29F1 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = Pods/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		848EE65D1D48CEEE00B7F780 /* iOSProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67B1D48CFE700B7F780 /* iOSProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848EE67D1D48CFE700B7F780 /* iOSProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSProjectTests.m; sourceTree = "<group>"; };
@@ -172,10 +176,6 @@
 		84F9A9861DA6858F00976209 /* AKILocalImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKILocalImageModel.m; sourceTree = "<group>"; };
 		84F9A99C1DA7CF5900976209 /* AKIImageModelCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIImageModelCache.h; sourceTree = "<group>"; };
 		84F9A99D1DA7CF5900976209 /* AKIImageModelCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIImageModelCache.m; sourceTree = "<group>"; };
-		84F9A99F1DAA481E00976209 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		84F9A9A01DAA481E00976209 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		84F9A9A11DAA481E00976209 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
-		84F9A9A51DAA4F4600976209 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		84F9A9AE1DAAB70C00976209 /* AKIFacebookLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKIFacebookLoginViewController.h; sourceTree = "<group>"; };
 		84F9A9AF1DAAB70C00976209 /* AKIFacebookLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKIFacebookLoginViewController.m; sourceTree = "<group>"; };
 		84F9A9B01DAAB70C00976209 /* AKIFacebookLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKIFacebookLoginViewController.xib; sourceTree = "<group>"; };
@@ -210,11 +210,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84F9A9A61DAA4F4600976209 /* Bolts.framework in Frameworks */,
-				84F9A9A41DAA481F00976209 /* FBSDKShareKit.framework in Frameworks */,
 				C550B8DBB0EE0507BFA3F1C1 /* libPods-iOSProject.a in Frameworks */,
-				84F9A9A21DAA481E00976209 /* FBSDKCoreKit.framework in Frameworks */,
-				84F9A9A31DAA481F00976209 /* FBSDKLoginKit.framework in Frameworks */,
+				8486CA6B1DB1142B002B29F1 /* FBSDKCoreKit.framework in Frameworks */,
+				8486CA6D1DB1142B002B29F1 /* FBSDKShareKit.framework in Frameworks */,
+				8486CA6C1DB1142B002B29F1 /* FBSDKLoginKit.framework in Frameworks */,
+				8486CA6A1DB1142B002B29F1 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,10 +916,10 @@
 		EB42B2D4BA7FD92FE33ABBE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				84F9A9A51DAA4F4600976209 /* Bolts.framework */,
-				84F9A99F1DAA481E00976209 /* FBSDKCoreKit.framework */,
-				84F9A9A01DAA481E00976209 /* FBSDKLoginKit.framework */,
-				84F9A9A11DAA481E00976209 /* FBSDKShareKit.framework */,
+				8486CA661DB1142B002B29F1 /* Bolts.framework */,
+				8486CA671DB1142B002B29F1 /* FBSDKCoreKit.framework */,
+				8486CA681DB1142B002B29F1 /* FBSDKLoginKit.framework */,
+				8486CA691DB1142B002B29F1 /* FBSDKShareKit.framework */,
 				DAF4BDE66977EDE9EA23314F /* libPods-iOSProject.a */,
 				C1DD131D430834B8AAACB0A2 /* libPods-iOSProjectTests.a */,
 			);
@@ -1291,6 +1291,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = iOSProject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -1308,6 +1309,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = iOSProject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
