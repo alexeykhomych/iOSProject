@@ -14,6 +14,8 @@
 
 #import "AKIFBConst.h"
 
+#import "AKIGCD.h"
+
 #import "AKIMacro.h"
 
 @interface AKIFriendDetailContext ()
@@ -62,7 +64,11 @@
 
 - (void)performExecute {
     FBSDKGraphRequest *request = [self request];
-    [request startWithCompletionHandler:[self completionHandler]];
+    AKIWeakify(self);
+    AKIAsyncPerformInMainQueue(^{
+        AKIStrongifyAndReturnIfNil(self);
+        [request startWithCompletionHandler:[self completionHandler]];
+    });
 }
 
 #pragma mark -

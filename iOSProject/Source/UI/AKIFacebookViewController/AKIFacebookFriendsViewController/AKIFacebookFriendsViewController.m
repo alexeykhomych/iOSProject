@@ -28,16 +28,9 @@
 
 AKIViewControllerBaseViewProperty(AKIFacebookFriendsViewController, AKIFacebookFriendsView, friendsView)
 
-@interface AKIFacebookFriendsViewController ()
-
-- (void)loadModel;
-
-@end
-
 @implementation AKIFacebookFriendsViewController
 
 @synthesize model = _model;
-@synthesize user = _user;
 
 #pragma mark -
 #pragma mark Accessors
@@ -50,20 +43,13 @@ AKIViewControllerBaseViewProperty(AKIFacebookFriendsViewController, AKIFacebookF
     }
 }
 
-- (void)setUser:(AKIUser *)user {
-    if (_user != user) {
-        _user = user;
-        self.model = user.friends;
-    }
-}
-
 #pragma mark -
 #pragma mark View Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self loadModel];
+    [self loadContext];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -143,9 +129,8 @@ AKIViewControllerBaseViewProperty(AKIFacebookFriendsViewController, AKIFacebookF
 #pragma mark -
 #pragma mark Private
 
-- (void)loadModel {
+- (void)loadContext {
     AKIFriendsContext *context = [AKIFriendsContext new];
-    
     context.model = self.model;
     
     self.context = context;

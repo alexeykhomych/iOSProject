@@ -8,10 +8,9 @@
 
 #import "AKIContext.h"
 
-@class AKIArrayModel;
-
 @interface AKIFacebookContext : AKIContext
 @property (nonatomic, readonly) NSString        *path;
+@property (nonatomic, readonly) id              request;
 
 //override in children
 - (id)completionHandler;

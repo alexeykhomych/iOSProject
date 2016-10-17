@@ -8,10 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AKIUser.h"
-
-#import "AKIArrayModel.h"
-
 #import "AKIObservableObject.h"
 
 @interface AKIContext : AKIObservableObject

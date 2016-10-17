@@ -66,6 +66,8 @@
 
 #define AKIStringConstant(name, value) static NSString * const kAKI##name = value
 
+#define AKIFBStringConstant(name, value) static NSString * const kAKIFB##name = value
+
 #define AKIPerformBlockWithParametr(block, parametr) \
     if (block) { \
         block(parametr); \

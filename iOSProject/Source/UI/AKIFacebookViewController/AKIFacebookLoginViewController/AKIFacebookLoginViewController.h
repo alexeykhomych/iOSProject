@@ -6,14 +6,13 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIAbstractViewController.h"
+#import "AKIFacebookViewController.h"
 
 #import "AKIFacebookLoginButton.h"
 
 @class AKIUser;
 
-@interface AKIFacebookLoginViewController : AKIAbstractViewController
-@property (nonatomic, strong) AKIUser *user;
+@interface AKIFacebookLoginViewController : AKIFacebookViewController
 
 - (IBAction)onLoginButton:(id)sender;
 

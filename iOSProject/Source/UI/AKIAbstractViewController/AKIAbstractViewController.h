@@ -10,14 +10,9 @@
 
 #import "AKIModel.h"
 
-@class AKIArrayModel;
 @class AKIUser;
 
 @interface AKIAbstractViewController : UIViewController <AKIModelObserver>
-@property (nonatomic, strong) AKIArrayModel *model;
-@property (nonatomic, strong) AKIUser       *user;
-@property (nonatomic, strong) id context;
-
-- (void)loadContext;
+@property (nonatomic, strong) id model;
 
 @end

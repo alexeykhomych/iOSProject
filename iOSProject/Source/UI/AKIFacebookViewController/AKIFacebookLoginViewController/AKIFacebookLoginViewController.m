@@ -24,8 +24,6 @@
 
 @implementation AKIFacebookLoginViewController
 
-@synthesize user = _user;
-
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
@@ -68,13 +66,6 @@
     [self.context execute];
 }
 
-- (void)setUser:(AKIUser *)user {
-    if (_user != user) {
-        [_user removeObserver:self];
-        _user = user;
-        [_user addObserver:self];
-    }
-}
 
 #pragma mark -
 #pragma mark Observing
@@ -84,7 +75,7 @@
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
         AKIFacebookFriendsViewController *controller = [AKIFacebookFriendsViewController viewController];
-        controller.user = self.user;
+        controller.model = self.user.friends;
         
         [self.navigationController pushViewController:controller animated:YES];
     });

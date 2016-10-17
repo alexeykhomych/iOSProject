@@ -8,8 +8,6 @@
 
 #import "AKIFacebookContext.h"
 
-@class AKIUser;
-
 @interface AKIFriendsContext : AKIFacebookContext
 
 @end

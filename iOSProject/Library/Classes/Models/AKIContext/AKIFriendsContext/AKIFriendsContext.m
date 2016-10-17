@@ -14,6 +14,10 @@
 
 #import "AKIFBConst.h"
 
+#import "AKIGCD.h"
+
+#import "AKIArrayModel.h"
+
 #import "AKIMacro.h"
 
 @interface AKIFriendsContext ()
@@ -34,7 +38,7 @@
     return [NSString stringWithFormat:@"%@%@", kAKIFBMe, kAKIFBFriendsRequest];
 }
 
-- (FBSDKGraphRequest *)request {
+- (id)request {
     return [[FBSDKGraphRequest alloc] initWithGraphPath:self.path
                                              parameters:nil
                                              HTTPMethod:kAKIFBGET];
@@ -57,7 +61,11 @@
 
 - (void)performExecute {
     FBSDKGraphRequest *request = [self request];
-    [request startWithCompletionHandler:[self completionHandler]];
+    AKIWeakify(self);
+    AKIAsyncPerformInMainQueue(^{
+        AKIStrongifyAndReturnIfNil(self);
+        [request startWithCompletionHandler:[self completionHandler]];
+    });
 }
 
 #pragma mark -

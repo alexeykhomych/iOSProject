@@ -6,13 +6,13 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIAbstractViewController.h"
+#import "AKIFacebookViewController.h"
 
 #import "AKIArrayModel.h"
 
 @class AKIUser;
 
-@interface AKIFacebookFriendsViewController :  AKIAbstractViewController <
+@interface AKIFacebookFriendsViewController :  AKIFacebookViewController <
     UITableViewDelegate,
     UITableViewDataSource,
     UISearchBarDelegate,

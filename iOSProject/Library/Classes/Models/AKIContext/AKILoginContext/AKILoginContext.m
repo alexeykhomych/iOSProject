@@ -12,9 +12,11 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-#import "AKIUser.h"
-
 #import "AKIFBConst.h"
+
+#import "AKIGCD.h"
+
+#import "AKIUser.h"
 
 #import "AKIMacro.h"
 
@@ -45,11 +47,15 @@
 #pragma mark Public
 
 - (void)performExecute {
-    [[FBSDKLoginManager new] logInWithReadPermissions:@[kAKIFBLoginPermissions]
-                                   fromViewController:self.controller
-                                              handler:[self completionHandler]];
-    
-    self.user.state = AKIModelDidLoad;
+    AKIWeakify(self);
+    AKIAsyncPerformInMainQueue(^{
+        AKIStrongifyAndReturnIfNil(self);
+        [[FBSDKLoginManager new] logInWithReadPermissions:@[kAKIFBLoginPermissions]
+                                       fromViewController:self.controller
+                                                  handler:[self completionHandler]];
+        
+        self.user.state = AKIModelDidLoad;
+    });
 }
 
 @end

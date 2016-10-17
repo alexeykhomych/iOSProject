@@ -6,12 +6,12 @@
 //  Copyright © 2016 Alexey Khomych. All rights reserved.
 //
 
-#import "AKIAbstractViewController.h"
+#import "AKIFacebookViewController.h"
 
 #import "AKIFacebookFriendsDetailView.h"
 
 @class AKIUser;
 
-@interface AKIFacebookFriendDetailViewController : AKIAbstractViewController
+@interface AKIFacebookFriendDetailViewController : AKIFacebookViewController
 
 @end

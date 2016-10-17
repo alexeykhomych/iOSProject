@@ -41,7 +41,9 @@
 AKIImplementationDispatchOnceFunctionReturnResult(documentsPath, NSDocumentDirectory)
 AKIImplementationDispatchOnceFunctionReturnResult(libraryPath, NSLibraryDirectory)
 
-+ (NSString *)cachedFilesPathWithFolder:(NSString *)folderName {
++ (NSString *)cachedFilesPath {
+    AKICreateDirectoryAtPath([[self libraryPath] stringByAppendingPathComponent:@"AppCache"]);
+    
     AKIReturnOnce(result, NSString, ^{ return [NSString new];});
 }
 
