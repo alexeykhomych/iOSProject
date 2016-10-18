@@ -23,6 +23,6 @@
 @property (nonatomic, strong)   NSURL             *url;
 
 @property (nonatomic, readonly) AKIImageModel     *imageModel;
-@property (nonatomic, strong)   AKIArrayModel     *friends;
+@property (nonatomic, readonly) AKIArrayModel     *friends;
 
 @end

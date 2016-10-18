@@ -8,24 +8,16 @@
 
 #import "AKIFacebookContext.h"
 
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "AKIFBConst.h"
+
 #import "AKIGCD.h"
 
 #import "AKIArrayModel.h"
 
-#import "AKIFBConst.h"
-
 #import "NSFileManager+AKIExtensions.h"
 
-@interface AKIFacebookContext ()
-@property (nonatomic, strong)   AKIArrayModel   *model;
-
-@end
-
 @implementation AKIFacebookContext
-
-@synthesize model = _model;
-
-@dynamic path;
 
 #pragma mark -
 #pragma mark Accessors
@@ -38,12 +30,27 @@
     return nil;
 }
 
+- (NSString *)parameters {
+    return nil;
+}
+
+- (NSString *)requestType {
+    return kAKIFBGET;
+}
+
+- (FBSDKGraphRequest *)request {
+    return [[FBSDKGraphRequest alloc] initWithGraphPath:self.path
+                                             parameters:self.parameters
+                                             HTTPMethod:self.requestType];
+}
+
 #pragma mark -
 #pragma mark Public
 
 - (void)execute {
     @synchronized (self) {
-        AKIModelState state = self.model.state;
+        AKIArrayModel *model = self.model;
+        AKIModelState state = model.state;
         
         if ([self shouldNotifyObserver:state]) {
             [self notifyOfState:state];
@@ -51,7 +58,7 @@
             return;
         }
         
-        self.model.state = AKIModelWillLoad;
+        model.state = AKIModelWillLoad;
         
         AKIAsyncPerformInBackground(^{
             [self performExecute];
@@ -59,12 +66,16 @@
     }   
 }
 
-- (BOOL)shouldNotifyObserver:(AKIModelState)state {
-    return AKIModelDidLoad == state || AKIModelWillLoad == state;
+- (void)performExecute {
+    AKIWeakify(self);
+    AKIAsyncPerformInMainQueue(^{
+        AKIStrongifyAndReturnIfNil(self);
+        [[self request] startWithCompletionHandler:[self completionHandler]];
+    });
 }
 
-- (void)performExecute {
-    
+- (BOOL)shouldNotifyObserver:(AKIModelState)state {
+    return AKIModelDidLoad == state || AKIModelWillLoad == state;
 }
 
 @end

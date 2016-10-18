@@ -8,9 +8,13 @@
 
 #import "AKIContext.h"
 
+@class FBSDKGraphRequest;
+
 @interface AKIFacebookContext : AKIContext
-@property (nonatomic, readonly) NSString        *path;
-@property (nonatomic, readonly) id              request;
+@property (nonatomic, readonly) NSString            *path;
+@property (nonatomic, readonly) NSDictionary        *parameters;
+@property (nonatomic, readonly) NSString            *requestType;
+@property (nonatomic, readonly) FBSDKGraphRequest   *request;
 
 //override in children
 - (id)completionHandler;

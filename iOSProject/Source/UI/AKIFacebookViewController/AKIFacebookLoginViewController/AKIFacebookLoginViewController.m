@@ -9,6 +9,7 @@
 #import "AKIFacebookLoginViewController.h"
 
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 #import "AKIFacebookFriendsViewController.h"
 
@@ -25,21 +26,20 @@
 @implementation AKIFacebookLoginViewController
 
 #pragma mark -
-#pragma mark Initializations and Deallocations
-
-- (instancetype)init {
-    self = [super init];
-    self.user = [AKIUser new];
-    
-    return self;
-}
-
-#pragma mark -
 #pragma mark View Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.user = [AKIUser new];
+    
+    FBSDKAccessToken *token = [FBSDKAccessToken currentAccessToken];
+    if (token) {
+        AKIUser *user = [AKIUser new];
+        self.user = user;
+        user.ID = token.userID;
+        user.state = AKIModelDidLoad;
+    } else {
+        self.user = [AKIUser new];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -40,6 +40,8 @@
         }
         
         user.ID = result.token.userID;
+        
+        user.state = AKIModelDidLoad;
     };
 }
 
@@ -53,8 +55,6 @@
         [[FBSDKLoginManager new] logInWithReadPermissions:@[kAKIFBLoginPermissions]
                                        fromViewController:self.controller
                                                   handler:[self completionHandler]];
-        
-        self.user.state = AKIModelDidLoad;
     });
 }
 

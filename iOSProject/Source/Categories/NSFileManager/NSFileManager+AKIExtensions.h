@@ -12,6 +12,6 @@
 
 + (NSString *)documentsPath;
 + (NSString *)libraryPath;
-+ (NSString *)cachedFilesPathWithFolder:(NSString *)folderName;
++ (NSString *)cachedFilesPath;
 
 @end

@@ -19,8 +19,6 @@
 #import "AKIMacro.h"
 
 @interface AKIFriendDetailContext ()
-@property (nonatomic, readonly) NSString        *path;
-@property (nonatomic, readonly) NSDictionary    *parameters;
 
 - (void)parseData:(NSDictionary *)data;
 
@@ -28,23 +26,15 @@
 
 @implementation AKIFriendDetailContext
 
-@synthesize model = _model;
-
 #pragma mark -
 #pragma mark Accessors
 
+- (NSDictionary *)parameters {
+    return @{ @"fields": @"picture.type(large)",};
+}
+
 - (NSString *)path {
     return [NSString stringWithFormat:@"/%@", self.user.ID];
-}
-
-- (NSDictionary *)parameters {
-    return @{ @"fields": @"birthday,name,picture{url},hometown",};
-}
-
-- (FBSDKGraphRequest *)request {
-    return [[FBSDKGraphRequest alloc] initWithGraphPath:self.path
-                                             parameters:self.parameters
-                                             HTTPMethod:kAKIFBGET];
 }
 
 - (id)completionHandler {
@@ -60,27 +50,15 @@
 }
 
 #pragma mark -
-#pragma mark Public
-
-- (void)performExecute {
-    FBSDKGraphRequest *request = [self request];
-    AKIWeakify(self);
-    AKIAsyncPerformInMainQueue(^{
-        AKIStrongifyAndReturnIfNil(self);
-        [request startWithCompletionHandler:[self completionHandler]];
-    });
-}
-
-#pragma mark -
 #pragma mark Private
 
 - (void)parseData:(NSDictionary *)data {
     AKIUser *user = self.user;
     
-    NSDictionary *picture = data[@"picture"];
-    NSDictionary *data2 = picture[@"data"];
+    NSDictionary *picture = data[kAKIFBPicture];
+    NSDictionary *data2 = picture[kAKIFBData];
     
-    user.url = data2[@"url"];
+//    user.url = data2[kAKIFBURL];
     
     user.state = AKIModelDidLoad;
 }

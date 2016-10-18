@@ -47,4 +47,11 @@
     }
 }
 
+#pragma mark -
+#pragma mark Public
+
+- (void)loadContext {
+    
+}
+
 @end

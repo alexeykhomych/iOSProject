@@ -883,8 +883,8 @@
 		84F9A9EC1DABE33200976209 /* AKIContext */ = {
 			isa = PBXGroup;
 			children = (
-				84FAD99A1DB4F62A00BB1E4B /* AKIFriendDetailContext */,
 				8486CA5E1DAFCA28002B29F1 /* AKIFacebookContext */,
+				84FAD99A1DB4F62A00BB1E4B /* AKIFriendDetailContext */,
 				84F9A9F41DABE3AB00976209 /* AKIFriendsContext */,
 				84F9A9F01DABE38300976209 /* AKILoginContext */,
 				84F9A9ED1DABE34D00976209 /* AKIContext.h */,

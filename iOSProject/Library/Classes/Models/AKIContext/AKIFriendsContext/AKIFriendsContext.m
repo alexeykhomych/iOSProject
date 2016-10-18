@@ -38,10 +38,8 @@
     return [NSString stringWithFormat:@"%@%@", kAKIFBMe, kAKIFBFriendsRequest];
 }
 
-- (id)request {
-    return [[FBSDKGraphRequest alloc] initWithGraphPath:self.path
-                                             parameters:nil
-                                             HTTPMethod:kAKIFBGET];
+- (NSDictionary *)parameters {
+    return @{@"fields": @"id,name,picture{url}",};
 }
 
 - (id)completionHandler {
@@ -57,37 +55,28 @@
 }
 
 #pragma mark -
-#pragma mark Public
-
-- (void)performExecute {
-    FBSDKGraphRequest *request = [self request];
-    AKIWeakify(self);
-    AKIAsyncPerformInMainQueue(^{
-        AKIStrongifyAndReturnIfNil(self);
-        [request startWithCompletionHandler:[self completionHandler]];
-    });
-}
-
-#pragma mark -
 #pragma mark Private
 
 - (void)parseData:(NSDictionary *)data {
     NSArray *friends = data[kAKIFBData];
-    AKIArrayModel *model = [AKIArrayModel new];
+    AKIArrayModel *model = self.model;
     
     for (NSDictionary *friendsDictionary in friends) {
         AKIUser *friend = [AKIUser new];
         friend.ID = friendsDictionary[kAKIFBID];
         friend.name = friendsDictionary[kAKIFBName];
         
+        NSDictionary *picture = friendsDictionary[kAKIFBPicture][kAKIFBData];
+        friend.url = [NSURL URLWithString:picture[kAKIFBURL]];
+        
         [model addObject:friend];
     }
     
-    [self.model performBlockWithoutNotification:^{
-        [self.model addObjects:model.objects];
+    [model performBlockWithoutNotification:^{
+        [model addObjects:model.objects];
     }];
     
-    self.model.state = AKIModelDidLoad;
+    model.state = AKIModelDidLoad;
 }
 
 @end

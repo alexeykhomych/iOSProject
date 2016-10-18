@@ -35,7 +35,7 @@
 
 - (void)fillWithModel:(AKIUser *)user {
     self.userName.text = self.user.name;
-//    self.userImage.image = user.imageModel;
+    self.userImage.imageModel = user.imageModel;
 }
 
 @end

@@ -20,6 +20,7 @@ typedef NS_ENUM(NSUInteger, AKIModelState) {
 
 @protocol AKIModelObserver <NSObject>
 
+@optional
 - (void)modelDidUpdate:(id)model;
 - (void)modelWillLoad:(id)model;
 - (void)modelDidLoad:(id)model;

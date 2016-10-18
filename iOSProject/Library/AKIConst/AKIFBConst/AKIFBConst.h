@@ -17,6 +17,8 @@ AKIFBStringConstant(LoginPermissions, @"public_profile");
 AKIFBStringConstant(Data, @"data");
 AKIFBStringConstant(ID, @"id");
 AKIFBStringConstant(Name, @"name");
+AKIFBStringConstant(Picture, @"picture");
+AKIFBStringConstant(URL, @"url");
 
 #pragma mark -
 #pragma mark Request type

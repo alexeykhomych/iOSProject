@@ -27,7 +27,7 @@ AKIKeyConstant(Country)
 AKIKeyConstant(City)
 
 @interface AKIUser ()
-//@property (nonatomic, strong) AKIArrayModel *friends;
+@property (nonatomic, strong) AKIArrayModel *friends;
 
 @end
 
