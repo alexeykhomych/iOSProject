@@ -8,7 +8,9 @@
 
 #import "AKIContext.h"
 
-@class FBSDKGraphRequest;
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
+#import "AKIFBConst.h"
 
 @interface AKIFacebookContext : AKIContext
 @property (nonatomic, readonly) NSString            *path;
@@ -18,5 +20,8 @@
 
 //override in children
 - (id)completionHandler;
+
+- (void)save;
+- (void)load;
 
 @end

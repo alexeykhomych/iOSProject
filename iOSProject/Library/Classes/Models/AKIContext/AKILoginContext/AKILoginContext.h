@@ -10,10 +10,7 @@
 
 #import "AKIFacebookContext.h"
 
-@class AKIUser;
-
 @interface AKILoginContext : AKIFacebookContext
 @property (nonatomic, strong) UIViewController  *controller;
-@property (nonatomic, strong) AKIUser           *user;
 
 @end

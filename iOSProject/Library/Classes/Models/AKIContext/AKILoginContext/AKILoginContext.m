@@ -10,15 +10,9 @@
 
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-
-#import "AKIFBConst.h"
-
 #import "AKIGCD.h"
 
 #import "AKIUser.h"
-
-#import "AKIMacro.h"
 
 @implementation AKILoginContext
 
@@ -31,7 +25,7 @@
 
 - (id)completionHandler {
     return ^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-        AKIUser *user = self.user;
+        AKIUser *user = self.model;
         
         if (error || !result) {
             user.state = AKIModelDidFailLoading;

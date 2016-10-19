@@ -19,6 +19,8 @@
 
 #import "AKIGCD.h"
 
+#import "AKIArrayModel.h"
+
 #import "UITableView+AKIExtensions.h"
 #import "NSBundle+AKIExtensions.h"
 #import "UINib+AKIExtensions.h"

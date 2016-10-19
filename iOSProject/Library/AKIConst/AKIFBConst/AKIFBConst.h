@@ -18,7 +18,13 @@ AKIFBStringConstant(Data, @"data");
 AKIFBStringConstant(ID, @"id");
 AKIFBStringConstant(Name, @"name");
 AKIFBStringConstant(Picture, @"picture");
+AKIFBStringConstant(SmallPicture, @"picture.type(small)");
 AKIFBStringConstant(URL, @"url");
+AKIFBStringConstant(EMail, @"email");
+AKIFBStringConstant(Hometown, @"hometown");
+AKIFBStringConstant(LargePicture, @"picture.type(large)");
+AKIFBStringConstant(Birthday, @"birthday");
+AKIFBStringConstant(Fields, @"fields");
 
 #pragma mark -
 #pragma mark Request type
@@ -33,3 +39,5 @@ AKIFBStringConstant(DELETE, @"DELETE");
 
 AKIFBStringConstant(FriendsRequest, @"/friends");
 AKIFBStringConstant(Me, @"/me");
+
+//fields": @"birthday,hometown,email,picture.type(large)"

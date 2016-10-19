@@ -58,7 +58,7 @@
 
 - (void)loadContext {
     AKILoginContext *loginContext = [AKILoginContext new];
-    loginContext.user = self.user;
+    loginContext.model = self.user;
     loginContext.controller = self;
     
     self.context = loginContext;

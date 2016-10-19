@@ -29,14 +29,6 @@
 #pragma mark -
 #pragma mark Accessors
 
-- (void)setUser:(AKIUser *)user {
-    if (_user != user) {
-        [_user removeObserver:self];
-        _user = user;
-        [_user addObserver:self];
-    }
-}
-
 - (void)setContext:(id)context {
     if (_context != context) {
         [_context removeObserver:self];
@@ -44,6 +36,16 @@
         _context = context;
         
         [_context addObserver:self];
+    }
+}
+
+- (void)setUser:(AKIUser *)user {
+    if (_user != user) {
+        [_user removeObserver:self];
+        
+        _user = user;
+        
+        [_user addObserver:self];
     }
 }
 

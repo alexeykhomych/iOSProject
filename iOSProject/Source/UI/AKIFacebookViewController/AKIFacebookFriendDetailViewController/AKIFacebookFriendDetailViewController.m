@@ -8,8 +8,6 @@
 
 #import "AKIFacebookFriendDetailViewController.h"
 
-#import "AKIUser.h"
-
 #import "AKIFacebookFriendsDetailView.h"
 
 #import "AKIFriendDetailContext.h"
@@ -61,7 +59,7 @@ AKIViewControllerBaseViewProperty(AKIFacebookFriendDetailViewController, AKIFace
 
 - (void)loadContext {
     AKIFriendDetailContext *context = [AKIFriendDetailContext new];
-    context.user = self.user;
+    context.model = self.user;
     
     self.context = context;
     

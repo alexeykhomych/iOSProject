@@ -8,10 +8,6 @@
 
 #import "AKIFacebookViewController.h"
 
-#import "AKIFacebookFriendsDetailView.h"
-
-@class AKIUser;
-
 @interface AKIFacebookFriendDetailViewController : AKIFacebookViewController
 
 @end
