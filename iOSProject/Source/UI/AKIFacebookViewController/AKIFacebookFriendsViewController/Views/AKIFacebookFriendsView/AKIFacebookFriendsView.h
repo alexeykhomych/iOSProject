@@ -9,7 +9,7 @@
 #import "AKILoadingViewContainer.h"
 
 @interface AKIFacebookFriendsView : AKILoadingViewContainer
-@property (nonatomic, strong) IBOutlet UITableView  *tableView;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property(nonatomic, assign, getter=isEditing) BOOL editing;
 
 @end

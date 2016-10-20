@@ -8,6 +8,8 @@
 
 #import "AKIFacebookFriendsViewController.h"
 
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 #import "AKIFacebookFriendsCell.h"
 
 #import "AKIFacebookFriendsView.h"
@@ -30,6 +32,14 @@
 
 AKIViewControllerBaseViewProperty(AKIFacebookFriendsViewController, AKIFacebookFriendsView, friendsView)
 
+AKIStringConstant(Logout, @"Logout");
+
+@interface AKIFacebookFriendsViewController ()
+
+- (void)onLogout:(id)sender;
+
+@end
+
 @implementation AKIFacebookFriendsViewController
 
 @synthesize model = _model;
@@ -51,7 +61,20 @@ AKIViewControllerBaseViewProperty(AKIFacebookFriendsViewController, AKIFacebookF
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:kAKILogout
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(onLogout:)];
+    
+    [self.navigationItem setLeftBarButtonItem:logoutButton animated:YES];
+    
     [self loadContext];
+}
+
+- (void)onLogout:(id)sender {
+    [[FBSDKLoginManager new] logOut];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -14,6 +14,8 @@
 
 #import "AKIGCD.h"
 
+#import "AKIUser.h"
+
 #import "AKIMacro.h"
 
 AKIViewControllerBaseViewProperty(AKIFacebookFriendDetailViewController, AKIFacebookFriendsDetailView, detailView)
@@ -25,6 +27,13 @@ AKIViewControllerBaseViewProperty(AKIFacebookFriendDetailViewController, AKIFace
 @end
 
 @implementation AKIFacebookFriendDetailViewController
+
+#pragma mark -
+#pragma mark Initializations and Deallocations
+
+- (void)dealloc {
+    self.user.state = AKIModelUpdated;
+}
 
 #pragma mark -
 #pragma mark View Lifecycle
