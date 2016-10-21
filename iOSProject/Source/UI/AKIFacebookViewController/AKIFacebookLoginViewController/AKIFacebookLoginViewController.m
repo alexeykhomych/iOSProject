@@ -23,6 +23,8 @@
 
 #import "AKIMacro.h"
 
+AKIViewControllerBaseViewProperty(AKIFacebookLoginViewController, AKIFacebookLoginButton, loginView)
+
 @implementation AKIFacebookLoginViewController
 
 #pragma mark -
@@ -74,6 +76,9 @@
     AKIWeakify(self);
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
+        
+        self.loginView.loadingViewVisible = NO;
+        
         AKIFacebookFriendsViewController *controller = [AKIFacebookFriendsViewController viewController];
         controller.model = self.user.friends;
         

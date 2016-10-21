@@ -147,6 +147,7 @@ AKIStringConstant(Logout, @"Logout");
     AKIWeakify(self);
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
+        self.friendsView.loadingViewVisible = NO;
         [self.friendsView.tableView reloadData];
     });
 }

@@ -70,8 +70,7 @@
 #pragma mark Public
 
 - (AKILoadingView *)defaultLoadingView {
-//    return [AKILoadingView loadingViewInSuperview:self];
-    return nil;
+    return [AKILoadingView loadingViewInSuperview:self];
 }
 
 @end

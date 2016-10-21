@@ -56,6 +56,7 @@ AKIViewControllerBaseViewProperty(AKIFacebookFriendDetailViewController, AKIFace
     AKIAsyncPerformInMainQueue(^{
         AKIStrongifyAndReturnIfNil(self);
         self.detailView.user = self.user;
+        self.detailView.loadingViewVisible = NO;
     });
 }
 
