@@ -12,21 +12,13 @@
 
 #import "AKIArrayModel.h"
 
+#import "AKIUser.h"
+
 #import "NSFileManager+AKIExtensions.h"
 
 #import "AKIMacro.h"
 
-AKIStringConstant(FileName, @"AKIContextModel.plist");
-
-@interface AKIFacebookContext ()
-@property (nonatomic, readonly)             NSFileManager   *fileManager;
-@property (nonatomic, readonly, copy)       NSString        *documentsPath;
-@property (nonatomic, readonly, copy)       NSString        *filePath;
-@property (nonatomic, readonly)             BOOL            cached;
-
-- (void)parseData:(id)result;
-
-@end
+AKIStringConstant(FileName, @"AKIUsersModel.plist");
 
 @implementation AKIFacebookContext
 
@@ -40,8 +32,7 @@ AKIStringConstant(FileName, @"AKIContextModel.plist");
 - (id)completionHandler {
     return ^(FBSDKGraphRequestConnection *connection, NSDictionary *result, NSError *error) {
         if (error) {
-            AKIArrayModel *model = self.model;
-            model.state = AKIModelDidFailLoading;
+            [self load];
             
             return;
         }
@@ -77,7 +68,11 @@ AKIStringConstant(FileName, @"AKIContextModel.plist");
 }
 
 - (BOOL)cached {
-    return [self.fileManager fileExistsAtPath:self.path];
+    return [self.fileManager fileExistsAtPath:self.filePath];
+}
+
+- (NSString *)fileName {
+    return kAKIFileName;
 }
 
 #pragma mark -
@@ -98,7 +93,6 @@ AKIStringConstant(FileName, @"AKIContextModel.plist");
         
         AKIAsyncPerformInBackground(^{
             [self performExecute];
-//            [self load];
         });
     }   
 }
@@ -123,28 +117,43 @@ AKIStringConstant(FileName, @"AKIContextModel.plist");
 }
 
 - (void)save {
+    [self removeCachedModel];
     [self.fileManager createFileAtPath:self.filePath contents:nil attributes:nil];
-    [NSKeyedArchiver archiveRootObject:self.model toFile:self.filePath];
+    AKIArrayModel *model = self.model;
+    [self archiveModel:model.objects];
+}
+
+- (void)archiveModel:(id)model {
+    [NSKeyedArchiver archiveRootObject:model toFile:self.filePath];
+    NSLog(@"model %@ added to cach", model);
 }
 
 - (void)load {
     id model = nil;
     
     if (!self.cached) {
-        [self performExecute];
-        NSLog(@"model will load from Internet");
+        ((AKIArrayModel *)self.model).state = AKIModelDidFailLoading;
         
         return;
-    } else {
-        model = [NSKeyedUnarchiver unarchiveObjectWithFile:self.path];
-        NSLog(@"model will load from file %@", kAKIFileName);
     }
     
-    [self performBlockWithoutNotification:^{
-        [self.model addObjects:model];
+    model = [NSKeyedUnarchiver unarchiveObjectWithFile:self.filePath];
+    NSLog(@"model will load from file %@", kAKIFileName);
+    
+    [self loadModel:model];
+}
+
+- (void)loadModel:(id)model {
+    AKIArrayModel *friends = self.model;
+    [friends performBlockWithoutNotification:^{
+        [friends addObjects:model];
     }];
     
-    self.state = AKIModelDidLoad;
+    friends.state = AKIModelDidLoad;
+}
+
+- (void)removeCachedModel {
+    [self.fileManager removeItemAtPath:self.filePath  error:nil];
 }
 
 @end

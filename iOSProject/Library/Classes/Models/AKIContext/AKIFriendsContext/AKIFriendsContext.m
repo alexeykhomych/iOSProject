@@ -46,6 +46,8 @@
     }];
     
     model.state = AKIModelDidLoad;
+    
+    [self save];
 }
 
 @end

@@ -10,6 +10,8 @@
 
 #import "AKIImageModel.h"
 
+#import "AKIMacro.h"
+
 @interface AKIImageModelCache ()
 @property (nonatomic, strong) NSMapTable *mapTable;
 
@@ -21,13 +23,9 @@
 #pragma mark Class methods
 
 + (instancetype)cache {
-    static dispatch_once_t onceToken;
-    static AKIImageModelCache *cacheImageModel = nil;
-    dispatch_once(&onceToken, ^{
-        cacheImageModel = [[AKIImageModelCache alloc] init];
-    });
-    
-    return cacheImageModel;
+    AKIReturnOnce(cacheImageModel, AKIImageModelCache, ^{
+        return [AKIImageModelCache new];
+    })
 }
 
 #pragma mark -
@@ -39,7 +37,8 @@
 
 - (instancetype)init {
     self = [super init];
-    self.mapTable = [NSMapTable strongToWeakObjectsMapTable];
+    
+    self.mapTable = [NSMapTable weakToStrongObjectsMapTable];
     
     return self;
 }

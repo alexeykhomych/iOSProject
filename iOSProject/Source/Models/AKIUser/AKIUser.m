@@ -25,6 +25,7 @@ AKIKeyConstant(Name)
 AKIKeyConstant(Birthday)
 AKIKeyConstant(Country)
 AKIKeyConstant(City)
+AKIKeyConstant(Url)
 
 @interface AKIUser ()
 @property (nonatomic, strong) AKIArrayModel *friends;
@@ -66,20 +67,22 @@ AKIKeyConstant(City)
     AKIDecode(birthday, kAKIBirthday)
     AKIDecode(country, kAKICountry)
     AKIDecode(city, kAKICity);
+    AKIDecode(url, kAKIUrl);
     
     return self;
 }
 
 #undef AKIDecode
 
-#define AKIEncode(object, key) [aCoder encodeObject:object forKey:key];
+#define AKIEncode(object, key) [aCoder encodeObject:self.object forKey:key];
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    AKIEncode(self.ID, kAKIID)
-    AKIEncode(self.name, kAKIName)
-    AKIEncode(self.birthday, kAKIBirthday)
-    AKIEncode(self.country, kAKICountry)
-    AKIEncode(self.city, kAKICity)
+    AKIEncode(ID, kAKIID)
+    AKIEncode(name, kAKIName)
+    AKIEncode(birthday, kAKIBirthday)
+    AKIEncode(country, kAKICountry)
+    AKIEncode(city, kAKICity)
+    AKIEncode(url, kAKIUrl)
 }
 
 #undef AKIEncode

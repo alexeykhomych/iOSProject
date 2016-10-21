@@ -24,7 +24,8 @@
 #pragma mark -
 #pragma mark Class methods
 
-+ (instancetype)imageWithURL:(NSURL *)url {    
++ (instancetype)imageWithURL:(NSURL *)url {
+    AKIImageModelCache *cache = [AKIImageModelCache cache];
     AKIImageModel *model = [[AKIImageModelCache cache] objectForKey:url];
     
     if (model) {
@@ -47,6 +48,7 @@
     self = [self init];
     
     self.url = url;
+    AKIImageModelCache *cache = [AKIImageModelCache cache];
     [[AKIImageModelCache cache] addObject:self];
     
     return self;

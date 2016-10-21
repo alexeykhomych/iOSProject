@@ -37,8 +37,13 @@
     NSDictionary *data2 = picture[kAKIFBData];
     
     user.url = [NSURL URLWithString:data2[kAKIFBURL]];
-//    user.birthday = 
     
+    user.state = AKIModelDidLoad;
+}
+
+- (void)loadModel:(id)model {
+    AKIUser *user = self.model;
+
     user.state = AKIModelDidLoad;
 }
 

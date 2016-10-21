@@ -92,7 +92,7 @@ typedef void (^AKICompletionHandler)(NSURL *location, NSURLResponse *response, N
             [self.fileManager copyItemAtPath:location.path toPath:self.filePath error:NULL];
             downloadedImage = [self loadImageAtURL:[NSURL URLWithString:self.filePath]];
         }
-        
+
         [self finishLoadingImage:downloadedImage];
     };;
 }
